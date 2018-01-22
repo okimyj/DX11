@@ -30,3 +30,9 @@
 *.exe
 *.out
 *.app
+/SoMac/SoMacClient/Debug
+/SoMac/SoMacClient/Release
+/SoMac/SoMacClient/x64/Debug
+/SoMac/SoMacEngine/Debug
+/SoMac/SoMacEngine/Release
+/SoMac/SoMacEngine/x64/Debug

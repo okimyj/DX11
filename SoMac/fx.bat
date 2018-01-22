@@ -1,0 +1,1 @@
+xcopy /s /y /d .\SoMacEngine\*.fx  .\Bin\Resources\Shader
