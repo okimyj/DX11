@@ -21,12 +21,6 @@
     <Filter Include="_SoMac Source\02. Manager">
       <UniqueIdentifier>{ed9a227a-87ae-43b8-a7a3-d6b43479e366}</UniqueIdentifier>
     </Filter>
-    <Filter Include="_SoMac Source\02. Manager\05. ShaderManager">
-      <UniqueIdentifier>{7fa6e030-f2ed-4189-8d14-29dc81b038e6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="_SoMac Source\02. Manager\05. ShaderManager\Shader">
-      <UniqueIdentifier>{0aadffe6-0b78-4117-9748-924992ee8dcf}</UniqueIdentifier>
-    </Filter>
     <Filter Include="_SoMac Source\02. Manager\01. PathMgr">
       <UniqueIdentifier>{c9a7df0d-32bf-4701-8483-f13aed29ba64}</UniqueIdentifier>
     </Filter>
@@ -62,6 +56,24 @@
     </Filter>
     <Filter Include="_SoMac Source\ShaderCode">
       <UniqueIdentifier>{6567a92a-8bb4-46d7-9cf7-657db2b34d48}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="_SoMac Source\02. Manager\06. SceneMgr">
+      <UniqueIdentifier>{9037047e-cbee-4d7c-92b4-268a267ae7cc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="_SoMac Source\02. Manager\05. ShaderMgr">
+      <UniqueIdentifier>{7fa6e030-f2ed-4189-8d14-29dc81b038e6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="_SoMac Source\02. Manager\05. ShaderMgr\Shader">
+      <UniqueIdentifier>{0aadffe6-0b78-4117-9748-924992ee8dcf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="_SoMac Source\02. Manager\06. SceneMgr\Layer">
+      <UniqueIdentifier>{80290711-b040-42e0-9162-8fe48795e3c3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="_SoMac Source\02. Manager\06. SceneMgr\Scene">
+      <UniqueIdentifier>{3d02078e-66d3-401e-b7b5-6fef4df53a7d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="_SoMac Source\04. Component\03. Camera">
+      <UniqueIdentifier>{20136e61-744f-4eeb-a988-d919de710c63}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -102,7 +114,7 @@
       <Filter>_SoMac Source\02. Manager\04. ResMgr\Resource\01. Mesh</Filter>
     </ClInclude>
     <ClInclude Include="Shader.h">
-      <Filter>_SoMac Source\02. Manager\05. ShaderManager\Shader</Filter>
+      <Filter>_SoMac Source\02. Manager\05. ShaderMgr\Shader</Filter>
     </ClInclude>
     <ClInclude Include="ResPtr.h">
       <Filter>_SoMac Source\02. Manager\04. ResMgr\ResPtr</Filter>
@@ -123,7 +135,19 @@
       <Filter>_SoMac Source\02. Manager\03. TimeMgr</Filter>
     </ClInclude>
     <ClInclude Include="ShaderMgr.h">
-      <Filter>_SoMac Source\02. Manager\05. ShaderManager</Filter>
+      <Filter>_SoMac Source\02. Manager\05. ShaderMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneMgr.h">
+      <Filter>_SoMac Source\02. Manager\06. SceneMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="Layer.h">
+      <Filter>_SoMac Source\02. Manager\06. SceneMgr\Layer</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene.h">
+      <Filter>_SoMac Source\02. Manager\06. SceneMgr\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>_SoMac Source\04. Component\03. Camera</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -152,7 +176,7 @@
       <Filter>_SoMac Source\02. Manager\04. ResMgr\Resource\01. Mesh</Filter>
     </ClCompile>
     <ClCompile Include="Shader.cpp">
-      <Filter>_SoMac Source\02. Manager\05. ShaderManager\Shader</Filter>
+      <Filter>_SoMac Source\02. Manager\05. ShaderMgr\Shader</Filter>
     </ClCompile>
     <ClCompile Include="ResPtr.cpp">
       <Filter>_SoMac Source\02. Manager\04. ResMgr\ResPtr</Filter>
@@ -173,7 +197,19 @@
       <Filter>_SoMac Source\02. Manager\03. TimeMgr</Filter>
     </ClCompile>
     <ClCompile Include="ShaderMgr.cpp">
-      <Filter>_SoMac Source\02. Manager\05. ShaderManager</Filter>
+      <Filter>_SoMac Source\02. Manager\05. ShaderMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneMgr.cpp">
+      <Filter>_SoMac Source\02. Manager\06. SceneMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="Layer.cpp">
+      <Filter>_SoMac Source\02. Manager\06. SceneMgr\Layer</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene.cpp">
+      <Filter>_SoMac Source\02. Manager\06. SceneMgr\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>_SoMac Source\04. Component\03. Camera</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
