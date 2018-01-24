@@ -3,6 +3,7 @@
 
 
 CRes::CRes()
+	: m_iRefCnt(0)
 {
 }
 

@@ -173,3 +173,34 @@ int CDevice::CreateView()
 
 	return RET_SUCCESS;
 }
+
+
+int CDevice::CreateConstBuffer(const wstring & _strKey, UINT _iSize, D3D11_USAGE _eUsage, UINT _iRegister)
+{
+	CBUFFER tBuffer = {};
+
+	// Create Constant Buffer .
+	D3D11_BUFFER_DESC tBufferDesc = {};
+	tBufferDesc.ByteWidth = _iSize;
+	tBufferDesc.Usage = _eUsage;
+	tBufferDesc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
+	if (D3D11_USAGE_DYNAMIC == tBufferDesc.Usage)
+		tBufferDesc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
+
+	if (FAILED(DEVICE->CreateBuffer(&tBufferDesc, NULL, &tBuffer.pBuffer)))
+	{
+		return RET_FAILED;
+	}
+	tBuffer.iRegister = _iRegister;
+	tBuffer.iSize = _iSize;
+	m_mapConstBuffer.insert(make_pair(_strKey, tBuffer));
+}
+
+CBUFFER * CDevice::FindConstBuffer(const wstring & _strKey)
+{
+	map<wstring, CBUFFER>::iterator iter = m_mapConstBuffer.find(_strKey);
+	if (iter == m_mapConstBuffer.end())
+		return NULL;
+
+	return &iter->second;
+}

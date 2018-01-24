@@ -24,6 +24,9 @@ private:
 	UINT					m_iMSLev;		// 멀티 샘플링 레벨.
 	float					m_fCol[4];		// 초기화 컬러.
 
+	// Constants Buffer --
+	map<wstring, CBUFFER>		m_mapConstBuffer;
+
 public:
 	int init(HWND _hWnd, bool _bWindow);
 	
@@ -45,8 +48,13 @@ public:
 
 	ID3D11Device* GetDevice() { return m_pDevice; }
 	ID3D11DeviceContext* GetContext() { return m_pContext; }
+
 private:
 	int CreateSwapChain();
 	int CreateView();
+
+public:
+	int CreateConstBuffer(const wstring& _strKey, UINT _iSize, D3D11_USAGE _eUsage, UINT _iRegister);
+	CBUFFER* FindConstBuffer(const wstring& _strKey);
 };
 

@@ -26,7 +26,7 @@ public:
 public:
 	int CreateVertexShader(wstring _strFilePath, char* _pFuncName, int _iHigh, int _iLow);
 	int CreatePixelShader(wstring _strFilePath, char* _pFuncName, int _iHigh, int _iLow);
-	void UpdateData();
+	void ApplyData();
 public:
 	CShader();
 	~CShader();

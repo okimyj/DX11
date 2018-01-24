@@ -21,3 +21,5 @@ using namespace DirectX::PackedVector;
 #include "define.h"
 #include "func.h"
 #include "struct.h"
+
+extern tTransform g_Transform;

@@ -153,7 +153,7 @@ int CMesh::SetShader(ID3DBlob * _pBlob)
 	return RET_SUCCESS;
 }
 
-void CMesh::UpdateData()
+void CMesh::ApplyData()
 {
 	UINT iOffset = 0;
 	UINT iStride = m_iVtxSize;			// 정점 데이터 1개의 size.

@@ -70,7 +70,7 @@ int CShader::CreatePixelShader(wstring _strFilePath, char * _pFuncName, int _iHi
 	return RET_SUCCESS;
 }
 
-void CShader::UpdateData()
+void CShader::ApplyData()
 {
 	CONTEXT->VSSetShader(m_pVS, NULL, NULL);
 	CONTEXT->PSSetShader(m_pPS, NULL, NULL);

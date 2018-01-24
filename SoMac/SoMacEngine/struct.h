@@ -38,6 +38,16 @@ typedef struct _tabIndex32
 	static DXGI_FORMAT format() { return DXGI_FORMAT_R32_UINT; }
 }INDEX32;
 
+
+
+// Device 에서 constant buffer를 관리하기 위한 구조체. 
+struct CBUFFER
+{
+	ID3D11Buffer* pBuffer;
+	UINT			iRegister;
+	UINT					iSize;
+
+};
 //== Constant Buffer  ==//
 typedef struct _tagTransform
 {

@@ -12,6 +12,7 @@ private:
 public:
 	virtual int Update() { return 0; }
 	virtual void Render();
+	
 public:
 	void SetShader(CShader* _pShader) { m_pShader = _pShader; }
 	void SetMesh(CMesh* _pMesh) { m_pMesh = _pMesh; }
