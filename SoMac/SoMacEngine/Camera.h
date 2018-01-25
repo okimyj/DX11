@@ -1,5 +1,6 @@
 #pragma once
 #include "Component.h"
+class CLayer;
 class CCamera :
 	public CComponent
 {
@@ -18,10 +19,17 @@ private:
 	float			m_fNear;
 	float			m_fFar;
 
+	UINT			m_iRenderLayerFlag;
 public:
 	virtual int Update();
 	virtual int LateUpdate();
 	virtual int FinalUpdate();
+
+	void ToggleRenderTargetLayer(CLayer* _pLayer);
+	void AddRenderTargetLayer(CLayer* _pLayer);
+	void RemoveRenderTargetLayer(CLayer* _pLayer);
+	
+	bool IsRenderTargetLayer(CLayer* _pLayer);
 public:
 	CCamera();
 	~CCamera();

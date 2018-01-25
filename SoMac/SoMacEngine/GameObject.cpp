@@ -1,5 +1,7 @@
 #include "GameObject.h"
-
+#include "Transform.h"
+#include "MeshRender.h"
+#include "Camera.h"
 CGameObject::CGameObject()
 	: m_arrComp{}
 {
@@ -9,6 +11,22 @@ CGameObject::CGameObject()
 CGameObject::~CGameObject()
 {
 }
+CGameObject * CGameObject::CreateGameObject(const wstring& _strTag)
+{
+	CGameObject* pObj = new CGameObject();
+	pObj->AddComponent<CTransform>(new CTransform);
+	pObj->AddComponent<CMeshRender>(new CMeshRender);
+	pObj->SetTag(_strTag);
+	return pObj;
+}
+
+CGameObject * CGameObject::CreateCamera(const wstring& _strTag)
+{
+	CGameObject* pObj = CGameObject::CreateGameObject(_strTag);
+	pObj->AddComponent<CCamera>(new CCamera);
+	return pObj;
+}
+
 
 
 void CGameObject::Awake()

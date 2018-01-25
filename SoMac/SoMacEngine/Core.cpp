@@ -4,14 +4,8 @@
 #include "TimeMgr.h"
 #include "ResMgr.h"
 #include "ShaderMgr.h"
+#include "SceneMgr.h"
 #include "Device.h"
-#include "GameObject.h"
-#include "Transform.h"
-#include "MeshRender.h"
-
-
-#include "Mesh.h"
-#include "Shader.h"
 
 // ID3D11Buffer* g_pVB = NULL;		// Vertex Buffer.		GPU에 정점 정보를 전달 할 수 있는 버퍼.
 // ID3D11Buffer* g_pIB = NULL;			// Index Buffer.
@@ -29,14 +23,6 @@ ID3D11PixelShader*		g_pPS;			// Pixel Shader.
 //-> Device
 tTransform g_Transform;
 
-// player 의 월드 상태정보
-XMFLOAT3	g_vPos = XMFLOAT3(0.f, 0.f, 100.f);
-XMFLOAT3	g_vScale = XMFLOAT3(100.f, 100.f, 100.f);
-XMFLOAT3	g_vRot = XMFLOAT3(0.f, 0.f, 0.f);
-
-// GameObjcet
-CGameObject* g_pObj = NULL;
-CMesh* g_pMesh = NULL;
 CCore::CCore()
 	: m_hWnd(NULL)
 {
@@ -45,8 +31,6 @@ CCore::CCore()
 
 CCore::~CCore()
 {
-	SAFE_DELETE(g_pObj);
-	SAFE_DELETE(g_pMesh);
 }
 
 int CCore::init(HWND _hWnd, bool _bWindow)
@@ -65,19 +49,13 @@ int CCore::init(HWND _hWnd, bool _bWindow)
 	CTimeMgr::GetInst()->Init();
 	CResMgr::GetInst()->Init();
 	CShaderMgr::GetInst()->Init();
+	CSceneMgr::GetInst()->Init();
 	
 	// == Create Buffer ================================
 	// clear color set.
 	CDevice::GetInst()->SetClearColor(100, 100, 100,1);
 	//-- Create Constance Buffer -- //
 	CDevice::GetInst()->CreateConstBuffer(L"Transform", sizeof(tTransform), D3D11_USAGE_DYNAMIC, 0);
-
-	// GameObject 생성 .
-	g_pObj = new CGameObject();
-	g_pObj->AddComponent<CTransform>();
-	g_pObj->AddComponent<CMeshRender>();
-	g_pObj->GetMeshRender()->SetMesh((CMesh*)CResMgr::GetInst()->Load<CMesh>(L"RectMesh"));
-	g_pObj->GetMeshRender()->SetShader(CShaderMgr::GetInst()->FindShader(L"ColorShader"));
 
 	return RET_SUCCESS;
 }
@@ -94,10 +72,7 @@ int CCore::update()
 {
 	CKeyMgr::GetInst()->update();
 	CTimeMgr::GetInst()->update();
-	
-	g_pObj->Update();
-	g_pObj->FinalUpdate();
-
+	CSceneMgr::GetInst()->Update();
 	// View 변환행렬 구하기
 	g_Transform.matView = XMMatrixIdentity();
 
@@ -114,10 +89,9 @@ int CCore::update()
 void CCore::render()
 {
 	CDevice::GetInst()->ClearTarget();
-
+	CSceneMgr::GetInst()->Render();
 	// 삼각형 하나 그리기.  (해당 mesh와 vertex blob과 연결된다.)
 	// 특정 mesh를 그리는 shader는 여러가지. shader와 연결관계인 layout은 어떠한 shader가 바뀔 때 마다 계속 새로 잡아주어야 함. 
-	g_pObj->Render();
 
 	CDevice::GetInst()->Present();
 }

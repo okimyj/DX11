@@ -3,13 +3,17 @@
 #include "Component.h"
 class CTransform;
 class CMeshRender;
+class CCamera;
 class CGameObject
 {
+public:
+	static CGameObject* CreateGameObject(const wstring& _strTag = L"");
+	static CGameObject* CreateCamera(const wstring& _strTag = L"");
+	
 private:
 	CComponent*	m_arrComp[(UINT)COMPONENT_TYPE::END];
-public:
-	CMeshRender* GetMeshRender() { return (CMeshRender*)m_arrComp[(UINT)COMPONENT_TYPE::MESHRENDER]; }
-	CTransform* GetTransform() {return (CTransform*)m_arrComp[(UINT)COMPONENT_TYPE::TRANSFORM];}
+	wstring				m_strTag;
+
 public:
 	void Awake();
 	void Start();
@@ -23,9 +27,15 @@ public:
 public :
 	template<typename T>
 	CComponent* GetComponent();
-
 	template<typename T>
 	CComponent* AddComponent(CComponent* _pCom=NULL);
+
+public:
+	CMeshRender* GetMeshRender() { return (CMeshRender*)m_arrComp[(UINT)COMPONENT_TYPE::MESHRENDER]; }
+	CTransform* GetTransform() { return (CTransform*)m_arrComp[(UINT)COMPONENT_TYPE::TRANSFORM]; }
+	CCamera* GetCamera() { return (CCamera*)m_arrComp[(UINT)COMPONENT_TYPE::CAMERA]; }
+	const wstring& GetTag() { return m_strTag; }
+	void SetTag(const wstring& _strTag) { m_strTag = _strTag; }
 
 public:
 	CGameObject();
@@ -50,8 +60,6 @@ template<typename T>
 CComponent* CGameObject::AddComponent(CComponent* _pComp)
 {
 	const type_info& info = typeid(T);
-	if (NULL == _pComp)
-		_pComp = new T();
 	if (info.hash_code() == typeid(CTransform).hash_code())
 	{
 		m_arrComp[(UINT)COMPONENT_TYPE::TRANSFORM] = _pComp;
@@ -59,6 +67,10 @@ CComponent* CGameObject::AddComponent(CComponent* _pComp)
 	if (info.hash_code() == typeid(CMeshRender).hash_code())
 	{
 		m_arrComp[(UINT)COMPONENT_TYPE::MESHRENDER] = _pComp;
+	}
+	if (info.hash_code() == typeid(CCamera).hash_code())
+	{
+		m_arrComp[(UINT)COMPONENT_TYPE::CAMERA] = _pComp;
 	}
 	_pComp->SetGameObject(this);
 	return _pComp;

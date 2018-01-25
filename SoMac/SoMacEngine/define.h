@@ -25,9 +25,16 @@
 #define DEVICE CDevice::GetInst()->GetDevice()
 #define CONTEXT CDevice::GetInst()->GetContext()
 
+#define MAX_LAYER 32
+
+#define LAYER_DEFAULT L"Default"
+#define LAYER_TRANSPARENT L"Transparent"
+#define LAYER_CAMERA L"Camera"
+
 enum class COMPONENT_TYPE
 {
 	TRANSFORM,
 	MESHRENDER,
+	CAMERA,
 	END,
 };

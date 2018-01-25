@@ -1,5 +1,7 @@
 #include "Scene.h"
 #include "Layer.h"
+#include "GameObject.h"
+#include "Camera.h"
 
 CScene::CScene()
 {
@@ -9,68 +11,110 @@ CScene::CScene()
 	{
 		m_setLayerIdx.insert(i);
 	}
+	// vector resize와 reserve의 차이. 
+	// reserve : 메모리 공간을 예약하는 개념. // 기본값 x 아직 데이터가 들어간 상태가 아님.
+	// resize : 해당 크기 만큼 메모리 할당. // 기본값 NULL(0)으로 초기화.
+	// vector는 push_back 할 때 마다 공간이 부족하면 재할당(메모리 할당, 복사, 삭제)이 일어나기 때문에 
+	// 지금 같이 최대 개수가 정해져 있는 경우 resize를 이용해서 미리 할당 해놓는게 낫다. 
+	m_vecLayer.resize(MAX_LAYER);
+
+	// 전체 씬 공통 Layer 생성.
+	AddLayer(LAYER_DEFAULT);
+	AddLayer(LAYER_TRANSPARENT);
+	AddLayer(LAYER_CAMERA);
 }
 
 
 CScene::~CScene()
 {
+	// map, vector 두개가 서로 같은 주소를 참조 하고 있으니 vector 만 Safe_Delete.  map은 혹시모르니 clear 해주자.
+	Safe_Delete_Vector(m_vecLayer);
+	m_mapLayer.clear();
 }
 
 
 void CScene::Awake()
 {
-	map<wstring, tLayerInfo>::iterator iter = m_mapLayer.begin();
-	for (; iter != m_mapLayer.end(); ++iter)
+	for (int i = 0; i < MAX_LAYER; ++i)
 	{
-		iter->second.pLayer->Awake();
+		if (NULL != m_vecLayer[i])
+		{
+			m_vecLayer[i]->Awake();
+		}
 	}
 }
 
 void CScene::Start()
 {
-	map<wstring, tLayerInfo>::iterator iter = m_mapLayer.begin();
-	for (; iter != m_mapLayer.end(); ++iter)
+	for (int i = 0; i < MAX_LAYER; ++i)
 	{
-		iter->second.pLayer->Start();
+		if (NULL != m_vecLayer[i])
+		{
+			m_vecLayer[i]->Start();
+		}
 	}
 }
 
 int CScene::Update()
 {
-	map<wstring, tLayerInfo>::iterator iter = m_mapLayer.begin();
-	for (; iter != m_mapLayer.end(); ++iter)
+	for (int i = 0; i < MAX_LAYER; ++i)
 	{
-		iter->second.pLayer->Update();
+		if (NULL != m_vecLayer[i])
+		{
+			m_vecLayer[i]->Update();
+		}
 	}
-	return 0;
+	return RET_SUCCESS;
 }
 
 int CScene::LateUpdate()
 {
-	map<wstring, tLayerInfo>::iterator iter = m_mapLayer.begin();
-	for (; iter != m_mapLayer.end(); ++iter)
+	for (int i = 0; i < MAX_LAYER; ++i)
 	{
-		iter->second.pLayer->LateUpdate();
+		if (NULL != m_vecLayer[i])
+		{
+			m_vecLayer[i]->LateUpdate();
+		}
 	}
-	return 0;
+	return RET_SUCCESS;
 }
 
 int CScene::FinalUpdate()
 {
-	map<wstring, tLayerInfo>::iterator iter = m_mapLayer.begin();
-	for (; iter != m_mapLayer.end(); ++iter)
+	for (int i = 0; i < MAX_LAYER; ++i)
 	{
-		iter->second.pLayer->FinalUpdate();
+		if (NULL != m_vecLayer[i])
+		{
+			m_vecLayer[i]->FinalUpdate();
+		}
 	}
-	return 0;
+	return RET_SUCCESS;
 }
 
 void CScene::Render()
 {
-	map<wstring, tLayerInfo>::iterator iter = m_mapLayer.begin();
-	for (; iter != m_mapLayer.end(); ++iter)
+	// Camera Layer 를 얻어옴.
+	CLayer* pCamLayer = FindLayer(LAYER_CAMERA);
+	list<CGameObject*>& listObj = pCamLayer->GetObjList();
+	list<CGameObject*>::iterator iter = listObj.begin();
+	for (; iter != listObj.end(); ++iter)
 	{
-		iter->second.pLayer->Render();
+		CCamera* pCamComp = (*iter)->GetCamera();
+		for (int i = 0; i < MAX_LAYER; ++i)
+		{
+			if (NULL != m_vecLayer[i] && pCamComp->IsRenderTargetLayer(m_vecLayer[i]))
+			{
+				m_vecLayer[i]->Render();
+			}
+		}
+	}
+
+	for (int i = 0; i < MAX_LAYER; ++i)
+	{
+		if (NULL != m_vecLayer[i])
+		{
+			m_vecLayer[i]->Render();
+		}
 	}
 }
 
@@ -79,19 +123,24 @@ int CScene::AddLayer(const wstring & _strLayerName)
 	CLayer* pLayer = FindLayer(_strLayerName);
 	if (NULL != pLayer)
 		return RET_FAILED;
-	tLayerInfo tInfo = {};
-	tInfo.pLayer = new CLayer();
-	tInfo.iLayerIdx = GetLayerIndex();
-	m_mapLayer.insert(make_pair(_strLayerName, tInfo));
-	return 0;
+	
+	pLayer = new CLayer();
+	UINT iLayerIdx = GetLayerIndex();
+	pLayer->SetLayerIndex(iLayerIdx);
+	pLayer->SetLayerName(_strLayerName);
+
+	// map 에 추가해주고, 배열에도 해당 인덱스에 넣어준다.
+	m_mapLayer.insert(make_pair(_strLayerName, pLayer));
+	m_vecLayer[iLayerIdx] = pLayer;
+	return RET_SUCCESS;
 }
 
 CLayer * CScene::FindLayer(const wstring & _strLayerName)
 {
-	map<wstring, tLayerInfo>::iterator iter = m_mapLayer.begin();
+	map<wstring, CLayer*>::iterator iter = m_mapLayer.find(_strLayerName);
 	if (iter == m_mapLayer.end())
 		return NULL;
-	return iter->second.pLayer;
+	return iter->second;
 }
 
 UINT CScene::GetLayerIndex()
