@@ -8,6 +8,7 @@
 #include "Transform.h"
 #include "MeshRender.h"
 #include "Mesh.h"
+#include "PlayerScript.h"
 
 
 
@@ -32,13 +33,12 @@ void CSceneMgr::Init()
 
 	// -- Create Camera & Add to Camera Layer
 	CGameObject* pCamera = CGameObject::CreateCamera(L"MainCamera");
-	pCamera->GetCamera()->AddRenderTargetLayer(m_pCurScene->FindLayer(LAYER_DEFAULT));
+	pCamera->GetCamera()->AddRenderTargetLayer(LAYER_DEFAULT);
 	m_pCurScene->FindLayer(LAYER_CAMERA)->AddGameObject(pCamera);
 
 	//-- create GameObject & Add to Default Layer.
 	CGameObject* pObj = CGameObject::CreateGameObject(L"Player");
-	pObj->GetTransform()->SetLocalPosition(Vec3(0.f, 0.f, 100.f));
-	pObj->GetTransform()->SetLocalScale(Vec3(100.f, 100.f, 100.f));
+	pObj->AddComponent<CScript>(new CPlayerScript);
 	pObj->GetMeshRender()->SetMesh((CMesh*)CResMgr::GetInst()->Load<CMesh>(L"RectMesh"));
 	pObj->GetMeshRender()->SetShader(CShaderMgr::GetInst()->FindShader(L"ColorShader"));
 	m_pCurScene->FindLayer(LAYER_DEFAULT)->AddGameObject(pObj);

@@ -18,28 +18,7 @@ CTransform::~CTransform()
 
 int CTransform::Update()
 {
-	bool bKeyPress = false;
-	float fDT = CTimeMgr::GetInst()->DeltaTime();
-
-	if (CKeyMgr::GetInst()->GetKeyState(KEY_TYPE::KEY_LEFT, KEY_STATE::HOLD))
-	{
-		m_vPos.x -= 100.f * fDT;
-	}
-
-	if (CKeyMgr::GetInst()->GetKeyState(KEY_TYPE::KEY_RIGHT, KEY_STATE::HOLD))
-	{
-		m_vPos.x += 100.f * fDT;
-	}
-
-	if (CKeyMgr::GetInst()->GetKeyState(KEY_TYPE::KEY_Y, KEY_STATE::HOLD))
-	{
-		m_vRot.y += XM_2PI * fDT;
-	}
-
-	if (CKeyMgr::GetInst()->GetKeyState(KEY_TYPE::KEY_Z, KEY_STATE::HOLD))
-	{
-		m_vPos.z += 100.f * fDT;
-	}
+	
 	return 0;
 }
 

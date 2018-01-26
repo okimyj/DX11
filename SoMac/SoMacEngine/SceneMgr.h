@@ -15,5 +15,8 @@ public:
 	void Render();
 //	void ChangeScene()
 
+public:
+	CScene* GetCurScene() { return m_pCurScene; }
+
 };
 

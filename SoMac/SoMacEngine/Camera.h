@@ -25,10 +25,11 @@ public:
 	virtual int LateUpdate();
 	virtual int FinalUpdate();
 
-	void ToggleRenderTargetLayer(CLayer* _pLayer);
-	void AddRenderTargetLayer(CLayer* _pLayer);
-	void RemoveRenderTargetLayer(CLayer* _pLayer);
+	void ToggleRenderTargetLayer(const wstring& _strLayerName);
+	void AddRenderTargetLayer(const wstring& _strLayerName);
+	void RemoveRenderTargetLayer(const wstring& _strLayerName);
 	
+	bool IsRenderTargetLayer(const wstring& _strLayerName);
 	bool IsRenderTargetLayer(CLayer* _pLayer);
 public:
 	CCamera();

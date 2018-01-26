@@ -1,4 +1,6 @@
 #include "Camera.h"
+#include "SceneMgr.h"
+#include "Scene.h"
 #include "Transform.h"
 #include "Layer.h"
 
@@ -56,24 +58,36 @@ int CCamera::FinalUpdate()
 }
 
 
-void CCamera::ToggleRenderTargetLayer(CLayer * _pLayer)
+void CCamera::ToggleRenderTargetLayer(const wstring& _strLayerName)
 {
-	if (IsRenderTargetLayer(_pLayer))
-		RemoveRenderTargetLayer(_pLayer);
+	if (IsRenderTargetLayer(_strLayerName))
+		RemoveRenderTargetLayer(_strLayerName);
 	else
-		AddRenderTargetLayer(_pLayer);
+		AddRenderTargetLayer(_strLayerName);
 }
 
-void CCamera::AddRenderTargetLayer(CLayer * _pLayer)
+void CCamera::AddRenderTargetLayer(const wstring& _strLayerName)
 {
-	int iIdx = _pLayer->GetLayerIndex();
+	CScene* pCurScene = CSceneMgr::GetInst()->GetCurScene();
+	CLayer* pLayer = pCurScene->FindLayer(_strLayerName);
+	int iIdx = pLayer->GetLayerIndex();
 	m_iRenderLayerFlag |= (1 << iIdx);
 }
 
-void CCamera::RemoveRenderTargetLayer(CLayer * _pLayer)
+void CCamera::RemoveRenderTargetLayer(const wstring& _strLayerName)
 {
-	int iIdx = _pLayer->GetLayerIndex();
+	CScene* pCurScene = CSceneMgr::GetInst()->GetCurScene();
+	CLayer* pLayer = pCurScene->FindLayer(_strLayerName);
+	int iIdx = pLayer->GetLayerIndex();
 	m_iRenderLayerFlag &= ~(1 << iIdx);
+}
+
+bool CCamera::IsRenderTargetLayer(const wstring& _strLayerName)
+{
+	CScene* pCurScene = CSceneMgr::GetInst()->GetCurScene();
+	CLayer* pLayer = pCurScene->FindLayer(_strLayerName);
+	int iIdx = pLayer->GetLayerIndex();
+	return (m_iRenderLayerFlag & (1 << iIdx));
 }
 
 bool CCamera::IsRenderTargetLayer(CLayer * _pLayer)

@@ -1,9 +1,16 @@
 #pragma once
 #include "global.h"
 #include "Component.h"
+
+template<typename T>
+struct ID { typedef T type; };
+
+
 class CTransform;
 class CMeshRender;
 class CCamera;
+class CScript;
+
 class CGameObject
 {
 public:
@@ -11,8 +18,9 @@ public:
 	static CGameObject* CreateCamera(const wstring& _strTag = L"");
 	
 private:
-	CComponent*	m_arrComp[(UINT)COMPONENT_TYPE::END];
 	wstring				m_strTag;
+	CComponent*	m_arrComp[(UINT)COMPONENT_TYPE::END];
+	list<CScript*>	m_listScript;
 
 public:
 	void Awake();
@@ -28,8 +36,12 @@ public :
 	template<typename T>
 	CComponent* GetComponent();
 	template<typename T>
-	CComponent* AddComponent(CComponent* _pCom=NULL);
-
+	CComponent* AddComponent(CComponent* _pComp) { return AddComponent(_pComp, ID<T>()); }
+	
+private:
+	template<typename T>
+	CComponent* AddComponent(CComponent* _pComp, ID<T> _id);
+	CComponent* AddComponent(CComponent* _pComp, ID<CScript>);
 public:
 	CMeshRender* GetMeshRender() { return (CMeshRender*)m_arrComp[(UINT)COMPONENT_TYPE::MESHRENDER]; }
 	CTransform* GetTransform() { return (CTransform*)m_arrComp[(UINT)COMPONENT_TYPE::TRANSFORM]; }
@@ -56,8 +68,9 @@ CComponent* CGameObject::GetComponent()
 	}
 	return NULL;
 }
+
 template<typename T>
-CComponent* CGameObject::AddComponent(CComponent* _pComp)
+CComponent* CGameObject::AddComponent(CComponent* _pComp, ID<T>)
 {
 	const type_info& info = typeid(T);
 	if (info.hash_code() == typeid(CTransform).hash_code())
@@ -75,4 +88,5 @@ CComponent* CGameObject::AddComponent(CComponent* _pComp)
 	_pComp->SetGameObject(this);
 	return _pComp;
 }
+
 

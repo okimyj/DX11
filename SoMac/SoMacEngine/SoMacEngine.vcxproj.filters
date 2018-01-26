@@ -75,6 +75,12 @@
     <Filter Include="_SoMac Source\04. Component\03. Camera">
       <UniqueIdentifier>{20136e61-744f-4eeb-a988-d919de710c63}</UniqueIdentifier>
     </Filter>
+    <Filter Include="_SoMac Source\04. Component\04. Script">
+      <UniqueIdentifier>{2c8d7e88-2e10-4a94-8162-c668c8003ecd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="_SoMac Source\04. Component\04. Script\ScriptCode">
+      <UniqueIdentifier>{6dff62a8-90f4-4d81-a08e-fafb93fb27ae}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -149,6 +155,12 @@
     <ClInclude Include="Camera.h">
       <Filter>_SoMac Source\04. Component\03. Camera</Filter>
     </ClInclude>
+    <ClInclude Include="Script.h">
+      <Filter>_SoMac Source\04. Component\04. Script</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerScript.h">
+      <Filter>_SoMac Source\04. Component\04. Script\ScriptCode</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="func.cpp">
@@ -210,6 +222,12 @@
     </ClCompile>
     <ClCompile Include="Camera.cpp">
       <Filter>_SoMac Source\04. Component\03. Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="Script.cpp">
+      <Filter>_SoMac Source\04. Component\04. Script</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerScript.cpp">
+      <Filter>_SoMac Source\04. Component\04. Script\ScriptCode</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -2,6 +2,8 @@
 #include "Transform.h"
 #include "MeshRender.h"
 #include "Camera.h"
+#include "Script.h"
+
 CGameObject::CGameObject()
 	: m_arrComp{}
 {
@@ -36,6 +38,11 @@ void CGameObject::Awake()
 		if (NULL != m_arrComp[i])
 			m_arrComp[i]->Awake();
 	}
+	list<CScript*>::iterator iter = m_listScript.begin();
+	for (; iter != m_listScript.end(); ++iter)
+	{
+		(*iter)->Awake();
+	}
 }
 
 void CGameObject::Start()
@@ -45,6 +52,11 @@ void CGameObject::Start()
 		if (NULL != m_arrComp[i])
 			m_arrComp[i]->Start();
 	}
+	list<CScript*>::iterator iter = m_listScript.begin();
+	for (; iter != m_listScript.end(); ++iter)
+	{
+		(*iter)->Start();
+	}
 }
 
 int CGameObject::Update()
@@ -53,6 +65,11 @@ int CGameObject::Update()
 	{
 		if (NULL != m_arrComp[i])
 			m_arrComp[i]->Update();
+	}
+	list<CScript*>::iterator iter = m_listScript.begin();
+	for (; iter != m_listScript.end(); ++iter)
+	{
+		(*iter)->Update();
 	}
 	return 0;
 }
@@ -64,6 +81,11 @@ int CGameObject::LateUpdate()
 		if (NULL != m_arrComp[i])
 			m_arrComp[i]->LateUpdate();
 	}
+	list<CScript*>::iterator iter = m_listScript.begin();
+	for (; iter != m_listScript.end(); ++iter)
+	{
+		(*iter)->LateUpdate();
+	}
 	return 0;
 }
 
@@ -73,6 +95,11 @@ int CGameObject::FinalUpdate()
 	{
 		if (NULL != m_arrComp[i])
 			m_arrComp[i]->FinalUpdate();
+	}
+	list<CScript*>::iterator iter = m_listScript.begin();
+	for (; iter != m_listScript.end(); ++iter)
+	{
+		(*iter)->FinalUpdate();
 	}
 	return 0;
 }
@@ -84,5 +111,16 @@ void CGameObject::Render()
 		if (NULL != m_arrComp[i])
 			m_arrComp[i]->Render();
 	}
+	list<CScript*>::iterator iter = m_listScript.begin();
+	for (; iter != m_listScript.end(); ++iter)
+	{
+		(*iter)->Render();
+	}
 }
 
+CComponent* CGameObject::AddComponent(CComponent* _pComp, ID<CScript>)
+{
+	m_listScript.push_back((CScript*)_pComp);
+	_pComp->SetGameObject(this);
+	return _pComp;
+}
