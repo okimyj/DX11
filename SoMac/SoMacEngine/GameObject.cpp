@@ -12,7 +12,14 @@ CGameObject::CGameObject()
 
 CGameObject::~CGameObject()
 {
+	for (int i = 0; i < (UINT)COMPONENT_TYPE::END; ++i)
+	{
+		SAFE_DELETE(m_arrComp[i]);
+	}
+	Safe_Delete_List(m_listScript);
+
 }
+
 CGameObject * CGameObject::CreateGameObject(const wstring& _strTag)
 {
 	CGameObject* pObj = new CGameObject();

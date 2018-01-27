@@ -13,6 +13,7 @@ typedef XMFLOAT2 Vec2;
 typedef struct _tabVTX 
 {
 	Vec3	vPos;
+	Vec2 vUV;
 	Vec4 vColor;
 }VTX;
 

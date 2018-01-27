@@ -17,15 +17,19 @@ void CResMgr::Init()
 	//== Create Default Mesh ==//
 	VTX arrVtx[4] = {};
 	arrVtx[0].vPos = Vec3(-0.5f, -0.5f, 0.f);
+	arrVtx[0].vUV = Vec2(0.f, 1.f);
 	arrVtx[0].vColor = Vec4(1.f, 0.f, 0.f, 1.f);
 
 	arrVtx[1].vPos = Vec3(-0.5f, 0.5f, 0.f);
+	arrVtx[1].vUV = Vec2(0.f, 0.f);
 	arrVtx[1].vColor = Vec4(0.f, 1.f, 0.f, 1.f);
 
 	arrVtx[2].vPos = Vec3(0.5f, 0.5f, 0.f);
+	arrVtx[2].vUV = Vec2(1.f, 0.f);
 	arrVtx[2].vColor = Vec4(0.f, 0.f, 1.f, 1.f);
 
 	arrVtx[3].vPos = Vec3(0.5f, -0.5f, 0.f);
+	arrVtx[3].vUV = Vec2(1.f, 1.f);
 	arrVtx[3].vColor = Vec4(0.f, 0.f, 1.f, 1.f);
 
 	INDEX16 arrIdx[2] = {};
@@ -38,6 +42,7 @@ void CResMgr::Init()
 	CMesh* pMesh = CMesh::Create(4, sizeof(VTX), D3D11_USAGE_DEFAULT, arrVtx
 		, iIdxCount, INDEX16::size(), D3D11_USAGE_DEFAULT, INDEX16::format(), arrIdx);
 	pMesh->AddLayoutDesc("POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0);
+	pMesh->AddLayoutDesc("TEXCOORD", 0, DXGI_FORMAT_R32G32_FLOAT, 0, 0);
 	pMesh->AddLayoutDesc("COLOR", 0, DXGI_FORMAT_R32G32B32A32_FLOAT, 0, 0);
 	AddMesh(L"RectMesh", pMesh);
 }
@@ -58,6 +63,14 @@ CMesh * CResMgr::FindMesh(const wstring & _strKey)
 {
 	map<wstring, CResPtr<CMesh>>::iterator iter = m_mapMesh.find(_strKey);
 	if (iter == m_mapMesh.end())
+		return NULL;
+	return iter->second;
+}
+
+CTexture * CResMgr::FindTexture(const wstring & _strKey)
+{
+	map<wstring, CResPtr<CTexture>>::iterator iter = m_mapTexture.find(_strKey);
+	if (iter == m_mapTexture.end())
 		return NULL;
 	return iter->second;
 }

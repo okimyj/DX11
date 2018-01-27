@@ -20,6 +20,11 @@ CDevice::~CDevice()
 	SAFE_RELEASE(m_pTargetView);
 	SAFE_RELEASE(m_pDepthStencilView);
 	SAFE_RELEASE(m_pDepthStencilTex);
+	map<wstring, CBUFFER>::iterator iter = m_mapConstBuffer.begin();
+	for (; iter != m_mapConstBuffer.end(); ++iter)
+	{
+		SAFE_RELEASE(iter->second.pBuffer);
+	}
 }
 
 int CDevice::init(HWND _hWnd, bool _bWindow)

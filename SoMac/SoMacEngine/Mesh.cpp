@@ -105,8 +105,8 @@ void CMesh::SetIdxSysMem(void * _pSysMem, UINT _iIdxSize, UINT _iIdxCount)
 	SAFE_DELETE(m_pIdxSysMem);
 	m_iIdxSize = _iIdxSize;
 	m_iIdxCount = _iIdxCount;
-	m_pVtxSysMem = malloc(_iIdxSize * _iIdxCount);
-	memcpy(m_pVtxSysMem, _pSysMem, _iIdxSize * _iIdxCount);
+	m_pIdxSysMem = malloc(_iIdxSize * _iIdxCount);
+	memcpy(m_pIdxSysMem, _pSysMem, _iIdxSize * _iIdxCount);
 }
 
 void CMesh::AddLayoutDesc(char * _pSemanticName, int _iSemanticIdx, DXGI_FORMAT _eFormat, int _iInputSlot, int _iInstancing)

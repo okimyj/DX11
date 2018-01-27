@@ -8,6 +8,9 @@
 #pragma comment(lib, "d3dcompiler")
 #pragma comment(lib, "dxguid")
 
+#include "..\External\include\DirectXTex.h"
+#pragma comment(lib, "DirectXTex")
+
 
 #include <string>
 #include <map>

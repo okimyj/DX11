@@ -62,7 +62,7 @@ CComponent* CGameObject::GetComponent()
 	{
 		return m_arrComp[(UINT)COMPONENT_TYPE::TRANSFORM];
 	}
-	if (info.hash_code() == typeid(CMeshRender).hash_code())
+	else if (info.hash_code() == typeid(CMeshRender).hash_code())
 	{
 		return m_arrComp[(UINT)COMPONENT_TYPE::MESHRENDER];
 	}

@@ -1,6 +1,8 @@
 #include "ResPtr.h"
 #include "Mesh.h"
+#include "Texture.h"
 template class CResPtr<CMesh>;
+template class CResPtr<CTexture>;
 
 template <typename T>
 CResPtr<T>::CResPtr()
@@ -28,7 +30,7 @@ template <typename T>
 CResPtr<T>::~CResPtr()
 {
 	if (NULL != m_pTarget)
-		m_pTarget->AddRef();
+		m_pTarget->SubRef();
 }
 template <typename T>
 void CResPtr<T>::operator = (const CResPtr & _ptr)

@@ -15,15 +15,23 @@ CShaderMgr::~CShaderMgr()
 
 void CShaderMgr::Init()
 {
-	// == Create Shader ================================
+	// == Create Color Shader ================================
+	CShader* pShader = new CShader();
 	wstring strPath = CPathMgr::GetResourcePath();
 	strPath += L"Shader\\Standard.fx";
-
-	CShader* pShader = new CShader();
 	pShader->CreateVertexShader(strPath, "VS_Color", 5, 0);
 	pShader->CreatePixelShader(strPath, "PS_Color", 5, 0);
 
 	CShaderMgr::GetInst()->AddShader(L"ColorShader", pShader);
+
+	// == Create Texture Shader ===============================
+	pShader = new CShader();
+	strPath = CPathMgr::GetResourcePath();
+	strPath += L"Shader\\Standard.fx";
+	pShader->CreateVertexShader(strPath, "VS_Texture", 5, 0);
+	pShader->CreatePixelShader(strPath, "PS_Texture", 5, 0);
+
+	CShaderMgr::GetInst()->AddShader(L"TextureShader", pShader);
 }
 
 int CShaderMgr::AddShader(wstring _strKey, CShader * _pShader)

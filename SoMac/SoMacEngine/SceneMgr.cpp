@@ -8,6 +8,7 @@
 #include "Transform.h"
 #include "MeshRender.h"
 #include "Mesh.h"
+#include "Texture.h"
 #include "PlayerScript.h"
 
 
@@ -21,7 +22,8 @@ CSceneMgr::CSceneMgr()
 
 CSceneMgr::~CSceneMgr()
 {
-
+	SAFE_DELETE(m_pCurScene);
+	SAFE_DELETE(m_pPrevScene);
 }
 
 void CSceneMgr::Init()
@@ -30,6 +32,9 @@ void CSceneMgr::Init()
 	m_pCurScene = new CScene();
 	// Scene 에 Layer 추가. 
 		// 현재는 추가할 Layer가 없으므로 추가하지 않는다.
+
+	// Texture Load.
+	CTexture* pText = (CTexture*)CResMgr::GetInst()->Load<CTexture>(L"Test", L"Texture\\Test.bmp");
 
 	// -- Create Camera & Add to Camera Layer
 	CGameObject* pCamera = CGameObject::CreateCamera(L"MainCamera");
@@ -40,7 +45,8 @@ void CSceneMgr::Init()
 	CGameObject* pObj = CGameObject::CreateGameObject(L"Player");
 	pObj->AddComponent<CScript>(new CPlayerScript);
 	pObj->GetMeshRender()->SetMesh((CMesh*)CResMgr::GetInst()->Load<CMesh>(L"RectMesh"));
-	pObj->GetMeshRender()->SetShader(CShaderMgr::GetInst()->FindShader(L"ColorShader"));
+	pObj->GetMeshRender()->SetTexture((CTexture*)CResMgr::GetInst()->Load<CTexture>(L"Test"));
+	pObj->GetMeshRender()->SetShader(CShaderMgr::GetInst()->FindShader(L"TextureShader"));
 	m_pCurScene->FindLayer(LAYER_DEFAULT)->AddGameObject(pObj);
 
 	pObj = CGameObject::CreateGameObject(L"Monster");

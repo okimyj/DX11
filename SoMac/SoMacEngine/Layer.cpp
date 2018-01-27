@@ -11,6 +11,7 @@ CLayer::CLayer()
 
 CLayer::~CLayer()
 {
+	Safe_Delete_List(m_listObj);
 }
 
 

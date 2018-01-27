@@ -76,10 +76,7 @@ int CCore::update()
 	// View 변환행렬 구하기
 	g_Transform.matView = XMMatrixIdentity();
 
-	// Projection 변환행렬 구하기
-	g_Transform.matProj = XMMatrixOrthographicLH(WINSIZE_X, WINSIZE_Y, 1.f, 1000.f);
-	//g_Transform.matProj = XMMatrixPerspectiveFovLH(XM_PI / 4.f, (float)WINSIZE_X / (float)WINSIZE_Y, 1.f, 1000.f);
-	g_Transform.matProj = XMMatrixTranspose(g_Transform.matProj);
+	
 
 
 

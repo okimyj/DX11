@@ -1,5 +1,4 @@
 #include "Component.h"
-#include "Transform.h"
 #include "GameObject.h"
 
 CComponent::CComponent()

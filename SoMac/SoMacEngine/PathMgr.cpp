@@ -1,7 +1,7 @@
 #include "PathMgr.h"
 // static 변수 초기화. 
 wchar_t CPathMgr::m_szResPath[255] = {};
-
+wchar_t CPathMgr::m_szExtension[20] = {};
 CPathMgr::CPathMgr()
 {
 }
@@ -30,4 +30,10 @@ void CPathMgr::Init()
 		}
 	}
 	wcscat_s(m_szResPath, 255, L"\\Bin\\Resources\\");
+}
+
+wchar_t * CPathMgr::GetExtension(const wchar_t * _pFileName)
+{
+	_wsplitpath_s(_pFileName, NULL, 0, NULL, 0, NULL, 0, m_szExtension, 20);
+	return m_szExtension;
 }

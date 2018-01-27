@@ -47,6 +47,7 @@ int CCamera::LateUpdate()
 	else
 	{
 		m_matProj = XMMatrixOrthographicLH(m_fWidth, m_fHeight, m_fNear, m_fFar);
+		//m_matProj = XMMatrixPerspectiveFovLH(XM_PI / 4.f, (float)WINSIZE_X / (float)WINSIZE_Y, 1.f, 1000.f);
 	}
 	
 	return RET_SUCCESS;
@@ -54,6 +55,10 @@ int CCamera::LateUpdate()
 
 int CCamera::FinalUpdate()
 {
+	// Projection 변환행렬 구하기
+	g_Transform.matProj = m_matProj; // MatrixOrthographicLH(WINSIZE_X, WINSIZE_Y, 1.f, 1000.f);
+	//g_Transform.matProj = XMMatrixPerspectiveFovLH(XM_PI / 4.f, (float)WINSIZE_X / (float)WINSIZE_Y, 1.f, 1000.f);
+	g_Transform.matProj = XMMatrixTranspose(g_Transform.matProj);
 	return 0;
 }
 
