@@ -1,6 +1,4 @@
 #include "ResPtr.h"
-#include "Mesh.h"
-#include "Texture.h"
 template class CResPtr<CMesh>;
 template class CResPtr<CTexture>;
 

@@ -150,11 +150,14 @@ call "fx.bat"</Command>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\External\Debug\include\DirectXTex.h" />
+    <ClInclude Include="BulletScript.h" />
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="Collider.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="Core.h" />
     <ClInclude Include="define.h" />
     <ClInclude Include="Device.h" />
+    <ClInclude Include="EnemyScript.h" />
     <ClInclude Include="func.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="global.h" />
@@ -174,14 +177,19 @@ call "fx.bat"</Command>
     <ClInclude Include="ShaderMgr.h" />
     <ClInclude Include="struct.h" />
     <ClInclude Include="Texture.h" />
+    <ClInclude Include="TextureAnim.h" />
+    <ClInclude Include="TextureAnimator.h" />
     <ClInclude Include="TimeMgr.h" />
     <ClInclude Include="Transform.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="BulletScript.cpp" />
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="Collider.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="Core.cpp" />
     <ClCompile Include="Device.cpp" />
+    <ClCompile Include="EnemyScript.cpp" />
     <ClCompile Include="func.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="KeyMgr.cpp" />
@@ -199,6 +207,8 @@ call "fx.bat"</Command>
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="ShaderMgr.cpp" />
     <ClCompile Include="Texture.cpp" />
+    <ClCompile Include="TextureAnim.cpp" />
+    <ClCompile Include="TextureAnimator.cpp" />
     <ClCompile Include="TimeMgr.cpp" />
     <ClCompile Include="Transform.cpp" />
   </ItemGroup>

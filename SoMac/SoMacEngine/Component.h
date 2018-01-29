@@ -21,9 +21,6 @@ protected:
 	CGameObject* GetGameObject() { return m_pObj; }
 	CTransform* Transform();
 	CMeshRender* MeshRender();
-	
-
-
 
 public:
 	CComponent();

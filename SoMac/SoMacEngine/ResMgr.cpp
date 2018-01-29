@@ -10,6 +10,7 @@ CResMgr::CResMgr()
 CResMgr::~CResMgr()
 {
 	Safe_Delete_Map(m_mapMesh);
+	Safe_Delete_Map(m_mapTexture);
 }
 
 void CResMgr::Init()

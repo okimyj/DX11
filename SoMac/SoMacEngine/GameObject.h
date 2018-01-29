@@ -9,6 +9,7 @@ struct ID { typedef T type; };
 class CTransform;
 class CMeshRender;
 class CCamera;
+class CTextureAnimator;
 class CScript;
 
 class CGameObject
@@ -21,7 +22,8 @@ private:
 	wstring				m_strTag;
 	CComponent*	m_arrComp[(UINT)COMPONENT_TYPE::END];
 	list<CScript*>	m_listScript;
-
+	
+	
 public:
 	void Awake();
 	void Start();
@@ -31,6 +33,7 @@ public:
 
 	int FinalUpdate();			// world행렬을 최종적으로 계산해 놓기 위한 단계임.
 	void Render();
+
 	
 public :
 	template<typename T>
@@ -66,6 +69,14 @@ CComponent* CGameObject::GetComponent()
 	{
 		return m_arrComp[(UINT)COMPONENT_TYPE::MESHRENDER];
 	}
+	else if (info.hash_code() == typeid(CCamera).hash_code())
+	{
+		return m_arrComp[(UINT)COMPONENT_TYPE::CAMERA];
+	}
+	else if (info.hash_code() == typeid(CTextureAnimator).hash_code())
+	{
+		return m_arrComp[(UINT)COMPONENT_TYPE::TEXTURE_ANIMATOR];
+	}
 	return NULL;
 }
 
@@ -84,6 +95,10 @@ CComponent* CGameObject::AddComponent(CComponent* _pComp, ID<T>)
 	if (info.hash_code() == typeid(CCamera).hash_code())
 	{
 		m_arrComp[(UINT)COMPONENT_TYPE::CAMERA] = _pComp;
+	}
+	if (info.hash_code() == typeid(CTextureAnimator).hash_code())
+	{
+		m_arrComp[(UINT)COMPONENT_TYPE::TEXTURE_ANIMATOR] = _pComp;
 	}
 	_pComp->SetGameObject(this);
 	return _pComp;

@@ -87,6 +87,15 @@
     <Filter Include="_SoMac Source\02. Manager\04. ResMgr\Resource\02. Texture">
       <UniqueIdentifier>{23dd590d-c1b0-44b5-a311-064c254797af}</UniqueIdentifier>
     </Filter>
+    <Filter Include="_SoMac Source\04. Component\05. Collider">
+      <UniqueIdentifier>{1b662069-bc44-495c-b71a-f9c66c34d70b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="_SoMac Source\04. Component\06. Texture Animator">
+      <UniqueIdentifier>{0124bc77-6ee1-4502-8804-d0e46f940520}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="_SoMac Source\04. Component\06. Texture Animator\TextureAnim">
+      <UniqueIdentifier>{7223560f-a757-464b-85c9-9a4934054698}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -170,8 +179,23 @@
     <ClInclude Include="..\External\Debug\include\DirectXTex.h">
       <Filter>External Header</Filter>
     </ClInclude>
+    <ClInclude Include="BulletScript.h">
+      <Filter>_SoMac Source\04. Component\04. Script\ScriptCode</Filter>
+    </ClInclude>
     <ClInclude Include="Texture.h">
-      <Filter>Header Files</Filter>
+      <Filter>_SoMac Source\02. Manager\04. ResMgr\Resource\02. Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyScript.h">
+      <Filter>_SoMac Source\04. Component\04. Script\ScriptCode</Filter>
+    </ClInclude>
+    <ClInclude Include="Collider.h">
+      <Filter>_SoMac Source\04. Component\05. Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureAnimator.h">
+      <Filter>_SoMac Source\04. Component\06. Texture Animator</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureAnim.h">
+      <Filter>_SoMac Source\04. Component\06. Texture Animator\TextureAnim</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -241,8 +265,23 @@
     <ClCompile Include="PlayerScript.cpp">
       <Filter>_SoMac Source\04. Component\04. Script\ScriptCode</Filter>
     </ClCompile>
+    <ClCompile Include="BulletScript.cpp">
+      <Filter>_SoMac Source\04. Component\04. Script\ScriptCode</Filter>
+    </ClCompile>
     <ClCompile Include="Texture.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>_SoMac Source\02. Manager\04. ResMgr\Resource\02. Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyScript.cpp">
+      <Filter>_SoMac Source\04. Component\04. Script\ScriptCode</Filter>
+    </ClCompile>
+    <ClCompile Include="Collider.cpp">
+      <Filter>_SoMac Source\04. Component\05. Collider</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureAnimator.cpp">
+      <Filter>_SoMac Source\04. Component\06. Texture Animator</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureAnim.cpp">
+      <Filter>_SoMac Source\04. Component\06. Texture Animator\TextureAnim</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

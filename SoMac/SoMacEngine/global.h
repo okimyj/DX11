@@ -17,6 +17,7 @@
 #include <vector>
 #include <list>
 #include <set>
+#include <time.h>
 
 using namespace std;
 using namespace DirectX;

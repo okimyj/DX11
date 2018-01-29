@@ -31,10 +31,13 @@
 #define LAYER_TRANSPARENT L"Transparent"
 #define LAYER_CAMERA L"Camera"
 
+// Script는 여러개가 붙을 수 있어서 추가 안함. 
 enum class COMPONENT_TYPE
 {
 	TRANSFORM,
 	MESHRENDER,
 	CAMERA,
+	COLLIDER,
+	TEXTURE_ANIMATOR,
 	END,
 };

@@ -11,7 +11,9 @@ class CScript :
 	public CComponent
 {
 public :
-	
+	virtual void Awake() {};
+	virtual void Start() {};
+	virtual int Update() { return 0; }
 protected:
 	float DT() { return CTimeMgr::GetInst()->DeltaTime(); }
 

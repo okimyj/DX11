@@ -1,6 +1,7 @@
 #pragma once
 #include "global.h"
 class CScene;
+class CGameObject;
 class CSceneMgr
 {
 	SINGLE(CSceneMgr);
@@ -11,8 +12,10 @@ public :
 	
 public:
 	void Init();
+	
 	int Update();
 	void Render();
+	void AddGameObject(CGameObject* _pObj, const wstring& _strLayerName=L"");
 //	void ChangeScene()
 
 public:
