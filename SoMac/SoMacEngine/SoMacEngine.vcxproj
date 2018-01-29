@@ -152,7 +152,6 @@ call "fx.bat"</Command>
     <ClInclude Include="..\External\Debug\include\DirectXTex.h" />
     <ClInclude Include="BulletScript.h" />
     <ClInclude Include="Camera.h" />
-    <ClInclude Include="Collider.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="Core.h" />
     <ClInclude Include="define.h" />
@@ -185,7 +184,6 @@ call "fx.bat"</Command>
   <ItemGroup>
     <ClCompile Include="BulletScript.cpp" />
     <ClCompile Include="Camera.cpp" />
-    <ClCompile Include="Collider.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="Core.cpp" />
     <ClCompile Include="Device.cpp" />

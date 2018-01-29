@@ -87,9 +87,6 @@
     <Filter Include="_SoMac Source\02. Manager\04. ResMgr\Resource\02. Texture">
       <UniqueIdentifier>{23dd590d-c1b0-44b5-a311-064c254797af}</UniqueIdentifier>
     </Filter>
-    <Filter Include="_SoMac Source\04. Component\05. Collider">
-      <UniqueIdentifier>{1b662069-bc44-495c-b71a-f9c66c34d70b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="_SoMac Source\04. Component\06. Texture Animator">
       <UniqueIdentifier>{0124bc77-6ee1-4502-8804-d0e46f940520}</UniqueIdentifier>
     </Filter>
@@ -188,9 +185,6 @@
     <ClInclude Include="EnemyScript.h">
       <Filter>_SoMac Source\04. Component\04. Script\ScriptCode</Filter>
     </ClInclude>
-    <ClInclude Include="Collider.h">
-      <Filter>_SoMac Source\04. Component\05. Collider</Filter>
-    </ClInclude>
     <ClInclude Include="TextureAnimator.h">
       <Filter>_SoMac Source\04. Component\06. Texture Animator</Filter>
     </ClInclude>
@@ -273,9 +267,6 @@
     </ClCompile>
     <ClCompile Include="EnemyScript.cpp">
       <Filter>_SoMac Source\04. Component\04. Script\ScriptCode</Filter>
-    </ClCompile>
-    <ClCompile Include="Collider.cpp">
-      <Filter>_SoMac Source\04. Component\05. Collider</Filter>
     </ClCompile>
     <ClCompile Include="TextureAnimator.cpp">
       <Filter>_SoMac Source\04. Component\06. Texture Animator</Filter>
