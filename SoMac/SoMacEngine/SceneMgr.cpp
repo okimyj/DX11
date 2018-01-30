@@ -9,8 +9,11 @@
 #include "MeshRender.h"
 #include "Mesh.h"
 #include "Texture.h"
+#include "Script.h"
 #include "PlayerScript.h"
 #include "EnemyScript.h"
+#include "BulletScript.h"
+#include "Prefab.h"
 
 
 
@@ -36,13 +39,21 @@ void CSceneMgr::Init()
 	m_pCurScene->AddLayer(L"PlayerLayer");
 	m_pCurScene->AddLayer(L"MonsterLayer");
 	// Texture Load.
-
 	CTexture* pText = (CTexture*)CResMgr::GetInst()->Load<CTexture>(L"Bullet", L"Texture\\bullet.png"); 
 	for(int i=0; i<8; ++i)
 	{
 		wstring strIdx = to_wstring(i);
 		pText = (CTexture*)CResMgr::GetInst()->Load<CTexture>(L"Player"+strIdx, L"Texture\\player" + strIdx + L".png");
 	}
+
+	// -- Create Bullet Prefab --//
+	CGameObject* pBullet = CGameObject::CreateGameObject(L"Bullet");
+	pBullet->GetMeshRender()->SetMesh((CMesh*)CResMgr::GetInst()->Load<CMesh>(L"RectMesh"));
+	pBullet->GetMeshRender()->SetTexture((CTexture*)CResMgr::GetInst()->Load<CTexture>(L"Bullet"));
+	pBullet->GetMeshRender()->SetShader(CShaderMgr::GetInst()->FindShader(L"TextureShader"));
+	pBullet->AddComponent<CScript>(new CBulletScript);
+	CResMgr::GetInst()->AddPrefab(L"Bullet", pBullet);
+
 	
 
 	// -- Create Camera & Add to Camera Layer

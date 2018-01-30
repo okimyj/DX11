@@ -9,6 +9,28 @@ CGameObject::CGameObject()
 {
 }
 
+CGameObject::CGameObject(const CGameObject & _pOther)
+	: m_strTag(_pOther.m_strTag)
+	, m_arrComp{}
+	, m_listScript{}
+{
+	for (UINT i = 0; i < (UINT)COMPONENT_TYPE::END; ++i)
+	{
+		if (NULL != _pOther.m_arrComp[i])
+		{
+			m_arrComp[i] = _pOther.m_arrComp[i]->Clone();
+			m_arrComp[i]->SetGameObject(this);
+		}
+	}
+	list<CScript*>::const_iterator iter = _pOther.m_listScript.begin();
+	for (; iter != _pOther.m_listScript.end(); ++iter)
+	{
+		CScript* pScript = (*iter)->Clone();
+		pScript->SetGameObject(this);
+		m_listScript.push_back(pScript);
+	}
+}
+
 
 CGameObject::~CGameObject()
 {

@@ -6,16 +6,42 @@
 
 
 CTextureAnim::CTextureAnim()
+	: m_pTargetMesh(NULL)
+	, m_strAnimPrefix(0)
+	, m_iStartIdx(0)
+	, m_iEndIdx(0)
+	, m_fFPS(0)
+	, m_bLoop(false)
 {
 }
 
-CTextureAnim::CTextureAnim(CMeshRender * _pTargetMeshRender, const wstring & _strAnimPrefix, int _iStartIdx, int _iEndIdx, float _fFPS, bool _bLoop)
-	: m_pTargetMesh(_pTargetMeshRender)
+CTextureAnim::CTextureAnim(const CTextureAnim * _pOther)
+	: m_pTargetMesh(NULL)
+	, m_vecTexture(_pOther->m_vecTexture)
+	, m_bLoop(_pOther->m_bLoop)
+	, m_fFPS(_pOther->m_fFPS)
+	, m_fAccrueDT(0)
+	, m_iAnimIdx(0)
+	, m_strAnimPrefix(_pOther->m_strAnimPrefix)
+	, m_iStartIdx(_pOther->m_iStartIdx)
+	, m_iEndIdx(_pOther->m_iEndIdx)
+	
+	
+{
+	
+}
+
+CTextureAnim::CTextureAnim(const wstring & _strAnimPrefix, int _iStartIdx, int _iEndIdx, float _fFPS, bool _bLoop)
+	: m_pTargetMesh(NULL)
+	, m_vecTexture{}
+	, m_bLoop(_bLoop)
+	, m_fFPS(_fFPS)
+	, m_fAccrueDT(0)
+	, m_iAnimIdx(0)
 	, m_strAnimPrefix(_strAnimPrefix)
 	, m_iStartIdx(_iStartIdx)
 	, m_iEndIdx(_iEndIdx)
-	, m_fFPS(_fFPS)
-	, m_bLoop(_bLoop)
+
 {
 	
 }

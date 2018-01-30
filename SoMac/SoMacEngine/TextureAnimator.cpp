@@ -3,13 +3,31 @@
 #include "TimeMgr.h"
 CTextureAnimator::CTextureAnimator()
 	: m_mapAnim{}
+	, m_pCurrentAnim(NULL)
 {
 }
 
 
+CTextureAnimator::CTextureAnimator(const CTextureAnimator & _pOther)
+	: m_mapAnim{}
+	, m_pCurrentAnim(NULL)
+{
+	map<wstring, CTextureAnim*>::const_iterator iter = _pOther.m_mapAnim.begin();
+	for (; iter != m_mapAnim.end(); ++iter)
+	{
+		m_mapAnim.insert(make_pair(iter->first, iter->second->Clone()));
+	}
+}
+
 CTextureAnimator::~CTextureAnimator()
 {
 	Safe_Delete_Map(m_mapAnim);
+}
+
+void CTextureAnimator::AddAnimation(const wstring & _strKey, CTextureAnim * _pAnim)
+{
+	_pAnim->SetTargetMesh(MeshRender());
+	m_mapAnim.insert(make_pair(_strKey, _pAnim));
 }
 
 void CTextureAnimator::Play(const wstring & _strName)
@@ -23,8 +41,10 @@ void CTextureAnimator::Play(const wstring & _strName)
 void CTextureAnimator::Start()
 {
 	map<wstring, CTextureAnim*>::iterator iter = m_mapAnim.begin();
+	CMeshRender* pMeshRender = MeshRender();
 	for (; iter != m_mapAnim.end(); ++iter)
 	{
+		iter->second->SetTargetMesh(pMeshRender);
 		iter->second->Init();
 	}
 }

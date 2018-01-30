@@ -11,12 +11,16 @@ class CResMgr
 private:
 	map<wstring, CResPtr<CMesh>>		m_mapMesh;
 	map<wstring, CResPtr<CTexture>>		m_mapTexture;
+	map<wstring, CResPtr<CPrefab>>		m_mapPrefab;
 
 public:
 	void Init();
-
+public :
+	int AddPrefab(const wstring& _strKey, CGameObject* _pPrefab);
 private:
 	int AddMesh(const wstring& _strKey, CMesh* _pMesh);
+	
+	CPrefab* FindPrefab(const wstring& _strKey);
 	CMesh* FindMesh(const wstring& _strKey);
 	CTexture* FindTexture(const wstring& _strKey);
 public:
@@ -48,6 +52,10 @@ inline CRes * CResMgr::Load(const wstring & _strKey, const wstring & _strFilePat
 		pTexture->SetPath(_strFilePath);
 		m_mapTexture.insert(make_pair(_strKey, pTexture));
 		return pTexture;
+	}
+	else if (&info == &typeid(CPrefab))
+	{
+		return FindPrefab(_strKey);
 	}
 	return NULL;
 }

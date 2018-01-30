@@ -16,6 +16,7 @@ private:
 	int							m_iStartIdx;
 	int							m_iEndIdx;
 public:
+	CTextureAnim* Clone() { return new CTextureAnim(*this); }
 	void SetTargetMesh(CMeshRender* _pMesh) { m_pTargetMesh = _pMesh; }
 	void LoadTexture(const wstring& _strPrefix, int _iStartIdx, int _iEndIdx);
 	// call TextrueAnimator.
@@ -26,7 +27,8 @@ public:
 
 public:
 	CTextureAnim();
-	CTextureAnim(CMeshRender* _pTargetMeshRender, const wstring& _strAnimPrefix, int _iStartIdx, int _iEndIdx, float _fFPS, bool _bLoop);
+	CTextureAnim(const CTextureAnim* _pOther);
+	CTextureAnim(const wstring& _strAnimPrefix, int _iStartIdx, int _iEndIdx, float _fFPS, bool _bLoop);
 	virtual ~CTextureAnim();
 };
 

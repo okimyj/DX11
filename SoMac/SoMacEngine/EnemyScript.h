@@ -8,7 +8,8 @@ private:
 	int				m_iCurDir;
 	float			m_fSpeed;
 public:
-	void Die();
+	virtual CEnemyScript* Clone() { return new CEnemyScript(*this); }
+	
 	virtual void Awake();
 	virtual void Start();
 	virtual int Update();

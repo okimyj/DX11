@@ -1,6 +1,7 @@
 #pragma once
 #include "Mesh.h"
 #include "Texture.h"
+#include "Prefab.h"
 template <typename T>
 class CResPtr
 {

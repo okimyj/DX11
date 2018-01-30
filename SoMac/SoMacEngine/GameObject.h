@@ -17,7 +17,8 @@ class CGameObject
 public:
 	static CGameObject* CreateGameObject(const wstring& _strTag = L"");
 	static CGameObject* CreateCamera(const wstring& _strTag = L"");
-	
+public:
+	CGameObject* Clone() { return new CGameObject(*this); }
 private:
 	wstring				m_strTag;
 	CComponent*	m_arrComp[(UINT)COMPONENT_TYPE::END];
@@ -54,6 +55,7 @@ public:
 
 public:
 	CGameObject();
+	CGameObject(const CGameObject& _pOther);
 	~CGameObject();
 };
 
@@ -76,6 +78,17 @@ CComponent* CGameObject::GetComponent()
 	else if (info.hash_code() == typeid(CTextureAnimator).hash_code())
 	{
 		return m_arrComp[(UINT)COMPONENT_TYPE::TEXTURE_ANIMATOR];
+	}
+	else
+	{
+		list<CScript*>::iterator iter = m_listScript.begin();
+		for (; iter != m_listScript.end(); ++iter)
+		{
+			if (dynamic_cast<T*>(*iter))
+			{
+				return *iter;
+			}
+		}
 	}
 	return NULL;
 }

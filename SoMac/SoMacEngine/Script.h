@@ -11,6 +11,7 @@ class CScript :
 	public CComponent
 {
 public :
+	virtual CScript* Clone() = 0;
 	virtual void Awake() {};
 	virtual void Start() {};
 	virtual int Update() { return 0; }

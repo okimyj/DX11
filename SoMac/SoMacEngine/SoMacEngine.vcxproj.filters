@@ -93,6 +93,9 @@
     <Filter Include="_SoMac Source\04. Component\06. Texture Animator\TextureAnim">
       <UniqueIdentifier>{7223560f-a757-464b-85c9-9a4934054698}</UniqueIdentifier>
     </Filter>
+    <Filter Include="_SoMac Source\02. Manager\04. ResMgr\Resource\03. Prefab">
+      <UniqueIdentifier>{6e68fb2c-997d-4968-82d9-b4b9d1c0cc4f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -191,6 +194,9 @@
     <ClInclude Include="TextureAnim.h">
       <Filter>_SoMac Source\04. Component\06. Texture Animator\TextureAnim</Filter>
     </ClInclude>
+    <ClInclude Include="Prefab.h">
+      <Filter>_SoMac Source\02. Manager\04. ResMgr\Resource\03. Prefab</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="func.cpp">
@@ -273,6 +279,9 @@
     </ClCompile>
     <ClCompile Include="TextureAnim.cpp">
       <Filter>_SoMac Source\04. Component\06. Texture Animator\TextureAnim</Filter>
+    </ClCompile>
+    <ClCompile Include="Prefab.cpp">
+      <Filter>_SoMac Source\02. Manager\04. ResMgr\Resource\03. Prefab</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -23,7 +23,7 @@ CPlayerScript::~CPlayerScript()
 void CPlayerScript::Awake()
 {
 	CTextureAnimator* pTextureAnimator = (CTextureAnimator*)GetGameObject()->AddComponent<CTextureAnimator>(new CTextureAnimator);
-	CTextureAnim* idleAnim = new CTextureAnim(MeshRender(), L"Player", 0, 7, 10, true);
+	CTextureAnim* idleAnim = new CTextureAnim(L"Player", 0, 7, 10, true);
 	pTextureAnimator->AddAnimation(L"Idle", idleAnim);
 }
 
@@ -84,22 +84,34 @@ int CPlayerScript::Update()
 void CPlayerScript::Shoot()
 {
 	CBulletScript* bullectComp = CreateBullet();
-	bullectComp->SetInitPosition(Transform()->GetLocalPosition());
-	bullectComp->Awake();
-	bullectComp->Start();
-
+	if (NULL != bullectComp)
+	{
+		bullectComp->SetInitPosition(Transform()->GetLocalPosition());
+		bullectComp->Awake();
+		bullectComp->Start();
+	}
 	// TODO : SetTarget
 
 }
 
 CBulletScript* CPlayerScript::CreateBullet()
 {
-	
+	/*
 	CGameObject* pObj = CGameObject::CreateGameObject(L"Bullet");
 	pObj->GetMeshRender()->SetMesh((CMesh*)CResMgr::GetInst()->Load<CMesh>(L"RectMesh"));
 	pObj->GetMeshRender()->SetTexture((CTexture*)CResMgr::GetInst()->Load<CTexture>(L"Bullet"));
 	pObj->GetMeshRender()->SetShader(CShaderMgr::GetInst()->FindShader(L"TextureShader"));
 	CSceneMgr::GetInst()->AddGameObject(pObj, LAYER_DEFAULT);
 	return (CBulletScript*)pObj->AddComponent<CScript>(new CBulletScript);
+	*/
+	if(NULL == m_bulletPrefab)
+		m_bulletPrefab = (CPrefab*)CResMgr::GetInst()->Load<CPrefab>(L"Bullet");
+	if (NULL != m_bulletPrefab)
+	{
+		CGameObject* pObj = m_bulletPrefab->Instantiate();
+		CSceneMgr::GetInst()->AddGameObject(pObj, LAYER_DEFAULT);
+		return ((CBulletScript*)pObj->GetComponent<CBulletScript>());
+	}
 	
+	return NULL;
 }

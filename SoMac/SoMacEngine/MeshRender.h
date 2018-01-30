@@ -12,6 +12,8 @@ private:
 	CTexture*					m_pTexture;
 	CShader*					m_pShader;
 public:
+	// 멤버 변수들이 pointer 들이지만 다 리소스 포인터임. 하나만 있어야 하는것들. 
+	virtual CMeshRender* Clone() { return new CMeshRender(*this); }
 	virtual int Update() { return 0; }
 	virtual void Render();
 	

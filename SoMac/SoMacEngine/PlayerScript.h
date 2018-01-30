@@ -3,11 +3,14 @@
 
 class CBulletScript;
 class CTexture;
+class CPrefab;
 class CPlayerScript :
 	public CScript
 {
-
+private :
+	CPrefab*		m_bulletPrefab;
 public :
+	virtual CPlayerScript* Clone() { return new CPlayerScript(*this); }
 	virtual void Awake();
 	virtual void Start();
 	virtual int Update();

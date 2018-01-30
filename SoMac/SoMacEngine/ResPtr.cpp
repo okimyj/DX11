@@ -1,6 +1,7 @@
 #include "ResPtr.h"
 template class CResPtr<CMesh>;
 template class CResPtr<CTexture>;
+template class CResPtr<CPrefab>;
 
 template <typename T>
 CResPtr<T>::CResPtr()

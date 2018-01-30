@@ -21,6 +21,7 @@ private:
 
 	UINT			m_iRenderLayerFlag;
 public:
+	virtual CCamera* Clone() { return new CCamera(*this); }
 	virtual int Update();
 	virtual int LateUpdate();
 	virtual int FinalUpdate();

@@ -7,7 +7,9 @@ class CComponent
 {
 private:
 	CGameObject*	m_pObj;
+	
 public:
+	virtual CComponent* Clone() = 0;
 	virtual void Awake() {};
 	virtual void Start() {};
 	virtual int Update() = 0;

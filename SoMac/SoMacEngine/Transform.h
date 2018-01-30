@@ -11,6 +11,8 @@ private:
 
 	Matrix		m_matWorld;
 public :
+	// 일반 값들만 있으니 기본 복사 생성자 이용해도 상관 x. 
+	virtual CTransform* Clone() { return new CTransform(*this); }
 	virtual int Update();
 	virtual int LateUpdate();
 	virtual int FinalUpdate();

@@ -1,5 +1,7 @@
 #include "ResMgr.h"
 #include "Mesh.h"
+#include "Texture.h"
+#include "Prefab.h"
 
 
 CResMgr::CResMgr()
@@ -55,9 +57,30 @@ int CResMgr::AddMesh(const wstring & _strKey, CMesh * _pMesh)
 	{
 		return RET_FAILED;
 	}
+	_pMesh->SetKey(_strKey);
 	m_mapMesh.insert(make_pair(_strKey, _pMesh));
 
 	return RET_SUCCESS;
+}
+
+int CResMgr::AddPrefab(const wstring & _strKey, CGameObject * _pObj)
+{
+	CPrefab* pPrefab = FindPrefab(_strKey);
+	if (NULL != pPrefab || NULL == _pObj)
+		return RET_FAILED;
+	pPrefab = new CPrefab(_pObj);
+	pPrefab->SetKey(_strKey);
+	m_mapPrefab.insert(make_pair(_strKey, pPrefab));
+
+	return RET_SUCCESS;
+}
+
+CPrefab * CResMgr::FindPrefab(const wstring & _strKey)
+{
+	map<wstring, CResPtr<CPrefab>>::iterator iter = m_mapPrefab.find(_strKey);
+	if (iter == m_mapPrefab.end())
+		return NULL;
+	return iter->second;
 }
 
 CMesh * CResMgr::FindMesh(const wstring & _strKey)
