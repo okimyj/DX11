@@ -96,6 +96,9 @@
     <Filter Include="_SoMac Source\02. Manager\04. ResMgr\Resource\03. Prefab">
       <UniqueIdentifier>{6e68fb2c-997d-4968-82d9-b4b9d1c0cc4f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="_SoMac Source\02. Manager\05. ShaderMgr\Sampler">
+      <UniqueIdentifier>{5678487c-6034-4565-aa93-60293dd127d9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -197,6 +200,9 @@
     <ClInclude Include="Prefab.h">
       <Filter>_SoMac Source\02. Manager\04. ResMgr\Resource\03. Prefab</Filter>
     </ClInclude>
+    <ClInclude Include="Sampler.h">
+      <Filter>_SoMac Source\02. Manager\05. ShaderMgr\Sampler</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="func.cpp">
@@ -282,6 +288,9 @@
     </ClCompile>
     <ClCompile Include="Prefab.cpp">
       <Filter>_SoMac Source\02. Manager\04. ResMgr\Resource\03. Prefab</Filter>
+    </ClCompile>
+    <ClCompile Include="Sampler.cpp">
+      <Filter>_SoMac Source\02. Manager\05. ShaderMgr\Sampler</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

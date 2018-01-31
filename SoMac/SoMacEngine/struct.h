@@ -5,7 +5,50 @@ typedef XMMATRIX Matrix;
 typedef XMFLOAT3 Vec3;
 typedef XMFLOAT4 Vec4;
 typedef XMFLOAT2 Vec2;
-
+/*
+typedef struct _tagVec3 {
+	float x;
+	float y;
+	float z;
+	_tagVec3()
+	: x(0), y(0), z(0)
+	{  }
+	_tagVec3(float _x, float _y, float _z) 
+	{
+		x = x;	y = y;	z = z;
+	}
+	
+	void operator += (_tagVec3 _other)
+	{
+		x += _other.x;	y += _other.y;	z += _other.z;
+	}
+	void operator -= (_tagVec3 _other)
+	{
+		x -= _other.x;	y -= _other.y;	z -= _other.z;
+	}
+	void operator *= (_tagVec3 _other)
+	{
+		x *= _other.x;	y *= _other.y;	z *= _other.z;
+	}
+	void operator *= (float _fValue)
+	{
+		x *= _fValue;	y *= _fValue;	z *= _fValue;
+	}
+	_tagVec3 operator + (_tagVec3 _other)
+	{
+		return _tagVec3{ x + _other.x, y + _other.y, z + _other.z };
+	}
+	_tagVec3 operator - (_tagVec3 _other)
+	{
+		return _tagVec3{ x - _other.x, y - _other.y, z - _other.z };
+	}
+	_tagVec3 operator * (_tagVec3 _other)
+	{
+		return _tagVec3{ x * _other.x, y * _other.y, z * _other.z };
+	}
+	
+}Vec3;
+*/
 // 구조체는 기본적으로 가장 큰 자료형의 크기를 메모리 할당 기준으로 삼는다.
 // 그렇다면 아래의 구조체의 크기는 원래 32byte 가 되어야 하는데 28byte 이다.
 // #pragma once pack(n) 을 선언해놓으면 각 자료형의 크기에 딱 맞게 메모리 할당 된다.

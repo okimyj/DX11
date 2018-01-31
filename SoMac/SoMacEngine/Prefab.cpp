@@ -9,6 +9,7 @@ CPrefab::CPrefab(CGameObject * _pObj)
 
 CPrefab::~CPrefab()
 {
+	SAFE_DELETE(m_pObj);
 }
 
 CGameObject * CPrefab::Instantiate()

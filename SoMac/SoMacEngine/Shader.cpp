@@ -1,5 +1,6 @@
 #include "Shader.h"
 #include "Device.h"
+#include "Sampler.h"
 
 CShader::CShader()
 	: m_pVSBlob(NULL)
@@ -74,4 +75,8 @@ void CShader::ApplyData()
 {
 	CONTEXT->VSSetShader(m_pVS, NULL, NULL);
 	CONTEXT->PSSetShader(m_pPS, NULL, NULL);
+	for (int i = 0; i < m_vecSampler.size(); ++i)
+	{
+		m_vecSampler[i].pSampler->ApplyData(m_vecSampler[i].iState);
+	}
 }

@@ -27,6 +27,8 @@ private:
 	// Constants Buffer --
 	map<wstring, CBUFFER>		m_mapConstBuffer;
 
+	ID3D11RasterizerState*			m_arrRasterizer[(UINT)RASTERIZE_TYPE::END];
+
 public:
 	int init(HWND _hWnd, bool _bWindow);
 	
@@ -52,9 +54,11 @@ public:
 private:
 	int CreateSwapChain();
 	int CreateView();
+	int CreateRasterizerState();
 
 public:
 	int CreateConstBuffer(const wstring& _strKey, UINT _iSize, D3D11_USAGE _eUsage, UINT _iRegister);
 	CBUFFER* FindConstBuffer(const wstring& _strKey);
+	void SetRasterizer(RASTERIZE_TYPE _eType) { m_pContext->RSSetState(m_arrRasterizer[(UINT)_eType]); }
 };
 

@@ -41,3 +41,22 @@ enum class COMPONENT_TYPE
 	TEXTURE_ANIMATOR,
 	END,
 };
+
+enum class SHADER_TYPE
+{
+	ST_VERTEX = 0x01,
+	ST_HULL = 0x02,
+	ST_DOMAIN = 0x04,
+	ST_GEOMETRY = 0x08,
+	ST_COMPUTE = 0x10,
+	ST_PIXEL = 0x20,
+};
+
+enum class RASTERIZE_TYPE
+{
+	FRONT,
+	BACK,
+	WIRE,
+	NONE,
+	END,
+};

@@ -1,7 +1,9 @@
 #include "BulletScript.h"
 
 CBulletScript::CBulletScript()
-	:m_fSpeed(200.f)
+	: m_vDir(1.f, 0.f, 0.f)
+	, m_fSpeed(200.f)
+	, m_vInitPos{}
 {
 }
 
@@ -27,7 +29,8 @@ int CBulletScript::Update()
 {
 	float fDT = DT();
 	Vec3 vPos = Transform()->GetLocalPosition();
-	vPos.x += m_fSpeed*fDT;
+	vPos.x += m_fSpeed * fDT * m_vDir.x;
+	vPos.y += m_fSpeed * fDT * m_vDir.y;
 	Transform()->SetLocalPosition(vPos);
 	return RET_SUCCESS;
 }

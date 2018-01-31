@@ -25,6 +25,10 @@ CDevice::~CDevice()
 	{
 		SAFE_RELEASE(iter->second.pBuffer);
 	}
+	for (int i = 0; i < (UINT)RASTERIZE_TYPE::END; ++i)
+	{
+		SAFE_RELEASE(m_arrRasterizer[i]);
+	}
 }
 
 int CDevice::init(HWND _hWnd, bool _bWindow)
@@ -80,7 +84,7 @@ int CDevice::init(HWND _hWnd, bool _bWindow)
 
 	m_pContext->RSSetViewports(1, &tViewPortDesc);
 
-
+	CreateRasterizerState();
 	return 0;
 }
 
@@ -177,6 +181,25 @@ int CDevice::CreateView()
 	m_pContext->OMSetRenderTargets(1, &m_pTargetView, m_pDepthStencilView);
 
 	return RET_SUCCESS;
+}
+
+int CDevice::CreateRasterizerState()
+{
+	// default rasterizer. null 이면 기본 값 사용하니 null로 채워버림.
+	m_arrRasterizer[(UINT)RASTERIZE_TYPE::BACK] = NULL;
+	D3D11_RASTERIZER_DESC tDesc = {};
+	tDesc.FillMode = D3D11_FILL_WIREFRAME;
+	tDesc.CullMode = D3D11_CULL_NONE;
+	m_pDevice->CreateRasterizerState(&tDesc, &m_arrRasterizer[(UINT)RASTERIZE_TYPE::WIRE]);
+
+	tDesc.FillMode = D3D11_FILL_SOLID;
+	tDesc.CullMode = D3D11_CULL_FRONT;
+	m_pDevice->CreateRasterizerState(&tDesc, &m_arrRasterizer[(UINT)RASTERIZE_TYPE::FRONT]);
+	
+	tDesc.FillMode = D3D11_FILL_SOLID;
+	tDesc.CullMode = D3D11_CULL_NONE;
+	m_pDevice->CreateRasterizerState(&tDesc, &m_arrRasterizer[(UINT)RASTERIZE_TYPE::NONE]);
+	return 0;
 }
 
 

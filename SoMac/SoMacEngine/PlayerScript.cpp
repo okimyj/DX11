@@ -74,6 +74,11 @@ int CPlayerScript::Update()
 	{
 		Shoot();
 	}
+	if (CKeyMgr::GetInst()->GetKeyState(KEY_TYPE::KEY_W, KEY_STATE::DOWN))
+	{
+		MeshRender()->SetRSType(RASTERIZE_TYPE::WIRE);
+	}
+
 
 
 	Transform()->SetLocalPosition(vPos);
