@@ -29,7 +29,6 @@ CScene::~CScene()
 {
 	// map, vector 두개가 서로 같은 주소를 참조 하고 있으니 vector 만 Safe_Delete.  map은 혹시모르니 clear 해주자.
 	Safe_Delete_Vector(m_vecLayer);
-	m_mapLayer.clear();
 }
 
 

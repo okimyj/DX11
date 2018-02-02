@@ -2,7 +2,7 @@
 #include "global.h"
 class CGameObject;
 class CTransform;
-class CMeshRender;
+class CMeshRenderer;
 class CComponent
 {
 private:
@@ -22,7 +22,7 @@ private:
 protected:
 	CGameObject* GetGameObject() { return m_pObj; }
 	CTransform* Transform();
-	CMeshRender* MeshRender();
+	CMeshRenderer* MeshRender();
 
 public:
 	CComponent();

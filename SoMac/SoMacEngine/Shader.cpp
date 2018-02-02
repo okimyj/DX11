@@ -71,12 +71,24 @@ int CShader::CreatePixelShader(wstring _strFilePath, char * _pFuncName, int _iHi
 	return RET_SUCCESS;
 }
 
+
+
+void CShader::AddShaderParam(SHADER_PARAM _eParam, UINT _iTiming)
+{
+	tShaderParam param = {};
+	param.eShaderParam = _eParam;
+	param.iRegister = g_SPRegister[(UINT)_eParam];
+	param.iTiming = _iTiming;
+	m_vecShaderParam.push_back(param);
+}
+
+
 void CShader::ApplyData()
 {
 	CONTEXT->VSSetShader(m_pVS, NULL, NULL);
 	CONTEXT->PSSetShader(m_pPS, NULL, NULL);
 	for (int i = 0; i < m_vecSampler.size(); ++i)
 	{
-		m_vecSampler[i].pSampler->ApplyData(m_vecSampler[i].iState);
+		m_vecSampler[i].pSampler->ApplyData(m_vecSampler[i].iTiming);
 	}
 }

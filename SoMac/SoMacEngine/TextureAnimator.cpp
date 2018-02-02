@@ -41,7 +41,7 @@ void CTextureAnimator::Play(const wstring & _strName)
 void CTextureAnimator::Start()
 {
 	map<wstring, CTextureAnim*>::iterator iter = m_mapAnim.begin();
-	CMeshRender* pMeshRender = MeshRender();
+	CMeshRenderer* pMeshRender = MeshRender();
 	for (; iter != m_mapAnim.end(); ++iter)
 	{
 		iter->second->SetTargetMesh(pMeshRender);

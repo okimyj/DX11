@@ -1,7 +1,9 @@
 #include "ResMgr.h"
+#include "ShaderMgr.h"
 #include "Mesh.h"
 #include "Texture.h"
 #include "Prefab.h"
+#include "Material.h"
 
 
 CResMgr::CResMgr()
@@ -14,9 +16,15 @@ CResMgr::~CResMgr()
 	Safe_Delete_Map(m_mapMesh);
 	Safe_Delete_Map(m_mapTexture);
 	Safe_Delete_Map(m_mapPrefab);
+	Safe_Delete_Map(m_mapMaterial);
 }
 
 void CResMgr::Init()
+{
+	CreateDefaultMesh();
+	CreateDefaultMaterial();
+}
+void CResMgr::CreateDefaultMesh()
 {
 	//== Create Default Mesh ==//
 	VTX arrVtx[4] = {};
@@ -27,6 +35,7 @@ void CResMgr::Init()
 	arrVtx[1].vPos = Vec3(-0.5f, 0.5f, 0.f);
 	arrVtx[1].vUV = Vec2(0.f, 0.f);
 	arrVtx[1].vColor = Vec4(0.f, 1.f, 0.f, 1.f);
+
 
 	arrVtx[2].vPos = Vec3(0.5f, 0.5f, 0.f);
 	arrVtx[2].vUV = Vec2(1.f, 0.f);
@@ -49,6 +58,13 @@ void CResMgr::Init()
 	pMesh->AddLayoutDesc("TEXCOORD", 0, DXGI_FORMAT_R32G32_FLOAT, 0, 0);
 	pMesh->AddLayoutDesc("COLOR", 0, DXGI_FORMAT_R32G32B32A32_FLOAT, 0, 0);
 	AddMesh(L"RectMesh", pMesh);
+}
+
+void CResMgr::CreateDefaultMaterial()
+{
+	CMaterial* pMaterial = new CMaterial;
+	pMaterial->SetShader(CShaderMgr::GetInst()->FindShader(L"ColorShader"));
+	AddMaterial(L"Default", pMaterial);
 }
 
 int CResMgr::AddMesh(const wstring & _strKey, CMesh * _pMesh)
@@ -76,6 +92,16 @@ int CResMgr::AddPrefab(const wstring & _strKey, CGameObject * _pObj)
 	return RET_SUCCESS;
 }
 
+int CResMgr::AddMaterial(const wstring & _strKey, CMaterial * _pMaterial)
+{
+	CMaterial* pMaterial = FindMaterial(_strKey);
+	if (NULL != pMaterial || NULL == _pMaterial)
+		return RET_FAILED;
+	_pMaterial->SetKey(_strKey);
+	m_mapMaterial.insert(make_pair(_strKey, _pMaterial));
+	return 0;
+}
+
 CPrefab * CResMgr::FindPrefab(const wstring & _strKey)
 {
 	map<wstring, CResPtr<CPrefab>>::iterator iter = m_mapPrefab.find(_strKey);
@@ -99,3 +125,13 @@ CTexture * CResMgr::FindTexture(const wstring & _strKey)
 		return NULL;
 	return iter->second;
 }
+
+CMaterial * CResMgr::FindMaterial(const wstring & _strKey)
+{
+	map<wstring, CResPtr<CMaterial>>::iterator iter = m_mapMaterial.find(_strKey);
+	if (iter == m_mapMaterial.end())
+		return NULL;
+	return iter->second;
+}
+
+

@@ -51,9 +51,6 @@
     <Filter Include="_SoMac Source\04. Component\01. Transform">
       <UniqueIdentifier>{52d2b63f-6b11-4278-82e3-6726f627e2ab}</UniqueIdentifier>
     </Filter>
-    <Filter Include="_SoMac Source\04. Component\02. MeshRender">
-      <UniqueIdentifier>{57d93220-1b57-48c4-b85b-efb2101abb96}</UniqueIdentifier>
-    </Filter>
     <Filter Include="_SoMac Source\ShaderCode">
       <UniqueIdentifier>{6567a92a-8bb4-46d7-9cf7-657db2b34d48}</UniqueIdentifier>
     </Filter>
@@ -99,6 +96,12 @@
     <Filter Include="_SoMac Source\02. Manager\05. ShaderMgr\Sampler">
       <UniqueIdentifier>{5678487c-6034-4565-aa93-60293dd127d9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="_SoMac Source\02. Manager\04. ResMgr\Resource\04. Material">
+      <UniqueIdentifier>{7a455356-ed2e-4b8f-b4fd-86c8cdfba63f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="_SoMac Source\04. Component\02. MeshRenderer">
+      <UniqueIdentifier>{57d93220-1b57-48c4-b85b-efb2101abb96}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -130,9 +133,6 @@
     </ClInclude>
     <ClInclude Include="Transform.h">
       <Filter>_SoMac Source\04. Component\01. Transform</Filter>
-    </ClInclude>
-    <ClInclude Include="MeshRender.h">
-      <Filter>_SoMac Source\04. Component\02. MeshRender</Filter>
     </ClInclude>
     <ClInclude Include="Mesh.h">
       <Filter>_SoMac Source\02. Manager\04. ResMgr\Resource\01. Mesh</Filter>
@@ -203,6 +203,12 @@
     <ClInclude Include="Sampler.h">
       <Filter>_SoMac Source\02. Manager\05. ShaderMgr\Sampler</Filter>
     </ClInclude>
+    <ClInclude Include="Material.h">
+      <Filter>_SoMac Source\02. Manager\04. ResMgr\Resource\04. Material</Filter>
+    </ClInclude>
+    <ClInclude Include="MeshRenderer.h">
+      <Filter>_SoMac Source\04. Component\02. MeshRenderer</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="func.cpp">
@@ -222,9 +228,6 @@
     </ClCompile>
     <ClCompile Include="Transform.cpp">
       <Filter>_SoMac Source\04. Component\01. Transform</Filter>
-    </ClCompile>
-    <ClCompile Include="MeshRender.cpp">
-      <Filter>_SoMac Source\04. Component\02. MeshRender</Filter>
     </ClCompile>
     <ClCompile Include="Mesh.cpp">
       <Filter>_SoMac Source\02. Manager\04. ResMgr\Resource\01. Mesh</Filter>
@@ -292,9 +295,18 @@
     <ClCompile Include="Sampler.cpp">
       <Filter>_SoMac Source\02. Manager\05. ShaderMgr\Sampler</Filter>
     </ClCompile>
+    <ClCompile Include="Material.cpp">
+      <Filter>_SoMac Source\02. Manager\04. ResMgr\Resource\04. Material</Filter>
+    </ClCompile>
+    <ClCompile Include="MeshRenderer.cpp">
+      <Filter>_SoMac Source\04. Component\02. MeshRenderer</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Standard.fx">
+      <Filter>_SoMac Source\ShaderCode</Filter>
+    </FxCompile>
+    <FxCompile Include="values.fx">
       <Filter>_SoMac Source\ShaderCode</Filter>
     </FxCompile>
   </ItemGroup>

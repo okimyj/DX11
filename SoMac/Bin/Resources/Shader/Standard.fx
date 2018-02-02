@@ -1,13 +1,5 @@
+#include "values.fx"
 // Semantic 관련 https://msdn.microsoft.com/en-us/library/windows/desktop/bb509647(v=vs.85).aspx .
-cbuffer TransformBuffer : register(b0)
-{
-	matrix g_matWorld;
-	matrix g_matView;
-	matrix g_matProj;
-}
-Texture2D g_tex_0 : register(t0);
-SamplerState g_default_sampler : register(s0);				// 아무것도 들어오지 않으면 default로 0으로 되어있는 놈을 사용한다.
-
 struct PS_OUTPUT
 {
 	float4 vColor : SV_Target;
@@ -46,6 +38,9 @@ PS_OUTPUT PS_Color(VS_COLOR_OUTPUT _input)
 }
 
 // == Texture Shader == //
+// g_tex_0
+// g_int_0
+// ============== //
 struct VS_TEXTURE_INPUT
 {
 	float3 vPos : POSITION;
@@ -72,6 +67,12 @@ VS_TEXTURE_OUTPUT VS_Texture(VS_TEXTURE_INPUT _input)
 PS_OUTPUT PS_Texture(VS_TEXTURE_OUTPUT _input)
 {
 	PS_OUTPUT output = (PS_OUTPUT)0.f;
-	output.vColor = g_tex_0.Sample(g_default_sampler, _input.vUV);
+	float4 vCol = g_tex_0.Sample(g_default_sampler, _input.vUV);
+	
+	if (g_int_0)
+	{
+		vCol.rgb = (vCol.r + vCol.g + vCol.b) / 3.f;
+	}
+	output.vColor = vCol;	
 	return output;
 }

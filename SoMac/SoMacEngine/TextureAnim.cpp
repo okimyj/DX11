@@ -2,6 +2,7 @@
 #include "ResMgr.h"
 #include "Texture.h"
 #include "MeshRender.h"
+#include "Material.h"
 
 
 
@@ -88,8 +89,9 @@ int CTextureAnim::Update(float _dt)
 		}
 		m_fAccrueDT = 0;
 		CTexture* pTexture = m_vecTexture[m_iAnimIdx];
-		if(NULL != pTexture)
-			m_pTargetMesh->SetTexture(pTexture);
+		if (NULL != pTexture)
+			m_pTargetMesh->GetMaterial()->SetParamData(SHADER_PARAM::TEXTURE_0, &pTexture);
+		//	m_pTargetMesh->SetTexture(pTexture);
 	}
 	return RET_SUCCESS;
 }

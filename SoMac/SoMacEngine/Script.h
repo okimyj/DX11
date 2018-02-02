@@ -5,7 +5,7 @@
 #include "KeyMgr.h"
 
 #include "Transform.h"
-#include "MeshRender.h"
+#include "MeshRenderer.h"
 #include "Camera.h"
 class CScript :
 	public CComponent

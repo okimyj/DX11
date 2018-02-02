@@ -13,5 +13,6 @@ private:
 	int update();
 	void render();
 
+	void CreateConstBuffer();
 };
 

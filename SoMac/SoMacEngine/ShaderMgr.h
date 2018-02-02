@@ -2,8 +2,6 @@
 #include "global.h"
 class CShader;
 class CSampler;
-
-
 class CShaderMgr
 {
 	SINGLE(CShaderMgr);

@@ -1,11 +1,11 @@
 #pragma once
 #include "global.h"
 class CTexture;
-class CMeshRender;
+class CMeshRenderer;
 class CTextureAnim
 {
 private:
-	CMeshRender*		m_pTargetMesh;
+	CMeshRenderer*		m_pTargetMesh;
 	vector<CTexture*>		m_vecTexture;
 	bool						m_bLoop;
 	float						m_fFPS;
@@ -17,7 +17,7 @@ private:
 	int							m_iEndIdx;
 public:
 	CTextureAnim* Clone() { return new CTextureAnim(*this); }
-	void SetTargetMesh(CMeshRender* _pMesh) { m_pTargetMesh = _pMesh; }
+	void SetTargetMesh(CMeshRenderer* _pMesh) { m_pTargetMesh = _pMesh; }
 	void LoadTexture(const wstring& _strPrefix, int _iStartIdx, int _iEndIdx);
 	// call TextrueAnimator.
 	void Init();

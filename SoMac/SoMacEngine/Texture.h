@@ -9,7 +9,7 @@ class CTexture :
 public:
 	static CTexture* Create(const wstring& _strFileName);
 public:
-	virtual void ApplyData();
+	virtual void ApplyData(UINT _iRegister, UINT _iTiming);
 public:
 	CTexture();
 	virtual ~CTexture();

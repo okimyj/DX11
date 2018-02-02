@@ -65,7 +65,18 @@ CTexture * CTexture::Create(const wstring & _strFileName)
 	return pTexture;
 }
 
-void CTexture::ApplyData()
+void CTexture::ApplyData(UINT _iRegister, UINT _iTiming)
 {
-	CONTEXT->PSSetShaderResources(0, 1, &m_pView);
+	if (_iTiming & (UINT)SHADER_TYPE::ST_VERTEX)
+		CONTEXT->VSSetShaderResources(_iRegister, 1, &m_pView);
+	if (_iTiming & (UINT)SHADER_TYPE::ST_HULL)
+		CONTEXT->HSSetShaderResources(_iRegister, 1, &m_pView);
+	if (_iTiming & (UINT)SHADER_TYPE::ST_DOMAIN)
+		CONTEXT->DSSetShaderResources(_iRegister, 1, &m_pView);
+	if (_iTiming & (UINT)SHADER_TYPE::ST_GEOMETRY)
+		CONTEXT->GSSetShaderResources(_iRegister, 1, &m_pView);
+	if (_iTiming & (UINT)SHADER_TYPE::ST_COMPUTE)
+		CONTEXT->CSSetShaderResources(_iRegister, 1, &m_pView);
+	if (_iTiming & (UINT)SHADER_TYPE::ST_PIXEL)
+		CONTEXT->PSSetShaderResources(_iRegister, 1, &m_pView);
 }

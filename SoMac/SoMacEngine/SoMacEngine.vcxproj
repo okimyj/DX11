@@ -162,8 +162,9 @@ call "fx.bat"</Command>
     <ClInclude Include="global.h" />
     <ClInclude Include="KeyMgr.h" />
     <ClInclude Include="Layer.h" />
+    <ClInclude Include="Material.h" />
     <ClInclude Include="Mesh.h" />
-    <ClInclude Include="MeshRender.h" />
+    <ClInclude Include="MeshRenderer.h" />
     <ClInclude Include="PathMgr.h" />
     <ClInclude Include="PlayerScript.h" />
     <ClInclude Include="Prefab.h" />
@@ -194,8 +195,9 @@ call "fx.bat"</Command>
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="KeyMgr.cpp" />
     <ClCompile Include="Layer.cpp" />
+    <ClCompile Include="Material.cpp" />
     <ClCompile Include="Mesh.cpp" />
-    <ClCompile Include="MeshRender.cpp" />
+    <ClCompile Include="MeshRenderer.cpp" />
     <ClCompile Include="PathMgr.cpp" />
     <ClCompile Include="PlayerScript.cpp" />
     <ClCompile Include="Prefab.cpp" />
@@ -220,6 +222,11 @@ call "fx.bat"</Command>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">5.0</ShaderModel>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Effect</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">5.0</ShaderModel>
+    </FxCompile>
+    <FxCompile Include="values.fx">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Effect</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">5.0</ShaderModel>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </FxCompile>
   </ItemGroup>
   <ItemGroup>

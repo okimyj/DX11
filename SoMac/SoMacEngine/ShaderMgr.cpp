@@ -85,6 +85,8 @@ void CShaderMgr::CreateShader()
 	strPath += L"Shader\\Standard.fx";
 	pShader->CreateVertexShader(strPath, "VS_Texture", 5, 0);
 	pShader->CreatePixelShader(strPath, "PS_Texture", 5, 0);
-	pShader->AddSampler(FindSampler(L"DefaultSampler"), SHADER_TYPE::ST_PIXEL);
+	pShader->AddSampler(FindSampler(L"DefaultSampler"), ((UINT)SHADER_TYPE::ST_PIXEL));
+	pShader->AddShaderParam(SHADER_PARAM::TEXTURE_0, (UINT)SHADER_TYPE::ST_PIXEL);
+	pShader->AddShaderParam(SHADER_PARAM::INT_0, (UINT)SHADER_TYPE::ST_PIXEL);
 	CShaderMgr::GetInst()->AddShader(L"TextureShader", pShader);
 }

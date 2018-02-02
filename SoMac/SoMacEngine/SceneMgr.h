@@ -20,6 +20,12 @@ public:
 
 public:
 	CScene* GetCurScene() { return m_pCurScene; }
+#ifdef _DEBUG
+public:
+	void CreateTestScene();
+	void CreateMaterial();
+	void CreateGameObject();
+#endif // _DEBUG
 
 };
 

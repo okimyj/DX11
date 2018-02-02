@@ -16,7 +16,7 @@ CTransform * CComponent::Transform()
 	return m_pObj->GetTransform();
 }
 
-CMeshRender * CComponent::MeshRender()
+CMeshRenderer * CComponent::MeshRender()
 {
 	return m_pObj->GetMeshRender();
 }

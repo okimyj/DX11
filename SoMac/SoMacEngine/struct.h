@@ -92,6 +92,15 @@ struct CBUFFER
 	UINT					iSize;
 
 };
+
+//== Shader Param ==//
+typedef struct _tagSP
+{
+	SHADER_PARAM		eShaderParam;
+	UINT						iRegister;
+	UINT						iTiming;
+}tShaderParam;
+
 //== Constant Buffer  ==//
 typedef struct _tagTransform
 {
@@ -99,3 +108,5 @@ typedef struct _tagTransform
 	Matrix	matView;
 	Matrix	matProj;
 }tTransform;
+
+

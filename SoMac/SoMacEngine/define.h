@@ -60,3 +60,31 @@ enum class RASTERIZE_TYPE
 	NONE,
 	END,
 };
+
+enum class SHADER_PARAM
+{
+	INT_0,
+	INT_1,
+	INT_2,
+	INT_3,
+	INT_END,
+
+	FLOAT_0,
+	FLOAT_1,
+	FLOAT_2,
+	FLOAT_3,
+	FLOAT_END,
+
+	VEC4_0,
+	VEC4_1,
+	VEC4_2,
+	VEC4_3,
+	VEC4_END,
+
+	TEXTURE_0,
+	TEXTURE_1,
+	TEXTURE_2,
+	TEXTURE_3,
+	TEXTURE_END,
+	END,
+};

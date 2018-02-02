@@ -1,6 +1,6 @@
 #pragma once
 #include "Component.h"
-class CMeshRender;
+class CMeshRenderer;
 class CTransform :
 	public CComponent
 {
@@ -30,6 +30,6 @@ public :
 public:
 	CTransform();
 	virtual ~CTransform();
-	friend class CMeshRender;
+	friend class CMeshRenderer;
 };
 

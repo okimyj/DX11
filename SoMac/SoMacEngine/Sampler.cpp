@@ -10,6 +10,7 @@ CSampler::CSampler(D3D11_SAMPLER_DESC _tDesc, ID3D11SamplerState * _pState, UINT
 
 CSampler::~CSampler()
 {
+	SAFE_RELEASE(m_pState);
 }
 
 

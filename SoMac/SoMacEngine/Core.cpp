@@ -43,20 +43,17 @@ int CCore::init(HWND _hWnd, bool _bWindow)
 		MessageBox(_hWnd, L"장치 초기화 실패", L"실패", MB_OK);
 		return RET_FAILED;
 	}
+	CreateConstBuffer();
 	// Manager Initialize.
 	CPathMgr::Init();
 	CKeyMgr::GetInst()->Init();
 	CTimeMgr::GetInst()->Init();
-	CResMgr::GetInst()->Init();
 	CShaderMgr::GetInst()->Init();
+	CResMgr::GetInst()->Init();
 	CSceneMgr::GetInst()->Init();
 	
-	// == Create Buffer ================================
-	// clear color set.
-	CDevice::GetInst()->SetClearColor(100, 100, 100,1);
-	//-- Create Constance Buffer -- //
-	CDevice::GetInst()->CreateConstBuffer(L"Transform", sizeof(tTransform), D3D11_USAGE_DYNAMIC, 0);
-
+	
+	
 	return RET_SUCCESS;
 }
 
@@ -91,4 +88,25 @@ void CCore::render()
 	// 특정 mesh를 그리는 shader는 여러가지. shader와 연결관계인 layout은 어떠한 shader가 바뀔 때 마다 계속 새로 잡아주어야 함. 
 
 	CDevice::GetInst()->Present();
+}
+
+void CCore::CreateConstBuffer()
+{
+	// == Create Buffer ================================
+	// clear color set.
+	CDevice::GetInst()->SetClearColor(100, 100, 100, 1);
+	//-- Create Constance Buffer -- //
+	CDevice::GetInst()->CreateConstBuffer(L"Transform", sizeof(tTransform), D3D11_USAGE_DYNAMIC, 0);
+	// == Create Int Buffer ======
+	CDevice::GetInst()->CreateConstBuffer(g_SPName[(UINT)SHADER_PARAM::INT_END]
+		, sizeof(int) * ((UINT)SHADER_PARAM::INT_END - (UINT)SHADER_PARAM::INT_0)
+		, D3D11_USAGE_DYNAMIC, g_SPRegister[(UINT)SHADER_PARAM::INT_END]);
+	// == Create Float Buffer ======
+	CDevice::GetInst()->CreateConstBuffer(g_SPName[(UINT)SHADER_PARAM::FLOAT_END]
+		, sizeof(float) * ((UINT)SHADER_PARAM::FLOAT_END - (UINT)SHADER_PARAM::FLOAT_0)
+		, D3D11_USAGE_DYNAMIC, g_SPRegister[(UINT)SHADER_PARAM::FLOAT_END]);
+	// == Create Vec4 Buffer ======
+	CDevice::GetInst()->CreateConstBuffer(g_SPName[(UINT)SHADER_PARAM::VEC4_END]
+		, sizeof(Vec4) * ((UINT)SHADER_PARAM::VEC4_END - (UINT)SHADER_PARAM::VEC4_0)
+		, D3D11_USAGE_DYNAMIC, g_SPRegister[(UINT)SHADER_PARAM::VEC4_END]);
 }

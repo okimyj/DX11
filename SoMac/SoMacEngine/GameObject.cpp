@@ -1,6 +1,6 @@
 #include "GameObject.h"
 #include "Transform.h"
-#include "MeshRender.h"
+#include "MeshRenderer.h"
 #include "Camera.h"
 #include "Script.h"
 
@@ -46,7 +46,7 @@ CGameObject * CGameObject::CreateGameObject(const wstring& _strTag)
 {
 	CGameObject* pObj = new CGameObject();
 	pObj->AddComponent<CTransform>(new CTransform);
-	pObj->AddComponent<CMeshRender>(new CMeshRender);
+	pObj->AddComponent<CMeshRenderer>(new CMeshRenderer);
 	pObj->SetTag(_strTag);
 	return pObj;
 }
