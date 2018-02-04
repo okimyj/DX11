@@ -76,3 +76,8 @@ void CLayer::AddGameObject(CGameObject * _pObj)
 {
 	m_listObj.push_back(_pObj);
 }
+
+void CLayer::RemoveGameObject(CGameObject * _pObj)
+{
+	m_listObj.remove(_pObj);
+}

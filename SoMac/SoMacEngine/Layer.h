@@ -26,6 +26,7 @@ public:
 	UINT GetLayerIndex() { return m_iIdx; }
 	const wstring& GetLayerName() { return m_strLayerName; }
 	void AddGameObject(CGameObject* _pObj);
+	void RemoveGameObject(CGameObject* _pObj);
 public:
 	CLayer();
 	~CLayer();

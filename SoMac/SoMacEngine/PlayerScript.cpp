@@ -1,7 +1,6 @@
 #include "PlayerScript.h"
-#include "GameObject.h"
 #include "BulletScript.h"
-#include "ResMgr.h"
+#include "PlayerPlanet.h"
 #include "ShaderMgr.h"
 #include "SceneMgr.h"
 #include "Scene.h"
@@ -11,7 +10,9 @@
 #include "Prefab.h"
 #include "TextureAnimator.h"
 #include "TextureAnim.h"
+#include "Material.h"
 CPlayerScript::CPlayerScript()
+	: m_fSpeed(200.f)
 {
 }
 
@@ -23,17 +24,17 @@ CPlayerScript::~CPlayerScript()
 
 void CPlayerScript::Awake()
 {
-	CTextureAnimator* pTextureAnimator = (CTextureAnimator*)GetGameObject()->AddComponent<CTextureAnimator>(new CTextureAnimator);
-	CTextureAnim* idleAnim = new CTextureAnim(L"Player", 0, 7, 10, true);
-	pTextureAnimator->AddAnimation(L"Idle", idleAnim);
+//	CTextureAnimator* pTextureAnimator = (CTextureAnimator*)GetGameObject()->AddComponent<CTextureAnimator>(new CTextureAnimator);
+//	CTextureAnim* idleAnim = new CTextureAnim(L"Player", 0, 7, 10, true);
+//	pTextureAnimator->AddAnimation(L"Idle", idleAnim);
 }
 
 void CPlayerScript::Start()
 {
-	CTextureAnimator* animator = (CTextureAnimator*)GetGameObject()->GetComponent<CTextureAnimator>();
-	animator->Play(L"Idle");
-	Transform()->SetLocalPosition(Vec3(0.f, 0.f, 100.f));
-	Transform()->SetLocalScale(Vec3(100.f, 100.f, 1.f));
+//	CTextureAnimator* animator = (CTextureAnimator*)GetGameObject()->GetComponent<CTextureAnimator>();
+//	animator->Play(L"Idle");
+	Transform()->SetLocalPosition(Vec3(0.f, 0.f, 10.f));
+	Transform()->SetLocalScale(Vec3(423.f/4.f, 700.f/4.f, 1.f));
 	Transform()->SetLocalRotation(Vec3(0.f, 0.f, 0.f));
 }
 
@@ -47,19 +48,19 @@ int CPlayerScript::Update()
 
 	if (CKeyMgr::GetInst()->GetKeyState(KEY_TYPE::KEY_LEFT, KEY_STATE::HOLD))
 	{
-		vPos.x -= 100.f * fDT;
+		vPos.x -= m_fSpeed * fDT;
 	}
 	if (CKeyMgr::GetInst()->GetKeyState(KEY_TYPE::KEY_RIGHT, KEY_STATE::HOLD))
 	{
-		vPos.x += 100.f * fDT;
+		vPos.x += m_fSpeed * fDT;
 	}
 	if (CKeyMgr::GetInst()->GetKeyState(KEY_TYPE::KEY_UP, KEY_STATE::HOLD))
 	{
-		vPos.y += 100.f * fDT;
+		vPos.y += m_fSpeed * fDT;
 	}
 	if (CKeyMgr::GetInst()->GetKeyState(KEY_TYPE::KEY_DOWN, KEY_STATE::HOLD))
 	{
-		vPos.y -= 100.f * fDT;
+		vPos.y -= m_fSpeed * fDT;
 	}
 
 	if (CKeyMgr::GetInst()->GetKeyState(KEY_TYPE::KEY_Y, KEY_STATE::HOLD))
@@ -69,7 +70,7 @@ int CPlayerScript::Update()
 
 	if (CKeyMgr::GetInst()->GetKeyState(KEY_TYPE::KEY_Z, KEY_STATE::HOLD))
 	{
-		vPos.z += 100.f * fDT;
+		vPos.z += m_fSpeed * fDT;
 	}
 	if (CKeyMgr::GetInst()->GetKeyState(KEY_TYPE::KEY_SPACE, KEY_STATE::DOWN))
 	{
@@ -78,6 +79,10 @@ int CPlayerScript::Update()
 	if (CKeyMgr::GetInst()->GetKeyState(KEY_TYPE::KEY_W, KEY_STATE::DOWN))
 	{
 		MeshRender()->SetRSType(RASTERIZE_TYPE::WIRE);
+	}
+	if (CKeyMgr::GetInst()->GetKeyState(KEY_TYPE::KEY_A, KEY_STATE::DOWN))
+	{
+		AddPlanet();
 	}
 
 
@@ -89,35 +94,47 @@ int CPlayerScript::Update()
 
 void CPlayerScript::Shoot()
 {
+	static UINT idx = 0;
 	CBulletScript* bullectComp = CreateBullet();
 	if (NULL != bullectComp)
 	{
 		bullectComp->SetInitPosition(Transform()->GetLocalPosition());
 		bullectComp->Awake();
 		bullectComp->Start();
+		if (++idx % 2)
+		{
+			bullectComp->SetGrayScale();
+		}
 	}
-	// TODO : SetTarget
 
 }
 
 CBulletScript* CPlayerScript::CreateBullet()
 {
-	/*
-	CGameObject* pObj = CGameObject::CreateGameObject(L"Bullet");
-	pObj->GetMeshRender()->SetMesh((CMesh*)CResMgr::GetInst()->Load<CMesh>(L"RectMesh"));
-	pObj->GetMeshRender()->SetTexture((CTexture*)CResMgr::GetInst()->Load<CTexture>(L"Bullet"));
-	pObj->GetMeshRender()->SetShader(CShaderMgr::GetInst()->FindShader(L"TextureShader"));
-	CSceneMgr::GetInst()->AddGameObject(pObj, LAYER_DEFAULT);
-	return (CBulletScript*)pObj->AddComponent<CScript>(new CBulletScript);
-	*/
 	if(NULL == m_bulletPrefab)
 		m_bulletPrefab = (CPrefab*)CResMgr::GetInst()->Load<CPrefab>(L"Bullet");
-	if (NULL != m_bulletPrefab)
-	{
-		CGameObject* pObj = m_bulletPrefab->Instantiate();
-		CSceneMgr::GetInst()->AddGameObject(pObj, LAYER_DEFAULT);
-		return ((CBulletScript*)pObj->GetComponent<CBulletScript>());
-	}
 	
-	return NULL;
+	CGameObject* pObj = m_bulletPrefab->Instantiate();
+	CSceneMgr::GetInst()->AddGameObject(pObj, LAYER_DEFAULT);
+	return ((CBulletScript*)pObj->GetComponent<CBulletScript>());
+}
+
+
+void CPlayerScript::AddPlanet()
+{
+	CPlayerPlanet* pPlanet = CreatePlanet();
+	pPlanet->SetOwner(this);
+	pPlanet->Awake();
+	pPlanet->Start();
+	m_listPlanet.push_back(pPlanet);
+}
+
+CPlayerPlanet * CPlayerScript::CreatePlanet()
+{
+	if (NULL == m_planetPrefab)
+		m_planetPrefab = (CPrefab*)CResMgr::GetInst()->Load<CPrefab>(L"PlayerPlanet");
+
+	CGameObject* pObj = m_planetPrefab->Instantiate();
+	CSceneMgr::GetInst()->AddGameObject(pObj, LAYER_DEFAULT);
+	return ((CPlayerPlanet*)pObj->GetComponent<CPlayerPlanet>());
 }

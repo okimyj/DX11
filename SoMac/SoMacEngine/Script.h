@@ -3,7 +3,8 @@
 
 #include "TimeMgr.h"
 #include "KeyMgr.h"
-
+#include "ResMgr.h"
+#include "GameObject.h"
 #include "Transform.h"
 #include "MeshRenderer.h"
 #include "Camera.h"

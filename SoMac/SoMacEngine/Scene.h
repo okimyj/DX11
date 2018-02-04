@@ -12,9 +12,10 @@ private:
 	// map과 동일하지만 key, value pair가 아니라 key 값 만을 가진다. 아마 push, pop 개념인듯.
 	set<UINT>						m_setLayerIdx;
 public:
-	void Awake();
-	void Start();
-	int Update();
+	virtual void Init() {}
+	virtual void Awake();
+	virtual void Start();
+	virtual int Update();
 	int LateUpdate();
 	int FinalUpdate();
 	void Render();
@@ -25,6 +26,6 @@ private:
 	UINT GetLayerIndex();
 public:
 	CScene();
-	~CScene();
+	virtual ~CScene();
 };
 

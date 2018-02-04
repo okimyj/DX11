@@ -17,6 +17,7 @@ CResMgr::~CResMgr()
 	Safe_Delete_Map(m_mapTexture);
 	Safe_Delete_Map(m_mapPrefab);
 	Safe_Delete_Map(m_mapMaterial);
+	Safe_Delete_Vector(m_vecCloneRes);
 }
 
 void CResMgr::Init()
@@ -101,6 +102,7 @@ int CResMgr::AddMaterial(const wstring & _strKey, CMaterial * _pMaterial)
 	m_mapMaterial.insert(make_pair(_strKey, _pMaterial));
 	return 0;
 }
+
 
 CPrefab * CResMgr::FindPrefab(const wstring & _strKey)
 {

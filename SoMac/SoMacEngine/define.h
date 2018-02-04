@@ -1,7 +1,7 @@
 #pragma once
 
-#define WINSIZE_X 800
-#define WINSIZE_Y 450
+#define WINSIZE_X 1600
+#define WINSIZE_Y 900
 
 #define SINGLE(Type) public : \
 									static Type* GetInst()\

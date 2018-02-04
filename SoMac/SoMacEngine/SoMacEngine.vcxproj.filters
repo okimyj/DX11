@@ -102,6 +102,12 @@
     <Filter Include="_SoMac Source\04. Component\02. MeshRenderer">
       <UniqueIdentifier>{57d93220-1b57-48c4-b85b-efb2101abb96}</UniqueIdentifier>
     </Filter>
+    <Filter Include="_SoMac Source\02. Manager\05. ShaderMgr\BlendState">
+      <UniqueIdentifier>{16f0bf77-82cb-449e-9735-93f157e4b815}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="_TestGame">
+      <UniqueIdentifier>{5952105e-ba3a-4795-ae8b-616c6db2ad02}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -209,6 +215,15 @@
     <ClInclude Include="MeshRenderer.h">
       <Filter>_SoMac Source\04. Component\02. MeshRenderer</Filter>
     </ClInclude>
+    <ClInclude Include="BlendState.h">
+      <Filter>_SoMac Source\02. Manager\05. ShaderMgr\BlendState</Filter>
+    </ClInclude>
+    <ClInclude Include="TestScene.h">
+      <Filter>_TestGame</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerPlanet.h">
+      <Filter>_SoMac Source\04. Component\04. Script\ScriptCode</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="func.cpp">
@@ -300,6 +315,15 @@
     </ClCompile>
     <ClCompile Include="MeshRenderer.cpp">
       <Filter>_SoMac Source\04. Component\02. MeshRenderer</Filter>
+    </ClCompile>
+    <ClCompile Include="BlendState.cpp">
+      <Filter>_SoMac Source\02. Manager\05. ShaderMgr\BlendState</Filter>
+    </ClCompile>
+    <ClCompile Include="TestScene.cpp">
+      <Filter>_TestGame</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerPlanet.cpp">
+      <Filter>_SoMac Source\04. Component\04. Script\ScriptCode</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

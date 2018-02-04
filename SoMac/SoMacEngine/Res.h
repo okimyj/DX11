@@ -9,13 +9,16 @@ private:
 public:
 	void AddRef() { ++m_iRefCnt; }
 	void SubRef() { --m_iRefCnt; }
-	virtual void ApplyData() {};
 	void SetKey(const wstring& _strKey) { m_strKey = _strKey; }
 	const wstring& GetKey() { return m_strKey; }
 	void SetPath(const wstring& _strPath) { m_strPath = _strPath; }
 	const wstring& GetPath() { return m_strPath; }
+public :
+	virtual CRes* Clone(CRes* _pOther) { return new CRes(*this); }
+	virtual void ApplyData() {};
 public:
 	CRes();
+	CRes(const CRes& _pOther);
 	virtual ~CRes();
 };
 

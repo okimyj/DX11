@@ -58,6 +58,54 @@ CMaterial::CMaterial()
 {
 }
 
+CMaterial::CMaterial(const CMaterial & _pOther)
+	: m_pShader(_pOther.m_pShader)
+	, m_vecShaderParam(_pOther.m_vecShaderParam)
+{
+	for (UINT i = 0; i < m_vecShaderParam.size(); ++i)
+	{
+		switch (m_vecShaderParam[i].eShaderParam)
+		{
+		case SHADER_PARAM::INT_0 :
+		case SHADER_PARAM::INT_1:
+		case SHADER_PARAM::INT_2:
+		case SHADER_PARAM::INT_3:
+		{
+			m_vecShaderParam[i].pData = new int;
+			memcpy(m_vecShaderParam[i].pData, _pOther.m_vecShaderParam[i].pData, sizeof(int));
+		}
+		break;
+		case SHADER_PARAM::FLOAT_0:
+		case SHADER_PARAM::FLOAT_1:
+		case SHADER_PARAM::FLOAT_2:
+		case SHADER_PARAM::FLOAT_3:
+		{
+			m_vecShaderParam[i].pData = new float;
+			memcpy(m_vecShaderParam[i].pData, _pOther.m_vecShaderParam[i].pData, sizeof(float));
+		}
+		break;
+		case SHADER_PARAM::VEC4_0:
+		case SHADER_PARAM::VEC4_1:
+		case SHADER_PARAM::VEC4_2:
+		case SHADER_PARAM::VEC4_3:
+		{
+			m_vecShaderParam[i].pData = new Vec4;
+			memcpy(m_vecShaderParam[i].pData, _pOther.m_vecShaderParam[i].pData, sizeof(Vec4));
+		}
+		break;
+		case SHADER_PARAM::TEXTURE_0:
+		case SHADER_PARAM::TEXTURE_1:
+		case SHADER_PARAM::TEXTURE_2:
+		case SHADER_PARAM::TEXTURE_3:
+		{
+			m_vecShaderParam[i].pData = new void*;
+			memcpy(m_vecShaderParam[i].pData, _pOther.m_vecShaderParam[i].pData, sizeof(void*));
+		}
+		break;
+		}
+	}
+}
+
 
 CMaterial::~CMaterial()
 {
@@ -259,4 +307,3 @@ void CMaterial::ApplyData()
 		CONTEXT->PSSetConstantBuffers(arrConstBuffer[i]->iRegister, 1, &arrConstBuffer[i]->pBuffer);
 	}
 }
-

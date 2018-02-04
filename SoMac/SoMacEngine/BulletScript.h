@@ -21,6 +21,7 @@ public:
 	void SetInitPosition(Vec3 _vPos) { m_vInitPos = _vPos; }
 	void SetSpeed(float _fSpeed) { m_fSpeed = _fSpeed; }
 	void SetDirection(Vec3 _vDir) { m_vDir = _vDir; }
+	void SetGrayScale();
 public:
 	CBulletScript();
 	virtual ~CBulletScript();

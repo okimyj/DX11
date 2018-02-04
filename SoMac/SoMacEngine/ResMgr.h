@@ -2,6 +2,7 @@
 #include "global.h"
 #include "ResPtr.h"
 #include "PathMgr.h"
+#include "Texture.h"
 
 class CRes;
 class CMesh;
@@ -17,6 +18,7 @@ private:
 	map<wstring, CResPtr<CTexture>>		m_mapTexture;
 	map<wstring, CResPtr<CPrefab>>		m_mapPrefab;
 	map<wstring, CResPtr<CMaterial>>	m_mapMaterial;
+	vector<CResPtr<CRes>>					m_vecCloneRes;
 public:
 	void Init();
 private:
@@ -25,7 +27,7 @@ private:
 public :
 	int AddPrefab(const wstring& _strKey, CGameObject* _pPrefab);
 	int AddMaterial(const wstring& _strKey, CMaterial* _pMaterial);
-	
+	void AddCloneResource(CRes* _pRes) { m_vecCloneRes.push_back(_pRes); }
 private:
 	int AddMesh(const wstring& _strKey, CMesh* _pMesh);
 	
@@ -52,7 +54,7 @@ inline CRes * CResMgr::Load(const wstring & _strKey, const wstring & _strFilePat
 	{
 		CTexture* pTexture = FindTexture(_strKey);
 		if (NULL != pTexture)
-			return pTexture;
+			return (CRes*)pTexture;
 		wstring strFullPath = CPathMgr::GetResourcePath();
 		strFullPath += _strFilePath;
 		pTexture = CTexture::Create(strFullPath);
@@ -61,7 +63,7 @@ inline CRes * CResMgr::Load(const wstring & _strKey, const wstring & _strFilePat
 		pTexture->SetKey(_strKey);
 		pTexture->SetPath(_strFilePath);
 		m_mapTexture.insert(make_pair(_strKey, pTexture));
-		return pTexture;
+		return (CRes*)pTexture;
 	}
 	else if (&info == &typeid(CPrefab))
 	{

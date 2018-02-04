@@ -8,7 +8,9 @@ class CMeshRenderer :
 {
 private:
 	CResPtr<CMesh>		m_pMesh;
+	CMaterial*					m_pSharedMaterial;
 	CMaterial*					m_pMaterial;
+	CMaterial*					m_pCloneMaterial;	
 	RASTERIZE_TYPE		m_eRSType;
 public:
 	// 멤버 변수들이 pointer 들이지만 다 리소스 포인터임. 하나만 있어야 하는것들. 
@@ -18,11 +20,13 @@ public:
 	
 public:
 	void SetMesh(CMesh* _pMesh) { m_pMesh = _pMesh; }
-	void SetMaterial(CMaterial* _pMaterial) { m_pMaterial = _pMaterial; }
+	void SetMaterial(CMaterial* _pMaterial);
 	void SetRSType(RASTERIZE_TYPE _eType) { m_eRSType = _eType; }
-	CMaterial* GetMaterial() { return m_pMaterial;	}
+	CMaterial* GetMaterial();
+	CMaterial* GetSharedMaterial();
 public:
 	CMeshRenderer();
+	CMeshRenderer(const CMeshRenderer& _pOther);
 	virtual ~CMeshRenderer();
 };
 

@@ -150,6 +150,7 @@ call "fx.bat"</Command>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\External\Debug\include\DirectXTex.h" />
+    <ClInclude Include="BlendState.h" />
     <ClInclude Include="BulletScript.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Component.h" />
@@ -166,6 +167,7 @@ call "fx.bat"</Command>
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="MeshRenderer.h" />
     <ClInclude Include="PathMgr.h" />
+    <ClInclude Include="PlayerPlanet.h" />
     <ClInclude Include="PlayerScript.h" />
     <ClInclude Include="Prefab.h" />
     <ClInclude Include="Res.h" />
@@ -178,6 +180,7 @@ call "fx.bat"</Command>
     <ClInclude Include="Shader.h" />
     <ClInclude Include="ShaderMgr.h" />
     <ClInclude Include="struct.h" />
+    <ClInclude Include="TestScene.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="TextureAnim.h" />
     <ClInclude Include="TextureAnimator.h" />
@@ -185,6 +188,7 @@ call "fx.bat"</Command>
     <ClInclude Include="Transform.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="BlendState.cpp" />
     <ClCompile Include="BulletScript.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Component.cpp" />
@@ -199,6 +203,7 @@ call "fx.bat"</Command>
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="MeshRenderer.cpp" />
     <ClCompile Include="PathMgr.cpp" />
+    <ClCompile Include="PlayerPlanet.cpp" />
     <ClCompile Include="PlayerScript.cpp" />
     <ClCompile Include="Prefab.cpp" />
     <ClCompile Include="Res.cpp" />
@@ -210,6 +215,7 @@ call "fx.bat"</Command>
     <ClCompile Include="Script.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="ShaderMgr.cpp" />
+    <ClCompile Include="TestScene.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="TextureAnim.cpp" />
     <ClCompile Include="TextureAnimator.cpp" />

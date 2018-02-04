@@ -1,6 +1,7 @@
 #include "Shader.h"
 #include "Device.h"
 #include "Sampler.h"
+#include "BlendState.h"
 
 CShader::CShader()
 	: m_pVSBlob(NULL)
@@ -90,5 +91,13 @@ void CShader::ApplyData()
 	for (int i = 0; i < m_vecSampler.size(); ++i)
 	{
 		m_vecSampler[i].pSampler->ApplyData(m_vecSampler[i].iTiming);
+	}
+	if (NULL == m_pBlendState)
+	{
+		CONTEXT->OMSetBlendState(NULL, NULL, 0xffffffff);
+	}
+	else
+	{
+		m_pBlendState->ApplyData();
 	}
 }

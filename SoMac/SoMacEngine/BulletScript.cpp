@@ -1,8 +1,15 @@
 #include "BulletScript.h"
+#include "Material.h"
+
+void CBulletScript::SetGrayScale()
+{
+	int i = 1;
+	MeshRender()->GetMaterial()->SetParamData(SHADER_PARAM::INT_0, &i);
+}
 
 CBulletScript::CBulletScript()
 	: m_vDir(1.f, 0.f, 0.f)
-	, m_fSpeed(200.f)
+	, m_fSpeed(300.f)
 	, m_vInitPos{}
 {
 }

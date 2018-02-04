@@ -1,8 +1,10 @@
 #include "ResPtr.h"
+#include "Res.h"
 #include "Mesh.h"
 #include "Texture.h"
 #include "Prefab.h"
 #include "Material.h"
+template class CResPtr<CRes>;
 template class CResPtr<CMesh>;
 template class CResPtr<CTexture>;
 template class CResPtr<CPrefab>;

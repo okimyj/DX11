@@ -2,23 +2,31 @@
 #include "global.h"
 class CShader;
 class CSampler;
+class CBlendState;
 class CShaderMgr
 {
 	SINGLE(CShaderMgr);
 private:
-	map<wstring, CShader*>	m_mapShader;
-	map<wstring, CSampler*> m_mapSampler;
+	map<wstring, CBlendState*>		m_mapBlendState;
+	map<wstring, CSampler*>			m_mapSampler;
+	map<wstring, CShader*>			m_mapShader;
+	
 public:
 	void Init();
 
 
 public :
-	CShader* FindShader(wstring _strKey);
-	CSampler* FindSampler(wstring _strKey);
+	CBlendState* FindBlendState(const wstring& _strKey);
+	CShader* FindShader(const wstring& _strKey);
+	CSampler* FindSampler(const wstring& _strKey);
 private:
-	int AddShader(wstring _strKey, CShader* _pShader);
-	int AddSampler(wstring _strKey, CSampler* _pSampler);
+	int AddBlendState(const wstring& _strKey, CBlendState* _pState);
+	int AddShader(const wstring& _strKey, CShader* _pShader);
+	int AddSampler(const wstring& _strKey, CSampler* _pSampler);
+
+	void CreateBlendState();
 	void CreateSampler();
 	void CreateShader();
+	
 };
 

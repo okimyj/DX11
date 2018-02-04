@@ -124,6 +124,11 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
       return FALSE;
    }
 
+   // window resize.
+   RECT rt = { 0,0, WINSIZE_X, WINSIZE_Y };
+   AdjustWindowRect(&rt, WS_OVERLAPPEDWINDOW, false);
+   SetWindowPos(g_hWnd, NULL, 100, 100, rt.right - rt.left, rt.bottom - rt.top, 0);
+
    ShowWindow(g_hWnd, nCmdShow);
    UpdateWindow(g_hWnd);
 

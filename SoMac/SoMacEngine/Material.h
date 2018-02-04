@@ -20,9 +20,12 @@ private:
 
 public:
 	void SetParamData(SHADER_PARAM _eParam, void* _pData);
-	void ApplyData();
+public:
+	virtual void ApplyData();
+	virtual CMaterial* Clone() { return new CMaterial(*this); }
 public:
 	CMaterial();
+	CMaterial(const CMaterial& _pOther);
 	virtual ~CMaterial();
 };
 
