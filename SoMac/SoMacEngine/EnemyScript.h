@@ -12,6 +12,7 @@ private:
 	float			m_fSpeed;
 	CPrefab*		m_bulletPrefab;
 	CTestScene*	m_pTestScene;
+	bool				m_bAlive;
 public:
 	void SetTestScene(CTestScene* _pScene) { m_pTestScene = _pScene; }
 	virtual CEnemyScript* Clone() { return new CEnemyScript(*this); }

@@ -31,5 +31,6 @@ public:
 	CLayer();
 	~CLayer();
 	friend class CScene;
+	friend class CTestScene;
 };
 

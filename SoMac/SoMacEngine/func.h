@@ -3,15 +3,16 @@
 int GetSizeOfFormat(DXGI_FORMAT _eFormat);
 
 template<typename T>
-void Safe_Delete_List(list<T> _list) 
+void Safe_Delete_List(list<T>& _list)
 {
 	list<T>::iterator iter = _list.begin();
+
 	for (; iter != _list.end(); ++iter)
 	{
 		SAFE_DELETE(*iter);
 	}
-	_list.clear();
 }
+
 
 template<typename T>
 void Safe_Delete_Vector(vector<T> _vec)
@@ -20,7 +21,6 @@ void Safe_Delete_Vector(vector<T> _vec)
 	{
 		SAFE_DELETE(_vec[i]);
 	}
-	_vec.clear();
 }
 
 template<typename T1, typename T2>
@@ -31,5 +31,4 @@ void Safe_Delete_Map(map<T1, T2> _map)
 	{
 		SAFE_DELETE(iter->second);
 	}
-	_map.clear();
 }

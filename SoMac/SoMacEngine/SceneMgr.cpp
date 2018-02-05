@@ -65,6 +65,14 @@ void CSceneMgr::AddGameObject(CGameObject * _pObj, const wstring & _strLayerName
 	m_pCurScene->FindLayer(layerName)->AddGameObject(_pObj);
 }
 
+void CSceneMgr::RemoveGameObject(CGameObject * _pObj, const wstring & _strLayerName)
+{
+	wstring layerName = _strLayerName;
+	if (layerName == L"")
+		layerName = LAYER_DEFAULT;
+	m_pCurScene->FindLayer(layerName)->RemoveGameObject(_pObj);
+}
+
 void CSceneMgr::CreateTestScene()
 {
 	// Scene ¿¡ Layer Ãß°¡. 

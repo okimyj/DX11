@@ -105,9 +105,6 @@
     <Filter Include="_SoMac Source\02. Manager\05. ShaderMgr\BlendState">
       <UniqueIdentifier>{16f0bf77-82cb-449e-9735-93f157e4b815}</UniqueIdentifier>
     </Filter>
-    <Filter Include="_TestGame">
-      <UniqueIdentifier>{5952105e-ba3a-4795-ae8b-616c6db2ad02}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -218,11 +215,14 @@
     <ClInclude Include="BlendState.h">
       <Filter>_SoMac Source\02. Manager\05. ShaderMgr\BlendState</Filter>
     </ClInclude>
-    <ClInclude Include="TestScene.h">
-      <Filter>_TestGame</Filter>
-    </ClInclude>
     <ClInclude Include="PlayerPlanet.h">
       <Filter>_SoMac Source\04. Component\04. Script\ScriptCode</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemScript.h">
+      <Filter>_SoMac Source\04. Component\04. Script\ScriptCode</Filter>
+    </ClInclude>
+    <ClInclude Include="TestScene.h">
+      <Filter>_SoMac Source\02. Manager\06. SceneMgr\Scene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -319,11 +319,14 @@
     <ClCompile Include="BlendState.cpp">
       <Filter>_SoMac Source\02. Manager\05. ShaderMgr\BlendState</Filter>
     </ClCompile>
-    <ClCompile Include="TestScene.cpp">
-      <Filter>_TestGame</Filter>
-    </ClCompile>
     <ClCompile Include="PlayerPlanet.cpp">
       <Filter>_SoMac Source\04. Component\04. Script\ScriptCode</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemScript.cpp">
+      <Filter>_SoMac Source\04. Component\04. Script\ScriptCode</Filter>
+    </ClCompile>
+    <ClCompile Include="TestScene.cpp">
+      <Filter>_SoMac Source\02. Manager\06. SceneMgr\Scene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

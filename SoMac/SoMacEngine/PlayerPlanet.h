@@ -5,8 +5,8 @@ class CPlayerPlanet :
 	public CScript
 {
 private:
-	float						m_fSpeed;
-	float						m_fAngle;
+	float						m_fRadian;
+	float						m_fRadius;
 	CPlayerScript*		m_pOwner;
 
 public:
@@ -17,6 +17,8 @@ public:
 	virtual int Update();
 public:
 	CPlayerPlanet();
+	CPlayerPlanet(const CPlayerPlanet& _pOther);
 	~CPlayerPlanet();
+	friend class CPlayerScript;
 };
 

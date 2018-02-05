@@ -161,6 +161,7 @@ call "fx.bat"</Command>
     <ClInclude Include="func.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="global.h" />
+    <ClInclude Include="ItemScript.h" />
     <ClInclude Include="KeyMgr.h" />
     <ClInclude Include="Layer.h" />
     <ClInclude Include="Material.h" />
@@ -197,6 +198,7 @@ call "fx.bat"</Command>
     <ClCompile Include="EnemyScript.cpp" />
     <ClCompile Include="func.cpp" />
     <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="ItemScript.cpp" />
     <ClCompile Include="KeyMgr.cpp" />
     <ClCompile Include="Layer.cpp" />
     <ClCompile Include="Material.cpp" />

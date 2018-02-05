@@ -11,8 +11,10 @@
 #include "TextureAnimator.h"
 #include "TextureAnim.h"
 #include "Material.h"
+#include "TestScene.h"
 CPlayerScript::CPlayerScript()
-	: m_fSpeed(200.f)
+	: m_fSpeed(300.f)
+	, m_bIsLeft(true)
 {
 }
 
@@ -34,10 +36,41 @@ void CPlayerScript::Start()
 //	CTextureAnimator* animator = (CTextureAnimator*)GetGameObject()->GetComponent<CTextureAnimator>();
 //	animator->Play(L"Idle");
 	Transform()->SetLocalPosition(Vec3(0.f, 0.f, 10.f));
-	Transform()->SetLocalScale(Vec3(423.f/4.f, 700.f/4.f, 1.f));
+	Transform()->SetLocalScale(Vec3(423.f/5.f, 700.f/5.f, 1.f));
 	Transform()->SetLocalRotation(Vec3(0.f, 0.f, 0.f));
 }
 
+
+bool CPlayerScript::CheckCollide(CGameObject * _pObj)
+{
+	Vec3 vPos = Transform()->GetLocalPosition();
+	Vec3 vScale = Transform()->GetLocalScale();
+	Vec3 vTargetPos = _pObj->GetTransform()->GetLocalPosition();
+	Vec3 vTargetScale = _pObj->GetTransform()->GetLocalScale();
+	
+	float diffX = abs(vPos.x - vTargetPos.x) - (vScale.x/2 + vTargetScale.x/2);
+	float diffY = abs(vPos.y - vTargetPos.y) - (vScale.y / 2 + vTargetScale.y / 2);
+	if (diffX <= 0 && diffY <= 0)
+	{
+		return true;
+	}
+	return false;
+}
+
+/*
+void CPlayerScript::Collide(CGameObject* _pObj) 
+{
+	if (_pObj->GetTag() == L"EnemyBullet (Clone)")
+	{
+		
+	}
+	else if (_pObj->GetTag() == L"HeartItem (Clone)")
+	{
+		AddPlanet();
+		m_pTestScene->PushItemObj(_pObj);
+	}
+}
+*/
 int CPlayerScript::Update()
 {
 	
@@ -48,10 +81,12 @@ int CPlayerScript::Update()
 
 	if (CKeyMgr::GetInst()->GetKeyState(KEY_TYPE::KEY_LEFT, KEY_STATE::HOLD))
 	{
+//		m_bIsLeft = true;
 		vPos.x -= m_fSpeed * fDT;
 	}
 	if (CKeyMgr::GetInst()->GetKeyState(KEY_TYPE::KEY_RIGHT, KEY_STATE::HOLD))
 	{
+//		m_bIsLeft = false;
 		vPos.x += m_fSpeed * fDT;
 	}
 	if (CKeyMgr::GetInst()->GetKeyState(KEY_TYPE::KEY_UP, KEY_STATE::HOLD))
@@ -84,9 +119,7 @@ int CPlayerScript::Update()
 	{
 		AddPlanet();
 	}
-
-
-
+	
 	Transform()->SetLocalPosition(vPos);
 	Transform()->SetLocalRotation(vRot);
 	return RET_SUCCESS;
@@ -99,6 +132,7 @@ void CPlayerScript::Shoot()
 	if (NULL != bullectComp)
 	{
 		bullectComp->SetInitPosition(Transform()->GetLocalPosition());
+		bullectComp->SetDirection(m_bIsLeft ? Vec3(-1.f, 0.f, 0.f) : Vec3(1.f, 0.f, 0.f));
 		bullectComp->Awake();
 		bullectComp->Start();
 		if (++idx % 2)
@@ -115,7 +149,7 @@ CBulletScript* CPlayerScript::CreateBullet()
 		m_bulletPrefab = (CPrefab*)CResMgr::GetInst()->Load<CPrefab>(L"Bullet");
 	
 	CGameObject* pObj = m_bulletPrefab->Instantiate();
-	CSceneMgr::GetInst()->AddGameObject(pObj, LAYER_DEFAULT);
+	CSceneMgr::GetInst()->AddGameObject(pObj, L"PlayerBulletLayer");
 	return ((CBulletScript*)pObj->GetComponent<CBulletScript>());
 }
 
@@ -129,8 +163,33 @@ void CPlayerScript::AddPlanet()
 	m_listPlanet.push_back(pPlanet);
 }
 
+void CPlayerScript::RemovePlanet()
+{
+	list<CPlayerPlanet*>::iterator iter = m_listPlanet.begin();
+
+
+	if (iter == m_listPlanet.end())
+	{
+		// sub hp.
+	}
+	else
+	{
+		CSceneMgr::GetInst()->RemoveGameObject((*iter)->GetGameObject(), LAYER_DEFAULT);
+		m_listPlanetPool.push_back(*(iter));
+		m_listPlanet.erase(iter);
+	}
+	
+	
+}
+
 CPlayerPlanet * CPlayerScript::CreatePlanet()
 {
+	list<CPlayerPlanet*>::iterator iter = m_listPlanetPool.begin();
+	if (iter != m_listPlanetPool.end())
+	{
+		CSceneMgr::GetInst()->AddGameObject((*iter)->GetGameObject(), LAYER_DEFAULT);
+		return (*iter);
+	}
 	if (NULL == m_planetPrefab)
 		m_planetPrefab = (CPrefab*)CResMgr::GetInst()->Load<CPrefab>(L"PlayerPlanet");
 

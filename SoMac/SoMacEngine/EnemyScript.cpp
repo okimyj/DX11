@@ -30,10 +30,12 @@ void CEnemyScript::Awake()
 
 void CEnemyScript::Start()
 {
+	m_bAlive = true;
 }
 
 void CEnemyScript::Die()
 {
+	m_bAlive = false;
 	if (NULL != m_pTestScene)
 	{
 		m_pTestScene->PushEnemyObj(GetGameObject());
@@ -57,13 +59,15 @@ CBulletScript* CEnemyScript::CreateBullet()
 		m_bulletPrefab = (CPrefab*)CResMgr::GetInst()->Load<CPrefab>(L"EnemyBullet");
 
 	CGameObject* pObj = m_bulletPrefab->Instantiate();
-	CSceneMgr::GetInst()->AddGameObject(pObj, LAYER_DEFAULT);
+	CSceneMgr::GetInst()->AddGameObject(pObj, L"MonsterBulletLayer");
 	return ((CBulletScript*)pObj->GetComponent<CBulletScript>());
 }
 
 
 int CEnemyScript::Update()
 {
+	if (!m_bAlive)
+		return RET_SUCCESS;
 	float fDT = DT();
 	m_fAccrueDT += fDT;
 	/*
@@ -103,9 +107,12 @@ int CEnemyScript::Update()
 	float halfW = vScale.x / 2.f;
 	float halfH = vScale.y / 2.f;
 	
-	if (vPos.x + halfW >= WINSIZE_X/2 || vPos.x - halfW <= -WINSIZE_X / 2
-		|| vPos.y + halfH >= WINSIZE_Y/2 || vPos.y - halfH <= -WINSIZE_Y / 2)
+	if (vPos.x + halfW >= WINSIZE_X / 2 || vPos.x - halfW <= -WINSIZE_X / 2
+		|| vPos.y + halfH >= WINSIZE_Y / 2 || vPos.y - halfH <= -WINSIZE_Y / 2)
+	{
 		m_fAccrueDT = 0.f;
+		Die();
+	}
 	else
 	{
 		Transform()->SetLocalPosition(vPos);
