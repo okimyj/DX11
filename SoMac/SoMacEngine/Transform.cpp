@@ -1,4 +1,5 @@
 #include "Transform.h"
+#include "GameObject.h"
 #include "TimeMgr.h"
 #include "KeyMgr.h"
 #include "Device.h"
@@ -35,6 +36,13 @@ int CTransform::FinalUpdate()
 	matRot *= XMMatrixRotationY(m_vRot.y);
 	matRot *= XMMatrixRotationZ(m_vRot.z);
 	m_matWorld = matScale * matRot * matTransform;
+
+	CGameObject* pParent = GetParentObject();
+	if (NULL != pParent)
+	{
+		m_matWorld *= pParent->GetTransform()->GetWorldMatrix();
+	}
+
 	return 0;
 }
 
@@ -51,4 +59,15 @@ void CTransform::ApplyData()
 	CONTEXT->Unmap(pBuffer->pBuffer, 0);
 
 	CONTEXT->VSSetConstantBuffers(pBuffer->iRegister, 1, &pBuffer->pBuffer);			// StartSlot(0) : Register ¹øÈ£.
+}
+
+Vec3 CTransform::GetWorldPosition()
+{
+	CGameObject* pParent = GetParentObject();
+	Vec3 vWorldPos = m_vPos;
+	if (NULL != pParent)
+	{
+		vWorldPos = XMVector3TransformCoord(m_vPos.Convert(), pParent->GetTransform()->GetWorldMatrix());
+	}
+	return vWorldPos;
 }

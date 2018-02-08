@@ -19,7 +19,7 @@ CScene::CScene()
 	m_vecLayer.resize(MAX_LAYER);
 
 	// 전체 씬 공통 Layer 생성.
-	AddLayer(LAYER_DEFAULT);
+	AddLayer(LAYER_DEFAULT, true);
 	AddLayer(LAYER_TRANSPARENT);
 	AddLayer(LAYER_CAMERA);
 }
@@ -117,7 +117,7 @@ void CScene::Render()
 	}
 }
 
-int CScene::AddLayer(const wstring & _strLayerName)
+int CScene::AddLayer(const wstring & _strLayerName, bool _bZOrder)
 {
 	CLayer* pLayer = FindLayer(_strLayerName);
 	if (NULL != pLayer)
@@ -127,6 +127,7 @@ int CScene::AddLayer(const wstring & _strLayerName)
 	UINT iLayerIdx = GetLayerIndex();
 	pLayer->SetLayerIndex(iLayerIdx);
 	pLayer->SetLayerName(_strLayerName);
+	pLayer->SetZOrder(_bZOrder);
 
 	// map 에 추가해주고, 배열에도 해당 인덱스에 넣어준다.
 	m_mapLayer.insert(make_pair(_strLayerName, pLayer));

@@ -1,4 +1,6 @@
 #include "GameObject.h"
+#include "SceneMgr.h"
+#include "Layer.h"
 #include "Transform.h"
 #include "MeshRenderer.h"
 #include "Camera.h"
@@ -72,6 +74,11 @@ void CGameObject::Awake()
 	{
 		(*iter)->Awake();
 	}
+	list<CGameObject*>::iterator iterChild = m_listChild.begin();
+	for (; iterChild != m_listChild.end(); ++iterChild)
+	{
+		(*iterChild)->Awake();
+	}
 }
 
 void CGameObject::Start()
@@ -85,6 +92,11 @@ void CGameObject::Start()
 	for (; iter != m_listScript.end(); ++iter)
 	{
 		(*iter)->Start();
+	}
+	list<CGameObject*>::iterator iterChild = m_listChild.begin();
+	for (; iterChild != m_listChild.end(); ++iterChild)
+	{
+		(*iterChild)->Start();
 	}
 }
 
@@ -100,7 +112,12 @@ int CGameObject::Update()
 	{
 		(*iter)->Update();
 	}
-	return 0;
+	list<CGameObject*>::iterator iterChild = m_listChild.begin();
+	for (; iterChild != m_listChild.end(); ++iterChild)
+	{
+		(*iterChild)->Update();
+	}
+	return RET_SUCCESS;
 }
 
 int CGameObject::LateUpdate()
@@ -115,7 +132,12 @@ int CGameObject::LateUpdate()
 	{
 		(*iter)->LateUpdate();
 	}
-	return 0;
+	list<CGameObject*>::iterator iterChild = m_listChild.begin();
+	for (; iterChild != m_listChild.end(); ++iterChild)
+	{
+		(*iterChild)->LateUpdate();
+	}
+	return RET_SUCCESS;
 }
 
 int CGameObject::FinalUpdate()
@@ -130,7 +152,12 @@ int CGameObject::FinalUpdate()
 	{
 		(*iter)->FinalUpdate();
 	}
-	return 0;
+	list<CGameObject*>::iterator iterChild = m_listChild.begin();
+	for (; iterChild != m_listChild.end(); ++iterChild)
+	{
+		(*iterChild)->FinalUpdate();
+	}
+	return RET_SUCCESS;
 }
 
 void CGameObject::Render()
@@ -145,6 +172,11 @@ void CGameObject::Render()
 	{
 		(*iter)->Render();
 	}
+	list<CGameObject*>::iterator iterChild = m_listChild.begin();
+	for (; iterChild != m_listChild.end(); ++iterChild)
+	{
+		(*iterChild)->Render();
+	}
 }
 
 CComponent* CGameObject::AddComponent(CComponent* _pComp, ID<CScript>)
@@ -152,4 +184,50 @@ CComponent* CGameObject::AddComponent(CComponent* _pComp, ID<CScript>)
 	m_listScript.push_back((CScript*)_pComp);
 	_pComp->SetGameObject(this);
 	return _pComp;
+}
+
+void CGameObject::SetParent(CGameObject * _pParent, bool _bApplyLayer)
+{
+	// 이미 부모 오브젝트가 있었고, set 하려는 부모가 현재 부모와 다른 오브젝트인 경우 clear.
+	// Layer 관련 된 것은 어차피 부모오브젝트 기반으로 호출 되기 때문에 빼주지 않아도 된다. 내 layer는 내 layer 일 뿐임.
+	if(HasParent() && m_pParent != _pParent)
+		ClearParent();
+
+	m_pParent = _pParent;
+
+	if (NULL != m_pParent)
+	{
+		m_pParent->AddChild(this);
+		if (_bApplyLayer)
+			CSceneMgr::GetInst()->GetCurSceneLayer(m_pParent->GetLayerName())->AddGameObject(this);
+	}
+	
+}
+
+void CGameObject::ClearParent()
+{
+	m_pParent->RemoveChild(this);
+	m_pParent = NULL;
+}
+
+
+void CGameObject::AddChild(CGameObject * _pChild)
+{
+	// 혹시 이미 들어있을 수 있으니 한번 지우고 다시 넣어준다.
+	RemoveChild(_pChild);
+	m_listChild.push_back(_pChild);
+}
+
+void CGameObject::RemoveChild(CGameObject * _pChild)
+{
+	list<CGameObject*>::iterator iter = m_listChild.begin();
+	for (; iter != m_listChild.end(); ++iter)
+	{
+		if (*iter == _pChild)
+		{
+			m_listChild.erase(iter);
+			break;
+		}
+	}
+	
 }

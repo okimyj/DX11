@@ -194,6 +194,7 @@ CPlayerPlanet * CPlayerScript::CreatePlanet()
 		m_planetPrefab = (CPrefab*)CResMgr::GetInst()->Load<CPrefab>(L"PlayerPlanet");
 
 	CGameObject* pObj = m_planetPrefab->Instantiate();
-	CSceneMgr::GetInst()->AddGameObject(pObj, LAYER_DEFAULT);
+	pObj->SetParent(GetGameObject());
+	//CSceneMgr::GetInst()->AddGameObject(pObj, LAYER_DEFAULT);
 	return ((CPlayerPlanet*)pObj->GetComponent<CPlayerPlanet>());
 }

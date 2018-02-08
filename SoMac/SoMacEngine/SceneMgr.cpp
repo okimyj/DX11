@@ -73,12 +73,17 @@ void CSceneMgr::RemoveGameObject(CGameObject * _pObj, const wstring & _strLayerN
 	m_pCurScene->FindLayer(layerName)->RemoveGameObject(_pObj);
 }
 
+CLayer * CSceneMgr::GetCurSceneLayer(const wstring & _strLayerName)
+{
+	return GetCurScene()->FindLayer(_strLayerName);
+}
+
 void CSceneMgr::CreateTestScene()
 {
 	// Scene 에 Layer 추가. 
 	// 현재는 추가할 Layer가 없으므로 추가하지 않는다.
-	m_pCurScene->AddLayer(L"PlayerLayer");
-	m_pCurScene->AddLayer(L"MonsterLayer");
+	m_pCurScene->AddLayer(L"PlayerLayer", true);
+	m_pCurScene->AddLayer(L"MonsterLayer", true);
 	// Texture Load.
 	CTexture* pText = (CTexture*)CResMgr::GetInst()->Load<CTexture>(L"Bullet", L"Texture\\bullet.png");
 	pText = (CTexture*)CResMgr::GetInst()->Load<CTexture>(L"Player", L"Texture\\player.png");

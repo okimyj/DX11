@@ -23,10 +23,13 @@ private:
 public : 
 	void SetLocalPosition(Vec3 _vPos) { m_vPos = _vPos; }
 	Vec3 GetLocalPosition() { return m_vPos; }
+	Vec3 GetWorldPosition();
 	void SetLocalScale(Vec3 _vScale) { m_vScale = _vScale; }
 	Vec3 GetLocalScale() { return m_vScale; }
 	void SetLocalRotation(Vec3 _vRot) { m_vRot = _vRot; }
 	Vec3 GetLocalRotation() { return m_vRot; }
+
+	Matrix GetWorldMatrix() { return m_matWorld; }
 public:
 	CTransform();
 	virtual ~CTransform();

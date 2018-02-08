@@ -54,6 +54,7 @@ int CTestScene::Update()
 {
 	float fDT = CTimeMgr::GetInst()->DeltaTime();
 	m_fAccureDT += fDT;
+	/*
 	if (m_fAccureDT >= 2.f)
 	{
 		m_fAccureDT = 0.f;
@@ -92,6 +93,7 @@ int CTestScene::Update()
 		
 	}
 	CheckCollide();
+	*/
 	// 마지막에 parent update 호출.
 	CScene::Update();
 	return RET_SUCCESS;
@@ -204,19 +206,20 @@ void CTestScene::CreateGameObject()
 	FindLayer(LAYER_CAMERA)->AddGameObject(pCamera);
 
 	//-- create GameObject & Add to Default Layer.
-	CGameObject* pObj = CGameObject::CreateGameObject(L"Player");
-	m_pPlayer = (CPlayerScript*)pObj->AddComponent<CScript>(new CPlayerScript);
-	pObj->GetMeshRender()->SetMesh((CMesh*)CResMgr::GetInst()->Load<CMesh>(L"RectMesh"));
-	pObj->GetMeshRender()->SetMaterial((CMaterial*)CResMgr::GetInst()->Load<CMaterial>(L"PlayerMaterial"));
-	FindLayer(L"PlayerLayer")->AddGameObject(pObj);
-	
+	CGameObject* pPlayerObj = CGameObject::CreateGameObject(L"Player");
+	m_pPlayer = (CPlayerScript*)pPlayerObj->AddComponent<CScript>(new CPlayerScript);
+	pPlayerObj->GetMeshRender()->SetMesh((CMesh*)CResMgr::GetInst()->Load<CMesh>(L"RectMesh"));
+	pPlayerObj->GetMeshRender()->SetMaterial((CMaterial*)CResMgr::GetInst()->Load<CMaterial>(L"PlayerMaterial"));
+	FindLayer(LAYER_DEFAULT)->AddGameObject(pPlayerObj);
+	m_pPlayer->AddPlanet();
 	/*
-	pObj = CGameObject::CreateGameObject(L"Enemy1");
+	CGameObject* pObj = CGameObject::CreateGameObject(L"Enemy1");
 	pObj->AddComponent<CScript>(new CEnemyScript);
 	pObj->GetMeshRender()->SetMesh((CMesh*)CResMgr::GetInst()->Load<CMesh>(L"RectMesh"));
 	pObj->GetMeshRender()->SetMaterial((CMaterial*)CResMgr::GetInst()->Load<CMaterial>(L"EnemyMaterial"));
-	FindLayer(L"MonsterLayer")->AddGameObject(pObj);
 	*/
+	//FindLayer(L"MonsterLayer")->AddGameObject(pObj);
+	
 }
 
 CGameObject * CTestScene::PopEnemyObj()

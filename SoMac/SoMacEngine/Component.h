@@ -21,6 +21,7 @@ private:
 
 protected:
 	CGameObject* GetGameObject() { return m_pObj; }
+	CGameObject* GetParentObject();
 	CTransform* Transform();
 	CMeshRenderer* MeshRender();
 

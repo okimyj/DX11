@@ -20,7 +20,7 @@ public:
 	int FinalUpdate();
 	void Render();
 public :
-	int AddLayer(const wstring& _strLayerName);
+	int AddLayer(const wstring& _strLayerName, bool _bZOrder = false);
 	CLayer* FindLayer(const wstring& _strLayerName);
 private:
 	UINT GetLayerIndex();

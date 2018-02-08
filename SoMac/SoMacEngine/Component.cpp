@@ -11,6 +11,11 @@ CComponent::~CComponent()
 }
 
 
+CGameObject * CComponent::GetParentObject()
+{
+	return m_pObj->GetParentObject();
+}
+
 CTransform * CComponent::Transform()
 {
 	return m_pObj->GetTransform();

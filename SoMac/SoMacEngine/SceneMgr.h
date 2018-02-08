@@ -1,6 +1,7 @@
 #pragma once
 #include "global.h"
 class CScene;
+class CLayer;
 class CGameObject;
 class CSceneMgr
 {
@@ -21,6 +22,7 @@ public:
 
 public:
 	CScene* GetCurScene() { return m_pCurScene; }
+	CLayer* GetCurSceneLayer(const wstring& _strLayerName);
 #ifdef _DEBUG
 public:
 	void CreateTestScene();

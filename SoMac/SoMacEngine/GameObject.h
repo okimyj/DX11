@@ -11,18 +11,24 @@ class CMeshRenderer;
 class CCamera;
 class CTextureAnimator;
 class CScript;
+class CLayer;
 
 class CGameObject
 {
 public:
 	static CGameObject* CreateGameObject(const wstring& _strTag = L"");
 	static CGameObject* CreateCamera(const wstring& _strTag = L"");
+
 public:
 	CGameObject* Clone() { return new CGameObject(*this); }
 private:
 	wstring				m_strTag;
+	wstring				m_strLayerName;
 	CComponent*	m_arrComp[(UINT)COMPONENT_TYPE::END];
 	list<CScript*>	m_listScript;
+
+	CGameObject*				m_pParent;
+	list<CGameObject*>		m_listChild;
 	
 	
 public:
@@ -46,17 +52,37 @@ private:
 	template<typename T>
 	CComponent* AddComponent(CComponent* _pComp, ID<T> _id);
 	CComponent* AddComponent(CComponent* _pComp, ID<CScript>);
+
 public:
 	CMeshRenderer* GetMeshRender() { return (CMeshRenderer*)m_arrComp[(UINT)COMPONENT_TYPE::MESHRENDER]; }
 	CTransform* GetTransform() { return (CTransform*)m_arrComp[(UINT)COMPONENT_TYPE::TRANSFORM]; }
 	CCamera* GetCamera() { return (CCamera*)m_arrComp[(UINT)COMPONENT_TYPE::CAMERA]; }
 	const wstring& GetTag() { return m_strTag; }
 	void SetTag(const wstring& _strTag) { m_strTag = _strTag; }
+	
+	
+	void SetParent(CGameObject* _pParent, bool _bApplyLayer = true);
+	CGameObject* GetParentObject() { return m_pParent; }
+	list<CGameObject*>& GetChildList() { return m_listChild; }
+
+	bool HasParent() { return NULL != m_pParent; }
+private:
+	void ClearParent();
+	void AddChild(CGameObject* _pChild);
+	void RemoveChild(CGameObject* _pChild);
+	
+
+private:
+	
+	void SetLayerName(const wstring& _strName) { m_strLayerName = _strName; }
+	const wstring& GetLayerName() { return m_strLayerName; }
 
 public:
 	CGameObject();
 	CGameObject(const CGameObject& _pOther);
 	~CGameObject();
+
+	friend class CLayer;
 };
 
 template<typename T>

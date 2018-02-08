@@ -2,9 +2,41 @@
 #include "global.h"
 
 typedef XMMATRIX Matrix;
-typedef XMFLOAT3 Vec3;
+//typedef XMFLOAT3 Vec3;
 typedef XMFLOAT4 Vec4;
 typedef XMFLOAT2 Vec2;
+struct Vec3 : XMFLOAT3{
+	Vec3() : XMFLOAT3(0.f, 0.f, 0.f){}
+	Vec3(float _x, float _y, float _z) :XMFLOAT3(_x, _y, _z) { }
+	Vec3(XMFLOAT3 _xmVec) : XMFLOAT3(_xmVec) {}
+	
+	XMVECTOR Convert()
+	{
+		return XMLoadFloat3((XMFLOAT3*)this);
+	}
+
+	const Vec3& operator = (FXMVECTOR _xmvec)
+	{
+		XMStoreFloat3(this, _xmvec);
+		return (*this);
+	}
+
+	const Vec3 operator + (const Vec3& _other)
+	{
+		return Vec3(x + _other.x, y + _other.y, z + _other.z);
+	}
+	const Vec3 operator + (const FXMVECTOR& _other)
+	{
+		return Vec3(x + _other.vector4_f32[0], y + _other.vector4_f32[1], z + _other.vector4_f32[2]);
+	}
+	const Vec3 operator += (const Vec3 _other)
+	{
+		x += _other.x;
+		y += _other.y;
+		z += _other.z;
+		return (*this);
+	}
+};
 /*
 typedef struct _tagVec3 {
 	float x;
