@@ -1,5 +1,5 @@
 #pragma once
-
+#define ULONGLONG unsigned long long
 #define WINSIZE_X 1600
 #define WINSIZE_Y 900
 

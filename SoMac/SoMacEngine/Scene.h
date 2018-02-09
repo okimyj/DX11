@@ -22,10 +22,13 @@ public:
 public :
 	int AddLayer(const wstring& _strLayerName, bool _bZOrder = false);
 	CLayer* FindLayer(const wstring& _strLayerName);
+	
 private:
 	UINT GetLayerIndex();
+	vector<CLayer*>&	GetVecLayer() { return m_vecLayer; }
 public:
 	CScene();
 	virtual ~CScene();
+	friend class CCollisionMgr;
 };
 

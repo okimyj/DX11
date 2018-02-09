@@ -153,6 +153,10 @@ call "fx.bat"</Command>
     <ClInclude Include="BlendState.h" />
     <ClInclude Include="BulletScript.h" />
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="Collider.h" />
+    <ClInclude Include="Collider2D.h" />
+    <ClInclude Include="Collider3D.h" />
+    <ClInclude Include="CollisionMgr.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="Core.h" />
     <ClInclude Include="define.h" />
@@ -192,6 +196,10 @@ call "fx.bat"</Command>
     <ClCompile Include="BlendState.cpp" />
     <ClCompile Include="BulletScript.cpp" />
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="Collider.cpp" />
+    <ClCompile Include="Collider2D.cpp" />
+    <ClCompile Include="Collider3D.cpp" />
+    <ClCompile Include="CollisionMgr.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="Core.cpp" />
     <ClCompile Include="Device.cpp" />
