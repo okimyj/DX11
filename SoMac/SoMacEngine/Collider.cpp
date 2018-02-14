@@ -11,7 +11,7 @@ CCollider::CCollider()
 	, m_vOffsetPos{}
 	, m_vOffsetScale{}
 	, m_matColliderWorld{}
-	, m_bApplyScale(false)
+	, m_bApplyScale(true)
 {
 }
 
@@ -58,12 +58,14 @@ void CCollider::ApplyData()
 {
 	g_Transform.matWorld = m_matColliderWorld;
 	g_Transform.matWorld = XMMatrixTranspose(g_Transform.matWorld);
-
 	const CBUFFER* pBuffer = CDevice::GetInst()->FindConstBuffer(L"Transform");
+
+	// 상수버퍼로 데이터 옮김
 	D3D11_MAPPED_SUBRESOURCE tSub = {};
 	CONTEXT->Map(pBuffer->pBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &tSub);
 	memcpy(tSub.pData, &g_Transform, pBuffer->iSize);
 	CONTEXT->Unmap(pBuffer->pBuffer, 0);
-	CONTEXT->VSSetConstantBuffers(pBuffer->iRegister, 1, &pBuffer->pBuffer);
+
+	CONTEXT->VSSetConstantBuffers(pBuffer->iRegister, 1, &pBuffer->pBuffer);			// StartSlot(0) : Register 번호.
 }
 

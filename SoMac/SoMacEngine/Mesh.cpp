@@ -139,20 +139,6 @@ int CMesh::SetShader(CShader * _pShader)
 	return RET_SUCCESS;
 }
 
-int CMesh::SetShader(ID3DBlob * _pBlob)
-{
-	SAFE_RELEASE(m_pLayout);
-	
-	// shader랑 연동 되는 시점에 create.
-	if (FAILED(DEVICE->CreateInputLayout(&m_vecLayoutDesc[0], m_vecLayoutDesc.size(), _pBlob->GetBufferPointer()
-		, _pBlob->GetBufferSize(), &m_pLayout)))
-	{
-		return RET_FAILED;
-	}
-	
-	return RET_SUCCESS;
-}
-
 void CMesh::ApplyData()
 {
 	UINT iOffset = 0;

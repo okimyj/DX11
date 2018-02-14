@@ -11,6 +11,7 @@ CBlendState::CBlendState()
 
 CBlendState::~CBlendState()
 {
+	SAFE_RELEASE(m_pBlendState);
 }
 
 void CBlendState::AddRenderTargetBlendDesc(UINT _iIdx, const D3D11_RENDER_TARGET_BLEND_DESC & _tTargetDesc)

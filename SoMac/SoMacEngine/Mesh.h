@@ -37,7 +37,6 @@ public :
 
 	void AddLayoutDesc(char* _pSemanticName, int _iSemanticIdx, DXGI_FORMAT _eFormat, int _iInputSlot, int _iInstancing);
 	int SetShader(CShader* _pShader);
-	int SetShader(ID3DBlob* _pBlob);
 	virtual void ApplyData();
 	void Render();
 public:

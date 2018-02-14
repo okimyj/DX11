@@ -46,6 +46,7 @@ void CResMgr::CreateDefaultMesh()
 	v.vUV = Vec2(1.f, 0.f);
 	v.vColor = Vec4(0.f, 0.f, 1.f, 1.f);
 	vecVtx.push_back(v);
+
 	v.vPos = Vec3(0.5f, -0.5f, 0.f);
 	v.vUV = Vec2(1.f, 1.f);
 	v.vColor = Vec4(0.f, 0.f, 1.f, 1.f);

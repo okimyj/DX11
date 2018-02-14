@@ -15,6 +15,7 @@ CShaderMgr::~CShaderMgr()
 {
 	Safe_Delete_Map(m_mapShader);
 	Safe_Delete_Map(m_mapSampler);
+	Safe_Delete_Map(m_mapBlendState);
 }
 
 void CShaderMgr::Init()
