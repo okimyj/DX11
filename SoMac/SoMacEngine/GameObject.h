@@ -21,7 +21,7 @@ public:
 	static CGameObject* CreateCamera(const wstring& _strTag = L"");
 
 public:
-	CGameObject* Clone() { return new CGameObject(*this); }
+	CLONE(CGameObject);
 private:
 	wstring				m_strTag;
 	wstring				m_strLayerName;

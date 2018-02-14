@@ -4,7 +4,7 @@ class CItemScript :
 	public CScript
 {
 public:
-	virtual CItemScript* Clone() { return new CItemScript(*this); }
+	virtual CLONE(CItemScript);
 	virtual void Awake();
 	virtual void Start();
 	virtual int Update();

@@ -11,7 +11,7 @@ private:
 
 public:
 	void SetOwner(CPlayerScript* _pOwner) { m_pOwner = _pOwner; }
-	virtual CPlayerPlanet* Clone() { return new CPlayerPlanet(*this); }
+	virtual CLONE(CPlayerPlanet);
 	virtual void Awake();
 	virtual void Start();
 	virtual int Update();

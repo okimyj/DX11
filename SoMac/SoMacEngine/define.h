@@ -25,6 +25,8 @@
 #define DEVICE CDevice::GetInst()->GetDevice()
 #define CONTEXT CDevice::GetInst()->GetContext()
 
+#define CLONE(type) type* Clone(){return new type(*this);}
+
 #define MAX_LAYER 32
 
 #define LAYER_DEFAULT L"Default"

@@ -11,6 +11,7 @@ void Safe_Delete_List(list<T>& _list)
 	{
 		SAFE_DELETE(*iter);
 	}
+	
 }
 
 

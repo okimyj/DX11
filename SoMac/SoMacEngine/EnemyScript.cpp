@@ -116,12 +116,13 @@ int CEnemyScript::Update()
 	else
 	{
 		Transform()->SetLocalPosition(vPos);
-		
+		/*
 		if (m_fAccrueDT >= 2.5f)
 		{
 			m_fAccrueDT = 0.f;
 			Shoot();
 		}
+		*/
 	}
 	Transform()->SetLocalRotation(vRot);
 	return 0;

@@ -26,7 +26,6 @@ CTestScene::~CTestScene()
 {
 	Safe_Delete_List(m_listEnemyPool);
 	Safe_Delete_List(m_listItemPool);
-	
 }
 
 void CTestScene::Init()

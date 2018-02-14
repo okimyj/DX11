@@ -16,7 +16,8 @@
 #include "Prefab.h"
 #include "Material.h"
 #include "TestScene.h"
-
+#include "Collider2D.h"
+#include "CollisionMgr.h"
 
 CSceneMgr::CSceneMgr()
 	: m_pCurScene(NULL)
@@ -33,13 +34,13 @@ CSceneMgr::~CSceneMgr()
 
 void CSceneMgr::Init()
 {
-	m_pCurScene = new CTestScene();
-	m_pCurScene->Init();
-	/*
+//	m_pCurScene = new CTestScene();
+//	m_pCurScene->Init();
+	
 	m_pCurScene = new CScene();
 	// -- 임시 테스트 씬 구성.
 	CreateTestScene();
-	*/
+	
 	m_pCurScene->Awake();
 	m_pCurScene->Start();
 }
@@ -49,6 +50,7 @@ int CSceneMgr::Update()
 	m_pCurScene->Update();
 	m_pCurScene->LateUpdate ();
 	m_pCurScene->FinalUpdate();
+	CCollisionMgr::GetInst()->Update();
 	return RET_SUCCESS;
 }
 
@@ -82,18 +84,14 @@ void CSceneMgr::CreateTestScene()
 {
 	// Scene 에 Layer 추가. 
 	// 현재는 추가할 Layer가 없으므로 추가하지 않는다.
-	m_pCurScene->AddLayer(L"PlayerLayer", true);
 	m_pCurScene->AddLayer(L"MonsterLayer", true);
+	m_pCurScene->AddLayer(L"PlayerLayer", true);
+	
+	CCollisionMgr::GetInst()->SetCollsionLayer(L"Player", L"Monster");
 	// Texture Load.
 	CTexture* pText = (CTexture*)CResMgr::GetInst()->Load<CTexture>(L"Bullet", L"Texture\\bullet.png");
 	pText = (CTexture*)CResMgr::GetInst()->Load<CTexture>(L"Player", L"Texture\\player.png");
-	/*
-	for (int i = 0; i<8; ++i)
-	{
-		wstring strIdx = to_wstring(i);
-		pText = (CTexture*)CResMgr::GetInst()->Load<CTexture>(L"Player" + strIdx, L"Texture\\player" + strIdx + L".png");
-	}
-	*/
+	
 	CreateMaterial();
 
 	CreateGameObject();
@@ -103,7 +101,7 @@ void CSceneMgr::CreateMaterial()
 {
 	CMaterial* pMaterial = new CMaterial;
 	pMaterial->SetShader(CShaderMgr::GetInst()->FindShader(L"TextureShader"));
-	int iData = 1;
+	int iData = 0;
 	CTexture* pTex = (CTexture*)CResMgr::GetInst()->Load <CTexture>(L"Player");
 	pMaterial->SetParamData(SHADER_PARAM::INT_0, &iData);
 	pMaterial->SetParamData(SHADER_PARAM::TEXTURE_0, &pTex);
@@ -139,25 +137,22 @@ void CSceneMgr::CreateGameObject()
 
 	//-- create GameObject & Add to Default Layer.
 	CGameObject* pObj = CGameObject::CreateGameObject(L"Player");
-	pObj->AddComponent<CScript>(new CPlayerScript);
+	CPlayerScript* pPlayer = (CPlayerScript*)pObj->AddComponent<CScript>(new CPlayerScript);
+	pObj->AddComponent<CCollider>(new CCollider2D);
 	pObj->GetMeshRender()->SetMesh((CMesh*)CResMgr::GetInst()->Load<CMesh>(L"RectMesh"));
 	pObj->GetMeshRender()->SetMaterial((CMaterial*)CResMgr::GetInst()->Load<CMaterial>(L"PlayerMaterial"));
+	pObj->GetCollider()->SetOffsetScale(Vec3(1.f, 1.f, 1.f));
 	AddGameObject(pObj, L"PlayerLayer");
 
 
 	pObj = CGameObject::CreateGameObject(L"Enemy1");
 	pObj->AddComponent<CScript>(new CEnemyScript);
+	pObj->AddComponent<CCollider>(new CCollider2D);
 	pObj->GetTransform()->SetLocalPosition(Vec3(-100.f, -100.f, 99.f));
 	pObj->GetMeshRender()->SetMesh((CMesh*)CResMgr::GetInst()->Load<CMesh>(L"RectMesh"));
 	pObj->GetMeshRender()->SetMaterial((CMaterial*)CResMgr::GetInst()->Load<CMaterial>(L"Default"));
+	pObj->GetCollider()->SetOffsetScale(Vec3(1.f, 1.f, 1.f));
 	AddGameObject(pObj, L"MonsterLayer");
 
-	/*
-	pObj = CGameObject::CreateGameObject(L"Enemy2");
-	pObj->AddComponent<CScript>(new CEnemyScript);
-	pObj->GetTransform()->SetLocalPosition(Vec3(100.f, 100.f, 99.f));
-	pObj->GetMeshRender()->SetMesh((CMesh*)CResMgr::GetInst()->Load<CMesh>(L"RectMesh"));
-	pObj->GetMeshRender()->SetShader(CShaderMgr::GetInst()->FindShader(L"ColorShader"));
-	m_pCurScene->FindLayer(L"MonsterLayer")->AddGameObject(pObj);
-	*/
+
 }

@@ -12,7 +12,7 @@ private:
 
 
 public:
-	virtual CBulletScript* Clone() { return new CBulletScript(*this); }
+	virtual CLONE(CBulletScript);
 	virtual void Awake();
 	virtual void Start();
 	virtual int Update();

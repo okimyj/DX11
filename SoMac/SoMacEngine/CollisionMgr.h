@@ -26,6 +26,7 @@ public:
 private:
 	void CollisionLayer(CLayer* _pLeft, CLayer* _pRight);
 	bool IsCollision(CCollider* _pLeftCol, CCollider* _pRightCol);
+	void GetProjAxis(const Matrix& _matWorld, Vec3* _vProj, Vec3* _vSource);
 public:
 	int ToggleCollsionLayer(const wstring& _strLeft, const wstring& _strRight);
 	int SetCollsionLayer(const wstring& _strLeft, const wstring& _strRight);

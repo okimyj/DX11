@@ -28,37 +28,52 @@ void CResMgr::Init()
 void CResMgr::CreateDefaultMesh()
 {
 	//== Create Default Mesh ==//
-	VTX arrVtx[4] = {};
-	arrVtx[0].vPos = Vec3(-0.5f, -0.5f, 0.f);
-	arrVtx[0].vUV = Vec2(0.f, 1.f);
-	arrVtx[0].vColor = Vec4(1.f, 0.f, 0.f, 1.f);
+	vector<VTX> vecVtx; VTX v;
+	vector<WORD> vecIdx;
+	
+	
+	v.vPos = Vec3(-0.5f, -0.5f, 0.f);
+	v.vUV = Vec2(0.f, 1.f);
+	v.vColor = Vec4(1.f, 0.f, 0.f, 1.f);
+	vecVtx.push_back(v);
 
-	arrVtx[1].vPos = Vec3(-0.5f, 0.5f, 0.f);
-	arrVtx[1].vUV = Vec2(0.f, 0.f);
-	arrVtx[1].vColor = Vec4(0.f, 1.f, 0.f, 1.f);
+	v.vPos = Vec3(-0.5f, 0.5f, 0.f);
+	v.vUV = Vec2(0.f, 0.f);
+	v.vColor = Vec4(0.f, 1.f, 0.f, 1.f);
+	vecVtx.push_back(v);
 
+	v.vPos = Vec3(0.5f, 0.5f, 0.f);
+	v.vUV = Vec2(1.f, 0.f);
+	v.vColor = Vec4(0.f, 0.f, 1.f, 1.f);
+	vecVtx.push_back(v);
+	v.vPos = Vec3(0.5f, -0.5f, 0.f);
+	v.vUV = Vec2(1.f, 1.f);
+	v.vColor = Vec4(0.f, 0.f, 1.f, 1.f);
+	vecVtx.push_back(v);
 
-	arrVtx[2].vPos = Vec3(0.5f, 0.5f, 0.f);
-	arrVtx[2].vUV = Vec2(1.f, 0.f);
-	arrVtx[2].vColor = Vec4(0.f, 0.f, 1.f, 1.f);
-
-	arrVtx[3].vPos = Vec3(0.5f, -0.5f, 0.f);
-	arrVtx[3].vUV = Vec2(1.f, 1.f);
-	arrVtx[3].vColor = Vec4(0.f, 0.f, 1.f, 1.f);
-
-	INDEX16 arrIdx[2] = {};
-
-	arrIdx[0] = INDEX16(0, 1, 3);
-	arrIdx[1] = INDEX16(1, 2, 3);
-
-	// Create Mesh.
+	vecIdx.push_back(0); vecIdx.push_back(1); vecIdx.push_back(3);
+	vecIdx.push_back(1); vecIdx.push_back(2); vecIdx.push_back(3);
+	
+	// == Create Rect Mesh. ==//
 	int iIdxCount = 6;			// Dx9 에서는 Index의 개수 (arrIdx.size = 2)였는데, 11에서는 정점의 개수임. (6)
-	CMesh* pMesh = CMesh::Create(4, sizeof(VTX), D3D11_USAGE_DEFAULT, arrVtx
-		, iIdxCount, INDEX16::size(), D3D11_USAGE_DEFAULT, INDEX16::format(), arrIdx);
+	CMesh* pMesh = CMesh::Create(vecVtx.size(), sizeof(VTX), D3D11_USAGE_DEFAULT, &vecVtx[0]
+		, vecIdx.size(), INDEX16::size(), D3D11_USAGE_DEFAULT, INDEX16::format(), &vecIdx[0]);
 	pMesh->AddLayoutDesc("POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0);
 	pMesh->AddLayoutDesc("TEXCOORD", 0, DXGI_FORMAT_R32G32_FLOAT, 0, 0);
 	pMesh->AddLayoutDesc("COLOR", 0, DXGI_FORMAT_R32G32B32A32_FLOAT, 0, 0);
 	AddMesh(L"RectMesh", pMesh);
+
+	// == Create Collider RectMesh ==//
+	vecIdx.clear();
+	vecIdx.push_back(0); vecIdx.push_back(1); 
+	vecIdx.push_back(2); vecIdx.push_back(3); vecIdx.push_back(0);
+
+	pMesh = CMesh::Create(vecVtx.size(), sizeof(VTX), D3D11_USAGE_DEFAULT, &vecVtx[0], vecIdx.size(), INDEX16::size()
+		, D3D11_USAGE_DEFAULT, INDEX16::format(), &vecIdx[0], D3D11_PRIMITIVE_TOPOLOGY_LINESTRIP);
+	pMesh->AddLayoutDesc("POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0);
+	pMesh->AddLayoutDesc("TEXCOORD", 0, DXGI_FORMAT_R32G32_FLOAT, 0, 0);
+	pMesh->AddLayoutDesc("COLOR", 0, DXGI_FORMAT_R32G32B32A32_FLOAT, 0, 0);
+	AddMesh(L"ColliderRectMesh", pMesh);
 }
 
 void CResMgr::CreateDefaultMaterial()
@@ -66,6 +81,10 @@ void CResMgr::CreateDefaultMaterial()
 	CMaterial* pMaterial = new CMaterial;
 	pMaterial->SetShader(CShaderMgr::GetInst()->FindShader(L"ColorShader"));
 	AddMaterial(L"Default", pMaterial);
+	//== Create Collider Material == //
+	pMaterial = new CMaterial;
+	pMaterial->SetShader(CShaderMgr::GetInst()->FindShader(L"ColliderShader"));
+	AddMaterial(L"ColliderMaterial", pMaterial);
 }
 
 int CResMgr::AddMesh(const wstring & _strKey, CMesh * _pMesh)

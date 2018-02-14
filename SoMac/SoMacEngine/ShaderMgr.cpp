@@ -24,6 +24,51 @@ void CShaderMgr::Init()
 	CreateShader();
 }
 
+
+void CShaderMgr::CreateSampler()
+{
+	// == Create Default Sampler ==============================
+	CSampler* pSampler = CSampler::Create(D3D11_FILTER_ANISOTROPIC, 0, D3D11_TEXTURE_ADDRESS_WRAP, D3D11_TEXTURE_ADDRESS_WRAP);
+	AddSampler(L"DefaultSampler", pSampler);
+}
+
+
+void CShaderMgr::CreateShader()
+{
+	// == Create Color Shader ================================
+	CShader* pShader = new CShader();
+	wstring strPath = CPathMgr::GetResourcePath();
+	strPath += L"Shader\\Standard.fx";
+	pShader->CreateVertexShader(strPath, "VS_Color", 5, 0);
+	pShader->CreatePixelShader(strPath, "PS_Color", 5, 0);
+
+	CShaderMgr::GetInst()->AddShader(L"ColorShader", pShader);
+
+	// == Create Texture Shader ===============================
+	pShader = new CShader();
+	strPath = CPathMgr::GetResourcePath();
+	strPath += L"Shader\\Standard.fx";
+	pShader->CreateVertexShader(strPath, "VS_Texture", 5, 0);
+	pShader->CreatePixelShader(strPath, "PS_Texture", 5, 0);
+	pShader->AddSampler(FindSampler(L"DefaultSampler"), ((UINT)SHADER_TYPE::ST_PIXEL));
+	pShader->SetBlendState(FindBlendState(L"AlphaBlend"));
+
+	pShader->AddShaderParam(SHADER_PARAM::TEXTURE_0, (UINT)SHADER_TYPE::ST_PIXEL);
+	pShader->AddShaderParam(SHADER_PARAM::INT_0, (UINT)SHADER_TYPE::ST_PIXEL);
+
+	CShaderMgr::GetInst()->AddShader(L"TextureShader", pShader);
+
+	// == Create Collider Shader ===============================
+	pShader = new CShader();
+	strPath = CPathMgr::GetResourcePath();
+	strPath += L"Shader\\Standard.fx";
+	pShader->CreateVertexShader(strPath, "VS_Collider", 5, 0);
+	pShader->CreatePixelShader(strPath, "PS_Collider", 5, 0);
+	pShader->AddShaderParam(SHADER_PARAM::INT_0, (UINT)SHADER_TYPE::ST_PIXEL);
+	CShaderMgr::GetInst()->AddShader(L"ColliderShader", pShader);
+}
+
+
 int CShaderMgr::AddBlendState(const wstring & _strKey, CBlendState * _pState)
 {
 	CBlendState* pState = FindBlendState(_strKey);
@@ -110,37 +155,3 @@ CSampler * CShaderMgr::FindSampler(const wstring& _strKey)
 	return iter->second;
 }
 
-
-void CShaderMgr::CreateSampler()
-{
-	// == Create Default Sampler ==============================
-	CSampler* pSampler = CSampler::Create(D3D11_FILTER_ANISOTROPIC, 0, D3D11_TEXTURE_ADDRESS_WRAP, D3D11_TEXTURE_ADDRESS_WRAP);
-	AddSampler(L"DefaultSampler", pSampler);
-}
-
-
-void CShaderMgr::CreateShader()
-{
-	// == Create Color Shader ================================
-	CShader* pShader = new CShader();
-	wstring strPath = CPathMgr::GetResourcePath();
-	strPath += L"Shader\\Standard.fx";
-	pShader->CreateVertexShader(strPath, "VS_Color", 5, 0);
-	pShader->CreatePixelShader(strPath, "PS_Color", 5, 0);
-
-	CShaderMgr::GetInst()->AddShader(L"ColorShader", pShader);
-
-	// == Create Texture Shader ===============================
-	pShader = new CShader();
-	strPath = CPathMgr::GetResourcePath();
-	strPath += L"Shader\\Standard.fx";
-	pShader->CreateVertexShader(strPath, "VS_Texture", 5, 0);
-	pShader->CreatePixelShader(strPath, "PS_Texture", 5, 0);
-	pShader->AddSampler(FindSampler(L"DefaultSampler"), ((UINT)SHADER_TYPE::ST_PIXEL));
-	pShader->SetBlendState(FindBlendState(L"AlphaBlend"));
-
-	pShader->AddShaderParam(SHADER_PARAM::TEXTURE_0, (UINT)SHADER_TYPE::ST_PIXEL);
-	pShader->AddShaderParam(SHADER_PARAM::INT_0, (UINT)SHADER_TYPE::ST_PIXEL);
-	
-	CShaderMgr::GetInst()->AddShader(L"TextureShader", pShader);
-}

@@ -76,3 +76,39 @@ PS_OUTPUT PS_Texture(VS_TEXTURE_OUTPUT _input)
 	output.vColor = vCol;	
 	return output;
 }
+
+//== Collider Shader ========//
+// g_int_0
+//====================//
+struct VS_COLLIDER_OUTPUT
+{
+	float4 vPos : SV_POSITION;
+};
+
+VS_COLLIDER_OUTPUT VS_Collider(float3 vPos : POSITION)
+{
+	VS_COLLIDER_OUTPUT output = (VS_COLLIDER_OUTPUT) 0.f;
+
+	float4 vWorldPos = mul(float4(vPos, 1.f), g_matWorld);
+	float4 vViewPos = mul(vWorldPos, g_matView);
+	float4 vProjPos = mul(vViewPos, g_matProj);
+
+	output.vPos = vProjPos;
+
+	return output;
+}
+PS_OUTPUT PS_Collider(VS_COLLIDER_OUTPUT _input)
+{
+	PS_OUTPUT output = (PS_OUTPUT) 0.f;
+
+	if (g_int_0)
+	{
+		output.vColor = float4(1.f, 0.f, 0.f, 1.f);
+	}
+	else
+	{
+		output.vColor = float4(0.f, 1.f, 0.f, 1.f);
+	}
+
+	return output;
+}

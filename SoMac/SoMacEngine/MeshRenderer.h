@@ -14,7 +14,7 @@ private:
 	RASTERIZE_TYPE		m_eRSType;
 public:
 	// 멤버 변수들이 pointer 들이지만 다 리소스 포인터임. 하나만 있어야 하는것들. 
-	virtual CMeshRenderer* Clone() { return new CMeshRenderer(*this); }
+	virtual CLONE(CMeshRenderer);
 	virtual int Update() { return 0; }
 	virtual void Render();
 	

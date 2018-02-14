@@ -71,3 +71,17 @@ Vec3 CTransform::GetWorldPosition()
 	}
 	return vWorldPos;
 }
+
+Vec3 CTransform::GetWorldScale()
+{
+	CGameObject* pParent = GetParentObject();
+	// ¿ì¼± ³» scale set.
+	Vec3 vWorldScale = m_vScale;
+	while (pParent)
+	{
+		vWorldScale *= pParent->GetTransform()->GetLocalScale();
+		pParent = pParent->GetParentObject();
+	}
+
+	return vWorldScale;
+}

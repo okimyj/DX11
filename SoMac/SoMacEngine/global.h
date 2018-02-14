@@ -30,3 +30,5 @@ using namespace DirectX::PackedVector;
 extern tTransform g_Transform;
 extern UINT g_SPRegister[(UINT)SHADER_PARAM::END];			// shader param register index.
 extern wchar_t* g_SPName[(UINT)SHADER_PARAM::END];		// shader param register name.
+
+extern bool g_bShowCollider;

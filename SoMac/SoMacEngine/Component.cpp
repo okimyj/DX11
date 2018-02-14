@@ -25,3 +25,8 @@ CMeshRenderer * CComponent::MeshRender()
 {
 	return m_pObj->GetMeshRender();
 }
+
+CCollider * CComponent::Collider()
+{
+	return m_pObj->GetCollider();
+}

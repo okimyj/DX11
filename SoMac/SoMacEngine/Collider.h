@@ -1,29 +1,48 @@
 #pragma once
 #include "Component.h"
-enum class COLLIDER_TYPE
-{
-	COL_2D,
-	COL_3D,
-	NONE,
-};
+#include "ResPtr.h"
+
+class CMesh;
+class CMaterial;
 class CCollider :
 	public CComponent
 
 {
 	static UINT g_iColID;
-private:
-	UINT						m_iColID;
-	COLLIDER_TYPE		m_eType;
+protected:
+	UINT							m_iColID;
+	CResPtr<CMesh>		m_pMesh;
+	CResPtr<CMaterial>	m_pMaterial;
+	int								m_iCollision;			// 충돌 여부에 따라 red, green. // 1:true, 0:false
+
+	Vec3							m_vObjPos;			// 충돌체의 GameObject의 위치. 
+	Vec3							m_vOffsetPos;		// GameObject로 부터의 상대적 위치. 
+	Vec3							m_vOffsetScale;		// GameObject로 부터의 상대적 크기.
+
+	Matrix						m_matColliderWorld;			// 충돌체의 World Matrix.
+
+	bool							m_bApplyScale;					// GameObject의 크기에 영향을 받을지 안받을지.
+
+public:
+	void SetOffsetPos(const Vec3& _vPos) { m_vOffsetPos = _vPos; }
+	void SetOffsetScale(const Vec3& _vScale) { m_vOffsetScale = _vScale; }
+	const Vec3& GetOffsetPos() { return m_vOffsetPos; }
+	const Vec3& GetOffsetScale() { return m_vOffsetScale; }
+	Vec3 GetWorldPos() { return m_vObjPos + m_vOffsetPos; }
+	const Matrix& GetWorldMatrix() { return m_matColliderWorld; }
 public:
 	virtual void OnCollisionEnter(CCollider* _pOther);
 	virtual void OnCollision(CCollider* _pOther);
 	virtual void OnCollisionExit(CCollider* _pOther);
+	virtual bool Is2DCollider() = 0;
+	virtual bool Is3DCollider() = 0;
+	virtual int FinalUpdate();
+	void ApplyData();
 public:
 	UINT GetColID() { return m_iColID; }
-	COLLIDER_TYPE GetColliderType() { return m_eType; }
+	
 public:
 	CCollider();
-	CCollider(COLLIDER_TYPE _eType);
 	virtual ~CCollider();
 };
 

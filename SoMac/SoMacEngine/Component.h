@@ -3,6 +3,7 @@
 class CGameObject;
 class CTransform;
 class CMeshRenderer;
+class CCollider;
 class CComponent
 {
 private:
@@ -24,6 +25,7 @@ protected:
 	CGameObject* GetParentObject();
 	CTransform* Transform();
 	CMeshRenderer* MeshRender();
+	CCollider* Collider();
 
 public:
 	CComponent();

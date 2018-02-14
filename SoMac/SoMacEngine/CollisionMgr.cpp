@@ -52,7 +52,7 @@ void CCollisionMgr::CollisionLayer(CLayer * _pLeft, CLayer * _pRight)
 		for (; iterRight != listRight.end(); ++iterRight)
 		{
 			pRight = (*iterRight)->GetCollider();
-			if (NULL == pRight || pLeft->GetColliderType() != pRight->GetColliderType())
+			if (NULL == pRight || pLeft->Is2DCollider() != pRight->Is2DCollider())
 				continue;
 			
 			if (pRight->GetColID() < pLeft->GetColID())
@@ -106,7 +106,53 @@ void CCollisionMgr::CollisionLayer(CLayer * _pLeft, CLayer * _pRight)
 
 bool CCollisionMgr::IsCollision(CCollider * _pLeftCol, CCollider * _pRightCol)
 {
-	return false;
+	Vec3 vProj[4] = {};
+	Vec3 vSource[4] = {};
+	Vec3 vCenter = _pRightCol->GetWorldPos() - _pLeftCol->GetWorldPos();
+	GetProjAxis(_pLeftCol->GetWorldMatrix(), vProj, vSource);
+	GetProjAxis(_pRightCol->GetWorldMatrix(), vProj+2, vSource+2);
+
+	for (int i = 0; i < 4; ++i)
+	{
+		float fDist = 0.f;
+		for (int j = 0; j < 4; ++j)
+		{
+			fDist += abs(vSource[j].Dot(vProj[i]));
+		}
+		fDist /= 2.f;
+		float fCenter = abs(vCenter.Dot(vProj[i]));
+		if (fCenter > fDist)
+			return false;
+	}
+	return true;
+}
+
+void CCollisionMgr::GetProjAxis(const Matrix & _matWorld, Vec3 * _vProj, Vec3 * _vSource)
+{
+	/*
+		1 ------ 2
+		|		    |
+		|		    |
+		0 ------ 3
+	*/
+	Vec3 vLocal[4] = { Vec3(-0.5f, -0.5f, 0.f), Vec3(-0.5f, 0.5f, 0.f)
+								, Vec3(0.5f, 0.5f, 0.f), Vec3(0.5f, -0.5f, 0.f) };
+	Vec3 vOut1 = XMVector3TransformCoord(vLocal[2].Convert(), _matWorld);
+	Vec3 vOut2 = XMVector3TransformCoord(vLocal[1].Convert(), _matWorld);
+
+	_vSource[0] = vOut1 - vOut2;
+	_vSource[0].z = 0.f;
+	_vProj[0] = _vSource[0];
+	_vProj[0].Normalize();
+
+	vOut1 = XMVector3TransformCoord(vLocal[0].Convert(), _matWorld);
+	vOut2 = XMVector3TransformCoord(vLocal[1].Convert(), _matWorld);
+
+	_vSource[1] = vOut1 - vOut2;
+	_vSource[1].z = 0.f;
+	_vProj[1] = _vSource[1];
+	_vProj[1].Normalize();
+
 }
 
 int CCollisionMgr::ToggleCollsionLayer(const wstring & _strLeft, const wstring & _strRight)

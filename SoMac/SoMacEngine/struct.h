@@ -8,11 +8,31 @@ typedef XMFLOAT2 Vec2;
 struct Vec3 : XMFLOAT3{
 	Vec3() : XMFLOAT3(0.f, 0.f, 0.f){}
 	Vec3(float _x, float _y, float _z) :XMFLOAT3(_x, _y, _z) { }
-	Vec3(XMFLOAT3 _xmVec) : XMFLOAT3(_xmVec) {}
+	Vec3(FXMVECTOR _xmVec) : XMFLOAT3(0.f,0.f,0.f) 
+	{
+		XMStoreFloat3(this, _xmVec);
+	}
 	
 	XMVECTOR Convert()
 	{
 		return XMLoadFloat3((XMFLOAT3*)this);
+	}
+	float Distance()
+	{
+		return sqrt(x*x + y*y + z*z);
+	}
+	void Normalize()
+	{
+		float fDist = Distance();
+		if (fDist == 0.f)
+			return;
+		x /= fDist;
+		y /= fDist;
+		z /= fDist;
+	}
+	float Dot(const Vec3& _other)
+	{
+		return (x*_other.x) + (y*_other.y) + (z*_other.z);
 	}
 
 	const Vec3& operator = (FXMVECTOR _xmvec)
@@ -20,7 +40,7 @@ struct Vec3 : XMFLOAT3{
 		XMStoreFloat3(this, _xmvec);
 		return (*this);
 	}
-
+	//== operator + ====================================================//
 	const Vec3 operator + (const Vec3& _other)
 	{
 		return Vec3(x + _other.x, y + _other.y, z + _other.z);
@@ -36,51 +56,72 @@ struct Vec3 : XMFLOAT3{
 		z += _other.z;
 		return (*this);
 	}
+	//== operator - ====================================================//
+	const Vec3 operator - (const Vec3& _other)
+	{
+		return Vec3(x - _other.x, y - _other.y, z - _other.z);
+	}
+	const Vec3 operator - (const FXMVECTOR& _other)
+	{
+		return Vec3(x - _other.vector4_f32[0], y - _other.vector4_f32[1], z - _other.vector4_f32[2]);
+	}
+	const Vec3 operator -= (const Vec3 _other)
+	{
+		x -= _other.x;
+		y -= _other.y;
+		z -= _other.z;
+		return (*this);
+	}
+
+	//== operator * ====================================================//
+	const Vec3 operator * (const Vec3& _other)
+	{
+		return Vec3(x * _other.x, y * _other.y, z * _other.z);
+	}
+	const Vec3 operator * (const FXMVECTOR& _other)
+	{
+		return Vec3(x * _other.vector4_f32[0], y * _other.vector4_f32[1], z * _other.vector4_f32[2]);
+	}
+	const Vec3 operator *= (const Vec3 _other)
+	{
+		x *= _other.x;
+		y *= _other.y;
+		z *= _other.z;
+		return (*this);
+	}
+
+	//== operator / ====================================================//
+	const Vec3 operator / (const Vec3& _other)
+	{
+		Vec3 vRet(
+			_other.x == 0.f ? 0.f:x/_other.x
+			, _other.y == 0.f ? 0.f : y / _other.y
+			, _other.z == 0.f ? 0.f : z / _other.z
+		);
+		
+		return vRet;
+	}
+	const Vec3 operator / (const FXMVECTOR& _other)
+	{
+		Vec3 vRet(
+			_other.vector4_f32[0] == 0.f ? 0.f : x / _other.vector4_f32[0]
+			, _other.vector4_f32[1] == 0.f ? 0.f : y / _other.vector4_f32[1]
+			, _other.vector4_f32[2] == 0.f ? 0.f : z / _other.vector4_f32[2]
+		);
+		
+		return vRet;
+	}
+	const Vec3 operator /= (const Vec3 _other)
+	{
+		x = _other.x == 0.f ? 0.f : x / _other.x;
+		y = _other.y == 0.f ? 0.f : y / _other.y;
+		z = _other.z == 0.f ? 0.f : z / _other.z;
+		
+		return (*this);
+	}
+
 };
-/*
-typedef struct _tagVec3 {
-	float x;
-	float y;
-	float z;
-	_tagVec3()
-	: x(0), y(0), z(0)
-	{  }
-	_tagVec3(float _x, float _y, float _z) 
-	{
-		x = x;	y = y;	z = z;
-	}
-	
-	void operator += (_tagVec3 _other)
-	{
-		x += _other.x;	y += _other.y;	z += _other.z;
-	}
-	void operator -= (_tagVec3 _other)
-	{
-		x -= _other.x;	y -= _other.y;	z -= _other.z;
-	}
-	void operator *= (_tagVec3 _other)
-	{
-		x *= _other.x;	y *= _other.y;	z *= _other.z;
-	}
-	void operator *= (float _fValue)
-	{
-		x *= _fValue;	y *= _fValue;	z *= _fValue;
-	}
-	_tagVec3 operator + (_tagVec3 _other)
-	{
-		return _tagVec3{ x + _other.x, y + _other.y, z + _other.z };
-	}
-	_tagVec3 operator - (_tagVec3 _other)
-	{
-		return _tagVec3{ x - _other.x, y - _other.y, z - _other.z };
-	}
-	_tagVec3 operator * (_tagVec3 _other)
-	{
-		return _tagVec3{ x * _other.x, y * _other.y, z * _other.z };
-	}
-	
-}Vec3;
-*/
+
 // 구조체는 기본적으로 가장 큰 자료형의 크기를 메모리 할당 기준으로 삼는다.
 // 그렇다면 아래의 구조체의 크기는 원래 32byte 가 되어야 하는데 28byte 이다.
 // #pragma once pack(n) 을 선언해놓으면 각 자료형의 크기에 딱 맞게 메모리 할당 된다.

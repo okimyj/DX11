@@ -4,6 +4,7 @@
 #include "Material.h"
 #include "Transform.h"
 #include "ResMgr.h"
+#include "Collider.h"
 CMeshRenderer::CMeshRenderer()
 	: m_pMesh(NULL)
 	, m_pMaterial(NULL)
@@ -74,4 +75,9 @@ void CMeshRenderer::Render()
 	m_pMesh->ApplyData();
 	CDevice::GetInst()->SetRasterizer(m_eRSType);
 	m_pMesh->Render();
+
+//	if (g_bShowCollider && NULL != Collider())
+	if (NULL != Collider())
+		Collider()->Render();
+
 }

@@ -18,7 +18,7 @@ private :
 	CTestScene*					m_pTestScene;
 	list<CPlayerPlanet*>		m_listPlanetPool;
 public :
-	virtual CPlayerScript* Clone() { return new CPlayerScript(*this); }
+	virtual CLONE(CPlayerScript);
 	virtual void Awake();
 	virtual void Start();
 	virtual int Update();

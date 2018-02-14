@@ -15,7 +15,7 @@ private:
 	bool				m_bAlive;
 public:
 	void SetTestScene(CTestScene* _pScene) { m_pTestScene = _pScene; }
-	virtual CEnemyScript* Clone() { return new CEnemyScript(*this); }
+	virtual CLONE(CEnemyScript);
 	
 	virtual void Awake();
 	virtual void Start();

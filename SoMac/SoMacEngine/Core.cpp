@@ -21,6 +21,7 @@ ID3D11PixelShader*		g_pPS;			// Pixel Shader.
 
 //ID3D11Buffer* g_pTransformBuffer = NULL; // Constant Buffer.
 //-> Device
+bool g_bShowCollider = true;
 tTransform g_Transform;
 
 CCore::CCore()
