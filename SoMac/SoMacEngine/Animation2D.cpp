@@ -72,7 +72,7 @@ bool CAnimation2D::Load(const wstring & _strFolderPath)
 
 int CAnimation2D::FinalUpdate()
 {
-	if (!m_bEnable)
+	if (!m_bEnable || m_vecFrame.size() <= 0)
 		return RET_FAILED;
 	float fDT = CTimeMgr::GetInst()->DeltaTime();
 	m_fAccTime += fDT;

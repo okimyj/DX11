@@ -144,8 +144,8 @@ void CSceneMgr::CreateGameObject()
 	pObj->AddComponent<CAnimator>(new CAnimator);
 	pObj->GetMeshRender()->SetMesh((CMesh*)CResMgr::GetInst()->Load<CMesh>(L"RectMesh"));
 	pObj->GetMeshRender()->SetMaterial((CMaterial*)CResMgr::GetInst()->Load<CMaterial>(L"PlayerMaterial"));
-	pObj->GetCollider()->SetOffsetScale(Vec3(1.f, 1.f, 1.f));
-	pObj->GetAnimator()->LoadAnimation2D(L"Explosion", L"Texture\\Animation\\Explosion");
+	pObj->GetCollider()->SetOffsetScale(Vec3(1.1f, 1.1f, 1.1f));
+	pObj->GetAnimator()->LoadAnimation2D(L"Explosion", L"Texture\\Animation\\Rabbit");
 	pObj->GetAnimator()->PlayAnimation(L"Explosion");
 	AddGameObject(pObj, L"PlayerLayer");
 
@@ -156,7 +156,7 @@ void CSceneMgr::CreateGameObject()
 	pObj->GetTransform()->SetLocalPosition(Vec3(-100.f, -100.f, 99.f));
 	pObj->GetMeshRender()->SetMesh((CMesh*)CResMgr::GetInst()->Load<CMesh>(L"RectMesh"));
 	pObj->GetMeshRender()->SetMaterial((CMaterial*)CResMgr::GetInst()->Load<CMaterial>(L"Default"));
-	pObj->GetCollider()->SetOffsetScale(Vec3(1.f, 1.f, 1.f));
+	pObj->GetCollider()->SetOffsetScale(Vec3(1.1f, 1.1f, 1.1f));
 	AddGameObject(pObj, L"MonsterLayer");
 
 

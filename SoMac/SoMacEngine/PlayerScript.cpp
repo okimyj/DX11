@@ -36,7 +36,7 @@ void CPlayerScript::Start()
 //	CTextureAnimator* animator = (CTextureAnimator*)GetGameObject()->GetComponent<CTextureAnimator>();
 //	animator->Play(L"Idle");
 	Transform()->SetLocalPosition(Vec3(0.f, 0.f, 10.f));
-	Transform()->SetLocalScale(Vec3(423.f/5.f, 700.f/5.f, 1.f));
+	Transform()->SetLocalScale(Vec3(316.f/2.f, 300.f/2.f, 1.f));
 	Transform()->SetLocalRotation(Vec3(0.f, 0.f, 0.f));
 }
 

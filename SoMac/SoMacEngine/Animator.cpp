@@ -11,6 +11,7 @@ CAnimator::CAnimator()
 
 CAnimator::~CAnimator()
 {
+	Safe_Delete_Map(m_mapAnim);
 }
 
 
