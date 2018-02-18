@@ -4,7 +4,7 @@
 void CBulletScript::SetGrayScale()
 {
 	int i = 1;
-	MeshRender()->GetMaterial()->SetParamData(SHADER_PARAM::INT_0, &i);
+	MeshRenderer()->GetMaterial()->SetParamData(SHADER_PARAM::INT_0, &i);
 }
 
 CBulletScript::CBulletScript()

@@ -112,3 +112,61 @@ PS_OUTPUT PS_Collider(VS_COLLIDER_OUTPUT _input)
 
 	return output;
 }
+
+
+
+// == Standard Texture Shader == //
+// g_int_0 : gray scale.
+// g_int_1 : Animation 인지 아닌지. 1, 0
+// g_tex_0 : Texture
+// g_vec4_0 : x, y (Left Top UV), z(width), w(height)
+// ============== //
+struct VS_STD_INPUT
+{
+	float3 vPos : POSITION;
+	float2 vUV : TEXCOORD;
+};
+
+struct VS_STD_OUTPUT
+{
+	float4 vPos : SV_POSITION;
+	float2 vUV : TEXCOORD;
+};
+
+VS_STD_OUTPUT VS_Std(VS_STD_INPUT _input)
+{
+	VS_STD_OUTPUT output = (VS_STD_OUTPUT)0.f;
+	float4 vWorldPos = mul(float4(_input.vPos, 1.f), g_matWorld);
+	float4 vViewPos = mul(vWorldPos, g_matView);
+	float4 vProjPos = mul(vViewPos, g_matProj);
+	output.vPos = vProjPos;
+	output.vUV = _input.vUV;
+	return output;
+}
+
+PS_OUTPUT PS_Std(VS_STD_OUTPUT _input)
+{
+	PS_OUTPUT output = (PS_OUTPUT)0.f;
+	float4 vCol = (float4)0.f;
+	// animator 기반인지(1), 일반 texture 기반인지(0).
+	if (g_int_1)
+	{
+		// _input.vUV 이게 보간 되어서 들어온 값이니까 이걸 이용 해서 비율을 알아내자.
+		// g_vec4_0.x = Left // g_vec4_0.y = Top 
+		// g_vec4_0.z = width // g_vec4_0.w = height
+		// left_top 에 width와 height 에 보간되어 온 비율을 곱한값을 더하면 나오겠지.
+		float2 vUV = float2(g_vec4_0.x + (g_vec4_0.z * _input.vUV.x), g_vec4_0.y + (g_vec4_0.w*_input.vUV.y));
+		vCol = g_tex_0.Sample(g_default_sampler, vUV);
+	}
+	else
+		vCol = g_tex_0.Sample(g_default_sampler, _input.vUV);
+
+	
+
+	if (g_int_0)
+	{
+		vCol.rgb = (vCol.r + vCol.g + vCol.b) / 3.f;
+	}
+	output.vColor = vCol;
+	return output;
+}

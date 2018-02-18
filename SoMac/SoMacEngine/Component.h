@@ -4,6 +4,7 @@ class CGameObject;
 class CTransform;
 class CMeshRenderer;
 class CCollider;
+class CAnimator;
 class CComponent
 {
 private:
@@ -21,10 +22,11 @@ private:
 	void SetGameObject(CGameObject* _pObj) { m_pObj = _pObj; }
 
 protected:
-	CGameObject* GetGameObject() { return m_pObj; }
-	CGameObject* GetParentObject();
+	CGameObject* GameObject() { return m_pObj; }
+	CGameObject* ParentObject();
 	CTransform* Transform();
-	CMeshRenderer* MeshRender();
+	CMeshRenderer* MeshRenderer();
+	CAnimator* Animator();
 	CCollider* Collider();
 
 public:

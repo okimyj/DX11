@@ -1,6 +1,8 @@
 #include "Collider.h"
 #include "Transform.h"
 #include "Device.h"
+#include "GameObject.h"
+#include "Script.h"
 UINT CCollider::g_iColID = 0;
 CCollider::CCollider()
 	: m_iColID(g_iColID++)
@@ -25,15 +27,33 @@ CCollider::~CCollider()
 void CCollider::OnCollisionEnter(CCollider * _pOther)
 {
 	m_iCollision = 1;
+	list<CScript*>& listScript = GameObject()->GetScriptList();
+	list<CScript*>::iterator iter = listScript.begin();
+	for (; iter != listScript.end(); ++iter)
+	{
+		(*iter)->OnCollisionEnter(_pOther);
+	}
 }
 
 void CCollider::OnCollision(CCollider * _pOther)
 {
+	list<CScript*>& listScript = GameObject()->GetScriptList();
+	list<CScript*>::iterator iter = listScript.begin();
+	for (; iter != listScript.end(); ++iter)
+	{
+		(*iter)->OnCollision(_pOther);
+	}
 }
 
 void CCollider::OnCollisionExit(CCollider * _pOther)
 {
 	m_iCollision = 0;
+	list<CScript*>& listScript = GameObject()->GetScriptList();
+	list<CScript*>::iterator iter = listScript.begin();
+	for (; iter != listScript.end(); ++iter)
+	{
+		(*iter)->OnCollisionExit(_pOther);
+	}
 }
 
 int CCollider::FinalUpdate()

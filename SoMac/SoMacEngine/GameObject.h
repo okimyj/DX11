@@ -13,7 +13,7 @@ class CTextureAnimator;
 class CScript;
 class CLayer;
 class CCollider;
-
+class CAnimator;
 class CGameObject
 {
 public:
@@ -59,6 +59,7 @@ public:
 	CTransform* GetTransform() { return (CTransform*)m_arrComp[(UINT)COMPONENT_TYPE::TRANSFORM]; }
 	CCamera* GetCamera() { return (CCamera*)m_arrComp[(UINT)COMPONENT_TYPE::CAMERA]; }
 	CCollider* GetCollider() { return (CCollider*)m_arrComp[(UINT)COMPONENT_TYPE::COLLIDER]; }
+	CAnimator* GetAnimator() { return (CAnimator*)m_arrComp[(UINT)COMPONENT_TYPE::ANIMATOR]; }
 	const wstring& GetTag() { return m_strTag; }
 	void SetTag(const wstring& _strTag) { m_strTag = _strTag; }
 	
@@ -66,6 +67,7 @@ public:
 	void SetParent(CGameObject* _pParent, bool _bApplyLayer = true);
 	CGameObject* GetParentObject() { return m_pParent; }
 	list<CGameObject*>& GetChildList() { return m_listChild; }
+	list<CScript*>& GetScriptList() { return m_listScript; }
 
 	bool HasParent() { return NULL != m_pParent; }
 private:
@@ -107,6 +109,10 @@ CComponent* CGameObject::GetComponent()
 	{
 		return m_arrComp[(UINT)COMPONENT_TYPE::COLLIDER];
 	}
+	else if (info.hash_code() == typeid(CAnimator).hash_code())
+	{
+		return m_arrComp[(UINT)COMPONENT_TYPE::ANIMATOR];
+	}
 	else if (info.hash_code() == typeid(CTextureAnimator).hash_code())
 	{
 		return m_arrComp[(UINT)COMPONENT_TYPE::TEXTURE_ANIMATOR];
@@ -144,6 +150,10 @@ CComponent* CGameObject::AddComponent(CComponent* _pComp, ID<T>)
 	if (info.hash_code() == typeid(CCollider).hash_code())
 	{
 		m_arrComp[(UINT)COMPONENT_TYPE::COLLIDER] = _pComp;
+	}
+	if (info.hash_code() == typeid(CAnimator).hash_code())
+	{
+		m_arrComp[(UINT)COMPONENT_TYPE::ANIMATOR] = _pComp;
 	}
 	if (info.hash_code() == typeid(CTextureAnimator).hash_code())
 	{

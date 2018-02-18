@@ -38,7 +38,7 @@ void CEnemyScript::Die()
 	m_bAlive = false;
 	if (NULL != m_pTestScene)
 	{
-		m_pTestScene->PushEnemyObj(GetGameObject());
+		m_pTestScene->PushEnemyObj(GameObject());
 	}
 }
 
@@ -115,7 +115,7 @@ int CEnemyScript::Update()
 	}
 	else
 	{
-		Transform()->SetLocalPosition(vPos);
+	//	Transform()->SetLocalPosition(vPos);
 		/*
 		if (m_fAccrueDT >= 2.5f)
 		{

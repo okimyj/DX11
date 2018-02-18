@@ -11,7 +11,7 @@ CComponent::~CComponent()
 }
 
 
-CGameObject * CComponent::GetParentObject()
+CGameObject * CComponent::ParentObject()
 {
 	return m_pObj->GetParentObject();
 }
@@ -21,9 +21,14 @@ CTransform * CComponent::Transform()
 	return m_pObj->GetTransform();
 }
 
-CMeshRenderer * CComponent::MeshRender()
+CMeshRenderer * CComponent::MeshRenderer()
 {
 	return m_pObj->GetMeshRender();
+}
+
+CAnimator * CComponent::Animator()
+{
+	return m_pObj->GetAnimator();
 }
 
 CCollider * CComponent::Collider()

@@ -37,7 +37,7 @@ int CTransform::FinalUpdate()
 	matRot *= XMMatrixRotationZ(m_vRot.z);
 	m_matWorld = matScale * matRot * matTransform;
 
-	CGameObject* pParent = GetParentObject();
+	CGameObject* pParent = ParentObject();
 	if (NULL != pParent)
 	{
 		m_matWorld *= pParent->GetTransform()->GetWorldMatrix();
@@ -63,7 +63,7 @@ void CTransform::ApplyData()
 
 Vec3 CTransform::GetWorldPosition()
 {
-	CGameObject* pParent = GetParentObject();
+	CGameObject* pParent = ParentObject();
 	Vec3 vWorldPos = m_vPos;
 	if (NULL != pParent)
 	{
@@ -74,7 +74,7 @@ Vec3 CTransform::GetWorldPosition()
 
 Vec3 CTransform::GetWorldScale()
 {
-	CGameObject* pParent = GetParentObject();
+	CGameObject* pParent = ParentObject();
 	// ¿ì¼± ³» scale set.
 	Vec3 vWorldScale = m_vScale;
 	while (pParent)

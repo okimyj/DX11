@@ -117,6 +117,18 @@
     <Filter Include="_SoMac Source\02. Manager\07. CollisionMgr">
       <UniqueIdentifier>{4a3a4820-0ca8-43be-9c58-6a1105f759e6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="_SoMac Source\04. Component\06. Animator">
+      <UniqueIdentifier>{eed2cae7-5a73-423b-93c4-3a2cdafe68c4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="_SoMac Source\04. Component\06. Animator\Animation">
+      <UniqueIdentifier>{08fd8039-6175-448f-a8e6-a69494e9a094}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="_SoMac Source\04. Component\06. Animator\Animation\Animation2D">
+      <UniqueIdentifier>{c370d12b-8026-4901-9065-be2874d4c1c9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="_SoMac Source\04. Component\06. Animator\Animation\Animation3D">
+      <UniqueIdentifier>{76e2fbc8-730e-419f-a813-ba22b15e0c27}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -248,6 +260,15 @@
     <ClInclude Include="CollisionMgr.h">
       <Filter>_SoMac Source\02. Manager\07. CollisionMgr</Filter>
     </ClInclude>
+    <ClInclude Include="Animator.h">
+      <Filter>_SoMac Source\04. Component\06. Animator</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation.h">
+      <Filter>_SoMac Source\04. Component\06. Animator\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation2D.h">
+      <Filter>_SoMac Source\04. Component\06. Animator\Animation\Animation2D</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="func.cpp">
@@ -363,6 +384,15 @@
     </ClCompile>
     <ClCompile Include="CollisionMgr.cpp">
       <Filter>_SoMac Source\02. Manager\07. CollisionMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="Animator.cpp">
+      <Filter>_SoMac Source\04. Component\06. Animator</Filter>
+    </ClCompile>
+    <ClCompile Include="Animation.cpp">
+      <Filter>_SoMac Source\04. Component\06. Animator\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="Animation2D.cpp">
+      <Filter>_SoMac Source\04. Component\06. Animator\Animation\Animation2D</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -105,7 +105,7 @@ int CPlayerScript::Update()
 
 	if (CKeyMgr::GetInst()->GetKeyState(KEY_TYPE::KEY_Z, KEY_STATE::HOLD))
 	{
-		vPos.z += m_fSpeed * fDT;
+		vRot.z += XM_PI *fDT;
 	}
 	if (CKeyMgr::GetInst()->GetKeyState(KEY_TYPE::KEY_SPACE, KEY_STATE::DOWN))
 	{
@@ -113,7 +113,7 @@ int CPlayerScript::Update()
 	}
 	if (CKeyMgr::GetInst()->GetKeyState(KEY_TYPE::KEY_W, KEY_STATE::DOWN))
 	{
-		MeshRender()->SetRSType(RASTERIZE_TYPE::WIRE);
+		MeshRenderer()->SetRSType(RASTERIZE_TYPE::WIRE);
 	}
 	if (CKeyMgr::GetInst()->GetKeyState(KEY_TYPE::KEY_A, KEY_STATE::DOWN))
 	{
@@ -174,7 +174,7 @@ void CPlayerScript::RemovePlanet()
 	}
 	else
 	{
-		CSceneMgr::GetInst()->RemoveGameObject((*iter)->GetGameObject(), LAYER_DEFAULT);
+		CSceneMgr::GetInst()->RemoveGameObject((*iter)->GameObject(), LAYER_DEFAULT);
 		m_listPlanetPool.push_back(*(iter));
 		m_listPlanet.erase(iter);
 	}
@@ -187,14 +187,14 @@ CPlayerPlanet * CPlayerScript::CreatePlanet()
 	list<CPlayerPlanet*>::iterator iter = m_listPlanetPool.begin();
 	if (iter != m_listPlanetPool.end())
 	{
-		CSceneMgr::GetInst()->AddGameObject((*iter)->GetGameObject(), LAYER_DEFAULT);
+		CSceneMgr::GetInst()->AddGameObject((*iter)->GameObject(), LAYER_DEFAULT);
 		return (*iter);
 	}
 	if (NULL == m_planetPrefab)
 		m_planetPrefab = (CPrefab*)CResMgr::GetInst()->Load<CPrefab>(L"PlayerPlanet");
 
 	CGameObject* pObj = m_planetPrefab->Instantiate();
-	pObj->SetParent(GetGameObject());
+	pObj->SetParent(GameObject());
 	//CSceneMgr::GetInst()->AddGameObject(pObj, LAYER_DEFAULT);
 	return ((CPlayerPlanet*)pObj->GetComponent<CPlayerPlanet>());
 }

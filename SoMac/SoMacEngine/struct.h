@@ -19,10 +19,12 @@ struct Vec3 : XMFLOAT3{
 	}
 	float Distance()
 	{
+		// 피타고라스 정리.
 		return sqrt(x*x + y*y + z*z);
 	}
 	void Normalize()
 	{
+		// 각각의 요소를 본인의 길이로 나눈다.
 		float fDist = Distance();
 		if (fDist == 0.f)
 			return;
@@ -30,6 +32,7 @@ struct Vec3 : XMFLOAT3{
 		y /= fDist;
 		z /= fDist;
 	}
+	// 내적.
 	float Dot(const Vec3& _other)
 	{
 		return (x*_other.x) + (y*_other.y) + (z*_other.z);

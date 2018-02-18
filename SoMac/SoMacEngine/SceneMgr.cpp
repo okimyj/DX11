@@ -18,6 +18,7 @@
 #include "TestScene.h"
 #include "Collider2D.h"
 #include "CollisionMgr.h"
+#include "Animator.h"
 
 CSceneMgr::CSceneMgr()
 	: m_pCurScene(NULL)
@@ -87,7 +88,7 @@ void CSceneMgr::CreateTestScene()
 	m_pCurScene->AddLayer(L"MonsterLayer", true);
 	m_pCurScene->AddLayer(L"PlayerLayer", true);
 	
-	CCollisionMgr::GetInst()->SetCollsionLayer(L"Player", L"Monster");
+	CCollisionMgr::GetInst()->SetCollsionLayer(L"PlayerLayer", L"MonsterLayer");
 	// Texture Load.
 	CTexture* pText = (CTexture*)CResMgr::GetInst()->Load<CTexture>(L"Bullet", L"Texture\\bullet.png");
 	pText = (CTexture*)CResMgr::GetInst()->Load<CTexture>(L"Player", L"Texture\\player.png");
@@ -100,10 +101,11 @@ void CSceneMgr::CreateTestScene()
 void CSceneMgr::CreateMaterial()
 {
 	CMaterial* pMaterial = new CMaterial;
-	pMaterial->SetShader(CShaderMgr::GetInst()->FindShader(L"TextureShader"));
+	pMaterial->SetShader(CShaderMgr::GetInst()->FindShader(L"StandardShader"));
 	int iData = 0;
 	CTexture* pTex = (CTexture*)CResMgr::GetInst()->Load <CTexture>(L"Player");
 	pMaterial->SetParamData(SHADER_PARAM::INT_0, &iData);
+	pMaterial->SetParamData(SHADER_PARAM::INT_1, &iData);
 	pMaterial->SetParamData(SHADER_PARAM::TEXTURE_0, &pTex);
 	CResMgr::GetInst()->AddMaterial(L"PlayerMaterial", pMaterial);
 
@@ -139,9 +141,12 @@ void CSceneMgr::CreateGameObject()
 	CGameObject* pObj = CGameObject::CreateGameObject(L"Player");
 	CPlayerScript* pPlayer = (CPlayerScript*)pObj->AddComponent<CScript>(new CPlayerScript);
 	pObj->AddComponent<CCollider>(new CCollider2D);
+	pObj->AddComponent<CAnimator>(new CAnimator);
 	pObj->GetMeshRender()->SetMesh((CMesh*)CResMgr::GetInst()->Load<CMesh>(L"RectMesh"));
 	pObj->GetMeshRender()->SetMaterial((CMaterial*)CResMgr::GetInst()->Load<CMaterial>(L"PlayerMaterial"));
 	pObj->GetCollider()->SetOffsetScale(Vec3(1.f, 1.f, 1.f));
+	pObj->GetAnimator()->LoadAnimation2D(L"Explosion", L"Texture\\Animation\\Explosion");
+	pObj->GetAnimator()->PlayAnimation(L"Explosion");
 	AddGameObject(pObj, L"PlayerLayer");
 
 

@@ -1,0 +1,31 @@
+#pragma once
+#include "Animation.h"
+#include "ResPtr.h"
+class CTexture;
+class CMaterial;
+struct tFrameInfo
+{
+	CResPtr<CTexture>	pTexture;
+	Vec2							vLeftTop;			// Textrue 에서 width, height만큼 가져올 기준 위치.
+	float							fWidth;
+	float							fHeight;
+	float							fTerm;			// 해당 frame 에 머물러 있는 시간.
+
+};
+class CAnimation2D :
+	public CAnimation
+{
+private:
+	vector<tFrameInfo>	m_vecFrame;
+	UINT							m_iCurFrame	;			// 현재 프레임 index.
+	float							m_fAccTime;		// 누적시간이 frameInfo 의 fTerm을 넘어서는 순간 다음 프레임으로 넘긴다.
+
+public:
+	virtual bool Load(const wstring& _strFolderPath);
+	virtual int FinalUpdate();
+	virtual int ApplyData(CMaterial* pMaterial);
+public:
+	CAnimation2D();
+	virtual ~CAnimation2D();
+};
+

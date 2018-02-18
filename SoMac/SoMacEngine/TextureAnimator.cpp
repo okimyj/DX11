@@ -26,7 +26,7 @@ CTextureAnimator::~CTextureAnimator()
 
 void CTextureAnimator::AddAnimation(const wstring & _strKey, CTextureAnim * _pAnim)
 {
-	_pAnim->SetTargetMesh(MeshRender());
+	_pAnim->SetTargetMesh(MeshRenderer());
 	m_mapAnim.insert(make_pair(_strKey, _pAnim));
 }
 
@@ -41,7 +41,7 @@ void CTextureAnimator::Play(const wstring & _strName)
 void CTextureAnimator::Start()
 {
 	map<wstring, CTextureAnim*>::iterator iter = m_mapAnim.begin();
-	CMeshRenderer* pMeshRender = MeshRender();
+	CMeshRenderer* pMeshRender = MeshRenderer();
 	for (; iter != m_mapAnim.end(); ++iter)
 	{
 		iter->second->SetTargetMesh(pMeshRender);
