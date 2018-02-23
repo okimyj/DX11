@@ -2,9 +2,7 @@
 #include "PathMgr.h"
 #include "ResMgr.h"
 #include "TimeMgr.h"
-#include "Material.h"
-
-
+#include "Device.h"
 
 
 CAnimation2D::CAnimation2D()
@@ -18,18 +16,60 @@ CAnimation2D::~CAnimation2D()
 {
 }
 
-int CAnimation2D::ApplyData(CMaterial* pMaterial)
+int CAnimation2D::FinalUpdate()
 {
-	
-	int iData = 0;
-	int iData1 = 1;
-	pMaterial->SetParamData(SHADER_PARAM::INT_0, &iData);
-	pMaterial->SetParamData(SHADER_PARAM::INT_1, &iData1);
-	pMaterial->SetParamData(SHADER_PARAM::TEXTURE_0, &m_vecFrame[m_iCurFrame].pTexture);
-	Vec4 vec = Vec4(m_vecFrame[m_iCurFrame].vLeftTop.x, m_vecFrame[m_iCurFrame].vLeftTop.y, m_vecFrame[m_iCurFrame].fWidth, m_vecFrame[m_iCurFrame].fHeight);
-	pMaterial->SetParamData(SHADER_PARAM::VEC4_0, &vec);
-	
+	if (!m_bEnable || m_vecFrame.size() <= 0)
+		return RET_FAILED;
+	float fDT = CTimeMgr::GetInst()->DeltaTime();
+	m_fAccTime += fDT;
+	if (m_vecFrame[m_iCurFrame].fTerm <= m_fAccTime)
+	{
+		m_fAccTime = 0.f;
+		++m_iCurFrame;
+
+		if (m_vecFrame.size() <= m_iCurFrame)
+		{
+			m_iCurFrame = 0;
+			m_bEnable = false;
+		}
+		else
+		{
+			// TODO : update mesh.
+		}
+	}
 	return 0;
+}
+
+
+
+int CAnimation2D::ApplyData()
+{
+	tAnimInfo tInfo = {};
+	tInfo.vAnim.x = 1;
+	tInfo.vUV.x = m_vecFrame[m_iCurFrame].vLeftTop.x;
+	tInfo.vUV.y = m_vecFrame[m_iCurFrame].vLeftTop.y;
+	tInfo.vUV.z = m_vecFrame[m_iCurFrame].fWidth;
+	tInfo.vUV.w = m_vecFrame[m_iCurFrame].fHeight;
+
+	const CBUFFER* pBuffer = CDevice::GetInst()->FindConstBuffer(L"AnimationInfo");
+	D3D11_MAPPED_SUBRESOURCE tSub = {};
+
+	CONTEXT->Map(pBuffer->pBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &tSub);
+	memcpy(tSub.pData, &tInfo, pBuffer->iSize);
+	CONTEXT->Unmap(pBuffer->pBuffer, 0);
+
+	CONTEXT->VSSetConstantBuffers(pBuffer->iRegister, 1, &pBuffer->pBuffer);
+	CONTEXT->HSSetConstantBuffers(pBuffer->iRegister, 1, &pBuffer->pBuffer);
+	CONTEXT->DSSetConstantBuffers(pBuffer->iRegister, 1, &pBuffer->pBuffer);
+	CONTEXT->CSSetConstantBuffers(pBuffer->iRegister, 1, &pBuffer->pBuffer);
+	CONTEXT->GSSetConstantBuffers(pBuffer->iRegister, 1, &pBuffer->pBuffer);
+	CONTEXT->PSSetConstantBuffers(pBuffer->iRegister, 1, &pBuffer->pBuffer);
+
+	if (NULL != m_vecFrame[m_iCurFrame].pTexture)
+		m_vecFrame[m_iCurFrame].pTexture->ApplyData(16, (UINT)SHADER_TYPE::ST_PIXEL);
+
+
+	return RET_SUCCESS;
 }
 
 
@@ -70,27 +110,13 @@ bool CAnimation2D::Load(const wstring & _strFolderPath)
 	return RET_SUCCESS;
 }
 
-int CAnimation2D::FinalUpdate()
+
+bool CAnimation2D::LoadMultiAnimation(const wstring & _strFolderPath, const wstring & _strFullPath, map<wstring, CAnimation*> _mapAnim)
 {
-	if (!m_bEnable || m_vecFrame.size() <= 0)
-		return RET_FAILED;
-	float fDT = CTimeMgr::GetInst()->DeltaTime();
-	m_fAccTime += fDT;
-	if (m_vecFrame[m_iCurFrame].fTerm <= m_fAccTime)
-	{
-		m_fAccTime = 0.f;
-		++m_iCurFrame;
-		
-		if (m_vecFrame.size() <= m_iCurFrame)
-		{
-			m_iCurFrame = 0;
-			m_bEnable = false;
-		}
-		else
-		{
-			// TODO : update mesh.
-		}
-	}
-	return 0;
+	wstring strFilePath = _strFullPath + L"\\desc.txt";
+	FILE* pFile = NULL;
+	_wfopen_s(&pFile, strFilePath.c_str(), L"rb");
+	return false;
 }
+
 

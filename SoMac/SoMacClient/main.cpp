@@ -63,7 +63,9 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 				DispatchMessage(&msg);
 			}
 			if (WM_QUIT == msg.message)
+			{
 				break;
+			}
 		}
 		else
 		{

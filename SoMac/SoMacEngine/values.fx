@@ -35,3 +35,13 @@ Texture2D g_tex_1 : register(t1);
 Texture2D g_tex_2 : register(t2);
 Texture2D g_tex_3 : register(t3);
 SamplerState g_default_sampler : register(s0);				// 아무것도 들어오지 않으면 default로 0으로 되어있는 놈을 사용한다.
+
+
+// Animation Constant buffer. (16byte 단위로 선언되어야 함. 그래서 g_vec4_anim에 값 1개만 필요한데 그냥 float4로 잡은 것.).
+cbuffer VEC4 : register(b13)
+{
+	float4 g_vec4_uv; // xy(uv), z(width), w(height).
+	float4 g_vec4_anim; // x(Animator 유무).
+}
+
+Texture2D g_tex_anim : register(t16);

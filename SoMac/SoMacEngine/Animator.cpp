@@ -1,11 +1,29 @@
 #include "Animator.h"
 #include "Animation2D.h"
 #include "MeshRenderer.h"
+#include "Device.h"
+#include "PathMgr.h"
+#include "shlwapi.h"
+#pragma comment(lib, "Shlwapi.lib")
 
 CAnimator::CAnimator()
 	: m_pCurAnim(NULL)
 	, m_bRepeat(true)
 {
+}
+
+CAnimator::CAnimator(const CAnimator& _other)
+	: CComponent(_other)
+	, m_pCurAnim(NULL)
+	, m_bRepeat(_other.m_bRepeat)
+{
+	map<wstring, CAnimation*>::const_iterator iter = _other.m_mapAnim.begin();
+	for (; iter != _other.m_mapAnim.end(); ++iter)
+	{
+		CAnimation* pAnim = iter->second->Clone();
+		pAnim->SetAnimator(this);
+		m_mapAnim.insert(make_pair(iter->first, pAnim));
+	}
 }
 
 
@@ -54,4 +72,21 @@ void CAnimator::LoadAnimation2D(const wstring & _strKey, const wstring & _strFol
 	pAnim->SetKey(_strKey);
 	m_mapAnim.insert(make_pair(_strKey, pAnim));
 
+}
+
+void CAnimator::ChangeAnimation(const wstring & _strKey, UINT _iStartFrameIdx)
+{
+}
+
+void CAnimator::ApplyData()
+{
+}
+
+void CAnimator::Disable()
+{
+}
+
+CAnimation * CAnimator::FindAnimation(const wstring & _strKey)
+{
+	return nullptr;
 }

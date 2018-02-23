@@ -32,6 +32,7 @@ CCore::CCore()
 
 CCore::~CCore()
 {
+	CSceneMgr::GetInst()->Release();
 }
 
 int CCore::init(HWND _hWnd, bool _bWindow)
@@ -110,4 +111,6 @@ void CCore::CreateConstBuffer()
 	CDevice::GetInst()->CreateConstBuffer(g_SPName[(UINT)SHADER_PARAM::VEC4_END]
 		, sizeof(Vec4) * ((UINT)SHADER_PARAM::VEC4_END - (UINT)SHADER_PARAM::VEC4_0)
 		, D3D11_USAGE_DYNAMIC, g_SPRegister[(UINT)SHADER_PARAM::VEC4_END]);
+	// == Create Animation Info Buffer =====
+	CDevice::GetInst()->CreateConstBuffer(L"AnimationInfo", sizeof(tAnimInfo), D3D11_USAGE_DYNAMIC, 13);
 }

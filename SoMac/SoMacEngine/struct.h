@@ -185,4 +185,9 @@ typedef struct _tagTransform
 	Matrix	matProj;
 }tTransform;
 
-
+// == Anim Buffer ==//
+struct tAnimInfo
+{
+	Vec4 vUV;
+	Vec4 vAnim;
+};

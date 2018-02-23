@@ -14,9 +14,15 @@ public:
 public:
 	void PlayAnimation(const wstring& _strKey, bool _bRepeat = true);
 	void LoadAnimation2D(const wstring& _strKey, const wstring& _strFolderPath);
+	void ChangeAnimation(const wstring& _strKey, UINT _iStartFrameIdx = 0);
+	void ApplyData();
+	static void Disable();
+private:
+	CAnimation* FindAnimation(const wstring& _strKey);
 public:
 	virtual CLONE(CAnimator);
 	CAnimator();
+	CAnimator(const CAnimator& _other);
 	virtual ~CAnimator();
 };
 
