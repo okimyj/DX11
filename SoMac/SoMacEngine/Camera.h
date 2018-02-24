@@ -32,6 +32,10 @@ public:
 	
 	bool IsRenderTargetLayer(const wstring& _strLayerName);
 	bool IsRenderTargetLayer(CLayer* _pLayer);
+
+	void SetScale(float _fScale) { m_fScale = _fScale; }
+	const Matrix& GetProjMatrix() { return m_matProj; }
+	const Matrix& GetViewMatrix() { return m_matView; }
 public:
 	CCamera();
 	~CCamera();

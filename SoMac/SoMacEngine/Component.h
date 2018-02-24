@@ -5,6 +5,7 @@ class CTransform;
 class CMeshRenderer;
 class CCollider;
 class CAnimator;
+class CCamera;
 class CComponent
 {
 private:
@@ -28,6 +29,7 @@ protected:
 	CMeshRenderer* MeshRenderer();
 	CAnimator* Animator();
 	CCollider* Collider();
+	CCamera* Camera();
 
 public:
 	CComponent();

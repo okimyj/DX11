@@ -2,7 +2,7 @@
 #include "Device.h"
 #include "Sampler.h"
 #include "BlendState.h"
-
+#include "DepthStencilState.h"
 CShader::CShader()
 	: m_pVSBlob(NULL)
 	, m_pPSBlob(NULL)
@@ -10,6 +10,8 @@ CShader::CShader()
 	, m_pPSErrBlob(NULL)
 	, m_pVS(NULL)
 	, m_pPS(NULL)
+	, m_pBlendState(NULL)
+	, m_pDepthStencilState(NULL)
 {
 }
 
@@ -92,12 +94,13 @@ void CShader::ApplyData()
 	{
 		m_vecSampler[i].pSampler->ApplyData(m_vecSampler[i].iTiming);
 	}
-	if (NULL == m_pBlendState)
-	{
-		CONTEXT->OMSetBlendState(NULL, NULL, 0xffffffff);
-	}
-	else
-	{
+	if (NULL != m_pBlendState)
 		m_pBlendState->ApplyData();
-	}
+	else
+		CONTEXT->OMSetBlendState(NULL, NULL, 0xffffffff);
+
+	if (NULL != m_pDepthStencilState)
+		m_pDepthStencilState->ApplyData();
+	else
+		CONTEXT->OMSetDepthStencilState(NULL, NULL);
 }

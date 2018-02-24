@@ -35,3 +35,8 @@ CCollider * CComponent::Collider()
 {
 	return m_pObj->GetCollider();
 }
+
+CCamera * CComponent::Camera()
+{
+	return m_pObj->GetCamera();
+}

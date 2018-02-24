@@ -46,7 +46,7 @@ int CCamera::LateUpdate()
 	}
 	else
 	{
-		m_matProj = XMMatrixOrthographicLH(m_fWidth, m_fHeight, m_fNear, m_fFar);
+		m_matProj = XMMatrixOrthographicLH(m_fWidth*m_fScale, m_fHeight*m_fScale, m_fNear, m_fFar);
 		//m_matProj = XMMatrixPerspectiveFovLH(XM_PI / 4.f, (float)WINSIZE_X / (float)WINSIZE_Y, 1.f, 1000.f);
 	}
 	

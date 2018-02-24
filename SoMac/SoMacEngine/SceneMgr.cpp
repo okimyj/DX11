@@ -13,6 +13,7 @@
 #include "PlayerScript.h"
 #include "EnemyScript.h"
 #include "BulletScript.h"
+#include "CameraScript.h"
 #include "Prefab.h"
 #include "Material.h"
 #include "TestScene.h"
@@ -136,6 +137,7 @@ void CSceneMgr::CreateGameObject()
 
 	// -- Create Camera & Add to Camera Layer
 	CGameObject* pCamera = CGameObject::CreateCamera(L"MainCamera");
+	pCamera->AddComponent<CScript>(new CCameraScript);
 	pCamera->GetCamera()->AddRenderTargetLayer(LAYER_DEFAULT);
 	pCamera->GetCamera()->AddRenderTargetLayer(L"PlayerLayer");
 	pCamera->GetCamera()->AddRenderTargetLayer(L"MonsterLayer");

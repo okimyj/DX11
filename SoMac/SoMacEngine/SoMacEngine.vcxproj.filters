@@ -129,6 +129,27 @@
     <Filter Include="_SoMac Source\04. Component\06. Animator\Animation\Animation3D">
       <UniqueIdentifier>{76e2fbc8-730e-419f-a813-ba22b15e0c27}</UniqueIdentifier>
     </Filter>
+    <Filter Include="_SoMac Source\02. Manager\05. ShaderMgr\DepthStencilState">
+      <UniqueIdentifier>{3213a4b6-42ae-421c-9641-bcca28fb4822}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="_SoMac Source\04. Component\04. Script\ScriptCode\BulletScript">
+      <UniqueIdentifier>{2b73ef6b-474c-4908-9820-fe990c639f83}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="_SoMac Source\04. Component\04. Script\ScriptCode\EnemyScript">
+      <UniqueIdentifier>{a7e5e63d-8401-46fa-b057-d6dd8d40f796}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="_SoMac Source\04. Component\04. Script\ScriptCode\ItemScript">
+      <UniqueIdentifier>{3d8edb0f-085c-494b-967a-021da048b4eb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="_SoMac Source\04. Component\04. Script\ScriptCode\PlayerPlanetScript">
+      <UniqueIdentifier>{3080335f-71da-44dc-8ce9-9b23fc3d455c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="_SoMac Source\04. Component\04. Script\ScriptCode\PlayerScript">
+      <UniqueIdentifier>{1b02eb35-9e41-4369-b70e-08767b9dc969}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="_SoMac Source\04. Component\04. Script\ScriptCode\CameraScript">
+      <UniqueIdentifier>{dc6fd5db-1dc0-4239-895a-d9945aeb1efb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -203,20 +224,11 @@
     <ClInclude Include="Script.h">
       <Filter>_SoMac Source\04. Component\04. Script</Filter>
     </ClInclude>
-    <ClInclude Include="PlayerScript.h">
-      <Filter>_SoMac Source\04. Component\04. Script\ScriptCode</Filter>
-    </ClInclude>
     <ClInclude Include="..\External\Debug\include\DirectXTex.h">
       <Filter>External Header</Filter>
     </ClInclude>
-    <ClInclude Include="BulletScript.h">
-      <Filter>_SoMac Source\04. Component\04. Script\ScriptCode</Filter>
-    </ClInclude>
     <ClInclude Include="Texture.h">
       <Filter>_SoMac Source\02. Manager\04. ResMgr\Resource\02. Texture</Filter>
-    </ClInclude>
-    <ClInclude Include="EnemyScript.h">
-      <Filter>_SoMac Source\04. Component\04. Script\ScriptCode</Filter>
     </ClInclude>
     <ClInclude Include="TextureAnimator.h">
       <Filter>_SoMac Source\04. Component\06. Texture Animator</Filter>
@@ -238,12 +250,6 @@
     </ClInclude>
     <ClInclude Include="BlendState.h">
       <Filter>_SoMac Source\02. Manager\05. ShaderMgr\BlendState</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerPlanet.h">
-      <Filter>_SoMac Source\04. Component\04. Script\ScriptCode</Filter>
-    </ClInclude>
-    <ClInclude Include="ItemScript.h">
-      <Filter>_SoMac Source\04. Component\04. Script\ScriptCode</Filter>
     </ClInclude>
     <ClInclude Include="TestScene.h">
       <Filter>_SoMac Source\02. Manager\06. SceneMgr\Scene</Filter>
@@ -268,6 +274,27 @@
     </ClInclude>
     <ClInclude Include="Animation2D.h">
       <Filter>_SoMac Source\04. Component\06. Animator\Animation\Animation2D</Filter>
+    </ClInclude>
+    <ClInclude Include="DepthStencilState.h">
+      <Filter>_SoMac Source\02. Manager\05. ShaderMgr\DepthStencilState</Filter>
+    </ClInclude>
+    <ClInclude Include="BulletScript.h">
+      <Filter>_SoMac Source\04. Component\04. Script\ScriptCode\BulletScript</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyScript.h">
+      <Filter>_SoMac Source\04. Component\04. Script\ScriptCode\EnemyScript</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemScript.h">
+      <Filter>_SoMac Source\04. Component\04. Script\ScriptCode\ItemScript</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerPlanet.h">
+      <Filter>_SoMac Source\04. Component\04. Script\ScriptCode\PlayerPlanetScript</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerScript.h">
+      <Filter>_SoMac Source\04. Component\04. Script\ScriptCode\PlayerScript</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraScript.h">
+      <Filter>_SoMac Source\04. Component\04. Script\ScriptCode\CameraScript</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -331,17 +358,8 @@
     <ClCompile Include="Script.cpp">
       <Filter>_SoMac Source\04. Component\04. Script</Filter>
     </ClCompile>
-    <ClCompile Include="PlayerScript.cpp">
-      <Filter>_SoMac Source\04. Component\04. Script\ScriptCode</Filter>
-    </ClCompile>
-    <ClCompile Include="BulletScript.cpp">
-      <Filter>_SoMac Source\04. Component\04. Script\ScriptCode</Filter>
-    </ClCompile>
     <ClCompile Include="Texture.cpp">
       <Filter>_SoMac Source\02. Manager\04. ResMgr\Resource\02. Texture</Filter>
-    </ClCompile>
-    <ClCompile Include="EnemyScript.cpp">
-      <Filter>_SoMac Source\04. Component\04. Script\ScriptCode</Filter>
     </ClCompile>
     <ClCompile Include="TextureAnimator.cpp">
       <Filter>_SoMac Source\04. Component\06. Texture Animator</Filter>
@@ -363,12 +381,6 @@
     </ClCompile>
     <ClCompile Include="BlendState.cpp">
       <Filter>_SoMac Source\02. Manager\05. ShaderMgr\BlendState</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayerPlanet.cpp">
-      <Filter>_SoMac Source\04. Component\04. Script\ScriptCode</Filter>
-    </ClCompile>
-    <ClCompile Include="ItemScript.cpp">
-      <Filter>_SoMac Source\04. Component\04. Script\ScriptCode</Filter>
     </ClCompile>
     <ClCompile Include="TestScene.cpp">
       <Filter>_SoMac Source\02. Manager\06. SceneMgr\Scene</Filter>
@@ -393,6 +405,27 @@
     </ClCompile>
     <ClCompile Include="Animation2D.cpp">
       <Filter>_SoMac Source\04. Component\06. Animator\Animation\Animation2D</Filter>
+    </ClCompile>
+    <ClCompile Include="DepthStencilState.cpp">
+      <Filter>_SoMac Source\02. Manager\05. ShaderMgr\DepthStencilState</Filter>
+    </ClCompile>
+    <ClCompile Include="BulletScript.cpp">
+      <Filter>_SoMac Source\04. Component\04. Script\ScriptCode\BulletScript</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyScript.cpp">
+      <Filter>_SoMac Source\04. Component\04. Script\ScriptCode\EnemyScript</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemScript.cpp">
+      <Filter>_SoMac Source\04. Component\04. Script\ScriptCode\ItemScript</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerPlanet.cpp">
+      <Filter>_SoMac Source\04. Component\04. Script\ScriptCode\PlayerPlanetScript</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerScript.cpp">
+      <Filter>_SoMac Source\04. Component\04. Script\ScriptCode\PlayerScript</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraScript.cpp">
+      <Filter>_SoMac Source\04. Component\04. Script\ScriptCode\CameraScript</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
