@@ -193,14 +193,15 @@ void CCaculatorDlg::OnBnClickedButton(UINT _id)
 	m_editInput.GetWindowTextW(str);
 	
 	int iOuput = _wtoi(str.GetBuffer());	
-	
-	if (!m_bEntered || 0 == iOuput)
+	iOuput *= 10;
+	if (!m_bEntered)
 	{
 		str.Format(L"%d", iNum);
 	}
 	else
 	{
-		str.Format(L"%s%d", str, iNum);
+		iOuput += iNum;
+		str.Format(L"%d", iOuput);
 	}
 	m_bEntered = true;
 	m_editInput.SetWindowTextW(str);
@@ -252,8 +253,8 @@ void CCaculatorDlg::ApplyCalc()
 		str.Format(L"%s%d%s", str, iInput, L"*");
 		break;
 	case IDC_BUTTON_DIVISION:
-		m_iLastResult /= iInput;
-		str.Format(L"%s%d%s", str, iInput, L"%");
+		m_iLastResult = m_bFirstCalc ? iInput : m_iLastResult / iInput;
+		str.Format(L"%s%d%s", str, iInput, L"/");
 		break;
 	}
 	m_bFirstCalc = false;
