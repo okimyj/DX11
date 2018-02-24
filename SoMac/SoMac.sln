@@ -10,7 +10,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SoMacClient", "SoMacClient\
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SoMacEngine", "SoMacEngine\SoMacEngine.vcxproj", "{3728DE4C-55E6-4AD7-84FF-FB531264F39C}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SoMacTool", "SoMacTool\SoMacTool.vcxproj", "{8EC7E8D3-A7D8-4EB5-B98C-9951CF7007C3}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SoMacTool", "SoMacTool\SoMacTool.vcxproj", "{E1E878B7-76D1-449E-9DB2-9AC8891BD317}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -36,14 +36,14 @@ Global
 		{3728DE4C-55E6-4AD7-84FF-FB531264F39C}.Release|x64.Build.0 = Release|x64
 		{3728DE4C-55E6-4AD7-84FF-FB531264F39C}.Release|x86.ActiveCfg = Release|Win32
 		{3728DE4C-55E6-4AD7-84FF-FB531264F39C}.Release|x86.Build.0 = Release|Win32
-		{8EC7E8D3-A7D8-4EB5-B98C-9951CF7007C3}.Debug|x64.ActiveCfg = Debug|x64
-		{8EC7E8D3-A7D8-4EB5-B98C-9951CF7007C3}.Debug|x64.Build.0 = Debug|x64
-		{8EC7E8D3-A7D8-4EB5-B98C-9951CF7007C3}.Debug|x86.ActiveCfg = Debug|Win32
-		{8EC7E8D3-A7D8-4EB5-B98C-9951CF7007C3}.Debug|x86.Build.0 = Debug|Win32
-		{8EC7E8D3-A7D8-4EB5-B98C-9951CF7007C3}.Release|x64.ActiveCfg = Release|x64
-		{8EC7E8D3-A7D8-4EB5-B98C-9951CF7007C3}.Release|x64.Build.0 = Release|x64
-		{8EC7E8D3-A7D8-4EB5-B98C-9951CF7007C3}.Release|x86.ActiveCfg = Release|Win32
-		{8EC7E8D3-A7D8-4EB5-B98C-9951CF7007C3}.Release|x86.Build.0 = Release|Win32
+		{E1E878B7-76D1-449E-9DB2-9AC8891BD317}.Debug|x64.ActiveCfg = Debug|x64
+		{E1E878B7-76D1-449E-9DB2-9AC8891BD317}.Debug|x64.Build.0 = Debug|x64
+		{E1E878B7-76D1-449E-9DB2-9AC8891BD317}.Debug|x86.ActiveCfg = Debug|Win32
+		{E1E878B7-76D1-449E-9DB2-9AC8891BD317}.Debug|x86.Build.0 = Debug|Win32
+		{E1E878B7-76D1-449E-9DB2-9AC8891BD317}.Release|x64.ActiveCfg = Release|x64
+		{E1E878B7-76D1-449E-9DB2-9AC8891BD317}.Release|x64.Build.0 = Release|x64
+		{E1E878B7-76D1-449E-9DB2-9AC8891BD317}.Release|x86.ActiveCfg = Release|Win32
+		{E1E878B7-76D1-449E-9DB2-9AC8891BD317}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

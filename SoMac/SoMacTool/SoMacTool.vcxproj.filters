@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="01. App">
+      <UniqueIdentifier>{875034d2-1837-4be5-a364-75461d6b6cf6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02. MainFrame">
+      <UniqueIdentifier>{92734559-3e4f-449c-9705-7eb2b79f4a25}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03. Window">
+      <UniqueIdentifier>{1331d60d-31d1-4f75-9817-e888b7d45c1f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. View">
+      <UniqueIdentifier>{45a8176a-ba6e-4828-a83a-b0c591c3c056}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. View\01. GameView">
+      <UniqueIdentifier>{fdc09f63-869c-4a26-8e7b-8f7addbe3e08}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. View\02. HierachyView">
+      <UniqueIdentifier>{da78aaf8-da62-40d7-bd0e-ed76414f4e7f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. View\03. ComponentView">
+      <UniqueIdentifier>{ba5eb433-cda3-4e24-accc-d775bdb62b36}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. View\04. ButtonView">
+      <UniqueIdentifier>{2ea4ceff-c87c-46bb-91f2-c0b83b5a0825}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. View\05. DebugVIew">
+      <UniqueIdentifier>{d2af4be3-60b0-4f43-9713-db2f17aa7d1f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="stdafx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SoMacTool.h">
+      <Filter>01. App</Filter>
+    </ClInclude>
+    <ClInclude Include="MainFrm.h">
+      <Filter>02. MainFrame</Filter>
+    </ClInclude>
+    <ClInclude Include="MySplitterWnd.h">
+      <Filter>03. Window</Filter>
+    </ClInclude>
+    <ClInclude Include="ButtonView.h">
+      <Filter>04. View\04. ButtonView</Filter>
+    </ClInclude>
+    <ClInclude Include="ComponentView.h">
+      <Filter>04. View\03. ComponentView</Filter>
+    </ClInclude>
+    <ClInclude Include="HierachyView.h">
+      <Filter>04. View\02. HierachyView</Filter>
+    </ClInclude>
+    <ClInclude Include="DebugView.h">
+      <Filter>04. View\05. DebugVIew</Filter>
+    </ClInclude>
+    <ClInclude Include="GameView.h">
+      <Filter>04. View\01. GameView</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SoMacTool.cpp">
+      <Filter>01. App</Filter>
+    </ClCompile>
+    <ClCompile Include="MainFrm.cpp">
+      <Filter>02. MainFrame</Filter>
+    </ClCompile>
+    <ClCompile Include="MySplitterWnd.cpp">
+      <Filter>03. Window</Filter>
+    </ClCompile>
+    <ClCompile Include="ButtonView.cpp">
+      <Filter>04. View\04. ButtonView</Filter>
+    </ClCompile>
+    <ClCompile Include="ComponentView.cpp">
+      <Filter>04. View\03. ComponentView</Filter>
+    </ClCompile>
+    <ClCompile Include="HierachyView.cpp">
+      <Filter>04. View\02. HierachyView</Filter>
+    </ClCompile>
+    <ClCompile Include="DebugView.cpp">
+      <Filter>04. View\05. DebugVIew</Filter>
+    </ClCompile>
+    <ClCompile Include="GameView.cpp">
+      <Filter>04. View\01. GameView</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="SoMacTool.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\SoMacTool.rc2">
+      <Filter>Resource Files</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\SoMacTool.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
+</Project>
