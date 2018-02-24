@@ -117,6 +117,10 @@ void CSceneMgr::CreateMaterial()
 	pMaterial->SetParamData(SHADER_PARAM::TEXTURE_0, &pTex);
 	CResMgr::GetInst()->AddMaterial(L"BulletMaterial", pMaterial);
 
+	pMaterial = new CMaterial;
+	pMaterial->SetShader(CShaderMgr::GetInst()->FindShader(L"Standard2DShader"));
+	CResMgr::GetInst()->AddMaterial(L"StandardMaterial", pMaterial);
+
 }
 
 void CSceneMgr::CreateGameObject()
@@ -143,10 +147,13 @@ void CSceneMgr::CreateGameObject()
 	pObj->AddComponent<CCollider>(new CCollider2D);
 	pObj->AddComponent<CAnimator>(new CAnimator);
 	pObj->GetMeshRender()->SetMesh((CMesh*)CResMgr::GetInst()->Load<CMesh>(L"RectMesh"));
-	pObj->GetMeshRender()->SetMaterial((CMaterial*)CResMgr::GetInst()->Load<CMaterial>(L"PlayerMaterial"));
+	pObj->GetMeshRender()->SetMaterial((CMaterial*)CResMgr::GetInst()->Load<CMaterial>(L"StandardMaterial"));
 	pObj->GetCollider()->SetOffsetScale(Vec3(1.1f, 1.1f, 1.1f));
-	pObj->GetAnimator()->LoadAnimation2D(L"Explosion", L"Texture\\Animation\\Rabbit");
-	pObj->GetAnimator()->PlayAnimation(L"Explosion");
+//	pObj->GetAnimator()->LoadAnimation2D(L"Explosion_00", L"Texture\\Animation\\Explosion");
+//	pObj->GetAnimator()->LoadAnimation2D(L"Explosion_01", L"Texture\\Animation\\Explosion_01");
+//	pObj->GetAnimator()->LoadAnimation2D(L"Explosion", L"Texture\\Animation\\Rabbit");
+	pObj->GetAnimator()->LoadAnimation2D(L"Player", L"Texture\\Animation\\Player");
+	pObj->GetAnimator()->PlayAnimation(L"Player_Right_Idle");
 	AddGameObject(pObj, L"PlayerLayer");
 
 

@@ -5,6 +5,7 @@
 #include "Transform.h"
 #include "ResMgr.h"
 #include "Collider.h"
+#include "Animator.h"
 CMeshRenderer::CMeshRenderer()
 	: m_pMesh(NULL)
 	, m_pMaterial(NULL)
@@ -74,6 +75,16 @@ void CMeshRenderer::Render()
 	m_pMesh->SetShader(m_pMaterial->GetShader());
 	m_pMesh->ApplyData();
 	CDevice::GetInst()->SetRasterizer(m_eRSType);
+
+	if (Animator())
+	{
+		Animator()->ApplyData();
+	}
+	else
+	{
+		CAnimator::Disable();
+	}
+
 	m_pMesh->Render();
 
 //	if (g_bShowCollider && NULL != Collider())

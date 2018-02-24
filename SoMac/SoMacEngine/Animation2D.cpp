@@ -73,17 +73,14 @@ int CAnimation2D::ApplyData()
 }
 
 
-bool CAnimation2D::Load(const wstring & _strFolderPath)
+bool CAnimation2D::Load(const wstring & _strFolderPath, const wstring& _strFullPath)
 {
 	// window 함수임.
 	WIN32_FIND_DATA tData = {};
 	
-	wstring strFullPath = CPathMgr::GetResourcePath();
-	strFullPath += _strFolderPath;	
-
 	// FIndFirstFile 을 사용 하는 탐색기(?)에 대한 handle. 커널 오브젝트(운영체제 내부에서 동작하는 것.)
 	// FindNextFile 의 인자로 사용 됨.
-	HANDLE hHandle = FindFirstFile(wstring(strFullPath + L"\\" + L"*.*").c_str(), &tData);
+	HANDLE hHandle = FindFirstFile(wstring(_strFullPath + L"\\" + L"*.*").c_str(), &tData);
 	if (INVALID_HANDLE_VALUE == hHandle)
 		return RET_FAILED;
 	tFrameInfo tInfo = {};
@@ -111,12 +108,66 @@ bool CAnimation2D::Load(const wstring & _strFolderPath)
 }
 
 
-bool CAnimation2D::LoadMultiAnimation(const wstring & _strFolderPath, const wstring & _strFullPath, map<wstring, CAnimation*> _mapAnim)
+bool CAnimation2D::LoadMultiAnimation(const wstring & _strFolderPath, const wstring & _strFullPath, map<wstring, CAnimation*>& _mapAnim)
 {
 	wstring strFilePath = _strFullPath + L"\\desc.txt";
-	FILE* pFile = NULL;
+	FILE* pFile = NULL;		
 	_wfopen_s(&pFile, strFilePath.c_str(), L"rb");
-	return false;
+
+	wchar_t szBuffer[255] = {};
+	tDescInfo tInfo = {};
+	vector<tDescInfo> vecInfo;
+	// 우선 애니메이션의 정보를 읽어서 tDescInfo 자료형으로 만들어 vecInfo에 저장.
+	while (true)
+	{
+		// fwscanf_s : file의 끝까지 읽으면 -1을 반환한다.
+		if (-1 == fwscanf_s(pFile, L"%s", szBuffer, 255))
+			break;
+		// wcscmp : 문자열 비교 함수. 
+		// result == 0 : 두 문자열이 같다. / result < 0 : String2가 더 크다. / result > 0 : String1가 더 크다. 
+		if (wcscmp(szBuffer, L"[ANIMATION]") == 0)
+		{
+			// Texture Name
+			fwscanf_s(pFile, L"%s", szBuffer, 255);
+			tInfo.strTexName = szBuffer;
+			// Animation Name
+			fwscanf_s(pFile, L"%s", szBuffer, 255);
+			tInfo.strAnimName = szBuffer;
+			// left top
+			fwscanf_s(pFile, L"%f%f", &tInfo.vLeftTop.x, &tInfo.vLeftTop.y);
+			// size
+			fwscanf_s(pFile, L"%f%f", &tInfo.vSize.x, &tInfo.vSize.y);
+			// frameCount
+			fwscanf_s(pFile, L"%d", &tInfo.iFrameCount);
+
+			vecInfo.push_back(tInfo);
+		}
+	}
+	// fopen 했으면 반드시 fclose.
+	fclose(pFile);
+
+	// 읽어온 정보들로 Animation 생성.
+	for (UINT i = 0; i < vecInfo.size(); ++i)
+	{
+		wstring strTexturePath = _strFolderPath + L"\\" + vecInfo[i].strTexName;
+		CTexture* pTexture = (CTexture*)CResMgr::GetInst()->Load<CTexture>(vecInfo[i].strTexName, strTexturePath);
+		CAnimation2D* pAnim = new CAnimation2D;
+		pAnim->SetKey(vecInfo[i].strAnimName);
+		for (UINT j = 0; j < vecInfo[i].iFrameCount; ++j)
+		{
+			tFrameInfo tFrame = {};
+			tFrame.pTexture = pTexture;
+			tFrame.fWidth = vecInfo[i].vSize.x / pTexture->GetWidth();
+			tFrame.fHeight = vecInfo[i].vSize.y / pTexture->GetHeight();
+			// 무조건 1열로 오른쪽으로 진행된다고 가정.
+			tFrame.vLeftTop.x = vecInfo[i].vLeftTop.x / pTexture->GetWidth() + (j * tFrame.fWidth);
+			tFrame.vLeftTop.y = vecInfo[i].vLeftTop.y / pTexture->GetHeight();
+			tFrame.fTerm = 0.05f;
+			pAnim->AddFrame(tFrame);
+		}
+		_mapAnim.insert(make_pair(pAnim->GetKey(), pAnim));
+	}
+	return RET_SUCCESS;
 }
 
 

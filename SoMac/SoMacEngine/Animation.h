@@ -19,7 +19,7 @@ public:
 	void SetAnimator(CAnimator* _pAnimator) { m_pAnimator = _pAnimator; }
 	void SetFrameIdx(UINT _iFrameIdx) { m_iCurFrame = _iFrameIdx; }
 
-	virtual bool Load(const wstring& _strFolderPath) = 0;
+	virtual bool Load(const wstring& _strFolderPath, const wstring& _strFullPath) = 0;
 	virtual int FinalUpdate() = 0;
 	virtual int ApplyData()=0;
 	void SetEnable(bool _bEnable) { m_bEnable = _bEnable; }

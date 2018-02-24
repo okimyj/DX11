@@ -151,6 +151,7 @@ void CMaterial::ConvertShaderParam()
 		case SHADER_PARAM::INT_3:
 		{
 			tParam.pData = new int;
+			*((int*)tParam.pData) = 0;
 		}
 			break;
 		case SHADER_PARAM::FLOAT_0:
@@ -159,6 +160,7 @@ void CMaterial::ConvertShaderParam()
 		case SHADER_PARAM::FLOAT_3:
 		{
 			tParam.pData = new float;
+			*((float*)tParam.pData) = 0;
 		}
 			break;
 		case SHADER_PARAM::VEC4_0:
@@ -167,6 +169,7 @@ void CMaterial::ConvertShaderParam()
 		case SHADER_PARAM::VEC4_3:
 		{
 			tParam.pData = new Vec4;
+			*((Vec4*)tParam.pData) = Vec4(0.f, 0.f, 0.f, 0.f);
 		}
 			break;
 		case SHADER_PARAM::TEXTURE_0:
@@ -175,6 +178,7 @@ void CMaterial::ConvertShaderParam()
 		case SHADER_PARAM::TEXTURE_3:
 		{
 			tParam.pData = new void*;
+			*((int*)tParam.pData) = NULL;
 		}
 			break;
 		default:
@@ -228,7 +232,7 @@ void CMaterial::SetParamData(SHADER_PARAM _eParam, void * _pData)
 		case SHADER_PARAM::TEXTURE_1:
 		case SHADER_PARAM::TEXTURE_2:
 		case SHADER_PARAM::TEXTURE_3:
-		{
+		{			
 			*((CTexture**)m_vecShaderParam[idx].pData) = *((CTexture**)_pData);
 		}
 		break;
@@ -279,7 +283,8 @@ void CMaterial::ApplyData()
 		case SHADER_PARAM::TEXTURE_1:
 		case SHADER_PARAM::TEXTURE_2:
 		case SHADER_PARAM::TEXTURE_3:
-			(*(CTexture**)m_vecShaderParam[i].pData)->ApplyData(m_vecShaderParam[i].iRegister, m_vecShaderParam[i].iTiming);
+			if (NULL != (*(CTexture**)m_vecShaderParam[i].pData))
+				(*(CTexture**)m_vecShaderParam[i].pData)->ApplyData(m_vecShaderParam[i].iRegister, m_vecShaderParam[i].iTiming);
 		break;
 		}
 	}

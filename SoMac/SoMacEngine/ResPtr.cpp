@@ -64,3 +64,13 @@ void CResPtr<T>::operator=(T * _pTarget)
 		m_pTarget->AddRef();
 	}
 }
+
+template<typename T>
+void CResPtr<T>::Delete()
+{
+	if(NULL != m_pTarget)
+	{
+		delete m_pTarget;
+		m_pTarget = NULL;
+	}
+}

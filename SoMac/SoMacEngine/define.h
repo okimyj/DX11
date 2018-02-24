@@ -13,10 +13,6 @@
 										static Type mgr;\
 										return &mgr;\
 									}\
-									void Release()\
-									{\
-										SAFE_DELETE(this);\
-									}\
 								private:\
 									Type();\
 									~Type();

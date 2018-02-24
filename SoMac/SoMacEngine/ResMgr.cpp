@@ -13,11 +13,11 @@ CResMgr::CResMgr()
 
 CResMgr::~CResMgr()
 {
-	Safe_Delete_Map(m_mapMesh);
-	Safe_Delete_Map(m_mapTexture);
-	Safe_Delete_Map(m_mapPrefab);
-	Safe_Delete_Map(m_mapMaterial);
-	Safe_Delete_Vector(m_vecCloneRes);
+	Safe_Delete_Map_ResPtr(m_mapMesh);
+	Safe_Delete_Map_ResPtr(m_mapTexture);
+	Safe_Delete_Map_ResPtr(m_mapPrefab);
+	Safe_Delete_Map_ResPtr(m_mapMaterial);
+	Safe_Delete_Vector_ResPtr(m_vecCloneRes);
 }
 
 void CResMgr::Init()

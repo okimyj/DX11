@@ -43,6 +43,7 @@ public:
 	
 public:
 	CCollider();
+	CCollider(const CCollider& _pOther);
 	virtual ~CCollider();
 };
 

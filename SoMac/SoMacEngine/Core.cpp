@@ -32,7 +32,7 @@ CCore::CCore()
 
 CCore::~CCore()
 {
-	CSceneMgr::GetInst()->Release();
+
 }
 
 int CCore::init(HWND _hWnd, bool _bWindow)

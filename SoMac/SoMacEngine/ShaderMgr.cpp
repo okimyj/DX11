@@ -63,8 +63,8 @@ void CShaderMgr::CreateShader()
 	pShader = new CShader();
 	strPath = CPathMgr::GetResourcePath();
 	strPath += L"Shader\\Standard.fx";
-	pShader->CreateVertexShader(strPath, "VS_Std", 5, 0);
-	pShader->CreatePixelShader(strPath, "PS_Std", 5, 0);
+	pShader->CreateVertexShader(strPath, "VS_Std2D", 5, 0);
+	pShader->CreatePixelShader(strPath, "PS_Std2D", 5, 0);
 	pShader->AddSampler(FindSampler(L"DefaultSampler"), ((UINT)SHADER_TYPE::ST_PIXEL));
 	pShader->SetBlendState(FindBlendState(L"AlphaBlend"));
 
@@ -73,7 +73,7 @@ void CShaderMgr::CreateShader()
 	pShader->AddShaderParam(SHADER_PARAM::INT_1, (UINT)SHADER_TYPE::ST_PIXEL);
 	pShader->AddShaderParam(SHADER_PARAM::VEC4_0, (UINT)SHADER_TYPE::ST_PIXEL);
 
-	CShaderMgr::GetInst()->AddShader(L"StandardShader", pShader);
+	CShaderMgr::GetInst()->AddShader(L"Standard2DShader", pShader);
 
 
 	// == Create Collider Shader ===============================

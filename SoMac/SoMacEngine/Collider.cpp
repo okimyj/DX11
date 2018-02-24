@@ -17,6 +17,19 @@ CCollider::CCollider()
 {
 }
 
+CCollider::CCollider(const CCollider & _pOther)
+	: m_iColID(g_iColID++)
+	, m_pMesh(_pOther.m_pMesh)
+	, m_pMaterial(_pOther.m_pMaterial)
+	, m_iCollision(_pOther.m_iCollision)
+	, m_vObjPos(_pOther.m_vObjPos)
+	, m_vOffsetPos(_pOther.m_vOffsetPos)
+	, m_vOffsetScale(_pOther.m_vOffsetScale)
+	, m_matColliderWorld(_pOther.m_matColliderWorld)
+	, m_bApplyScale(_pOther.m_bApplyScale)
+{
+}
+
 
 CCollider::~CCollider()
 {

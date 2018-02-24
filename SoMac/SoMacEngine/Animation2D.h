@@ -27,8 +27,8 @@ private:
 	float							m_fAccTime;		// 누적시간이 frameInfo 의 fTerm을 넘어서는 순간 다음 프레임으로 넘긴다.
 
 public:
-	virtual bool Load(const wstring& _strFolderPath);
-	static bool LoadMultiAnimation(const wstring& _strFolderPath, const wstring& _strFullPath, map<wstring, CAnimation*> _mapAnim);
+	virtual bool Load(const wstring& _strFolderPath, const wstring& _strFullPath);
+	static bool LoadMultiAnimation(const wstring& _strFolderPath, const wstring& _strFullPath, map<wstring, CAnimation*>& _mapAnim);
 	virtual int FinalUpdate();
 	virtual int ApplyData();
 private:

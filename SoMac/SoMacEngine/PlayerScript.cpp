@@ -26,15 +26,11 @@ CPlayerScript::~CPlayerScript()
 
 void CPlayerScript::Awake()
 {
-//	CTextureAnimator* pTextureAnimator = (CTextureAnimator*)GetGameObject()->AddComponent<CTextureAnimator>(new CTextureAnimator);
-//	CTextureAnim* idleAnim = new CTextureAnim(L"Player", 0, 7, 10, true);
-//	pTextureAnimator->AddAnimation(L"Idle", idleAnim);
+
 }
 
 void CPlayerScript::Start()
 {
-//	CTextureAnimator* animator = (CTextureAnimator*)GetGameObject()->GetComponent<CTextureAnimator>();
-//	animator->Play(L"Idle");
 	Transform()->SetLocalPosition(Vec3(0.f, 0.f, 10.f));
 	Transform()->SetLocalScale(Vec3(316.f/2.f, 300.f/2.f, 1.f));
 	Transform()->SetLocalRotation(Vec3(0.f, 0.f, 0.f));
@@ -57,20 +53,6 @@ bool CPlayerScript::CheckCollide(CGameObject * _pObj)
 	return false;
 }
 
-/*
-void CPlayerScript::Collide(CGameObject* _pObj) 
-{
-	if (_pObj->GetTag() == L"EnemyBullet (Clone)")
-	{
-		
-	}
-	else if (_pObj->GetTag() == L"HeartItem (Clone)")
-	{
-		AddPlanet();
-		m_pTestScene->PushItemObj(_pObj);
-	}
-}
-*/
 int CPlayerScript::Update()
 {
 	
@@ -119,7 +101,14 @@ int CPlayerScript::Update()
 	{
 		AddPlanet();
 	}
-	
+	if (CKeyMgr::GetInst()->GetKeyState(KEY_TYPE::KEY_1, KEY_STATE::UP))
+		Animator()->ChangeAnimation(L"Player_Right_Idle");
+	if (CKeyMgr::GetInst()->GetKeyState(KEY_TYPE::KEY_2, KEY_STATE::UP))
+		Animator()->ChangeAnimation(L"Player_Right_Walk");
+	if (CKeyMgr::GetInst()->GetKeyState(KEY_TYPE::KEY_3, KEY_STATE::UP))
+		Animator()->ChangeAnimation(L"Player_Right_Run");
+	if (CKeyMgr::GetInst()->GetKeyState(KEY_TYPE::KEY_4, KEY_STATE::UP))
+		Animator()->ChangeAnimation(L"Player_Right_Sprint");
 	Transform()->SetLocalPosition(vPos);
 	Transform()->SetLocalRotation(vRot);
 	return RET_SUCCESS;
@@ -195,6 +184,6 @@ CPlayerPlanet * CPlayerScript::CreatePlanet()
 
 	CGameObject* pObj = m_planetPrefab->Instantiate();
 	pObj->SetParent(GameObject());
-	//CSceneMgr::GetInst()->AddGameObject(pObj, LAYER_DEFAULT);
+	
 	return ((CPlayerPlanet*)pObj->GetComponent<CPlayerPlanet>());
 }

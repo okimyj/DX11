@@ -9,6 +9,7 @@
 #include "MeshRenderer.h"
 #include "Camera.h"
 #include "Collider.h"
+#include "Animator.h"
 class CScript :
 	public CComponent
 {

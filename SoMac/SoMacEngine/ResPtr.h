@@ -11,6 +11,8 @@ public:
 	void operator = (const CResPtr& _ptr);
 	void operator = (T* _pTarget);
 
+	void Delete();
+
 public:
 	CResPtr();
 	CResPtr(const CResPtr& _ptr);
