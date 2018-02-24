@@ -1,5 +1,6 @@
 #include "values.fx"
 // Semantic ฐüทร https://msdn.microsoft.com/en-us/library/windows/desktop/bb509647(v=vs.85).aspx .
+
 struct PS_OUTPUT
 {
 	float4 vColor : SV_Target;
@@ -74,6 +75,23 @@ PS_OUTPUT PS_Texture(VS_TEXTURE_OUTPUT _input)
 		vCol.rgb = (vCol.r + vCol.g + vCol.b) / 3.f;
 	}
 	output.vColor = vCol;	
+	return output;
+}
+
+PS_OUTPUT PS_Cartoon_Texture(VS_TEXTURE_OUTPUT _input)
+{
+	PS_OUTPUT output = (PS_OUTPUT)0.f;
+	
+	
+	float4 vCol = g_tex_0.Sample(g_default_sampler, _input.vUV);
+	vCol = ceil(vCol * 10) / 10.0f;
+
+	if (g_int_0)
+	{
+		vCol.rgb = (vCol.r + vCol.g + vCol.b) / 3.f;
+	}
+
+	output.vColor = vCol;
 	return output;
 }
 

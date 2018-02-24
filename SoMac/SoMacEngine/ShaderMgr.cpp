@@ -100,6 +100,8 @@ void CShaderMgr::CreateShader()
 	strPath += L"Shader\\Standard.fx";
 	pShader->CreateVertexShader(strPath, "VS_Std2D", 5, 0);
 	pShader->CreatePixelShader(strPath, "PS_Std2D", 5, 0);
+	
+	
 	pShader->AddSampler(FindSampler(L"DefaultSampler"), ((UINT)SHADER_TYPE::ST_PIXEL));
 	pShader->SetBlendState(FindBlendState(L"AlphaBlend"));
 	pShader->SetDepthStencilState(FindDepthStencilState(L"LESS_STATE"));
@@ -119,6 +121,20 @@ void CShaderMgr::CreateShader()
 	pShader->CreatePixelShader(strPath, "PS_Collider", 5, 0);
 	pShader->AddShaderParam(SHADER_PARAM::INT_0, (UINT)SHADER_TYPE::ST_PIXEL);
 	CShaderMgr::GetInst()->AddShader(L"ColliderShader", pShader);
+
+	// == Create Cartoon Shader ===============================
+	pShader = new CShader();
+	strPath = CPathMgr::GetResourcePath();
+	strPath += L"Shader\\Standard.fx";
+	pShader->CreateVertexShader(strPath, "VS_Texture", 5, 0);
+	pShader->CreatePixelShader(strPath, "PS_Cartoon_Texture", 5, 0);
+	pShader->AddSampler(FindSampler(L"DefaultSampler"), ((UINT)SHADER_TYPE::ST_PIXEL));
+	pShader->SetBlendState(FindBlendState(L"AlphaBlend"));
+
+	pShader->AddShaderParam(SHADER_PARAM::TEXTURE_0, (UINT)SHADER_TYPE::ST_PIXEL);
+	pShader->AddShaderParam(SHADER_PARAM::INT_0, (UINT)SHADER_TYPE::ST_PIXEL);
+
+	CShaderMgr::GetInst()->AddShader(L"CartoonShader", pShader);
 }
 
 

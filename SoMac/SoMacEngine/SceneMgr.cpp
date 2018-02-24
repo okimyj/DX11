@@ -93,6 +93,7 @@ void CSceneMgr::CreateTestScene()
 	// Texture Load.
 	CTexture* pText = (CTexture*)CResMgr::GetInst()->Load<CTexture>(L"Bullet", L"Texture\\bullet.png");
 	pText = (CTexture*)CResMgr::GetInst()->Load<CTexture>(L"Player", L"Texture\\player.png");
+	pText = (CTexture*)CResMgr::GetInst()->Load<CTexture>(L"Cartoon", L"Texture\\cartoon.jpg");
 	
 	CreateMaterial();
 
@@ -122,6 +123,14 @@ void CSceneMgr::CreateMaterial()
 	pMaterial->SetShader(CShaderMgr::GetInst()->FindShader(L"Standard2DShader"));
 	CResMgr::GetInst()->AddMaterial(L"StandardMaterial", pMaterial);
 
+	pMaterial = new CMaterial;
+	pMaterial->SetShader(CShaderMgr::GetInst()->FindShader(L"CartoonShader"));
+	iData = 0;
+	pTex = (CTexture*)CResMgr::GetInst()->Load <CTexture>(L"Cartoon");
+	pMaterial->SetParamData(SHADER_PARAM::INT_0, &iData);
+	pMaterial->SetParamData(SHADER_PARAM::TEXTURE_0, &pTex);
+	CResMgr::GetInst()->AddMaterial(L"CartoonMaterial", pMaterial);
+	
 }
 
 void CSceneMgr::CreateGameObject()
@@ -168,5 +177,12 @@ void CSceneMgr::CreateGameObject()
 	pObj->GetCollider()->SetOffsetScale(Vec3(1.1f, 1.1f, 1.1f));
 	AddGameObject(pObj, L"MonsterLayer");
 
-
+	pObj = CGameObject::CreateGameObject(L"Cartoon");
+	pObj->AddComponent<CCollider>(new CCollider2D);
+	pObj->GetTransform()->SetLocalPosition(Vec3(0, 0, 100.f));
+	pObj->GetTransform()->SetLocalScale(Vec3(720.f, 960.f, 200.f));
+	pObj->GetMeshRender()->SetMesh((CMesh*)CResMgr::GetInst()->Load<CMesh>(L"RectMesh"));
+	pObj->GetMeshRender()->SetMaterial((CMaterial*)CResMgr::GetInst()->Load<CMaterial>(L"CartoonMaterial"));
+	pObj->GetCollider()->SetOffsetScale(Vec3(1.1f, 1.1f, 1.1f));
+	AddGameObject(pObj, L"MonsterLayer");
 }
