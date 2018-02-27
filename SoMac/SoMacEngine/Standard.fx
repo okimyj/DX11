@@ -84,7 +84,7 @@ PS_OUTPUT PS_Cartoon_Texture(VS_TEXTURE_OUTPUT _input)
 	
 	
 	float4 vCol = g_tex_0.Sample(g_default_sampler, _input.vUV);
-	vCol = ceil(vCol * 10) / 10.0f;
+	vCol = ceil(vCol * 8) / 8.0f;
 
 	if (g_int_0)
 	{

@@ -179,8 +179,9 @@ void CSceneMgr::CreateGameObject()
 
 	pObj = CGameObject::CreateGameObject(L"Cartoon");
 	pObj->AddComponent<CCollider>(new CCollider2D);
+	
 	pObj->GetTransform()->SetLocalPosition(Vec3(0, 0, 100.f));
-	pObj->GetTransform()->SetLocalScale(Vec3(720.f, 960.f, 200.f));
+	pObj->GetTransform()->SetLocalScale(Vec3(WINSIZE_X, WINSIZE_Y, 1.f));
 	pObj->GetMeshRender()->SetMesh((CMesh*)CResMgr::GetInst()->Load<CMesh>(L"RectMesh"));
 	pObj->GetMeshRender()->SetMaterial((CMaterial*)CResMgr::GetInst()->Load<CMaterial>(L"CartoonMaterial"));
 	pObj->GetCollider()->SetOffsetScale(Vec3(1.1f, 1.1f, 1.1f));
