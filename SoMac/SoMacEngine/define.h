@@ -35,6 +35,8 @@
 #define LAYER_TRANSPARENT L"Transparent"
 #define LAYER_CAMERA L"Camera"
 
+#define TAG_MAIN_CAMERA L"MainCamera"
+
 // Script는 여러개가 붙을 수 있어서 추가 안함. 
 enum class COMPONENT_TYPE
 {

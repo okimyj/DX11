@@ -55,6 +55,12 @@ CMainFrame::~CMainFrame()
 {
 }
 
+void CMainFrame::Update()
+{
+	CComponentView* pComView = (CComponentView*)GetComponentView();
+	pComView->Update();
+}
+
 int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 {
 	if (CFrameWnd::OnCreate(lpCreateStruct) == -1)
@@ -65,7 +71,7 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 
 	// FrameWnd 3열 분할
 	m_MainSplitter.CreateStatic(this, 1, 3);
-	m_MainSplitter.SetColumnInfo(0, GAME_VIEW_X, GAME_VIEW_X);
+	m_MainSplitter.SetColumnInfo(0, GAME_VIEW_X-4, GAME_VIEW_X-4);
 
 	// Frame Wnd 0, 0 요소를 3행으로 분할
 	m_SubSplitter.CreateStatic(&m_MainSplitter, 3, 1, WS_CHILD | WS_VISIBLE, m_MainSplitter.IdFromRowCol(0, 0));

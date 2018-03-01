@@ -176,7 +176,7 @@ void CSceneMgr::CreateGameObject()
 	pObj->GetMeshRender()->SetMaterial((CMaterial*)CResMgr::GetInst()->Load<CMaterial>(L"Default"));
 	pObj->GetCollider()->SetOffsetScale(Vec3(1.1f, 1.1f, 1.1f));
 	AddGameObject(pObj, L"MonsterLayer");
-
+	/*
 	pObj = CGameObject::CreateGameObject(L"Cartoon");
 	pObj->AddComponent<CCollider>(new CCollider2D);
 	
@@ -186,4 +186,5 @@ void CSceneMgr::CreateGameObject()
 	pObj->GetMeshRender()->SetMaterial((CMaterial*)CResMgr::GetInst()->Load<CMaterial>(L"CartoonMaterial"));
 	pObj->GetCollider()->SetOffsetScale(Vec3(1.1f, 1.1f, 1.1f));
 	AddGameObject(pObj, L"MonsterLayer");
+	*/
 }

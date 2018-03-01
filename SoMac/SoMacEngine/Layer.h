@@ -27,7 +27,8 @@ private:
 	void SetLayerIndex(UINT _iIdx) { m_iIdx = _iIdx; }
 	void SetLayerName(const wstring& _strName) { m_strLayerName = _strName; }
 	list<CGameObject*>& GetObjList() { return m_listObj; }
-	
+	CGameObject* FindObject(Vec2 _vWorldPos);
+	CGameObject* FindObjectByTag(const wstring& _strTag);
 public:
 	UINT GetLayerIndex() { return m_iIdx; }
 	const wstring& GetLayerName() { return m_strLayerName; }

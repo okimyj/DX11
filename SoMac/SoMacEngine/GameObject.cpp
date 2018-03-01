@@ -204,6 +204,19 @@ void CGameObject::SetParent(CGameObject * _pParent, bool _bApplyLayer)
 	
 }
 
+bool CGameObject::IsMouseOn(Vec2 _vWorldPos)
+{
+	Vec3 vWorldPos = GetTransform()->GetWorldPosition();
+	Vec3 vWorldScale = GetTransform()->GetWorldScale();
+	if (vWorldPos.x - vWorldScale.x / 2.f <= _vWorldPos.x &&  _vWorldPos.x <= vWorldPos.x + vWorldScale.x / 2.f
+		&& vWorldPos.y - vWorldScale.y / 2.f <= _vWorldPos.y &&  _vWorldPos.y <= vWorldPos.y + vWorldScale.y / 2.f)
+	{
+		return true;
+	}
+
+	return false;
+}
+
 void CGameObject::ClearParent()
 {
 	m_pParent->RemoveChild(this);

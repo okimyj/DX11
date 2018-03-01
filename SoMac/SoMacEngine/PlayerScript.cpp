@@ -93,14 +93,7 @@ int CPlayerScript::Update()
 	{
 		Shoot();
 	}
-	if (CKeyMgr::GetInst()->GetKeyState(KEY_TYPE::KEY_W, KEY_STATE::DOWN))
-	{
-		MeshRenderer()->SetRSType(RASTERIZE_TYPE::WIRE);
-	}
-	if (CKeyMgr::GetInst()->GetKeyState(KEY_TYPE::KEY_A, KEY_STATE::DOWN))
-	{
-		AddPlanet();
-	}
+
 	if (CKeyMgr::GetInst()->GetKeyState(KEY_TYPE::KEY_1, KEY_STATE::UP))
 		Animator()->ChangeAnimation(L"Player_Right_Idle");
 	if (CKeyMgr::GetInst()->GetKeyState(KEY_TYPE::KEY_2, KEY_STATE::UP))

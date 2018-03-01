@@ -46,6 +46,7 @@ public:
 public :
 	template<typename T>
 	CComponent* GetComponent();
+	CComponent* GetComponent(COMPONENT_TYPE _eType) { return m_arrComp[(UINT)_eType]; }
 	template<typename T>
 	CComponent* AddComponent(CComponent* _pComp) { return AddComponent(_pComp, ID<T>()); }
 	
@@ -69,7 +70,10 @@ public:
 	list<CGameObject*>& GetChildList() { return m_listChild; }
 	list<CScript*>& GetScriptList() { return m_listScript; }
 
+	bool IsMouseOn(Vec2 _vWorldPos);
+
 	bool HasParent() { return NULL != m_pParent; }
+	
 private:
 	void ClearParent();
 	void AddChild(CGameObject* _pChild);

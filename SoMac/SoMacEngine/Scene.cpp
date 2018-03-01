@@ -1,9 +1,11 @@
 #include "Scene.h"
 #include "Layer.h"
 #include "GameObject.h"
+#include "Transform.h"
 #include "Camera.h"
 
 CScene::CScene()
+	:m_pMainCamera(NULL)
 {
 	// map 에 미리 32개의 layer index를 넣어놓는다. 
 	// 우린 이제 32개까지만 layer를 추가 할 수 있음. 
@@ -99,6 +101,7 @@ void CScene::Render()
 	for (; iter != listObj.end(); ++iter)
 	{
 		CCamera* pCamComp = (*iter)->GetCamera();
+		pCamComp->ApplyData();
 		for (int i = 0; i < MAX_LAYER; ++i)
 		{
 			if (NULL != m_vecLayer[i] && pCamComp->IsRenderTargetLayer(m_vecLayer[i]))
@@ -143,6 +146,7 @@ CLayer * CScene::FindLayer(const wstring & _strLayerName)
 	return iter->second;
 }
 
+
 UINT CScene::GetLayerIndex()
 {
 	// 만약 정해진 layer 개수를 다 사용 했으면 assert. 
@@ -151,5 +155,55 @@ UINT CScene::GetLayerIndex()
 	UINT iIndex = *(m_setLayerIdx.begin());
 	m_setLayerIdx.erase(m_setLayerIdx.begin());
 	return iIndex;
+}
+
+
+CGameObject * CScene::FindObject(Vec2 _vWindowPos, Vec2 _vResolution, UINT _iMask)
+{
+	Vec2 vWorldPos = ScreenToWorldPosition(_vWindowPos, _vResolution);
+	for (UINT i = 0; i < m_vecLayer.size(); ++i)
+	{
+		if (NULL == m_vecLayer[i])
+			continue;
+
+		int iIdx = m_vecLayer[i]->GetLayerIndex();
+		if (_iMask==0 || _iMask & (1 << iIdx))
+		{
+			CGameObject* pTarget = m_vecLayer[i]->FindObject(vWorldPos);
+			if (NULL != pTarget)
+				return pTarget;
+		}
+	}
+	return NULL;
+}
+
+Vec2 CScene::ScreenToWorldPosition(Vec2 _vWindowPos, Vec2 _vResolution)
+{
+	Vec2 vRatio;
+	vRatio.x = WINSIZE_X / _vResolution.x;
+	vRatio.y = WINSIZE_Y / _vResolution.y;
+
+	Vec2 vWindowPos = Vec2(_vWindowPos.x * vRatio.x, _vWindowPos.y * vRatio.y);
+	Vec2 vWorldPos;
+	vWorldPos.x = vWindowPos.x - (WINSIZE_X / 2.f);
+	vWorldPos.y = (WINSIZE_Y / 2.f) - vWindowPos.y;
+	CGameObject* pMainCamera = GetMainCamera();
+	float fScale = pMainCamera->GetCamera()->GetScale();
+	Vec3 vCamWorldPos = pMainCamera->GetTransform()->GetWorldPosition();
+	
+	vWorldPos = Vec2(vWorldPos.x * fScale + vCamWorldPos.x
+			, vWorldPos.y * fScale + vCamWorldPos.y);
+
+	return vWorldPos;
+}
+
+CGameObject * CScene::GetMainCamera()
+{
+	if (NULL == m_pMainCamera)
+	{
+		CLayer* pCamLayer = FindLayer(LAYER_CAMERA);
+		m_pMainCamera = pCamLayer->FindObjectByTag(TAG_MAIN_CAMERA);
+	}
+	return m_pMainCamera;
 }
 

@@ -89,6 +89,32 @@ void CLayer::Render()
 	}
 }
 
+CGameObject * CLayer::FindObject(Vec2 _vWorldPos)
+{
+	list<CGameObject*>::iterator iter = m_listObj.begin();
+
+	for (; iter != m_listObj.end(); ++iter)
+	{
+		if ((*iter)->IsMouseOn(_vWorldPos))
+		{
+			return *iter;
+		}
+	}
+
+	return NULL;
+}
+
+CGameObject * CLayer::FindObjectByTag(const wstring & _strTag)
+{
+	list<CGameObject*>::iterator iter = m_listObj.begin();
+	for (; iter != m_listObj.end(); ++iter)
+	{
+		if ((*iter)->GetTag() == _strTag)
+			return *iter;
+	}
+	return NULL;
+}
+
 void CLayer::AddGameObject(CGameObject * _pObj, bool _bApplyChild)
 {
 	// _pObj가 최상위 부모라면(부모가 없다면) parentList 에 넣어준다.

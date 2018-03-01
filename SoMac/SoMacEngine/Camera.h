@@ -24,8 +24,7 @@ public:
 	virtual CLONE(CCamera);
 	virtual int Update();
 	virtual int LateUpdate();
-	virtual int FinalUpdate();
-
+	void ApplyData();
 	void ToggleRenderTargetLayer(const wstring& _strLayerName);
 	void AddRenderTargetLayer(const wstring& _strLayerName);
 	void RemoveRenderTargetLayer(const wstring& _strLayerName);
@@ -34,6 +33,7 @@ public:
 	bool IsRenderTargetLayer(CLayer* _pLayer);
 
 	void SetScale(float _fScale) { m_fScale = _fScale; }
+	float GetScale() { return m_fScale; }
 	const Matrix& GetProjMatrix() { return m_matProj; }
 	const Matrix& GetViewMatrix() { return m_matView; }
 public:

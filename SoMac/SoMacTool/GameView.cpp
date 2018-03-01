@@ -4,8 +4,11 @@
 #include "stdafx.h"
 #include "SoMacTool.h"
 #include "GameView.h"
-
-
+#include "Scene.h"
+#include "SceneMgr.h"
+#include "GameObject.h"
+#include "MainFrm.h"
+#include "ComponentView.h"
 // CGameView
 
 IMPLEMENT_DYNCREATE(CGameView, CFormView)
@@ -26,6 +29,7 @@ void CGameView::DoDataExchange(CDataExchange* pDX)
 }
 
 BEGIN_MESSAGE_MAP(CGameView, CFormView)
+	ON_WM_LBUTTONUP()
 END_MESSAGE_MAP()
 
 
@@ -47,3 +51,19 @@ void CGameView::Dump(CDumpContext& dc) const
 
 
 // CGameView message handlers
+
+
+void CGameView::OnLButtonUp(UINT nFlags, CPoint point)
+{
+	RECT rt = {};
+	GetWindowRect(&rt);
+	CScene* pCurScene = CSceneMgr::GetInst()->GetCurScene();
+	CGameObject* pObj = pCurScene->FindObject(Vec2((float)point.x, (float)point.y), Vec2((float)rt.right - rt.left, (float)rt.bottom - rt.top));
+	if (NULL != pObj)
+	{
+		CMainFrame* pMainFrame = (CMainFrame*)AfxGetApp()->m_pMainWnd;
+		CComponentView* pCompView = (CComponentView*)pMainFrame->GetComponentView();
+		pCompView->SetGameObject(pObj);
+	}
+	CFormView::OnLButtonUp(nFlags, point);
+}

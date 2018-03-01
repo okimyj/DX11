@@ -43,6 +43,20 @@ struct Vec3 : XMFLOAT3{
 		XMStoreFloat3(this, _xmvec);
 		return (*this);
 	}
+	float& operator[](int _iIdx)
+	{
+		switch (_iIdx)
+		{
+		case 0:
+			return x;
+		case 1:
+			return y;
+		case 2:
+			return z;
+		default:
+			assert(NULL);
+		}
+	}
 	//== operator + ====================================================//
 	const Vec3 operator + (const Vec3& _other)
 	{

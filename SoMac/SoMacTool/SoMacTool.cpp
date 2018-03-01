@@ -175,6 +175,9 @@ BOOL CSoMacToolApp::OnIdle(LONG lCount)
 {
 	// TODO: Add your specialized code here and/or call the base class
 	CCore::GetInst()->run();
+
+	((CMainFrame*)AfxGetApp()->m_pMainWnd)->Update();
+
 	// lCount  시간 이후에 다시 호출. 그러니까 바로 호출 되도록 0 넘겨줌.
 	return CWinApp::OnIdle(0);
 }
