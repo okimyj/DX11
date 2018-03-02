@@ -21,7 +21,7 @@ protected:
 	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
 	DECLARE_MESSAGE_MAP()
 	virtual void PostNcDestroy();
-
+	virtual void OnOK();
 public:
 	CEdit m_arrEdit[9];
 	UINT m_iFocusedEditID;

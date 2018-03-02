@@ -67,7 +67,30 @@ void CTransformDlg::OnEnKillfocus(UINT _id)
 
 void CTransformDlg::OnEnChange(UINT _id)
 {
-
+	if (m_iFocusedEditID != _id)
+		return;
+	int index = _id - IDC_POS_X;
+	CString str;
+	m_arrEdit[index].GetWindowTextW(str);
+	float f = _wtof(str.GetBuffer());
+	if (_id <= IDC_POS_Z)
+	{
+		Vec3 vPos = m_pTargetObj->GetTransform()->GetLocalPosition();
+		vPos[index % 3] = f;
+		m_pTargetObj->GetTransform()->SetLocalPosition(vPos);
+	}
+	else if (_id <= IDC_ROT_Z)
+	{
+		Vec3 vRot = m_pTargetObj->GetTransform()->GetLocalRotation();
+		vRot[index % 3] = f;
+		m_pTargetObj->GetTransform()->SetLocalRotation(vRot);
+	}
+	else if (_id <= IDC_SCALE_Z)
+	{
+		Vec3 vScale = m_pTargetObj->GetTransform()->GetLocalScale();
+		vScale[index % 3] = f;
+		m_pTargetObj->GetTransform()->SetLocalScale(vScale);
+	}
 }
 
 
@@ -86,4 +109,13 @@ void CTransformDlg::PostNcDestroy()
 	// TODO: Add your specialized code here and/or call the base class
 	delete this;
 	CComponentDlg::PostNcDestroy();
+}
+
+void CTransformDlg::OnOK()
+{
+	if (m_iFocusedEditID != -1)
+	{
+		m_arrEdit[m_iFocusedEditID - IDC_POS_X].SendMessage(WM_KILLFOCUS, NULL);
+		m_iFocusedEditID = -1;
+	}
 }

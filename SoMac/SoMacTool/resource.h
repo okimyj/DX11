@@ -12,14 +12,12 @@
 #define IDD_BUTTONVIEW                  313
 #define IDD_DEBUGVIEW                   314
 #define IDD_TRANSFORMDLG                315
-#define IDD_RENDERERDLG                 316
 #define IDD_COLLIDERDLG                 317
 #define IDD_MESHRENDERERDLG             318
 #define IDC_BUTTON1                     1000
 #define IDC_BUTTON2                     1001
-#define IDC_BUTTON3                     1002
-
 #define IDC_POS_X                       1001
+#define IDC_BUTTON3                     1002
 #define IDC_POS_Y                       1002
 #define IDC_POS_Z                       1003
 #define IDC_ROT_X                       1004
@@ -28,7 +26,6 @@
 #define IDC_SCALE_X                     1007
 #define IDC_SCALE_Y                     1008
 #define IDC_SCALE_Z                     1009
-
 
 // Next default values for new objects
 // 

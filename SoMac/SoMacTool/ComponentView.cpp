@@ -92,7 +92,7 @@ int CComponentView::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	m_arrDlg[(UINT)COMPONENT_TYPE::TRANSFORM]->UpdateWindow();
 
 	m_arrDlg[(UINT)COMPONENT_TYPE::MESHRENDER] = new CMeshRendererDlg;
-	m_arrDlg[(UINT)COMPONENT_TYPE::MESHRENDER]->Create(IDD_RENDERERDLG, this);
+	m_arrDlg[(UINT)COMPONENT_TYPE::MESHRENDER]->Create(IDD_MESHRENDERERDLG, this);
 	m_arrDlg[(UINT)COMPONENT_TYPE::MESHRENDER]->ShowWindow(false);
 	m_arrDlg[(UINT)COMPONENT_TYPE::MESHRENDER]->UpdateWindow();
 
