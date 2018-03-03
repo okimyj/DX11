@@ -39,5 +39,4 @@ public:
 	afx_msg void OnNMDblclkList(NMHDR *pNMHDR, LRESULT *pResult);
 	virtual void OnOK();
 	virtual void OnCancel();
-	
 };

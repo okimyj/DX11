@@ -20,6 +20,7 @@ CListDlg::CListDlg(CWnd* pParent /*=NULL*/)
 
 CListDlg::~CListDlg()
 {
+
 }
 
 void CListDlg::DoDataExchange(CDataExchange* pDX)
@@ -96,6 +97,7 @@ void CListDlg::OnOK()
 	if (-1 == iIdx)
 	{
 		// 아무것도 선택 되지 않음.
+		EndDialog(NULL);
 	}
 	else
 	{

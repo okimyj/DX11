@@ -121,7 +121,7 @@ void CMeshRendererDlg::OnSelectedRSTypeCombo()
 
 void CMeshRendererDlg::OnClickedMeshBtn()
 {
-	CListDlg listDlg = new CListDlg;
+	CListDlg listDlg;
 	listDlg.SetInitType(RESOURCE_TYPE::MESH);
 	// 내부에서 선택된 Mesh의 주소값을 반환한다.
 	CMesh* pMesh =  (CMesh*)listDlg.DoModal();
@@ -134,10 +134,8 @@ void CMeshRendererDlg::OnClickedMeshBtn()
 
 void CMeshRendererDlg::OnClickedMtrlBtn()
 {
-	CListDlg listDlg = new CListDlg;
-	listDlg.SetInitType(RESOURCE_TYPE::MATERIAL);
-	listDlg.DoModal();
-	
+	CListDlg listDlg;
+	listDlg.SetInitType(RESOURCE_TYPE::MATERIAL);	
 	CMaterial* pMaterial = (CMaterial*)listDlg.DoModal();
 	if (NULL == pMaterial)
 		return;
