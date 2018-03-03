@@ -17,6 +17,12 @@ public:
 	void ChangeAnimation(const wstring& _strKey, UINT _iStartFrameIdx = 0);
 	void ApplyData();
 	static void Disable();
+
+	map<wstring, CAnimation*>& GetAnimationMap() { return m_mapAnim; }
+	CAnimation* GetCurAnim() { return m_pCurAnim; }
+	bool IsRepeat() { return m_bRepeat; }
+	void SetRepeat(bool _bRepeat) { m_bRepeat = _bRepeat; }
+
 private:
 	CAnimation* FindAnimation(const wstring& _strKey);
 public:

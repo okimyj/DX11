@@ -124,7 +124,7 @@ void CAnimator::Disable()
 
 CAnimation * CAnimator::FindAnimation(const wstring & _strKey)
 {
-	map<wstring, CAnimation*>::iterator iter = m_mapAnim.begin();
+	map<wstring, CAnimation*>::iterator iter = m_mapAnim.find(_strKey);
 	if (iter == m_mapAnim.end())
 		return NULL;
 

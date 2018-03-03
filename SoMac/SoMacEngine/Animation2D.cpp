@@ -3,7 +3,7 @@
 #include "ResMgr.h"
 #include "TimeMgr.h"
 #include "Device.h"
-
+#include <atlstr.h>  
 
 CAnimation2D::CAnimation2D()
 	: m_iCurFrame(0)
@@ -127,19 +127,29 @@ bool CAnimation2D::LoadMultiAnimation(const wstring & _strFolderPath, const wstr
 		// result == 0 : 두 문자열이 같다. / result < 0 : String2가 더 크다. / result > 0 : String1가 더 크다. 
 		if (wcscmp(szBuffer, L"[ANIMATION]") == 0)
 		{
+			// 여러개의 텍스쳐를 사용하는지 아닌지.
+			fwscanf_s(pFile, L"%d", &tInfo.bMultipleTexture);
 			// Texture Name
 			fwscanf_s(pFile, L"%s", szBuffer, 255);
 			tInfo.strTexName = szBuffer;
 			// Animation Name
 			fwscanf_s(pFile, L"%s", szBuffer, 255);
 			tInfo.strAnimName = szBuffer;
-			// left top
-			fwscanf_s(pFile, L"%f%f", &tInfo.vLeftTop.x, &tInfo.vLeftTop.y);
-			// size
-			fwscanf_s(pFile, L"%f%f", &tInfo.vSize.x, &tInfo.vSize.y);
+			if (!tInfo.bMultipleTexture)
+			{
+				// left top
+				fwscanf_s(pFile, L"%f%f", &tInfo.vLeftTop.x, &tInfo.vLeftTop.y);
+				// size
+				fwscanf_s(pFile, L"%f%f", &tInfo.vSize.x, &tInfo.vSize.y);	
+			}
+			else
+			{
+				// startIndex
+				fwscanf_s(pFile, L"%d", &tInfo.iStartIdx);
+			}
+			
 			// frameCount
 			fwscanf_s(pFile, L"%d", &tInfo.iFrameCount);
-
 			vecInfo.push_back(tInfo);
 		}
 	}
@@ -149,25 +159,57 @@ bool CAnimation2D::LoadMultiAnimation(const wstring & _strFolderPath, const wstr
 	// 읽어온 정보들로 Animation 생성.
 	for (UINT i = 0; i < vecInfo.size(); ++i)
 	{
-		wstring strTexturePath = _strFolderPath + L"\\" + vecInfo[i].strTexName;
-		CTexture* pTexture = (CTexture*)CResMgr::GetInst()->Load<CTexture>(vecInfo[i].strTexName, strTexturePath);
-		CAnimation2D* pAnim = new CAnimation2D;
-		pAnim->SetKey(vecInfo[i].strAnimName);
-		for (UINT j = 0; j < vecInfo[i].iFrameCount; ++j)
-		{
-			tFrameInfo tFrame = {};
-			tFrame.pTexture = pTexture;
-			tFrame.fWidth = vecInfo[i].vSize.x / pTexture->GetWidth();
-			tFrame.fHeight = vecInfo[i].vSize.y / pTexture->GetHeight();
-			// 무조건 1열로 오른쪽으로 진행된다고 가정.
-			tFrame.vLeftTop.x = vecInfo[i].vLeftTop.x / pTexture->GetWidth() + (j * tFrame.fWidth);
-			tFrame.vLeftTop.y = vecInfo[i].vLeftTop.y / pTexture->GetHeight();
-			tFrame.fTerm = 0.05f;
-			pAnim->AddFrame(tFrame);
-		}
+		CAnimation2D* pAnim = MakeOneAnim(vecInfo[i], _strFolderPath);
 		_mapAnim.insert(make_pair(pAnim->GetKey(), pAnim));
 	}
 	return RET_SUCCESS;
+}
+
+CAnimation2D * CAnimation2D::MakeOneAnim(tDescInfo & _tDesc, const wstring& _strFolderPath)
+{
+	CAnimation2D* pAnim = new CAnimation2D;
+	pAnim->SetKey(_tDesc.strAnimName);
+	if (_tDesc.bMultipleTexture)
+	{
+		CString str;
+		wstring strTextureName;
+		wstring strTexturePath;
+		CTexture* pTexture;
+		for (UINT i = 0; i < _tDesc.iFrameCount; ++i)
+		{
+			
+			str.Format(_tDesc.strTexName.c_str(), i);
+			strTextureName = str.GetBuffer();
+			strTexturePath = _strFolderPath + L"\\" + strTextureName;
+			pTexture = (CTexture*)CResMgr::GetInst()->Load<CTexture>(strTextureName, strTexturePath);
+			tFrameInfo tFrame = {};
+			tFrame.pTexture = pTexture;
+			tFrame.fWidth = 1.f;
+			tFrame.fHeight = 1.f;
+			tFrame.vLeftTop = { 0.f, 0.f };
+			tFrame.fTerm = 0.05f;
+			pAnim->AddFrame(tFrame);
+		}
+	}
+	else
+	{
+		wstring strTexturePath = _strFolderPath + L"\\" + _tDesc.strTexName;
+		CTexture* pTexture = (CTexture*)CResMgr::GetInst()->Load<CTexture>(_tDesc.strTexName, strTexturePath);
+		for (UINT i = 0; i < _tDesc.iFrameCount; ++i)
+		{
+			tFrameInfo tFrame = {};
+			tFrame.pTexture = pTexture;
+			tFrame.fWidth = _tDesc.vSize.x / pTexture->GetWidth();
+			tFrame.fHeight = _tDesc.vSize.y / pTexture->GetHeight();
+			// 무조건 1열로 오른쪽으로 진행된다고 가정.
+			tFrame.vLeftTop.x = _tDesc.vLeftTop.x / pTexture->GetWidth() + (i * tFrame.fWidth);
+			tFrame.vLeftTop.y = _tDesc.vLeftTop.y / pTexture->GetHeight();
+			tFrame.fTerm = 0.05f;
+			pAnim->AddFrame(tFrame);
+		}
+	}
+	
+	return pAnim;
 }
 
 

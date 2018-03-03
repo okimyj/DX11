@@ -102,9 +102,6 @@
     <ClInclude Include="GameView.h">
       <Filter>04. View\01. GameView</Filter>
     </ClInclude>
-    <ClInclude Include="AnimatorDlg.h">
-      <Filter>04. View\03. ComponentView\ComponentDlg\04. AnimatorDlg</Filter>
-    </ClInclude>
     <ClInclude Include="CameraDlg.h">
       <Filter>04. View\03. ComponentView\ComponentDlg\05. CameraDlg</Filter>
     </ClInclude>
@@ -122,6 +119,9 @@
     </ClInclude>
     <ClInclude Include="ListDlg.h">
       <Filter>05. Dialog\01. ListDlg</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimatorDlg.h">
+      <Filter>04. View\03. ComponentView\ComponentDlg\04. AnimatorDlg</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -152,9 +152,6 @@
     <ClCompile Include="GameView.cpp">
       <Filter>04. View\01. GameView</Filter>
     </ClCompile>
-    <ClCompile Include="AnimatorDlg.cpp">
-      <Filter>04. View\03. ComponentView\ComponentDlg\04. AnimatorDlg</Filter>
-    </ClCompile>
     <ClCompile Include="CameraDlg.cpp">
       <Filter>04. View\03. ComponentView\ComponentDlg\05. CameraDlg</Filter>
     </ClCompile>
@@ -172,6 +169,9 @@
     </ClCompile>
     <ClCompile Include="ListDlg.cpp">
       <Filter>05. Dialog\01. ListDlg</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimatorDlg.cpp">
+      <Filter>04. View\03. ComponentView\ComponentDlg\04. AnimatorDlg</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

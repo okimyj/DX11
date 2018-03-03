@@ -17,6 +17,8 @@ struct tDescInfo
 	Vec2			vLeftTop;
 	Vec2			vSize;
 	UINT			iFrameCount;
+	bool			bMultipleTexture;
+	UINT			iStartIdx;
 };
 class CAnimation2D :
 	public CAnimation
@@ -29,9 +31,11 @@ private:
 public:
 	virtual bool Load(const wstring& _strFolderPath, const wstring& _strFullPath);
 	static bool LoadMultiAnimation(const wstring& _strFolderPath, const wstring& _strFullPath, map<wstring, CAnimation*>& _mapAnim);
+	
 	virtual int FinalUpdate();
 	virtual int ApplyData();
 private:
+	static CAnimation2D* MakeOneAnim(tDescInfo& _tDesc, const wstring& _strFolderPath);
 	void AddFrame(const tFrameInfo& _tFrame) { m_vecFrame.push_back(_tFrame); }
 	virtual CLONE(CAnimation2D);
 public:

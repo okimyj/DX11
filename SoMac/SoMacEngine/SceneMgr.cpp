@@ -162,8 +162,9 @@ void CSceneMgr::CreateGameObject()
 	pObj->GetCollider()->SetOffsetScale(Vec3(1.1f, 1.1f, 1.1f));
 //	pObj->GetAnimator()->LoadAnimation2D(L"Explosion_00", L"Texture\\Animation\\Explosion");
 //	pObj->GetAnimator()->LoadAnimation2D(L"Explosion_01", L"Texture\\Animation\\Explosion_01");
-//	pObj->GetAnimator()->LoadAnimation2D(L"Explosion", L"Texture\\Animation\\Rabbit");
+	pObj->GetAnimator()->LoadAnimation2D(L"Explosion", L"Texture\\Animation\\Explosion");
 	pObj->GetAnimator()->LoadAnimation2D(L"Player", L"Texture\\Animation\\Player");
+
 	pObj->GetAnimator()->PlayAnimation(L"Player_Right_Idle");
 	AddGameObject(pObj, L"PlayerLayer");
 

@@ -8,6 +8,7 @@
 #include "TransformDlg.h"
 #include "MeshRendererDlg.h"
 #include "ColliderDlg.h"
+#include "AnimatorDlg.h"
 // CComponentView
 
 IMPLEMENT_DYNCREATE(CComponentView, CFormView)
@@ -103,6 +104,11 @@ int CComponentView::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	m_arrDlg[(UINT)COMPONENT_TYPE::COLLIDER]->Create(IDD_COLLIDERDLG, this);
 	m_arrDlg[(UINT)COMPONENT_TYPE::COLLIDER]->ShowWindow(false);
 	m_arrDlg[(UINT)COMPONENT_TYPE::COLLIDER]->UpdateWindow();
+
+	m_arrDlg[(UINT)COMPONENT_TYPE::ANIMATOR] = new CAnimatorDlg;
+	m_arrDlg[(UINT)COMPONENT_TYPE::ANIMATOR]->Create(IDD_ANIMATORDLG, this);
+	m_arrDlg[(UINT)COMPONENT_TYPE::ANIMATOR]->ShowWindow(false);
+	m_arrDlg[(UINT)COMPONENT_TYPE::ANIMATOR]->UpdateWindow();
 
 	return 0;
 }
