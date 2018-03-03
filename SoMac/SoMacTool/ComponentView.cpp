@@ -7,6 +7,7 @@
 #include "GameObject.h"
 #include "TransformDlg.h"
 #include "MeshRendererDlg.h"
+#include "ColliderDlg.h"
 // CComponentView
 
 IMPLEMENT_DYNCREATE(CComponentView, CFormView)
@@ -97,6 +98,11 @@ int CComponentView::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	m_arrDlg[(UINT)COMPONENT_TYPE::MESHRENDER]->Create(IDD_MESHRENDERERDLG, this);
 	m_arrDlg[(UINT)COMPONENT_TYPE::MESHRENDER]->ShowWindow(false);
 	m_arrDlg[(UINT)COMPONENT_TYPE::MESHRENDER]->UpdateWindow();
+
+	m_arrDlg[(UINT)COMPONENT_TYPE::COLLIDER] = new CColliderDlg;
+	m_arrDlg[(UINT)COMPONENT_TYPE::COLLIDER]->Create(IDD_COLLIDERDLG, this);
+	m_arrDlg[(UINT)COMPONENT_TYPE::COLLIDER]->ShowWindow(false);
+	m_arrDlg[(UINT)COMPONENT_TYPE::COLLIDER]->UpdateWindow();
 
 	return 0;
 }

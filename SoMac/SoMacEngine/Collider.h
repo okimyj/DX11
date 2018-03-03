@@ -30,6 +30,8 @@ public:
 	const Vec3& GetOffsetScale() { return m_vOffsetScale; }
 	Vec3 GetWorldPos() { return m_vObjPos + m_vOffsetPos; }
 	const Matrix& GetWorldMatrix() { return m_matColliderWorld; }
+	void SetApplyScale(bool _bApplyScale) { m_bApplyScale = _bApplyScale; }
+	bool GetApplyScale() { return m_bApplyScale; }
 public:
 	virtual void OnCollisionEnter(CCollider* _pOther);
 	virtual void OnCollision(CCollider* _pOther);
