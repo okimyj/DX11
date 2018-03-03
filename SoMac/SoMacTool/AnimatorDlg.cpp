@@ -73,7 +73,9 @@ void CAnimatorDlg::Update(CGameObject* _pObj)
 	m_ckRepeat.SetCheck(pAnimator->IsRepeat());
 	if (!m_bFocusAnimComb)
 	{
-		m_cbAnim.SelectString(-1, pAnimator->GetCurAnim()->GetKey().c_str());
+		if (NULL != pAnimator->GetCurAnim())
+			m_cbAnim.SelectString(-1, pAnimator->GetCurAnim()->GetKey().c_str());
+
 	}
 	
 }

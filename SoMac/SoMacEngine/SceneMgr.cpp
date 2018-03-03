@@ -163,6 +163,7 @@ void CSceneMgr::CreateGameObject()
 //	pObj->GetAnimator()->LoadAnimation2D(L"Explosion_00", L"Texture\\Animation\\Explosion");
 //	pObj->GetAnimator()->LoadAnimation2D(L"Explosion_01", L"Texture\\Animation\\Explosion_01");
 	pObj->GetAnimator()->LoadAnimation2D(L"Explosion", L"Texture\\Animation\\Explosion");
+	pObj->GetAnimator()->LoadAnimation2D(L"Rabbit", L"Texture\\Animation\\Rabbit\\");
 	pObj->GetAnimator()->LoadAnimation2D(L"Player", L"Texture\\Animation\\Player");
 
 	pObj->GetAnimator()->PlayAnimation(L"Player_Right_Idle");
