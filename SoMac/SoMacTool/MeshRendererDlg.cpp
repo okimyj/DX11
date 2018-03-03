@@ -129,6 +129,7 @@ void CMeshRendererDlg::OnClickedMeshBtn()
 		return;
 
 	m_pTargetObj->GetMeshRender()->SetMesh(pMesh);
+	SetFocusGameView();
 }
 
 
@@ -140,4 +141,5 @@ void CMeshRendererDlg::OnClickedMtrlBtn()
 	if (NULL == pMaterial)
 		return;
 	m_pTargetObj->GetMeshRender()->SetMaterial(pMaterial);
+	SetFocusGameView();
 }

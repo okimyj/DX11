@@ -33,7 +33,6 @@ public:
 
 	bool						m_bFocusAnimComb;
 	CComboBox			m_cbAnim;
-	vector<wstring>	m_vecAnimName;
 	CButton m_ckRepeat;
 	
 

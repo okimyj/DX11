@@ -58,11 +58,9 @@ void CAnimatorDlg::Update(CGameObject* _pObj)
 
 		map<wstring, CAnimation*> mapAnim = _pObj->GetAnimator()->GetAnimationMap();
 		map<wstring, CAnimation*>::iterator iter = mapAnim.begin();
-		m_vecAnimName.reserve(mapAnim.size());
 		for (int i = 0; iter != mapAnim.end(); ++iter, ++i)
 		{
-			m_vecAnimName.push_back(iter->first.c_str());
-			m_cbAnim.InsertString(i, m_vecAnimName[i].c_str());
+			m_cbAnim.InsertString(i, iter->first.c_str());
 		}		
 	}
 	
@@ -105,7 +103,10 @@ void CAnimatorDlg::OnChangeAnimComb()
 void CAnimatorDlg::OnSelectedAnimComb()
 {
 	int iSel = m_cbAnim.GetCurSel();
-	m_pTargetObj->GetAnimator()->ChangeAnimation(m_vecAnimName[iSel].c_str());
+	CString str;
+	m_cbAnim.GetLBText(iSel, str);
+	m_pTargetObj->GetAnimator()->ChangeAnimation(str.GetBuffer());
+	SetFocusGameView();
 	
 }
 
@@ -123,4 +124,5 @@ void CAnimatorDlg::OnBnClickedCheck1()
 {
 	CAnimator* pAnimator = m_pTargetObj->GetAnimator();
 	pAnimator->SetRepeat(!pAnimator->IsRepeat());
+	SetFocusGameView();
 }

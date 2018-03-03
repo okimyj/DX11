@@ -35,8 +35,8 @@ CResPtr<T>::CResPtr(T * _target)
 template <typename T>
 CResPtr<T>::~CResPtr()
 {
-	if (NULL != m_pTarget)
-		m_pTarget->SubRef();
+//	if (NULL != m_pTarget)
+//		m_pTarget->SubRef();
 }
 template <typename T>
 void CResPtr<T>::operator = (const CResPtr & _ptr)

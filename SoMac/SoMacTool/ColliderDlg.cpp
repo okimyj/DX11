@@ -120,4 +120,5 @@ void CColliderDlg::OnClickedApplyScale()
 {
 	CCollider* pCollider = m_pTargetObj->GetCollider();
 	pCollider->SetApplyScale(!pCollider->GetApplyScale());
+	SetFocusGameView();
 }

@@ -93,7 +93,7 @@ int CPlayerScript::Update()
 	{
 		Shoot();
 	}
-
+	/*
 	if (CKeyMgr::GetInst()->GetKeyState(KEY_TYPE::KEY_1, KEY_STATE::UP))
 		Animator()->ChangeAnimation(L"Player_Right_Idle");
 	if (CKeyMgr::GetInst()->GetKeyState(KEY_TYPE::KEY_2, KEY_STATE::UP))
@@ -102,6 +102,7 @@ int CPlayerScript::Update()
 		Animator()->ChangeAnimation(L"Player_Right_Run");
 	if (CKeyMgr::GetInst()->GetKeyState(KEY_TYPE::KEY_4, KEY_STATE::UP))
 		Animator()->ChangeAnimation(L"Player_Right_Sprint");
+		*/
 	Transform()->SetLocalPosition(vPos);
 	Transform()->SetLocalRotation(vRot);
 	return RET_SUCCESS;
