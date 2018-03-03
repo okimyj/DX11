@@ -35,10 +35,14 @@ private:
 	CMesh* FindMesh(const wstring& _strKey);
 	CTexture* FindTexture(const wstring& _strKey);
 	CMaterial* FindMaterial(const wstring& _strKey);
+private:
+	map<wstring, CResPtr<CMesh>>& GetMeshMap() { return m_mapMesh; }
+	map<wstring, CResPtr<CMaterial>>& GetMaterialMap() { return m_mapMaterial; }
 public:
 	template <typename T>
 	CRes* Load(const wstring& _strKey, const wstring& _strFilePath=L"");	
 
+	friend class CListDlg;
 };
 
 template<typename T>

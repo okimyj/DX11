@@ -23,6 +23,7 @@ protected:
 	virtual void PostNcDestroy();
 	virtual void OnOK();
 public:
+	CEdit m_editName;
 	CEdit m_arrEdit[9];
 	UINT m_iFocusedEditID;
 	afx_msg void OnEnSetfocus(UINT _id);

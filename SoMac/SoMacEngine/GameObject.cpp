@@ -55,8 +55,10 @@ CGameObject * CGameObject::CreateGameObject(const wstring& _strTag)
 
 CGameObject * CGameObject::CreateCamera(const wstring& _strTag)
 {
-	CGameObject* pObj = CGameObject::CreateGameObject(_strTag);
+	CGameObject* pObj = new CGameObject();
+	pObj->AddComponent<CTransform>(new CTransform);
 	pObj->AddComponent<CCamera>(new CCamera);
+	pObj->SetTag(_strTag);
 	return pObj;
 }
 

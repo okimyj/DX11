@@ -39,12 +39,14 @@ void CComponentView::UpdateComponents()
 {
 	if (NULL == m_pTargetObj)
 		return;
+
 	INT iStartY = 0;
 	for (UINT i = 0; i < (UINT)COMPONENT_TYPE::END; ++i)
 	{
 		// 해당 dialog가 없거나 targetObject 에 component가 없으면 다음꺼.
 		if (NULL == m_arrDlg[i] || NULL == m_pTargetObj->GetComponent((COMPONENT_TYPE)i))
 			continue;
+
 		RECT rt = {};
 		m_arrDlg[i]->GetWindowRect(&rt);
 		m_arrDlg[i]->ShowWindow(true);

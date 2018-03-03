@@ -58,6 +58,12 @@
     <Filter Include="04. View\03. ComponentView\ComponentDlg\02. MeshRendererDlg">
       <UniqueIdentifier>{caa5e01a-2a2f-408c-9c7f-87610da9cd1f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="05. Dialog">
+      <UniqueIdentifier>{e753e15b-aa2b-471e-b9e3-2bce2e857f7d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="05. Dialog\01. ListDlg">
+      <UniqueIdentifier>{86cea1a8-5bfa-433e-9498-355d34bda8b3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -114,6 +120,9 @@
     <ClInclude Include="MeshRendererDlg.h">
       <Filter>04. View\03. ComponentView\ComponentDlg\02. MeshRendererDlg</Filter>
     </ClInclude>
+    <ClInclude Include="ListDlg.h">
+      <Filter>05. Dialog\01. ListDlg</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -160,6 +169,9 @@
     </ClCompile>
     <ClCompile Include="MeshRendererDlg.cpp">
       <Filter>04. View\03. ComponentView\ComponentDlg\02. MeshRendererDlg</Filter>
+    </ClCompile>
+    <ClCompile Include="ListDlg.cpp">
+      <Filter>05. Dialog\01. ListDlg</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

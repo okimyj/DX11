@@ -27,7 +27,7 @@ void CTransformDlg::Update(CGameObject * _pObj)
 	m_pTargetObj = _pObj;
 	if (NULL == m_pTargetObj)
 		return;
-	
+	m_editName.SetWindowTextW(_pObj->GetTag().c_str());
 	CTransform* pTrans = m_pTargetObj->GetTransform();
 	Vec3 vTransform[3] = { pTrans->GetLocalPosition(),  pTrans->GetLocalRotation(), pTrans->GetLocalScale() };
 	CString str;
@@ -47,7 +47,7 @@ void CTransformDlg::Update(CGameObject * _pObj)
 void CTransformDlg::DoDataExchange(CDataExchange* pDX)
 {
 	CDialogEx::DoDataExchange(pDX);
-
+	DDX_Control(pDX, IDC_OBJ_NAME, m_editName);
 	int iStartID = IDC_POS_X;
 	for (int i = 0; i < 9; ++i)
 	{
@@ -115,7 +115,7 @@ void CTransformDlg::OnOK()
 {
 	if (m_iFocusedEditID != -1)
 	{
-		m_arrEdit[m_iFocusedEditID - IDC_POS_X].SendMessage(WM_KILLFOCUS, NULL);
+		SetFocusGameView();
 		m_iFocusedEditID = -1;
 	}
 }

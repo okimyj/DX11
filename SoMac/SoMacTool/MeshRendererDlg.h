@@ -1,5 +1,6 @@
 #pragma once
 #include "ComponentDlg.h"
+#include "afxwin.h"
 
 // CMeshRendererDlg dialog
 
@@ -22,4 +23,18 @@ protected:
 
 	DECLARE_MESSAGE_MAP()
 	virtual void PostNcDestroy();
+public:
+	virtual BOOL OnInitDialog();
+	afx_msg void OnSetFocusRsTypeCombo();
+	afx_msg void OnKillFocusRsTypeCombo();
+	afx_msg void OnChangeRSTypeCombo();
+	afx_msg void OnSelectedRSTypeCombo();
+	CComboBox	m_cbRSType;
+	bool				m_bFocusRSType;
+	CEdit				m_editMesh;
+	CEdit				m_editMtrl;
+	
+	
+	afx_msg void OnClickedMeshBtn();
+	afx_msg void OnClickedMtrlBtn();
 };
