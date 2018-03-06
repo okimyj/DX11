@@ -175,7 +175,7 @@ CAnimation2D * CAnimation2D::MakeOneAnim(tDescInfo & _tDesc, const wstring& _str
 		wstring strTextureName;
 		wstring strTexturePath;
 		CTexture* pTexture;
-		for (UINT i = 0; i < _tDesc.iFrameCount; ++i)
+		for (UINT i = _tDesc.iStartIdx; i < _tDesc.iFrameCount; ++i)
 		{
 			
 			str.Format(_tDesc.strTexName.c_str(), i);

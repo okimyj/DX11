@@ -49,6 +49,7 @@ void CAnimatorDlg::Update(CGameObject* _pObj)
 	// list를 갱신하는건 계속 update 해야하는 부분이 아니기 때문에 현재 target과 update 되는 object가 다를 때만 실행한다.
 	if(m_pTargetObj != _pObj)
 	{
+		m_bFocusAnimComb = false;
 		m_cbAnim.Clear();
 		if (NULL == _pObj)
 		{
@@ -73,6 +74,10 @@ void CAnimatorDlg::Update(CGameObject* _pObj)
 	{
 		if (NULL != pAnimator->GetCurAnim())
 			m_cbAnim.SelectString(-1, pAnimator->GetCurAnim()->GetKey().c_str());
+		else
+		{
+			m_cbAnim.SetCurSel(-1);
+		}
 
 	}
 	
