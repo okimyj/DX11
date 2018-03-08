@@ -191,6 +191,7 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Add2DAnimDlg.h" />
     <ClInclude Include="AnimatorDlg.h" />
     <ClInclude Include="ButtonView.h" />
     <ClInclude Include="CameraDlg.h" />
@@ -211,6 +212,7 @@
     <ClInclude Include="TransformDlg.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Add2DAnimDlg.cpp" />
     <ClCompile Include="AnimatorDlg.cpp" />
     <ClCompile Include="ButtonView.cpp" />
     <ClCompile Include="CameraDlg.cpp" />

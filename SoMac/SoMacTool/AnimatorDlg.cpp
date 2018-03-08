@@ -8,6 +8,7 @@
 #include "GameObject.h"
 #include "Animator.h"
 #include "Animation.h"
+#include "Add2DAnimDlg.h"
 // CAnimatorDlg dialog
 
 IMPLEMENT_DYNAMIC(CAnimatorDlg, CDialogEx)
@@ -85,7 +86,8 @@ void CAnimatorDlg::Update(CGameObject* _pObj)
 
 void CAnimatorDlg::OnBnClickedButton1()
 {
-	// TODO: Add your control notification handler code here
+	CAdd2DAnimDlg dlg;
+	dlg.DoModal();
 }
 
 void CAnimatorDlg::OnSetFocusAnimComb()

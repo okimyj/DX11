@@ -16,6 +16,7 @@
 #define IDD_MESHRENDERERDLG             318
 #define IDD_LISTDLG                     319
 #define IDD_ANIMATORDLG                 320
+#define IDD_ADD2DANIMDLG                321
 #define IDC_BUTTON1                     1000
 #define IDC_BUTTON2                     1001
 #define IDC_POS_X                       1001
@@ -44,14 +45,25 @@
 #define IDC_OFF_SCALE_Y                 1022
 #define IDC_OFF_SCALE_Z                 1023
 #define IDC_ANIM_COMB                   1024
+#define IDC_LIST2                       1025
+#define IDC_EDIT1                       1026
+#define IDC_EDIT3                       1028
+#define IDC_EDIT4                       1029
+#define IDC_EDIT5                       1030
+#define IDC_EDIT6                       1031
+#define IDC_EDIT7                       1032
+#define IDC_EDIT8                       1033
+#define IDC_LIST4                       1035
+#define IDC_EDIT9                       1036
+#define IDC_EDIT10                      1037
 
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        322
+#define _APS_NEXT_RESOURCE_VALUE        323
 #define _APS_NEXT_COMMAND_VALUE         32771
-#define _APS_NEXT_CONTROL_VALUE         1025
-#define _APS_NEXT_SYMED_VALUE           321
+#define _APS_NEXT_CONTROL_VALUE         1036
+#define _APS_NEXT_SYMED_VALUE           322
 #endif
 #endif
