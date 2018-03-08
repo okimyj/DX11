@@ -4,7 +4,7 @@
 
 
 // CAdd2DAnimDlg dialog
-
+class CGameObject;
 class CAdd2DAnimDlg : public CDialogEx
 {
 	DECLARE_DYNAMIC(CAdd2DAnimDlg)
@@ -27,10 +27,12 @@ public:
 	afx_msg void OnNMClickList(NMHDR *pNMHDR, LRESULT *pResult);
 	afx_msg void OnClickedSelectPathButton();
 	virtual BOOL OnInitDialog();
-
+	virtual void OnOK();
+	void SetTargetObject(CGameObject* _pObj) { m_pTargetObj = _pObj; }
 private:
+	CGameObject	*	m_pTargetObj;
 	CEdit m_editFolderPath;
-	CString m_strTextureName;
+	CEdit m_editTextureName;
 	CEdit m_editAnimName;
 	CButton m_cbMultiTexture;
 	CEdit m_editStartIdx;
@@ -40,9 +42,15 @@ private:
 	CEdit m_editWidth;
 	CEdit m_editHeight;
 	CListCtrl m_listBox;
+	bool m_bFocusPathEdit;
 
 private:
 	void UpdateFolderPath();
 	void SetActiveControl(CEdit& _control, bool _bActive);
 
+public:
+	afx_msg void OnSetfocusPathEdit();
+	afx_msg void OnKillfocusPathEdit();
+	afx_msg void OnClickedCreate();
+	
 };

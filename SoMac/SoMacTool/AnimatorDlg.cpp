@@ -87,6 +87,7 @@ void CAnimatorDlg::Update(CGameObject* _pObj)
 void CAnimatorDlg::OnBnClickedButton1()
 {
 	CAdd2DAnimDlg dlg;
+	dlg.SetTargetObject(m_pTargetObj);
 	dlg.DoModal();
 }
 
