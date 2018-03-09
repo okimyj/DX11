@@ -68,7 +68,7 @@ void CAnimator::LoadAnimation2D(const wstring & _strKey, const wstring & _strFol
 	if (PathFileExists(wstring(strFullPath + L"\\desc.txt").c_str()))
 	{
 		CAnimation2D::LoadMultiAnimation(_strFolderPath, strFullPath, m_mapAnim);
-		int a = 10;
+		int a = 0;
 	}
 	else
 	{

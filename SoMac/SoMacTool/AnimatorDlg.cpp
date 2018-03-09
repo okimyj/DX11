@@ -44,11 +44,11 @@ END_MESSAGE_MAP()
 // CAnimatorDlg message handlers
 
 
-void CAnimatorDlg::Update(CGameObject* _pObj)
+void CAnimatorDlg::Update(CGameObject* _pObj, bool _bForce = false)
 {
 	
 	// list를 갱신하는건 계속 update 해야하는 부분이 아니기 때문에 현재 target과 update 되는 object가 다를 때만 실행한다.
-	if(m_pTargetObj != _pObj)
+	if(m_pTargetObj != _pObj || _bForce)
 	{
 		m_bFocusAnimComb = false;
 		m_cbAnim.Clear();
@@ -89,6 +89,7 @@ void CAnimatorDlg::OnBnClickedButton1()
 	CAdd2DAnimDlg dlg;
 	dlg.SetTargetObject(m_pTargetObj);
 	dlg.DoModal();
+	Update(m_pTargetObj, true);
 }
 
 void CAnimatorDlg::OnSetFocusAnimComb()

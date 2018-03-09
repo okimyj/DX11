@@ -157,9 +157,15 @@ bool CAnimation2D::LoadMultiAnimation(const wstring & _strFolderPath, const wstr
 	fclose(pFile);
 
 	// 읽어온 정보들로 Animation 생성.
+	map<wstring, CAnimation*>::iterator iter;
 	for (UINT i = 0; i < vecInfo.size(); ++i)
 	{
+		// 이미 같은 키로 등록되어있는 animation 이 있다면 continue.
+		iter = _mapAnim.find(vecInfo[i].strAnimName);
+		if (iter != _mapAnim.end())
+			continue;
 		CAnimation2D* pAnim = MakeOneAnim(vecInfo[i], _strFolderPath);
+		
 		_mapAnim.insert(make_pair(pAnim->GetKey(), pAnim));
 	}
 	return RET_SUCCESS;

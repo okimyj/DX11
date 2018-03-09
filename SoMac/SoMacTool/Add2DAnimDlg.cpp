@@ -172,7 +172,7 @@ void CAdd2DAnimDlg::OnClickedCreate()
 	m_editFolderPath.GetWindowTextW(strFolderPath);
 	wstring strFilePath = strFolderPath + L"\\desc.txt";
 	FILE* pFile = NULL;
-	_wfopen_s(&pFile, strFilePath.c_str(), L"a+, ccs=UNICODE");
+	_wfopen_s(&pFile, strFilePath.c_str(), L"a+, ccs=UTF-16LE");
 	CString str;
 	CString strAnimName;
 	CString writeStr;

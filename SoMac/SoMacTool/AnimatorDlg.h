@@ -23,7 +23,7 @@ protected:
 
 	DECLARE_MESSAGE_MAP()
 public:
-	virtual void Update(CGameObject* _pObj);
+	virtual void Update(CGameObject* _pObj, bool _bForce = false);
 
 	afx_msg void OnBnClickedButton1();
 	afx_msg void OnSetFocusAnimComb();
