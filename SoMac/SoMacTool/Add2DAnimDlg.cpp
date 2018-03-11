@@ -46,7 +46,8 @@ BEGIN_MESSAGE_MAP(CAdd2DAnimDlg, CDialogEx)
 	ON_NOTIFY(NM_CLICK, IDC_LIST4, &CAdd2DAnimDlg::OnNMClickList)
 	ON_EN_SETFOCUS(IDC_EDIT1, &CAdd2DAnimDlg::OnSetfocusPathEdit)
 	ON_EN_KILLFOCUS(IDC_EDIT1, &CAdd2DAnimDlg::OnKillfocusPathEdit)
-	ON_BN_CLICKED(IDOK, &CAdd2DAnimDlg::OnClickedCreate)
+	ON_BN_CLICKED(ID_APPEND_FILE_BTN, &CAdd2DAnimDlg::OnClickedAppend)
+	ON_BN_CLICKED(ID_ADD_BTN, &CAdd2DAnimDlg::OnClickedAdd)
 END_MESSAGE_MAP()
 
 
@@ -165,8 +166,13 @@ void CAdd2DAnimDlg::OnKillfocusPathEdit()
 	m_bFocusPathEdit = false;
 }
 
+void CAdd2DAnimDlg::OnClickedAdd()
+{
+	// add Desc.
+}
 
-void CAdd2DAnimDlg::OnClickedCreate()
+
+void CAdd2DAnimDlg::OnClickedAppend()
 {
 	CString strFolderPath;
 	m_editFolderPath.GetWindowTextW(strFolderPath);

@@ -44,7 +44,7 @@ END_MESSAGE_MAP()
 // CAnimatorDlg message handlers
 
 
-void CAnimatorDlg::Update(CGameObject* _pObj, bool _bForce = false)
+void CAnimatorDlg::Update(CGameObject* _pObj, bool _bForce)
 {
 	
 	// list를 갱신하는건 계속 update 해야하는 부분이 아니기 때문에 현재 target과 update 되는 object가 다를 때만 실행한다.

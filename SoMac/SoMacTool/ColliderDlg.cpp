@@ -46,7 +46,7 @@ END_MESSAGE_MAP()
 
 // CColliderDlg message handlers
 
-void CColliderDlg::Update(CGameObject * _pObj)
+void CColliderDlg::Update(CGameObject * _pObj, bool _bForce)
 {
 	m_pTargetObj = _pObj;
 	if (NULL == m_pTargetObj)

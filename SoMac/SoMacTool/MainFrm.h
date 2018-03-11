@@ -41,6 +41,11 @@ public:
 protected:
 	afx_msg int OnCreate(LPCREATESTRUCT lpCreateStruct);
 	afx_msg void OnSetFocus(CWnd *pOldWnd);
+
+	afx_msg void OnGameObjectEmpty();
+	afx_msg void OnGameObjectRect();
+	afx_msg void OnGameObjectStdAnim();
+
 	DECLARE_MESSAGE_MAP()
 
 };

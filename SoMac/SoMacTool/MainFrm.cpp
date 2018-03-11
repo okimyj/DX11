@@ -12,6 +12,12 @@
 #include "ButtonView.h"
 #include "DebugView.h"
 
+#include "SceneMgr.h"
+#include "Scene.h"
+#include "Layer.h"
+#include "GameObject.h"
+#include "Transform.h"
+
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
@@ -42,6 +48,7 @@ IMPLEMENT_DYNAMIC(CMainFrame, CFrameWnd)
 BEGIN_MESSAGE_MAP(CMainFrame, CFrameWnd)
 	ON_WM_CREATE()
 	ON_WM_SETFOCUS()
+	ON_COMMAND(ID_GAMEOBJECT_EMPTY, &CMainFrame::OnGameObjectEmpty)
 END_MESSAGE_MAP()
 
 // CMainFrame 생성/소멸
@@ -121,6 +128,31 @@ void CMainFrame::Dump(CDumpContext& dc) const
 void CMainFrame::OnSetFocus(CWnd* /*pOldWnd*/)
 {
 	// 뷰 창으로 포커스를 이동합니다.
+}
+
+void CMainFrame::OnGameObjectEmpty()
+{
+	CScene* pCurScene = CSceneMgr::GetInst()->GetCurScene();
+	CLayer* pLayer = pCurScene->FindLayer(LAYER_DEFAULT);
+	CGameObject* pObj = new CGameObject();
+	pObj->SetTag(L"Empty GameObject");
+	CTransform* pTrans = (CTransform*)pObj->AddComponent<CTransform>(new CTransform);
+	pTrans->SetLocalPosition(Vec3(0.f, 0.f, 1.f));
+	pTrans->SetLocalScale(Vec3(100.f, 100.f, 1.f));
+	pLayer->AddGameObject(pObj);
+	CComponentView* pComView = (CComponentView*)GetComponentView();
+	pComView->SetGameObject(pObj);
+}
+
+void CMainFrame::OnGameObjectRect()
+{
+	CScene* pCurScene = CSceneMgr::GetInst()->GetCurScene();
+	CLayer * pLayer = pCurScene->FindLayer(LAYER_DEFAULT);
+
+}
+
+void CMainFrame::OnGameObjectStdAnim()
+{
 }
 
 BOOL CMainFrame::OnCmdMsg(UINT nID, int nCode, void* pExtra, AFX_CMDHANDLERINFO* pHandlerInfo)

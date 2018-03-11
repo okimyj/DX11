@@ -7,7 +7,7 @@ class CComponentDlg :
 protected:
 	CGameObject*		m_pTargetObj;
 public:
-	virtual void Update(CGameObject* _pObj) = 0;
+	virtual void Update(CGameObject* _pObj, bool _bForce = false) = 0;
 protected:
 	void SetFocusGameView();
 public:

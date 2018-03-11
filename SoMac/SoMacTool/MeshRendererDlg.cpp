@@ -34,7 +34,7 @@ void CMeshRendererDlg::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_MTRL_EDIT, m_editMtrl);
 }
 
-void CMeshRendererDlg::Update(CGameObject * _pObj)
+void CMeshRendererDlg::Update(CGameObject * _pObj, bool _bForce)
 {
 	m_pTargetObj = _pObj;
 	if (NULL == m_pTargetObj)

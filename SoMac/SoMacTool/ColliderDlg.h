@@ -23,7 +23,7 @@ protected:
 	DECLARE_MESSAGE_MAP()
 
 public:
-	virtual void Update(CGameObject* _pObj);
+	virtual void Update(CGameObject* _pObj, bool _bForce = false);
 	virtual void PostNcDestroy();
 	virtual void OnOK();
 

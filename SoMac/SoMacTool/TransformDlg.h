@@ -16,7 +16,7 @@ public:
 	enum { IDD = IDD_TRANSFORMDLG };
 #endif
 public:
-	virtual void Update(CGameObject* _pObj);
+	virtual void Update(CGameObject* _pObj, bool _bForce = false);
 protected:
 	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
 	DECLARE_MESSAGE_MAP()

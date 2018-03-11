@@ -51,6 +51,6 @@ private:
 public:
 	afx_msg void OnSetfocusPathEdit();
 	afx_msg void OnKillfocusPathEdit();
-	afx_msg void OnClickedCreate();
-	
+	afx_msg void OnClickedAdd();
+	afx_msg void OnClickedAppend();
 };
