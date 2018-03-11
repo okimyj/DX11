@@ -9,7 +9,6 @@ struct ID { typedef T type; };
 class CTransform;
 class CMeshRenderer;
 class CCamera;
-class CTextureAnimator;
 class CScript;
 class CLayer;
 class CCollider;
@@ -117,10 +116,6 @@ CComponent* CGameObject::GetComponent()
 	{
 		return m_arrComp[(UINT)COMPONENT_TYPE::ANIMATOR];
 	}
-	else if (info.hash_code() == typeid(CTextureAnimator).hash_code())
-	{
-		return m_arrComp[(UINT)COMPONENT_TYPE::TEXTURE_ANIMATOR];
-	}
 	else
 	{
 		list<CScript*>::iterator iter = m_listScript.begin();
@@ -158,10 +153,6 @@ CComponent* CGameObject::AddComponent(CComponent* _pComp, ID<T>)
 	if (info.hash_code() == typeid(CAnimator).hash_code())
 	{
 		m_arrComp[(UINT)COMPONENT_TYPE::ANIMATOR] = _pComp;
-	}
-	if (info.hash_code() == typeid(CTextureAnimator).hash_code())
-	{
-		m_arrComp[(UINT)COMPONENT_TYPE::TEXTURE_ANIMATOR] = _pComp;
 	}
 	_pComp->SetGameObject(this);
 	return _pComp;

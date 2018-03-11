@@ -57,12 +57,12 @@
 #define IDC_EDIT9                       1036
 #define IDC_EDIT10                      1037
 #define ID_APPEND_FILE_BTN              1038
+#define ID_WRITE_FILE_BTN               1038
 #define ID_ADD_BTN                      1040
+#define IDC_COMBO1                      1040
 #define ID_GAMEOBJECT_EMPTY             32771
 #define ID_GAMEOBJECT_STDANIM           32772
-#define ID_GAMEOBJECT_COLORRECT         32773
-#define ID_GAMEOBJECT_STDANIM32774      32774
-#define ID_GAMEOBJECT_RECT              32775
+#define ID_GAMEOBJECT_RECT              32773
 
 // Next default values for new objects
 // 
@@ -70,7 +70,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        323
 #define _APS_NEXT_COMMAND_VALUE         32776
-#define _APS_NEXT_CONTROL_VALUE         1039
+#define _APS_NEXT_CONTROL_VALUE         1041
 #define _APS_NEXT_SYMED_VALUE           322
 #endif
 #endif

@@ -35,13 +35,8 @@ CSceneMgr::~CSceneMgr()
 }
 
 void CSceneMgr::Init()
-{
-//	m_pCurScene = new CTestScene();
-//	m_pCurScene->Init();
-	
+{	
 	m_pCurScene = new CScene();
-	// -- 임시 테스트 씬 구성.
-	CreateTestScene();
 	
 	m_pCurScene->Awake();
 	m_pCurScene->Start();
@@ -84,17 +79,6 @@ CLayer * CSceneMgr::GetCurSceneLayer(const wstring & _strLayerName)
 
 void CSceneMgr::CreateTestScene()
 {
-	// Scene 에 Layer 추가. 
-	// 현재는 추가할 Layer가 없으므로 추가하지 않는다.
-	m_pCurScene->AddLayer(L"MonsterLayer", true);
-	m_pCurScene->AddLayer(L"PlayerLayer", true);
-	
-	CCollisionMgr::GetInst()->SetCollsionLayer(L"PlayerLayer", L"MonsterLayer");
-	// Texture Load.
-	CTexture* pText = (CTexture*)CResMgr::GetInst()->Load<CTexture>(L"Bullet", L"Texture\\bullet.png");
-	pText = (CTexture*)CResMgr::GetInst()->Load<CTexture>(L"Player", L"Texture\\player.png");
-	pText = (CTexture*)CResMgr::GetInst()->Load<CTexture>(L"Cartoon", L"Texture\\cartoon.jpg");
-	
 	CreateMaterial();
 
 	CreateGameObject();
@@ -119,10 +103,7 @@ void CSceneMgr::CreateMaterial()
 	pMaterial->SetParamData(SHADER_PARAM::TEXTURE_0, &pTex);
 	CResMgr::GetInst()->AddMaterial(L"BulletMaterial", pMaterial);
 
-	pMaterial = new CMaterial;
-	pMaterial->SetShader(CShaderMgr::GetInst()->FindShader(L"Standard2DShader"));
-	CResMgr::GetInst()->AddMaterial(L"StandardMaterial", pMaterial);
-
+	
 	pMaterial = new CMaterial;
 	pMaterial->SetShader(CShaderMgr::GetInst()->FindShader(L"CartoonShader"));
 	iData = 0;
@@ -141,16 +122,6 @@ void CSceneMgr::CreateGameObject()
 	pBullet->GetMeshRender()->SetMaterial((CMaterial*)CResMgr::GetInst()->Load<CMaterial>(L"BulletMaterial"));
 	pBullet->AddComponent<CScript>(new CBulletScript);
 	CResMgr::GetInst()->AddPrefab(L"Bullet", pBullet);
-
-
-
-	// -- Create Camera & Add to Camera Layer
-	CGameObject* pCamera = CGameObject::CreateCamera(L"MainCamera");
-	pCamera->AddComponent<CScript>(new CCameraScript);
-	pCamera->GetCamera()->AddRenderTargetLayer(LAYER_DEFAULT);
-	pCamera->GetCamera()->AddRenderTargetLayer(L"PlayerLayer");
-	pCamera->GetCamera()->AddRenderTargetLayer(L"MonsterLayer");
-	AddGameObject(pCamera, LAYER_CAMERA);
 
 	//-- create GameObject & Add to Default Layer.
 	CGameObject* pObj = CGameObject::CreateGameObject(L"Player");

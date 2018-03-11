@@ -16,7 +16,7 @@ IMPLEMENT_DYNAMIC(CAnimatorDlg, CDialogEx)
 CAnimatorDlg::CAnimatorDlg(CWnd* pParent /*=NULL*/)
 	: CComponentDlg(IDD_ANIMATORDLG, pParent)
 {
-
+	m_pName = L"Animator";
 }
 
 CAnimatorDlg::~CAnimatorDlg()

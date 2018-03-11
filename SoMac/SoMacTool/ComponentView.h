@@ -1,5 +1,6 @@
 #pragma once
 #include "global.h"
+#include "afxwin.h"
 
 
 // CComponentView form view
@@ -32,13 +33,25 @@ protected:
 private:
 	CGameObject*		m_pTargetObj;
 	CComponentDlg*	m_arrDlg[(UINT)COMPONENT_TYPE::END];
+	CButton m_btAC;
+	CComboBox m_cbAC;
+	bool m_bACFocused;
+
 public:
-	void SetGameObject(CGameObject* _pObj);
+	void SetGameObject(CGameObject* _pObj, bool _bForce = false);
 	void UpdateComponents();
 	void Update();
 
 	afx_msg int OnCreate(LPCREATESTRUCT lpCreateStruct);
 	afx_msg void OnDestroy();
+	afx_msg void OnAddComponentClicked();
+	
+	afx_msg void OnSetFocusACCombo();
+	afx_msg void OnKillFocusACCombo();
+	afx_msg void OnChangeACCombo();
+	afx_msg void OnSelchangeACCombo();
+	
+
 };
 
 

@@ -8,6 +8,7 @@
 #include "PathMgr.h"
 #include "GameObject.h"
 #include "Animator.h"
+#include "Animation2D.h"
 
 // CAdd2DAnimDlg dialog
 
@@ -46,7 +47,7 @@ BEGIN_MESSAGE_MAP(CAdd2DAnimDlg, CDialogEx)
 	ON_NOTIFY(NM_CLICK, IDC_LIST4, &CAdd2DAnimDlg::OnNMClickList)
 	ON_EN_SETFOCUS(IDC_EDIT1, &CAdd2DAnimDlg::OnSetfocusPathEdit)
 	ON_EN_KILLFOCUS(IDC_EDIT1, &CAdd2DAnimDlg::OnKillfocusPathEdit)
-	ON_BN_CLICKED(ID_APPEND_FILE_BTN, &CAdd2DAnimDlg::OnClickedAppend)
+	ON_BN_CLICKED(ID_WRITE_FILE_BTN, &CAdd2DAnimDlg::OnClickedAppend)
 	ON_BN_CLICKED(ID_ADD_BTN, &CAdd2DAnimDlg::OnClickedAdd)
 END_MESSAGE_MAP()
 
@@ -70,7 +71,6 @@ void CAdd2DAnimDlg::OnOK()
 		UpdateFolderPath();
 	}
 }
-
 
 // CAddAnimDlg message handlers
 int CALLBACK Proc(HWND hwnd, UINT uMsg, LPARAM lParam, LPARAM lpData)
@@ -169,6 +169,42 @@ void CAdd2DAnimDlg::OnKillfocusPathEdit()
 void CAdd2DAnimDlg::OnClickedAdd()
 {
 	// add Desc.
+	tDescInfo tInfo = {};
+	int iMultiTexture = m_cbMultiTexture.GetCheck();
+	tInfo.bMultipleTexture = iMultiTexture;
+	CString str;
+	
+	m_editTextureName.GetWindowTextW(str);
+	tInfo.strTexName = str;
+	m_editAnimName.GetWindowTextW(str);
+	tInfo.strAnimName = str;
+	
+	if (iMultiTexture)
+	{
+		m_editStartIdx.GetWindowTextW(str);
+		tInfo.iStartIdx = _wtoi(str);
+	}
+	else
+	{
+		m_editLeft.GetWindowTextW(str);
+		tInfo.vLeftTop.x = _wtoi(str);
+		m_editTop.GetWindowTextW(str);
+		tInfo.vLeftTop.y = _wtoi(str);
+		m_editWidth.GetWindowTextW(str);
+		tInfo.vSize.x = _wtoi(str);
+		m_editHeight.GetWindowTextW(str);
+		tInfo.vSize.y = _wtoi(str);
+	}
+	m_editFrameNum.GetWindowTextW(str);
+	tInfo.iFrameCount = _wtoi(str);
+
+	CString strFolderPath;
+	m_editFolderPath.GetWindowTextW(strFolderPath);
+	CString resourcePath = CPathMgr::GetResourcePath();
+	resourcePath = strFolderPath.Mid(resourcePath.GetLength(), strFolderPath.GetLength());
+	CAnimation2D* pAnim = CAnimation2D::MakeOneAnim(tInfo, resourcePath.GetBuffer());
+	m_pTargetObj->GetAnimator()->AddAnimation(pAnim);
+	CDialogEx::OnOK();
 }
 
 
@@ -187,6 +223,8 @@ void CAdd2DAnimDlg::OnClickedAppend()
 	str.Format(L"%d", iMultiTexture);
 	writeStr += str + L"\n";
 	m_editTextureName.GetWindowTextW(str);
+	if (iMultiTexture)
+		str.Replace(L"%", L"%%");
 	writeStr += str + L"\n";
 	m_editAnimName.GetWindowTextW(strAnimName);
 	writeStr += strAnimName + L"\n";

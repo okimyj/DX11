@@ -79,6 +79,7 @@ void CResMgr::CreateDefaultMesh()
 
 void CResMgr::CreateDefaultMaterial()
 {
+	//== Create Default Material ==//
 	CMaterial* pMaterial = new CMaterial;
 	pMaterial->SetShader(CShaderMgr::GetInst()->FindShader(L"ColorShader"));
 	AddMaterial(L"Default", pMaterial);
@@ -86,6 +87,11 @@ void CResMgr::CreateDefaultMaterial()
 	pMaterial = new CMaterial;
 	pMaterial->SetShader(CShaderMgr::GetInst()->FindShader(L"ColliderShader"));
 	AddMaterial(L"ColliderMaterial", pMaterial);
+	//== Create Standard Materail ==//
+	pMaterial = new CMaterial;
+	pMaterial->SetShader(CShaderMgr::GetInst()->FindShader(L"Standard2DShader"));
+	CResMgr::GetInst()->AddMaterial(L"StandardMaterial", pMaterial);
+
 }
 
 int CResMgr::AddMesh(const wstring & _strKey, CMesh * _pMesh)

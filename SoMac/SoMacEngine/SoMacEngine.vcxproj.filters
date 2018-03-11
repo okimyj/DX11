@@ -117,12 +117,6 @@
     <Filter Include="04. Component\04. Script\ScriptCode\CameraScript">
       <UniqueIdentifier>{dc6fd5db-1dc0-4239-895a-d9945aeb1efb}</UniqueIdentifier>
     </Filter>
-    <Filter Include="04. Component\06. Texture Animator">
-      <UniqueIdentifier>{0124bc77-6ee1-4502-8804-d0e46f940520}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="04. Component\06. Texture Animator\TextureAnim">
-      <UniqueIdentifier>{7223560f-a757-464b-85c9-9a4934054698}</UniqueIdentifier>
-    </Filter>
     <Filter Include="04. Component\02. MeshRenderer">
       <UniqueIdentifier>{57d93220-1b57-48c4-b85b-efb2101abb96}</UniqueIdentifier>
     </Filter>
@@ -226,12 +220,6 @@
     </ClInclude>
     <ClInclude Include="Texture.h">
       <Filter>02. Manager\04. ResMgr\Resource\02. Texture</Filter>
-    </ClInclude>
-    <ClInclude Include="TextureAnimator.h">
-      <Filter>04. Component\06. Texture Animator</Filter>
-    </ClInclude>
-    <ClInclude Include="TextureAnim.h">
-      <Filter>04. Component\06. Texture Animator\TextureAnim</Filter>
     </ClInclude>
     <ClInclude Include="Prefab.h">
       <Filter>02. Manager\04. ResMgr\Resource\03. Prefab</Filter>
@@ -357,12 +345,6 @@
     </ClCompile>
     <ClCompile Include="Texture.cpp">
       <Filter>02. Manager\04. ResMgr\Resource\02. Texture</Filter>
-    </ClCompile>
-    <ClCompile Include="TextureAnimator.cpp">
-      <Filter>04. Component\06. Texture Animator</Filter>
-    </ClCompile>
-    <ClCompile Include="TextureAnim.cpp">
-      <Filter>04. Component\06. Texture Animator\TextureAnim</Filter>
     </ClCompile>
     <ClCompile Include="Prefab.cpp">
       <Filter>02. Manager\04. ResMgr\Resource\03. Prefab</Filter>

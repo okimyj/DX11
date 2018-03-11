@@ -93,6 +93,13 @@ void CAnimator::ChangeAnimation(const wstring & _strKey, UINT _iStartFrameIdx)
 	m_pCurAnim->SetFrameIdx(_iStartFrameIdx);
 }
 
+void CAnimator::AddAnimation(CAnimation * pAnim)
+{
+	map<wstring, CAnimation*>::iterator iter = m_mapAnim.find(pAnim->GetKey());
+	if (iter == m_mapAnim.end())
+		m_mapAnim.insert(make_pair(pAnim->GetKey(), pAnim));
+}
+
 void CAnimator::ApplyData()
 {
 	if (NULL != m_pCurAnim)

@@ -8,8 +8,6 @@
 #include "Mesh.h"
 #include "Texture.h"
 #include "Prefab.h"
-#include "TextureAnimator.h"
-#include "TextureAnim.h"
 #include "Material.h"
 #include "TestScene.h"
 CPlayerScript::CPlayerScript()

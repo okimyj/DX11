@@ -12,7 +12,7 @@ IMPLEMENT_DYNAMIC(CCameraDlg, CWnd)
 
 CCameraDlg::CCameraDlg()
 {
-
+	
 }
 
 CCameraDlg::~CCameraDlg()

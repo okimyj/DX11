@@ -193,8 +193,6 @@ call "fx.bat"</Command>
     <ClInclude Include="struct.h" />
     <ClInclude Include="TestScene.h" />
     <ClInclude Include="Texture.h" />
-    <ClInclude Include="TextureAnim.h" />
-    <ClInclude Include="TextureAnimator.h" />
     <ClInclude Include="TimeMgr.h" />
     <ClInclude Include="Transform.h" />
   </ItemGroup>
@@ -238,8 +236,6 @@ call "fx.bat"</Command>
     <ClCompile Include="ShaderMgr.cpp" />
     <ClCompile Include="TestScene.cpp" />
     <ClCompile Include="Texture.cpp" />
-    <ClCompile Include="TextureAnim.cpp" />
-    <ClCompile Include="TextureAnimator.cpp" />
     <ClCompile Include="TimeMgr.cpp" />
     <ClCompile Include="Transform.cpp" />
   </ItemGroup>

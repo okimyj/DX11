@@ -36,6 +36,12 @@ CScene::~CScene()
 
 void CScene::Awake()
 {
+	// -- Create Camera & Add to Camera Layer
+	CGameObject* pCamera = CGameObject::CreateCamera(L"MainCamera");
+	pCamera->GetCamera()->AddRenderTargetLayer(LAYER_DEFAULT);
+	FindLayer(LAYER_CAMERA)->AddGameObject(pCamera);
+
+
 	for (int i = 0; i < MAX_LAYER; ++i)
 	{
 		if (NULL != m_vecLayer[i])

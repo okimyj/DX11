@@ -19,7 +19,7 @@ IMPLEMENT_DYNAMIC(CMeshRendererDlg, CDialogEx)
 CMeshRendererDlg::CMeshRendererDlg(CWnd* pParent /*=NULL*/)
 	: CComponentDlg(IDD_MESHRENDERERDLG, pParent)
 {
-
+	m_pName = L"MeshRenderer";
 }
 
 CMeshRendererDlg::~CMeshRendererDlg()
@@ -40,9 +40,15 @@ void CMeshRendererDlg::Update(CGameObject * _pObj, bool _bForce)
 	if (NULL == m_pTargetObj)
 		return;
 	CString str;
-	str = m_pTargetObj->GetMeshRender()->GetMesh()->GetKey().c_str();
+	CMeshRenderer* pMeshRenderer = m_pTargetObj->GetMeshRender();
+	str = L"";
+	if (NULL != pMeshRenderer->GetMesh())
+		str = pMeshRenderer->GetMesh()->GetKey().c_str();	
 	m_editMesh.SetWindowTextW(str);
-	str = m_pTargetObj->GetMeshRender()->GetSharedMaterial()->GetKey().c_str();
+	str = L"";
+	if(NULL != pMeshRenderer->GetSharedMaterial())
+		str = pMeshRenderer->GetSharedMaterial()->GetKey().c_str();
+	
 	m_editMtrl.SetWindowTextW(str);
 	if (!m_bFocusRSType)
 	{

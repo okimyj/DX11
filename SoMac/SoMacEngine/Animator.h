@@ -15,6 +15,7 @@ public:
 	void PlayAnimation(const wstring& _strKey, bool _bRepeat = true);
 	void LoadAnimation2D(const wstring& _strKey, const wstring& _strFolderPath);
 	void ChangeAnimation(const wstring& _strKey, UINT _iStartFrameIdx = 0);
+	void AddAnimation(CAnimation* pAnim);
 	void ApplyData();
 	static void Disable();
 

@@ -15,7 +15,7 @@ IMPLEMENT_DYNAMIC(CColliderDlg, CDialogEx)
 CColliderDlg::CColliderDlg(CWnd* pParent /*=NULL*/)
 	: CComponentDlg(IDD_COLLIDERDLG, pParent)
 {
-
+	m_pName = L"2D Collider";
 }
 
 CColliderDlg::~CColliderDlg()
