@@ -48,10 +48,7 @@ public:
 	
 	afx_msg void OnSetFocusACCombo();
 	afx_msg void OnKillFocusACCombo();
-	afx_msg void OnChangeACCombo();
 	afx_msg void OnSelchangeACCombo();
-	
-
 };
 
 

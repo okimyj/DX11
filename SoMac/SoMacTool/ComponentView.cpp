@@ -36,6 +36,7 @@ void CComponentView::DoDataExchange(CDataExchange* pDX)
 	CFormView::DoDataExchange(pDX);
 	DDX_Control(pDX, IDC_BUTTON1, m_btAC);
 	DDX_Control(pDX, IDC_COMBO1, m_cbAC);
+	m_cbAC.ShowWindow(false);
 }
 
 void CComponentView::SetGameObject(CGameObject * _pObj, bool _bForce)
@@ -104,11 +105,7 @@ BEGIN_MESSAGE_MAP(CComponentView, CFormView)
 	ON_BN_CLICKED(IDC_BUTTON1, &CComponentView::OnAddComponentClicked)
 	ON_CBN_SETFOCUS(IDC_COMBO1, &CComponentView::OnSetFocusACCombo)
 	ON_CBN_KILLFOCUS(IDC_COMBO1, &CComponentView::OnKillFocusACCombo)
-	ON_CBN_EDITCHANGE(IDC_COMBO1, &CComponentView::OnChangeACCombo)
 	ON_CBN_SELCHANGE(IDC_COMBO1, &CComponentView::OnSelchangeACCombo)
-	
-	
-	
 END_MESSAGE_MAP()
 
 
@@ -179,11 +176,6 @@ void CComponentView::OnSetFocusACCombo()
 void CComponentView::OnKillFocusACCombo()
 {
 	m_bACFocused = false;
-}
-
-void CComponentView::OnChangeACCombo()
-{
-	
 }
 
 
