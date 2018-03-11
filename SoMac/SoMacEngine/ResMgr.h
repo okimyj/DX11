@@ -56,7 +56,11 @@ inline CRes * CResMgr::Load(const wstring & _strKey, const wstring & _strFilePat
 	}
 	else if (&info == &typeid(CTexture))
 	{
-		CTexture* pTexture = FindTexture(_strKey);
+		// Texture Key는 filePath랑 합친걸로 사용한다. 
+		// 다른 폴더내에 같은 이름의 texture가 있을 수 있다.
+		wstring newKey = _strFilePath + _strKey;
+	
+		CTexture* pTexture = FindTexture(newKey);
 		if (NULL != pTexture)
 			return (CRes*)pTexture;
 		wstring strFullPath = CPathMgr::GetResourcePath();
@@ -64,9 +68,9 @@ inline CRes * CResMgr::Load(const wstring & _strKey, const wstring & _strFilePat
 		pTexture = CTexture::Create(strFullPath);
 		if (NULL == pTexture)
 			return NULL;
-		pTexture->SetKey(_strKey);
+		pTexture->SetKey(newKey);
 		pTexture->SetPath(_strFilePath);
-		m_mapTexture.insert(make_pair(_strKey, pTexture));
+		m_mapTexture.insert(make_pair(newKey, pTexture));
 		return (CRes*)pTexture;
 	}
 	else if (&info == &typeid(CPrefab))

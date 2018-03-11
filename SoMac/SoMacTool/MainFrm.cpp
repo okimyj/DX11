@@ -143,7 +143,7 @@ void CMainFrame::OnGameObjectEmpty()
 	pObj->SetTag(L"Empty GameObject");
 	CTransform* pTrans = (CTransform*)pObj->AddComponent<CTransform>(new CTransform);
 	pTrans->SetLocalPosition(Vec3(0.f, 0.f, 10.f));
-	pTrans->SetLocalScale(Vec3(100.f, 100.f, 1.f));
+	pTrans->SetLocalScale(Vec3(150.f, 150.f, 1.f));
 	pLayer->AddGameObject(pObj);
 	CComponentView* pComView = (CComponentView*)GetComponentView();
 	pComView->SetGameObject(pObj);
@@ -156,7 +156,7 @@ void CMainFrame::OnGameObjectRect()
 	CGameObject* pObj = CGameObject::CreateGameObject(L"Rect GameObject");
 	CTransform* pTrans = pObj->GetTransform();
 	pTrans->SetLocalPosition(Vec3(0.f, 0.f, 10.f));
-	pTrans->SetLocalScale(Vec3(100.f, 100.f, 1.f));
+	pTrans->SetLocalScale(Vec3(150.f, 150.f, 1.f));
 	CMeshRenderer* pMeshRenderer = pObj->GetMeshRender();
 	pMeshRenderer->SetMesh((CMesh*)CResMgr::GetInst()->Load<CMesh>(L"RectMesh"));
 	pMeshRenderer->SetMaterial((CMaterial*)CResMgr::GetInst()->Load<CMaterial>(L"Default"));
@@ -172,7 +172,7 @@ void CMainFrame::OnGameObjectStdAnim()
 	CGameObject* pObj = CGameObject::CreateGameObject(L"Std GameObject");
 	CTransform* pTrans = pObj->GetTransform();
 	pTrans->SetLocalPosition(Vec3(0.f, 0.f, 10.f));
-	pTrans->SetLocalScale(Vec3(100.f, 100.f, 1.f));
+	pTrans->SetLocalScale(Vec3(150.f, 150.f, 1.f));
 	CMeshRenderer* pMeshRenderer = pObj->GetMeshRender();
 	pMeshRenderer->SetMesh((CMesh*)CResMgr::GetInst()->Load<CMesh>(L"RectMesh"));
 	pMeshRenderer->SetMaterial((CMaterial*)CResMgr::GetInst()->Load<CMaterial>(L"StandardMaterial"));

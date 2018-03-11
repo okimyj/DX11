@@ -51,7 +51,7 @@ void CAnimatorDlg::Update(CGameObject* _pObj, bool _bForce)
 	if(m_pTargetObj != _pObj || _bForce)
 	{
 		m_bFocusAnimComb = false;
-		m_cbAnim.Clear();
+		m_cbAnim.ResetContent();
 		if (NULL == _pObj)
 		{
 			m_pTargetObj = NULL;
