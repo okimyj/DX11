@@ -67,6 +67,15 @@
     <Filter Include="05. Dialog\02. Add2DAnimDlg">
       <UniqueIdentifier>{c96d52ff-2e10-482c-a497-48bb7e55afde}</UniqueIdentifier>
     </Filter>
+    <Filter Include="04. View\02. HierachyView\TreeCtrlDlg">
+      <UniqueIdentifier>{6b2857de-31d6-492d-b926-4772ee9b4cc9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. View\02. HierachyView\TreeCtrlDlg\01. HierachyTreeDlg">
+      <UniqueIdentifier>{dbeed212-6a31-47d2-b9ec-25a74ea2954c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. View\02. HierachyView\TreeCtrlDlg\02. ResourceTreeDlg">
+      <UniqueIdentifier>{b23dd83b-73f8-4578-b200-761568df763e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -129,6 +138,15 @@
     <ClInclude Include="Add2DAnimDlg.h">
       <Filter>05. Dialog\02. Add2DAnimDlg</Filter>
     </ClInclude>
+    <ClInclude Include="HierachyTreeDlg.h">
+      <Filter>04. View\02. HierachyView\TreeCtrlDlg\01. HierachyTreeDlg</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourceTreeDlg.h">
+      <Filter>04. View\02. HierachyView\TreeCtrlDlg\02. ResourceTreeDlg</Filter>
+    </ClInclude>
+    <ClInclude Include="TreeCtrlDlg.h">
+      <Filter>04. View\02. HierachyView\TreeCtrlDlg</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -181,6 +199,15 @@
     </ClCompile>
     <ClCompile Include="Add2DAnimDlg.cpp">
       <Filter>05. Dialog\02. Add2DAnimDlg</Filter>
+    </ClCompile>
+    <ClCompile Include="HierachyTreeDlg.cpp">
+      <Filter>04. View\02. HierachyView\TreeCtrlDlg\01. HierachyTreeDlg</Filter>
+    </ClCompile>
+    <ClCompile Include="ResourceTreeDlg.cpp">
+      <Filter>04. View\02. HierachyView\TreeCtrlDlg\02. ResourceTreeDlg</Filter>
+    </ClCompile>
+    <ClCompile Include="TreeCtrlDlg.cpp">
+      <Filter>04. View\02. HierachyView\TreeCtrlDlg</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

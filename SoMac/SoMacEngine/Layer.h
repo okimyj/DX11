@@ -9,12 +9,11 @@ class CLayer
 {
 private:
 	wstring							m_strLayerName;
-	list<CGameObject*>		m_listParentObj;			// 최 상위 부모 오브젝트 리스트.  // 최상위 부모로부터 awake, start, update.. 등등 호출 받는다.
-	list<CGameObject*>		m_listObj;						// 전체 오브젝트 리스트.
+	list<CGameObject*>			m_listParentObj;			// 최 상위 부모 오브젝트 리스트.  // 최상위 부모로부터 awake, start, update.. 등등 호출 받는다.
+	list<CGameObject*>			m_listObj;						// 전체 오브젝트 리스트.
 
 	UINT								m_iIdx;
 	bool								m_bZOrder;			// z-order를 사용 할지 안할지.
-
 
 public:
 	void Awake();
@@ -27,6 +26,7 @@ private:
 	void SetLayerIndex(UINT _iIdx) { m_iIdx = _iIdx; }
 	void SetLayerName(const wstring& _strName) { m_strLayerName = _strName; }
 	list<CGameObject*>& GetObjList() { return m_listObj; }
+	list<CGameObject*>& GetParentObjList() { return m_listParentObj; }
 	CGameObject* FindObject(Vec2 _vWorldPos);
 	CGameObject* FindObjectByTag(const wstring& _strTag);
 public:

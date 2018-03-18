@@ -28,11 +28,14 @@ public :
 	Vec2 ScreenToWorldPosition(Vec2 _vWindowPos, Vec2 _vResolution);
 	CGameObject* GetMainCamera();
 private:
+private:
+	void GetAllParentObjects(list<CGameObject*>& _listOut);
 	UINT GetLayerIndex();
 	vector<CLayer*>&	GetVecLayer() { return m_vecLayer; }
 public:
 	CScene();
 	virtual ~CScene();
 	friend class CCollisionMgr;
+	friend class CHierachyTreeDlg;
 };
 

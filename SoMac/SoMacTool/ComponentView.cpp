@@ -36,7 +36,9 @@ void CComponentView::DoDataExchange(CDataExchange* pDX)
 	CFormView::DoDataExchange(pDX);
 	DDX_Control(pDX, IDC_BUTTON1, m_btAC);
 	DDX_Control(pDX, IDC_COMBO1, m_cbAC);
+	m_btAC.ShowWindow(false);
 	m_cbAC.ShowWindow(false);
+	
 }
 
 void CComponentView::SetGameObject(CGameObject * _pObj, bool _bForce)
@@ -56,10 +58,11 @@ void CComponentView::SetGameObject(CGameObject * _pObj, bool _bForce)
 			if (NULL != m_arrDlg[i])
 			{
 				m_arrDlg[i]->ShowWindow(false);
+				
 				m_cbAC.InsertString(iIndex, m_arrDlg[i]->GetName());
 				m_cbAC.SetItemData(iIndex++, i);
-			}
-				
+		
+			}				
 			continue;
 		}
 		RECT rt = {};
@@ -69,15 +72,23 @@ void CComponentView::SetGameObject(CGameObject * _pObj, bool _bForce)
 		m_arrDlg[i]->Update(m_pTargetObj);
 		iStartY += rt.bottom - rt.top - 1;
 	}
-	RECT rt = {};
-	m_btAC.GetWindowRect(&rt);
-	ScreenToClient(&rt);
-	iStartY += 35;
-	m_btAC.SetWindowPos(NULL, rt.left, iStartY, rt.right - rt.left, rt.bottom - rt.top, 0);
-	iStartY += rt.bottom - rt.top + 10;
-	m_cbAC.GetWindowRect(&rt);
-	ScreenToClient(&rt);
-	m_cbAC.SetWindowPos(NULL, rt.left, iStartY, rt.right - rt.left, rt.bottom - rt.top, 0);
+	if (NULL == m_pTargetObj)
+	{
+		m_btAC.ShowWindow(false);
+	}
+	else
+	{
+		m_btAC.ShowWindow(true);
+		RECT rt = {};
+		m_btAC.GetWindowRect(&rt);
+		ScreenToClient(&rt);
+		iStartY += 35;
+		m_btAC.SetWindowPos(NULL, rt.left, iStartY, rt.right - rt.left, rt.bottom - rt.top, 0);
+		iStartY += rt.bottom - rt.top + 10;
+		m_cbAC.GetWindowRect(&rt);
+		ScreenToClient(&rt);
+		m_cbAC.SetWindowPos(NULL, rt.left, iStartY, rt.right - rt.left, rt.bottom - rt.top, 0);
+	}
 	m_cbAC.ShowWindow(false);
 }
 
@@ -145,10 +156,10 @@ int CComponentView::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	m_arrDlg[(UINT)COMPONENT_TYPE::MESHRENDER]->ShowWindow(false);
 	m_arrDlg[(UINT)COMPONENT_TYPE::MESHRENDER]->UpdateWindow();
 
-	m_arrDlg[(UINT)COMPONENT_TYPE::COLLIDER] = new CColliderDlg;
-	m_arrDlg[(UINT)COMPONENT_TYPE::COLLIDER]->Create(IDD_COLLIDERDLG, this);
-	m_arrDlg[(UINT)COMPONENT_TYPE::COLLIDER]->ShowWindow(false);
-	m_arrDlg[(UINT)COMPONENT_TYPE::COLLIDER]->UpdateWindow();
+	m_arrDlg[(UINT)COMPONENT_TYPE::COLLIDER_2D] = new CColliderDlg;
+	m_arrDlg[(UINT)COMPONENT_TYPE::COLLIDER_2D]->Create(IDD_COLLIDERDLG, this);
+	m_arrDlg[(UINT)COMPONENT_TYPE::COLLIDER_2D]->ShowWindow(false);
+	m_arrDlg[(UINT)COMPONENT_TYPE::COLLIDER_2D]->UpdateWindow();
 
 	m_arrDlg[(UINT)COMPONENT_TYPE::ANIMATOR] = new CAnimatorDlg;
 	m_arrDlg[(UINT)COMPONENT_TYPE::ANIMATOR]->Create(IDD_ANIMATORDLG, this);
@@ -196,8 +207,8 @@ void CComponentView::OnSelchangeACCombo()
 	case (UINT)COMPONENT_TYPE::CAMERA:
 		m_pTargetObj->AddComponent<CCamera>(new CCamera);
 		break;
-	case (UINT)COMPONENT_TYPE::COLLIDER:
-		m_pTargetObj->AddComponent<CCollider>(new CCollider2D);
+	case (UINT)COMPONENT_TYPE::COLLIDER_2D:
+		m_pTargetObj->AddComponent<CCollider2D>(new CCollider2D);
 		break;
 	case (UINT)COMPONENT_TYPE::ANIMATOR:
 		m_pTargetObj->AddComponent<CAnimator>(new CAnimator);

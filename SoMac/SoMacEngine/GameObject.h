@@ -12,6 +12,9 @@ class CCamera;
 class CScript;
 class CLayer;
 class CCollider;
+class CCollider2D;
+class CCollider3D;
+
 class CAnimator;
 class CGameObject
 {
@@ -58,7 +61,10 @@ public:
 	CMeshRenderer* GetMeshRender() { return (CMeshRenderer*)m_arrComp[(UINT)COMPONENT_TYPE::MESHRENDER]; }
 	CTransform* GetTransform() { return (CTransform*)m_arrComp[(UINT)COMPONENT_TYPE::TRANSFORM]; }
 	CCamera* GetCamera() { return (CCamera*)m_arrComp[(UINT)COMPONENT_TYPE::CAMERA]; }
-	CCollider* GetCollider() { return (CCollider*)m_arrComp[(UINT)COMPONENT_TYPE::COLLIDER]; }
+	CCollider2D* GetCollider2D() { return (CCollider2D*)m_arrComp[(UINT)COMPONENT_TYPE::COLLIDER_2D]; }
+	CCollider3D* GetCollider3D() { return (CCollider3D*)m_arrComp[(UINT)COMPONENT_TYPE::COLLIDER_3D]; }
+
+	CCollider* GetCollider();
 	CAnimator* GetAnimator() { return (CAnimator*)m_arrComp[(UINT)COMPONENT_TYPE::ANIMATOR]; }
 	const wstring& GetTag() { return m_strTag; }
 	void SetTag(const wstring& _strTag) { m_strTag = _strTag; }
@@ -82,6 +88,7 @@ private:
 private:
 	
 	void SetLayerName(const wstring& _strName) { m_strLayerName = _strName; }
+public:
 	const wstring& GetLayerName() { return m_strLayerName; }
 
 public:
@@ -110,7 +117,15 @@ CComponent* CGameObject::GetComponent()
 	}
 	else if (info.hash_code() == typeid(CCollider).hash_code())
 	{
-		return m_arrComp[(UINT)COMPONENT_TYPE::COLLIDER];
+		return GetCollider();
+	}
+	else if (info.hash_code() == typeid(CCollider2D).hash_code())
+	{
+		return m_arrComp[(UINT)COMPONENT_TYPE::COLLIDER_2D];
+	}
+	else if (info.hash_code() == typeid(CCollider3D).hash_code())
+	{
+		return m_arrComp[(UINT)COMPONENT_TYPE::COLLIDER_3D];
 	}
 	else if (info.hash_code() == typeid(CAnimator).hash_code())
 	{
@@ -146,9 +161,13 @@ CComponent* CGameObject::AddComponent(CComponent* _pComp, ID<T>)
 	{
 		m_arrComp[(UINT)COMPONENT_TYPE::CAMERA] = _pComp;
 	}
-	if (info.hash_code() == typeid(CCollider).hash_code())
+	if (info.hash_code() == typeid(CCollider2D).hash_code())
 	{
-		m_arrComp[(UINT)COMPONENT_TYPE::COLLIDER] = _pComp;
+		m_arrComp[(UINT)COMPONENT_TYPE::COLLIDER_2D] = _pComp;
+	}
+	if (info.hash_code() == typeid(CCollider3D).hash_code())
+	{
+		m_arrComp[(UINT)COMPONENT_TYPE::COLLIDER_3D] = _pComp;
 	}
 	if (info.hash_code() == typeid(CAnimator).hash_code())
 	{

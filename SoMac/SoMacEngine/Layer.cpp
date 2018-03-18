@@ -5,8 +5,10 @@
 
 CLayer::CLayer()
 	:m_strLayerName(L"")
-	, m_bZOrder(false)
+	, m_bZOrder(true)
 	, m_iIdx(-1)
+	, m_listParentObj{}
+	, m_listObj{}
 {
 }
 
@@ -157,6 +159,7 @@ void CLayer::AddGameObject(CGameObject * _pObj, bool _bApplyChild)
 		(*iter)->SetLayerName(m_strLayerName);
 	}
 	m_listObj.insert(m_listObj.end(), listSource.begin(), listSource.end());
+	CSceneMgr::GetInst()->NotifyUpdate();
 }
 
 void CLayer::RemoveGameObject(CGameObject * _pObj)

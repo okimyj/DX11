@@ -17,6 +17,8 @@
 #define IDD_LISTDLG                     319
 #define IDD_ANIMATORDLG                 320
 #define IDD_ADD2DANIMDLG                321
+#define IDD_HIERACHYTREEDLG             322
+#define IDD_RESOURCETREEDLG             323
 #define IDC_BUTTON1                     1000
 #define IDC_BUTTON2                     1001
 #define IDC_POS_X                       1001
@@ -33,6 +35,8 @@
 #define IDC_OBJ_NAME                    1011
 #define IDC_MESH_EDIT                   1011
 #define IDC_MTRL_EDIT                   1012
+#define IDC_OBJ_NAME2                   1012
+#define IDC_LAYER_NAME                  1012
 #define IDC_RS_TYPE_COM                 1013
 #define IDC_MTRL_BTN                    1014
 #define IDC_MESH_BTN                    1015
@@ -60,6 +64,7 @@
 #define ID_WRITE_FILE_BTN               1038
 #define ID_ADD_BTN                      1040
 #define IDC_COMBO1                      1040
+#define IDC_TREE1                       1042
 #define ID_GAMEOBJECT_EMPTY             32771
 #define ID_GAMEOBJECT_STDANIM           32772
 #define ID_GAMEOBJECT_RECT              32773
@@ -68,9 +73,9 @@
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        323
+#define _APS_NEXT_RESOURCE_VALUE        325
 #define _APS_NEXT_COMMAND_VALUE         32776
-#define _APS_NEXT_CONTROL_VALUE         1041
-#define _APS_NEXT_SYMED_VALUE           322
+#define _APS_NEXT_CONTROL_VALUE         1043
+#define _APS_NEXT_SYMED_VALUE           324
 #endif
 #endif

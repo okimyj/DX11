@@ -145,11 +145,10 @@ void CAdd2DAnimDlg::OnClickedMultiTextureCheckBtn()
 void CAdd2DAnimDlg::OnNMClickList(NMHDR * pNMHDR, LRESULT * pResult)
 {
 	LPNMITEMACTIVATE pNMItemActivate = reinterpret_cast<LPNMITEMACTIVATE>(pNMHDR);
-
-	int iIdx = m_listBox.GetSelectionMark();
-	if (-1 != iIdx)
+	int selected = m_listBox.GetSelectionMark();
+	if (-1 != selected)
 	{
-		m_editTextureName.SetWindowTextW(m_listBox.GetItemText(iIdx, 0));
+		m_editTextureName.SetWindowTextW(m_listBox.GetItemText(selected, 0));
 	}
 	*pResult = 0;
 }
@@ -251,6 +250,7 @@ void CAdd2DAnimDlg::OnClickedAppend()
 	if (NULL != m_pTargetObj)
 	{
 		CString resourcePath = CPathMgr::GetResourcePath();
+
 		resourcePath = strFolderPath.Mid(resourcePath.GetLength(), strFolderPath.GetLength());
 		CAnimator* pAnimator = m_pTargetObj->GetAnimator();
 		pAnimator->LoadAnimation2D(strAnimName.GetBuffer(), resourcePath.GetBuffer());

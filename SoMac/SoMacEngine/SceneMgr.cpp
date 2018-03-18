@@ -9,11 +9,6 @@
 #include "MeshRenderer.h"
 #include "Mesh.h"
 #include "Texture.h"
-#include "Script.h"
-#include "PlayerScript.h"
-#include "EnemyScript.h"
-#include "BulletScript.h"
-#include "CameraScript.h"
 #include "Prefab.h"
 #include "Material.h"
 #include "TestScene.h"
@@ -33,6 +28,15 @@ CSceneMgr::~CSceneMgr()
 	SAFE_DELETE(m_pCurScene);
 	SAFE_DELETE(m_pPrevScene);
 }
+
+void CSceneMgr::NotifyUpdate()
+{
+#ifdef _SOMAC_TOOL
+	CallbackUpdate();
+#endif 
+
+}
+
 
 void CSceneMgr::Init()
 {	
@@ -115,7 +119,7 @@ void CSceneMgr::CreateMaterial()
 }
 
 void CSceneMgr::CreateGameObject()
-{
+{/*
 	// -- Create Bullet Prefab --//
 	CGameObject* pBullet = CGameObject::CreateGameObject(L"Bullet");
 	pBullet->GetMeshRender()->SetMesh((CMesh*)CResMgr::GetInst()->Load<CMesh>(L"RectMesh"));
@@ -149,7 +153,7 @@ void CSceneMgr::CreateGameObject()
 	pObj->GetMeshRender()->SetMaterial((CMaterial*)CResMgr::GetInst()->Load<CMaterial>(L"Default"));
 	pObj->GetCollider()->SetOffsetScale(Vec3(1.1f, 1.1f, 1.1f));
 	AddGameObject(pObj, L"MonsterLayer");
-	/*
+	
 	pObj = CGameObject::CreateGameObject(L"Cartoon");
 	pObj->AddComponent<CCollider>(new CCollider2D);
 	

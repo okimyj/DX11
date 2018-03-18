@@ -25,6 +25,12 @@ void CResMgr::Init()
 	CreateDefaultMesh();
 	CreateDefaultMaterial();
 }
+void CResMgr::NotifyUpdate()
+{
+#ifdef _SOMAC_TOOL
+	CallbackUpdate();
+#endif
+}
 void CResMgr::CreateDefaultMesh()
 {
 	//== Create Default Mesh ==//
@@ -103,7 +109,7 @@ int CResMgr::AddMesh(const wstring & _strKey, CMesh * _pMesh)
 	}
 	_pMesh->SetKey(_strKey);
 	m_mapMesh.insert(make_pair(_strKey, _pMesh));
-
+	NotifyUpdate();
 	return RET_SUCCESS;
 }
 
@@ -115,7 +121,7 @@ int CResMgr::AddPrefab(const wstring & _strKey, CGameObject * _pObj)
 	pPrefab = new CPrefab(_pObj);
 	pPrefab->SetKey(_strKey);
 	m_mapPrefab.insert(make_pair(_strKey, pPrefab));
-
+	NotifyUpdate();
 	return RET_SUCCESS;
 }
 
@@ -126,6 +132,7 @@ int CResMgr::AddMaterial(const wstring & _strKey, CMaterial * _pMaterial)
 		return RET_FAILED;
 	_pMaterial->SetKey(_strKey);
 	m_mapMaterial.insert(make_pair(_strKey, _pMaterial));
+	NotifyUpdate();
 	return 0;
 }
 

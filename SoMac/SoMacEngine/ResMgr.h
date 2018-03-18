@@ -19,15 +19,27 @@ private:
 	map<wstring, CResPtr<CPrefab>>		m_mapPrefab;
 	map<wstring, CResPtr<CMaterial>>	m_mapMaterial;
 	vector<CResPtr<CRes>>					m_vecCloneRes;
+
+#ifdef _SOMAC_TOOL
+	using voidFunc = std::function<void()>;
+	voidFunc m_updateCallback;
+
+public:
+	void SetUpdateCallback(const voidFunc& _func) { m_updateCallback = _func; }
+private:
+	void CallbackUpdate() { if (NULL != m_updateCallback)m_updateCallback(); };
+#endif
+
 public:
 	void Init();
 private:
+	void NotifyUpdate();
 	void CreateDefaultMesh();
 	void CreateDefaultMaterial();
 public :
 	int AddPrefab(const wstring& _strKey, CGameObject* _pPrefab);
 	int AddMaterial(const wstring& _strKey, CMaterial* _pMaterial);
-	void AddCloneResource(CRes* _pRes) { m_vecCloneRes.push_back(_pRes); }
+	void AddCloneResource(CRes* _pRes) { m_vecCloneRes.push_back(_pRes); NotifyUpdate();	}
 private:
 	int AddMesh(const wstring& _strKey, CMesh* _pMesh);
 	
@@ -37,12 +49,16 @@ private:
 	CMaterial* FindMaterial(const wstring& _strKey);
 private:
 	map<wstring, CResPtr<CMesh>>& GetMeshMap() { return m_mapMesh; }
+	map<wstring, CResPtr<CTexture>>& GetTextureMap() { return m_mapTexture; }
+	map<wstring, CResPtr<CPrefab>>& GetPrefabMap() { return m_mapPrefab; }
 	map<wstring, CResPtr<CMaterial>>& GetMaterialMap() { return m_mapMaterial; }
+	vector<CResPtr<CRes>>& GetCloneVector() { return m_vecCloneRes; }
 public:
 	template <typename T>
 	CRes* Load(const wstring& _strKey, const wstring& _strFilePath=L"");	
 
 	friend class CListDlg;
+	friend class CResourceTreeDlg;
 };
 
 template<typename T>

@@ -93,15 +93,16 @@ void CListDlg::OnNMDblclkList(NMHDR *pNMHDR, LRESULT *pResult)
 
 void CListDlg::OnOK()
 {
-	int iIdx = m_listCtrl.GetSelectionMark();
-	if (-1 == iIdx)
+	int selected = m_listCtrl.GetSelectionMark();
+	
+	if (-1 == selected)
 	{
 		// 아무것도 선택 되지 않음.
 		EndDialog(NULL);
 	}
 	else
 	{
-		LPARAM lp = m_listCtrl.GetItemData(iIdx);
+		LPARAM lp = m_listCtrl.GetItemData(selected);
 		EndDialog(lp);
 		//CDialogEx::OnOK();
 	}

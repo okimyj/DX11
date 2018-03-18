@@ -137,6 +137,7 @@ void CMainFrame::OnSetFocus(CWnd* /*pOldWnd*/)
 
 void CMainFrame::OnGameObjectEmpty()
 {
+	// 비어있는 게임 오브젝트를 만든다. 
 	CScene* pCurScene = CSceneMgr::GetInst()->GetCurScene();
 	CLayer* pLayer = pCurScene->FindLayer(LAYER_DEFAULT);
 	CGameObject* pObj = new CGameObject();

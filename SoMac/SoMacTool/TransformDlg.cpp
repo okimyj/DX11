@@ -28,6 +28,7 @@ void CTransformDlg::Update(CGameObject * _pObj, bool _bForce)
 	if (NULL == m_pTargetObj)
 		return;
 	m_editName.SetWindowTextW(_pObj->GetTag().c_str());
+	m_editLayerName.SetWindowTextW(_pObj->GetLayerName().c_str());
 	CTransform* pTrans = m_pTargetObj->GetTransform();
 	Vec3 vTransform[3] = { pTrans->GetLocalPosition(),  pTrans->GetLocalRotation(), pTrans->GetLocalScale() };
 	CString str;
@@ -48,6 +49,7 @@ void CTransformDlg::DoDataExchange(CDataExchange* pDX)
 {
 	CDialogEx::DoDataExchange(pDX);
 	DDX_Control(pDX, IDC_OBJ_NAME, m_editName);
+	DDX_Control(pDX, IDC_LAYER_NAME, m_editLayerName);
 	int iStartID = IDC_POS_X;
 	for (int i = 0; i < 9; ++i)
 	{

@@ -94,7 +94,7 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;_SOMAC_TOOL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>..\SoMacEngine\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
@@ -141,7 +141,7 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;_SOMAC_TOOL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>..\SoMacEngine\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
@@ -200,16 +200,19 @@
     <ClInclude Include="ComponentView.h" />
     <ClInclude Include="DebugView.h" />
     <ClInclude Include="GameView.h" />
+    <ClInclude Include="HierachyTreeDlg.h" />
     <ClInclude Include="HierachyView.h" />
     <ClInclude Include="ListDlg.h" />
     <ClInclude Include="MainFrm.h" />
     <ClInclude Include="MeshRendererDlg.h" />
     <ClInclude Include="MySplitterWnd.h" />
     <ClInclude Include="Resource.h" />
+    <ClInclude Include="ResourceTreeDlg.h" />
     <ClInclude Include="SoMacTool.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="TransformDlg.h" />
+    <ClInclude Include="TreeCtrlDlg.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Add2DAnimDlg.cpp" />
@@ -221,11 +224,13 @@
     <ClCompile Include="ComponentView.cpp" />
     <ClCompile Include="DebugView.cpp" />
     <ClCompile Include="GameView.cpp" />
+    <ClCompile Include="HierachyTreeDlg.cpp" />
     <ClCompile Include="HierachyView.cpp" />
     <ClCompile Include="ListDlg.cpp" />
     <ClCompile Include="MainFrm.cpp" />
     <ClCompile Include="MeshRendererDlg.cpp" />
     <ClCompile Include="MySplitterWnd.cpp" />
+    <ClCompile Include="ResourceTreeDlg.cpp" />
     <ClCompile Include="SoMacTool.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -234,6 +239,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="TransformDlg.cpp" />
+    <ClCompile Include="TreeCtrlDlg.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="SoMacTool.rc" />

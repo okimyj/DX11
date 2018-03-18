@@ -39,7 +39,10 @@ void CScene::Awake()
 	// -- Create Camera & Add to Camera Layer
 	CGameObject* pCamera = CGameObject::CreateCamera(L"MainCamera");
 	pCamera->GetCamera()->AddRenderTargetLayer(LAYER_DEFAULT);
+	pCamera->GetCamera()->AddRenderTargetLayer(LAYER_CAMERA);
 	FindLayer(LAYER_CAMERA)->AddGameObject(pCamera);
+	CGameObject* empty = CGameObject::CreateGameObject(L"Camera Child");
+	empty->SetParent(pCamera);
 
 
 	for (int i = 0; i < MAX_LAYER; ++i)
@@ -107,6 +110,8 @@ void CScene::Render()
 	for (; iter != listObj.end(); ++iter)
 	{
 		CCamera* pCamComp = (*iter)->GetCamera();
+		if (NULL == pCamComp)
+			continue;
 		pCamComp->ApplyData();
 		for (int i = 0; i < MAX_LAYER; ++i)
 		{
@@ -152,6 +157,17 @@ CLayer * CScene::FindLayer(const wstring & _strLayerName)
 	return iter->second;
 }
 
+
+void CScene::GetAllParentObjects(list<CGameObject*>& _listOut)
+{
+	for (UINT i = 0; i < m_vecLayer.size(); ++i)
+	{
+		if (NULL == m_vecLayer[i])
+			continue;
+		list<CGameObject*> list = m_vecLayer[i]->GetParentObjList();
+		_listOut.insert(_listOut.end(), list.begin(), list.end());
+	}
+}
 
 UINT CScene::GetLayerIndex()
 {

@@ -8,11 +8,14 @@
 
 CGameObject::CGameObject()
 	: m_arrComp{}
+	, m_listScript{}
+	, m_pParent(NULL)
 {
 }
 
 CGameObject::CGameObject(const CGameObject & _pOther)
 	: m_strTag(_pOther.m_strTag)
+	, m_pParent(NULL)
 	, m_arrComp{}
 	, m_listScript{}
 {
@@ -61,7 +64,17 @@ CGameObject * CGameObject::CreateCamera(const wstring& _strTag)
 	pObj->SetTag(_strTag);
 	return pObj;
 }
+CCollider* CGameObject::GetCollider()
+{
+	CCollider2D* pComp = GetCollider2D();
+	if (NULL != pComp)
+		return (CCollider*)pComp;
+	else
+	{
+		return (CCollider*)GetCollider3D();
+	}
 
+}
 
 
 void CGameObject::Awake()
@@ -194,16 +207,32 @@ void CGameObject::SetParent(CGameObject * _pParent, bool _bApplyLayer)
 	// Layer 관련 된 것은 어차피 부모오브젝트 기반으로 호출 되기 때문에 빼주지 않아도 된다. 내 layer는 내 layer 일 뿐임.
 	if(HasParent() && m_pParent != _pParent)
 		ClearParent();
-
+	else if(!HasParent() && _pParent != NULL)
+	{
+		// 부모 오브젝트가 없고 Set 하려는 부모가 NULL 이 아니다 -> 더 이상 최상위 오브젝트가 아니다. 
+		CLayer* pCurLayer = CSceneMgr::GetInst()->GetCurSceneLayer(m_strLayerName);
+		if (NULL != pCurLayer)
+			pCurLayer->RemoveParentObject(this);
+	}
+		
 	m_pParent = _pParent;
 
 	if (NULL != m_pParent)
 	{
+		
 		m_pParent->AddChild(this);
 		if (_bApplyLayer)
+		{
+			
+			CLayer* pCurLayer = CSceneMgr::GetInst()->GetCurSceneLayer(m_strLayerName);
+			if (NULL != pCurLayer)
+			{
+				pCurLayer->RemoveGameObject(this);
+			}
 			CSceneMgr::GetInst()->GetCurSceneLayer(m_pParent->GetLayerName())->AddGameObject(this);
+		}	
 	}
-	
+
 }
 
 bool CGameObject::IsMouseOn(Vec2 _vWorldPos)
@@ -221,6 +250,7 @@ bool CGameObject::IsMouseOn(Vec2 _vWorldPos)
 
 void CGameObject::ClearParent()
 {
+	
 	m_pParent->RemoveChild(this);
 	m_pParent = NULL;
 }

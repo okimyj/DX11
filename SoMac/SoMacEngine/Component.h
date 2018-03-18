@@ -13,12 +13,14 @@ private:
 	
 public:
 	virtual CComponent* Clone() = 0;
-	virtual void Awake() {};
+	virtual void Awake() { isAwake = true; }
 	virtual void Start() {};
 	virtual int Update() = 0;
 	virtual int LateUpdate() { return 0; }
 	virtual int FinalUpdate() { return 0; }
 	virtual void Render() {};
+	bool enabled = true;
+	bool isAwake = false;
 private:
 	void SetGameObject(CGameObject* _pObj) { m_pObj = _pObj; }
 

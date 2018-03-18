@@ -16,12 +16,15 @@ CCollider2D::~CCollider2D()
 
 void CCollider2D::Awake()
 {
+	CComponent::Awake();
 	m_pMaterial = (CMaterial*)CResMgr::GetInst()->Load<CMaterial>(L"ColliderMaterial");
 	m_pMesh = (CMesh*)CResMgr::GetInst()->Load<CMesh>(L"ColliderRectMesh");
 }
 
 void CCollider2D::Render()
 {
+	if (!isAwake)
+		Awake();
 	if (m_pMaterial == NULL || m_pMesh == NULL)
 		return;
 
