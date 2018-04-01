@@ -1,5 +1,6 @@
 #pragma once
 #include "define.h"
+class CLayer;
 class CSaveLoadMgr
 {
 	SINGLE(CSaveLoadMgr);
