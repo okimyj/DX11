@@ -76,6 +76,24 @@
     <Filter Include="04. View\02. HierachyView\TreeCtrlDlg\02. ResourceTreeDlg">
       <UniqueIdentifier>{b23dd83b-73f8-4578-b200-761568df763e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="06. External">
+      <UniqueIdentifier>{7e597138-4324-40d4-8a3b-a6f41ccc728d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04. View\03. ComponentView\ComponentDlg\06. ScriptDlg">
+      <UniqueIdentifier>{e4eb2700-9ff3-4a76-9d36-f480840efb85}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="06. External\01. Script">
+      <UniqueIdentifier>{51bd7d08-4308-4667-a964-5d28c3094425}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="06. External\01. Script\ScriptCode">
+      <UniqueIdentifier>{e2969ea0-3a3c-465a-86c8-ce8265232a19}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="06. External\01. Script\ScriptMgr">
+      <UniqueIdentifier>{a9a4234c-c3c8-40b6-a684-c7a24d6e10da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="06. External\02. SaveLoad">
+      <UniqueIdentifier>{b1d51f08-2b3b-4f36-a543-e714b1ac3b02}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -147,6 +165,33 @@
     <ClInclude Include="TreeCtrlDlg.h">
       <Filter>04. View\02. HierachyView\TreeCtrlDlg</Filter>
     </ClInclude>
+    <ClInclude Include="..\External\ScriptMgr.h">
+      <Filter>06. External\01. Script\ScriptMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\External\ScriptCode\BulletScript.h">
+      <Filter>06. External\01. Script\ScriptCode</Filter>
+    </ClInclude>
+    <ClInclude Include="..\External\ScriptCode\CameraScript.h">
+      <Filter>06. External\01. Script\ScriptCode</Filter>
+    </ClInclude>
+    <ClInclude Include="..\External\ScriptCode\EnemyScript.h">
+      <Filter>06. External\01. Script\ScriptCode</Filter>
+    </ClInclude>
+    <ClInclude Include="..\External\ScriptCode\ItemScript.h">
+      <Filter>06. External\01. Script\ScriptCode</Filter>
+    </ClInclude>
+    <ClInclude Include="..\External\ScriptCode\PlayerPlanet.h">
+      <Filter>06. External\01. Script\ScriptCode</Filter>
+    </ClInclude>
+    <ClInclude Include="..\External\ScriptCode\PlayerScript.h">
+      <Filter>06. External\01. Script\ScriptCode</Filter>
+    </ClInclude>
+    <ClInclude Include="ScriptDlg.h">
+      <Filter>04. View\03. ComponentView\ComponentDlg\06. ScriptDlg</Filter>
+    </ClInclude>
+    <ClInclude Include="..\External\SaveLoadMgr.h">
+      <Filter>06. External\02. SaveLoad</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -208,6 +253,33 @@
     </ClCompile>
     <ClCompile Include="TreeCtrlDlg.cpp">
       <Filter>04. View\02. HierachyView\TreeCtrlDlg</Filter>
+    </ClCompile>
+    <ClCompile Include="..\External\ScriptMgr.cpp">
+      <Filter>06. External\01. Script\ScriptMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\External\ScriptCode\BulletScript.cpp">
+      <Filter>06. External\01. Script\ScriptCode</Filter>
+    </ClCompile>
+    <ClCompile Include="..\External\ScriptCode\CameraScript.cpp">
+      <Filter>06. External\01. Script\ScriptCode</Filter>
+    </ClCompile>
+    <ClCompile Include="..\External\ScriptCode\EnemyScript.cpp">
+      <Filter>06. External\01. Script\ScriptCode</Filter>
+    </ClCompile>
+    <ClCompile Include="..\External\ScriptCode\ItemScript.cpp">
+      <Filter>06. External\01. Script\ScriptCode</Filter>
+    </ClCompile>
+    <ClCompile Include="..\External\ScriptCode\PlayerPlanet.cpp">
+      <Filter>06. External\01. Script\ScriptCode</Filter>
+    </ClCompile>
+    <ClCompile Include="..\External\ScriptCode\PlayerScript.cpp">
+      <Filter>06. External\01. Script\ScriptCode</Filter>
+    </ClCompile>
+    <ClCompile Include="ScriptDlg.cpp">
+      <Filter>04. View\03. ComponentView\ComponentDlg\06. ScriptDlg</Filter>
+    </ClCompile>
+    <ClCompile Include="..\External\SaveLoadMgr.cpp">
+      <Filter>06. External\02. SaveLoad</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

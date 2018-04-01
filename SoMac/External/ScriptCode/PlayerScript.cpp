@@ -1,3 +1,4 @@
+#include "stdafx.h"
 #include "PlayerScript.h"
 #include "BulletScript.h"
 #include "PlayerPlanet.h"
@@ -9,7 +10,6 @@
 #include "Texture.h"
 #include "Prefab.h"
 #include "Material.h"
-#include "TestScene.h"
 CPlayerScript::CPlayerScript()
 	: m_fSpeed(300.f)
 	, m_bIsLeft(true)

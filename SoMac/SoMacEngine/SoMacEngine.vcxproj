@@ -72,11 +72,12 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>..\Bin_Debug\</OutDir>
     <LibraryPath>$(SolutionDir)\External\lib;$(LibraryPath)</LibraryPath>
-    <IncludePath>$(SolutionDir)\External\include;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)\External\include;$(SolutionDir)\External\;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>..\Bin\</OutDir>
     <LibraryPath>$(SolutionDir)\Bin;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)\External\include;$(SolutionDir)\External\;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -155,9 +156,7 @@ call "fx.bat"</Command>
     <ClInclude Include="Animation2D.h" />
     <ClInclude Include="Animator.h" />
     <ClInclude Include="BlendState.h" />
-    <ClInclude Include="BulletScript.h" />
     <ClInclude Include="Camera.h" />
-    <ClInclude Include="CameraScript.h" />
     <ClInclude Include="Collider.h" />
     <ClInclude Include="Collider2D.h" />
     <ClInclude Include="Collider3D.h" />
@@ -167,19 +166,15 @@ call "fx.bat"</Command>
     <ClInclude Include="define.h" />
     <ClInclude Include="DepthStencilState.h" />
     <ClInclude Include="Device.h" />
-    <ClInclude Include="EnemyScript.h" />
     <ClInclude Include="func.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="global.h" />
-    <ClInclude Include="ItemScript.h" />
     <ClInclude Include="KeyMgr.h" />
     <ClInclude Include="Layer.h" />
     <ClInclude Include="Material.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="MeshRenderer.h" />
     <ClInclude Include="PathMgr.h" />
-    <ClInclude Include="PlayerPlanet.h" />
-    <ClInclude Include="PlayerScript.h" />
     <ClInclude Include="Prefab.h" />
     <ClInclude Include="Res.h" />
     <ClInclude Include="ResMgr.h" />
@@ -191,7 +186,6 @@ call "fx.bat"</Command>
     <ClInclude Include="Shader.h" />
     <ClInclude Include="ShaderMgr.h" />
     <ClInclude Include="struct.h" />
-    <ClInclude Include="TestScene.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="TimeMgr.h" />
     <ClInclude Include="Transform.h" />
@@ -201,9 +195,7 @@ call "fx.bat"</Command>
     <ClCompile Include="Animation2D.cpp" />
     <ClCompile Include="Animator.cpp" />
     <ClCompile Include="BlendState.cpp" />
-    <ClCompile Include="BulletScript.cpp" />
     <ClCompile Include="Camera.cpp" />
-    <ClCompile Include="CameraScript.cpp" />
     <ClCompile Include="Collider.cpp" />
     <ClCompile Include="Collider2D.cpp" />
     <ClCompile Include="Collider3D.cpp" />
@@ -212,18 +204,14 @@ call "fx.bat"</Command>
     <ClCompile Include="Core.cpp" />
     <ClCompile Include="DepthStencilState.cpp" />
     <ClCompile Include="Device.cpp" />
-    <ClCompile Include="EnemyScript.cpp" />
     <ClCompile Include="func.cpp" />
     <ClCompile Include="GameObject.cpp" />
-    <ClCompile Include="ItemScript.cpp" />
     <ClCompile Include="KeyMgr.cpp" />
     <ClCompile Include="Layer.cpp" />
     <ClCompile Include="Material.cpp" />
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="MeshRenderer.cpp" />
     <ClCompile Include="PathMgr.cpp" />
-    <ClCompile Include="PlayerPlanet.cpp" />
-    <ClCompile Include="PlayerScript.cpp" />
     <ClCompile Include="Prefab.cpp" />
     <ClCompile Include="Res.cpp" />
     <ClCompile Include="ResMgr.cpp" />
@@ -234,7 +222,6 @@ call "fx.bat"</Command>
     <ClCompile Include="Script.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="ShaderMgr.cpp" />
-    <ClCompile Include="TestScene.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="TimeMgr.cpp" />
     <ClCompile Include="Transform.cpp" />

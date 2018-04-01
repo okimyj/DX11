@@ -10,8 +10,10 @@ protected:
 public:
 	virtual void Update(CGameObject* _pObj, bool _bForce = false) = 0;
 	const wchar_t* GetName() { return m_pName; }
+
 protected:
 	void SetFocusGameView();
+
 public:
 	CComponentDlg();
 	CComponentDlg(UINT nIDTemplate, CWnd* pParent = NULL);

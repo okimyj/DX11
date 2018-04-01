@@ -9,7 +9,7 @@
 #include "MeshRendererDlg.h"
 #include "ColliderDlg.h"
 #include "AnimatorDlg.h"
-
+#include "ScriptDlg.h"
 #include "Transform.h"
 #include "MeshRenderer.h"
 #include "Camera.h"
@@ -72,14 +72,23 @@ void CComponentView::SetGameObject(CGameObject * _pObj, bool _bForce)
 		m_arrDlg[i]->Update(m_pTargetObj);
 		iStartY += rt.bottom - rt.top - 1;
 	}
+
 	if (NULL == m_pTargetObj)
 	{
+		m_arrDlg[(UINT)COMPONENT_TYPE::END]->ShowWindow(false);
 		m_btAC.ShowWindow(false);
 	}
 	else
 	{
-		m_btAC.ShowWindow(true);
+		m_arrDlg[(UINT)COMPONENT_TYPE::END]->ShowWindow(true);
 		RECT rt = {};
+		m_arrDlg[(UINT)COMPONENT_TYPE::END]->GetWindowRect(&rt);
+		m_arrDlg[(UINT)COMPONENT_TYPE::END]->ShowWindow(true);
+		m_arrDlg[(UINT)COMPONENT_TYPE::END]->SetWindowPos(NULL, 0, iStartY, rt.right - rt.left, rt.bottom - rt.top, 0);
+		m_arrDlg[(UINT)COMPONENT_TYPE::END]->Update(m_pTargetObj);
+		iStartY += rt.bottom - rt.top - 1;
+
+		m_btAC.ShowWindow(true);
 		m_btAC.GetWindowRect(&rt);
 		ScreenToClient(&rt);
 		iStartY += 35;
@@ -165,6 +174,11 @@ int CComponentView::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	m_arrDlg[(UINT)COMPONENT_TYPE::ANIMATOR]->Create(IDD_ANIMATORDLG, this);
 	m_arrDlg[(UINT)COMPONENT_TYPE::ANIMATOR]->ShowWindow(false);
 	m_arrDlg[(UINT)COMPONENT_TYPE::ANIMATOR]->UpdateWindow();
+
+	m_arrDlg[(UINT)COMPONENT_TYPE::END] = new CScriptDlg;
+	m_arrDlg[(UINT)COMPONENT_TYPE::END]->Create(IDD_SCRIPTDLG, this);
+	m_arrDlg[(UINT)COMPONENT_TYPE::END]->ShowWindow(false);
+	m_arrDlg[(UINT)COMPONENT_TYPE::END]->UpdateWindow();
 
 	return 0;
 }

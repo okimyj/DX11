@@ -96,7 +96,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;_SOMAC_TOOL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>..\SoMacEngine\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)SoMacEngine\;$(SolutionDir)SoMacTool\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -111,6 +111,10 @@
       <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
+    <PreBuildEvent>
+      <Command>cd $(SolutionDir)Bin_Debug\
+call "CodeGen.exe"</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -143,7 +147,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;_SOMAC_TOOL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>..\SoMacEngine\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)SoMacEngine\;$(SolutionDir)SoMacTool\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -191,6 +195,14 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\External\SaveLoadMgr.h" />
+    <ClInclude Include="..\External\ScriptCode\BulletScript.h" />
+    <ClInclude Include="..\External\ScriptCode\CameraScript.h" />
+    <ClInclude Include="..\External\ScriptCode\EnemyScript.h" />
+    <ClInclude Include="..\External\ScriptCode\ItemScript.h" />
+    <ClInclude Include="..\External\ScriptCode\PlayerPlanet.h" />
+    <ClInclude Include="..\External\ScriptCode\PlayerScript.h" />
+    <ClInclude Include="..\External\ScriptMgr.h" />
     <ClInclude Include="Add2DAnimDlg.h" />
     <ClInclude Include="AnimatorDlg.h" />
     <ClInclude Include="ButtonView.h" />
@@ -208,6 +220,7 @@
     <ClInclude Include="MySplitterWnd.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="ResourceTreeDlg.h" />
+    <ClInclude Include="ScriptDlg.h" />
     <ClInclude Include="SoMacTool.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
@@ -215,6 +228,14 @@
     <ClInclude Include="TreeCtrlDlg.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\External\SaveLoadMgr.cpp" />
+    <ClCompile Include="..\External\ScriptCode\BulletScript.cpp" />
+    <ClCompile Include="..\External\ScriptCode\CameraScript.cpp" />
+    <ClCompile Include="..\External\ScriptCode\EnemyScript.cpp" />
+    <ClCompile Include="..\External\ScriptCode\ItemScript.cpp" />
+    <ClCompile Include="..\External\ScriptCode\PlayerPlanet.cpp" />
+    <ClCompile Include="..\External\ScriptCode\PlayerScript.cpp" />
+    <ClCompile Include="..\External\ScriptMgr.cpp" />
     <ClCompile Include="Add2DAnimDlg.cpp" />
     <ClCompile Include="AnimatorDlg.cpp" />
     <ClCompile Include="ButtonView.cpp" />
@@ -231,6 +252,7 @@
     <ClCompile Include="MeshRendererDlg.cpp" />
     <ClCompile Include="MySplitterWnd.cpp" />
     <ClCompile Include="ResourceTreeDlg.cpp" />
+    <ClCompile Include="ScriptDlg.cpp" />
     <ClCompile Include="SoMacTool.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

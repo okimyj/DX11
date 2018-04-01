@@ -32,7 +32,7 @@ protected:
 
 private:
 	CGameObject*		m_pTargetObj;
-	CComponentDlg*	m_arrDlg[(UINT)COMPONENT_TYPE::END];
+	CComponentDlg*	m_arrDlg[(UINT)COMPONENT_TYPE::END+1];			// END 자리 == Script 자리. 
 	CButton m_btAC;
 	CComboBox m_cbAC;
 	bool m_bACFocused;

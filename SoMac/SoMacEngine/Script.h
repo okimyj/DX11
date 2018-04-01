@@ -1,6 +1,5 @@
 #pragma once
 #include "Component.h"
-
 #include "TimeMgr.h"
 #include "KeyMgr.h"
 #include "ResMgr.h"

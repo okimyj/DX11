@@ -1,3 +1,4 @@
+#include "stdafx.h"
 #include "BulletScript.h"
 #include "Material.h"
 

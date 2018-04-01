@@ -1,9 +1,9 @@
+#include "stdafx.h"
 #include "EnemyScript.h"
 #include "SceneMgr.h"
 #include "Transform.h"
 #include "BulletScript.h"
 #include "Prefab.h"
-#include "TestScene.h"
 
 CEnemyScript::CEnemyScript()
 	: m_fAccrueDT(0.f)
@@ -38,7 +38,7 @@ void CEnemyScript::Die()
 	m_bAlive = false;
 	if (NULL != m_pTestScene)
 	{
-		m_pTestScene->PushEnemyObj(GameObject());
+		
 	}
 }
 

@@ -12,14 +12,17 @@
 #include "ButtonView.h"
 #include "DebugView.h"
 
+#include "PathMgr.h"
 #include "SceneMgr.h"
 #include "Scene.h"
 #include "Layer.h"
+
 #include "GameObject.h"
 #include "Transform.h"
 #include "ResMgr.h"
 #include "MeshRenderer.h"
 #include "Animator.h"
+
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -54,6 +57,8 @@ BEGIN_MESSAGE_MAP(CMainFrame, CFrameWnd)
 	ON_COMMAND(ID_GAMEOBJECT_EMPTY, &CMainFrame::OnGameObjectEmpty)
 	ON_COMMAND(ID_GAMEOBJECT_RECT, &CMainFrame::OnGameObjectRect)
 	ON_COMMAND(ID_GAMEOBJECT_STDANIM, &CMainFrame::OnGameObjectStdAnim)
+	ON_COMMAND(ID_SCENE_SAVE, &CMainFrame::OnSceneSave)
+	ON_COMMAND(ID_SCENE_LOAD, &CMainFrame::OnSceneLoad)
 END_MESSAGE_MAP()
 
 // CMainFrame »ý¼º/¼Ò¸ê
@@ -189,3 +194,32 @@ BOOL CMainFrame::OnCmdMsg(UINT nID, int nCode, void* pExtra, AFX_CMDHANDLERINFO*
 	return CFrameWnd::OnCmdMsg(nID, nCode, pExtra, pHandlerInfo);
 }
 
+
+
+void CMainFrame::OnSceneSave()
+{
+	wchar_t szFilter[] = L"Scene (*.scene) | *.scene; |";
+	CFileDialog dlg(FALSE, NULL, NULL, OFN_OVERWRITEPROMPT, szFilter);
+	CString strInitPath = CPathMgr::GetResourcePath();
+	strInitPath += L"Scene";
+	dlg.m_ofn.lpstrInitialDir = strInitPath;
+
+	CString strPathName;
+	if (IDOK == dlg.DoModal())
+	{
+		strPathName = dlg.GetPathName();
+		wchar_t* pExt = CPathMgr::GetExtension(strPathName.GetBuffer());
+
+		if (0 == wcslen(pExt))
+			strPathName += L".scene";
+
+	//	CSaveLoadMgr::GetInst()->SaveScene(strPathName.GetBuffer());
+	}
+
+}
+
+
+void CMainFrame::OnSceneLoad()
+{
+	// TODO: Add your command handler code here
+}

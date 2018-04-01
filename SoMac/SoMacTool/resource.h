@@ -19,6 +19,7 @@
 #define IDD_ADD2DANIMDLG                321
 #define IDD_HIERACHYTREEDLG             322
 #define IDD_RESOURCETREEDLG             323
+#define IDD_SCRIPTDLG                   324
 #define IDC_BUTTON1                     1000
 #define IDC_BUTTON2                     1001
 #define IDC_POS_X                       1001
@@ -35,7 +36,6 @@
 #define IDC_OBJ_NAME                    1011
 #define IDC_MESH_EDIT                   1011
 #define IDC_MTRL_EDIT                   1012
-#define IDC_OBJ_NAME2                   1012
 #define IDC_LAYER_NAME                  1012
 #define IDC_RS_TYPE_COM                 1013
 #define IDC_MTRL_BTN                    1014
@@ -68,14 +68,17 @@
 #define ID_GAMEOBJECT_EMPTY             32771
 #define ID_GAMEOBJECT_STDANIM           32772
 #define ID_GAMEOBJECT_RECT              32773
+#define ID_SCENE_NEW                    32776
+#define ID_SCENE_SAVE                   32777
+#define ID_SCENE_LOAD                   32778
 
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        325
-#define _APS_NEXT_COMMAND_VALUE         32776
+#define _APS_NEXT_COMMAND_VALUE         32779
 #define _APS_NEXT_CONTROL_VALUE         1043
-#define _APS_NEXT_SYMED_VALUE           324
+#define _APS_NEXT_SYMED_VALUE           325
 #endif
 #endif

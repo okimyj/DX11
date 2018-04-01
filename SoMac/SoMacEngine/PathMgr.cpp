@@ -1,6 +1,9 @@
 #include "PathMgr.h"
+#include <string>
+#include <Windows.h>
 // static 변수 초기화. 
 wchar_t CPathMgr::m_szResPath[255] = {};
+wchar_t CPathMgr::m_szExternalPath[255] = {};
 wchar_t CPathMgr::m_szExtension[20] = {};
 CPathMgr::CPathMgr()
 {
@@ -29,7 +32,9 @@ void CPathMgr::Init()
 			break;
 		}
 	}
+	wcscpy_s(m_szExternalPath, 255, m_szResPath);
 	wcscat_s(m_szResPath, 255, L"\\Bin\\Resources\\");
+	wcscat_s(m_szExternalPath, 255, L"\\External\\");
 }
 
 wchar_t * CPathMgr::GetExtension(const wchar_t * _pFileName)

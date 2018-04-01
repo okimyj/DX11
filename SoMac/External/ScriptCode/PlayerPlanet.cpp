@@ -1,3 +1,4 @@
+#include "stdafx.h"
 #include "PlayerPlanet.h"
 #include "PlayerScript.h"
 CPlayerPlanet::CPlayerPlanet()

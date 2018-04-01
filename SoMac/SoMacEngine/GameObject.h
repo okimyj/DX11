@@ -86,8 +86,8 @@ private:
 	
 
 private:
-	
 	void SetLayerName(const wstring& _strName) { m_strLayerName = _strName; }
+
 public:
 	const wstring& GetLayerName() { return m_strLayerName; }
 

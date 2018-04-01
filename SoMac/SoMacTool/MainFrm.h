@@ -48,6 +48,9 @@ protected:
 
 	DECLARE_MESSAGE_MAP()
 
+public:
+	afx_msg void OnSceneSave();
+	afx_msg void OnSceneLoad();
 };
 
 
