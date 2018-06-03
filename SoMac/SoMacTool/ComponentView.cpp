@@ -41,6 +41,16 @@ void CComponentView::DoDataExchange(CDataExchange* pDX)
 	
 }
 
+void CComponentView::InitTarget()
+{
+	m_pTargetObj = NULL;
+	for (UINT i = 0; i < (UINT)COMPONENT_TYPE::END; ++i)
+	{
+		if (NULL != m_arrDlg[i])
+			m_arrDlg[i]->InitTarget();
+	}
+}
+
 void CComponentView::SetGameObject(CGameObject * _pObj, bool _bForce)
 {
 	if (!_bForce && m_pTargetObj == _pObj)
@@ -160,10 +170,10 @@ int CComponentView::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	m_arrDlg[(UINT)COMPONENT_TYPE::TRANSFORM]->ShowWindow(false);
 	m_arrDlg[(UINT)COMPONENT_TYPE::TRANSFORM]->UpdateWindow();
 
-	m_arrDlg[(UINT)COMPONENT_TYPE::MESHRENDER] = new CMeshRendererDlg;
-	m_arrDlg[(UINT)COMPONENT_TYPE::MESHRENDER]->Create(IDD_MESHRENDERERDLG, this);
-	m_arrDlg[(UINT)COMPONENT_TYPE::MESHRENDER]->ShowWindow(false);
-	m_arrDlg[(UINT)COMPONENT_TYPE::MESHRENDER]->UpdateWindow();
+	m_arrDlg[(UINT)COMPONENT_TYPE::MESHRENDERER] = new CMeshRendererDlg;
+	m_arrDlg[(UINT)COMPONENT_TYPE::MESHRENDERER]->Create(IDD_MESHRENDERERDLG, this);
+	m_arrDlg[(UINT)COMPONENT_TYPE::MESHRENDERER]->ShowWindow(false);
+	m_arrDlg[(UINT)COMPONENT_TYPE::MESHRENDERER]->UpdateWindow();
 
 	m_arrDlg[(UINT)COMPONENT_TYPE::COLLIDER_2D] = new CColliderDlg;
 	m_arrDlg[(UINT)COMPONENT_TYPE::COLLIDER_2D]->Create(IDD_COLLIDERDLG, this);
@@ -215,7 +225,7 @@ void CComponentView::OnSelchangeACCombo()
 	case (UINT)COMPONENT_TYPE::TRANSFORM:
 		m_pTargetObj->AddComponent<CTransform>(new CTransform);
 		break;
-	case (UINT)COMPONENT_TYPE::MESHRENDER:
+	case (UINT)COMPONENT_TYPE::MESHRENDERER:
 		m_pTargetObj->AddComponent<CMeshRenderer>(new CMeshRenderer);
 		break;
 	case (UINT)COMPONENT_TYPE::CAMERA:

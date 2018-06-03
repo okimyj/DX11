@@ -40,6 +40,14 @@ void CSceneMgr::NotifyUpdate()
 void CSceneMgr::Init()
 {	
 	m_pCurScene = new CScene();
+	m_pCurScene->AddLayer(LAYER_DEFAULT, true);
+	m_pCurScene->AddLayer(LAYER_TRANSPARENT);
+	m_pCurScene->AddLayer(LAYER_CAMERA);
+	// -- Create Camera & Add to Camera Layer
+	CGameObject* pCamera = CGameObject::CreateCamera(L"MainCamera");
+	pCamera->GetCamera()->AddRenderTargetLayer(LAYER_DEFAULT);
+	pCamera->GetCamera()->AddRenderTargetLayer(LAYER_CAMERA);
+	m_pCurScene->FindLayer(LAYER_CAMERA)->AddGameObject(pCamera);
 	
 	m_pCurScene->Awake();
 	m_pCurScene->Start();
@@ -79,7 +87,13 @@ CLayer * CSceneMgr::GetCurSceneLayer(const wstring & _strLayerName)
 {
 	return GetCurScene()->FindLayer(_strLayerName);
 }
-
+void CSceneMgr::ChangeScene(CScene* _pNextScene)
+{
+	if (NULL != m_pCurScene)
+		delete m_pCurScene;
+	m_pCurScene = _pNextScene;
+	NotifyUpdate();
+}
 void CSceneMgr::CreateTestScene()
 {
 	CreateMaterial();

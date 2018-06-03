@@ -35,10 +35,11 @@ public:
 	virtual int FinalUpdate();
 	virtual int ApplyData();
 private:
-	
 	void AddFrame(const tFrameInfo& _tFrame) { m_vecFrame.push_back(_tFrame); }
 	virtual CLONE(CAnimation2D);
 public:
+	void Save(FILE* _pFile);
+	void Load(FILE* _pFile);
 	CAnimation2D();
 	virtual ~CAnimation2D();
 };

@@ -5,10 +5,14 @@
 #include "Device.h"
 #include <atlstr.h>  
 
+
+
 CAnimation2D::CAnimation2D()
-	: m_iCurFrame(0)
+	: m_vecFrame{}
+	, m_iCurFrame(0)
 	, m_fAccTime(0.f)
 {
+	m_b2DAnim = true;
 }
 
 
@@ -67,6 +71,7 @@ int CAnimation2D::ApplyData()
 
 	if (NULL != m_vecFrame[m_iCurFrame].pTexture)
 		m_vecFrame[m_iCurFrame].pTexture->ApplyData(16, (UINT)SHADER_TYPE::ST_PIXEL);
+
 
 
 	return RET_SUCCESS;
@@ -219,3 +224,38 @@ CAnimation2D * CAnimation2D::MakeOneAnim(tDescInfo & _tDesc, const wstring& _str
 }
 
 
+
+
+void CAnimation2D::Save(FILE * _pFile)
+{
+	CAnimation::Save(_pFile);
+	UINT iCount = m_vecFrame.size();
+	WriteUINT(iCount, _pFile);
+	for (UINT i = 0; i < iCount; ++i)
+	{
+		WriteVec2(m_vecFrame[i].vLeftTop, _pFile);
+		WriteFloat(m_vecFrame[i].fWidth, _pFile);
+		WriteFloat(m_vecFrame[i].fHeight, _pFile);
+		WriteFloat(m_vecFrame[i].fTerm, _pFile);
+		WriteResourceKey(m_vecFrame[i].pTexture.GetTarget(), _pFile);		
+	}
+}
+
+void CAnimation2D::Load(FILE * _pFile)
+{
+	CAnimation::Load(_pFile);
+	UINT iCount = ReadUINT(_pFile);
+	tFrameInfo tInfo = {};
+	wstring strKey;
+	for (UINT i = 0; i < iCount; ++i)
+	{
+		tInfo.vLeftTop = ReadVec2(_pFile);
+		tInfo.fWidth = ReadFloat(_pFile);
+		tInfo.fHeight = ReadFloat(_pFile);
+		tInfo.fTerm = ReadFloat(_pFile);
+		strKey = ReadResourceKey(_pFile);
+		if (!strKey.empty())
+			tInfo.pTexture = (CTexture*)CResMgr::GetInst()->Load<CTexture>(strKey);
+		AddFrame(tInfo);
+	}
+}

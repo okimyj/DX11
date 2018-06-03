@@ -3,6 +3,8 @@
 
 
 
+
+
 CTreeCtrlDlg::CTreeCtrlDlg()
 {
 }
@@ -107,4 +109,8 @@ void CTreeCtrlDlg::DeleteChildren(HTREEITEM _hItem)
 		if (NULL == hChild)
 			break;
 	}
+}
+void CTreeCtrlDlg::Init()
+{
+	m_ctrlTree.DeleteAllItems();
 }

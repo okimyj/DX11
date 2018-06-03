@@ -126,3 +126,89 @@ int GetSizeOfFormat(DXGI_FORMAT _eFormat)
 
 	return iRetByte / 8;
 }
+
+void WriteBool(const bool & _bool, FILE * _pFile)
+{
+	WriteValue(_bool, _pFile);
+}
+
+bool ReadBool(FILE * _pFile)
+{
+	return ReadValue<bool>(_pFile);
+}
+void WriteByte(const BYTE& _byte, FILE * _pFile)
+{
+	WriteValue(_byte, _pFile);
+}
+BYTE ReadByte(FILE * _pFile)
+{
+	return ReadValue<BYTE>(_pFile);
+}
+void WriteFloat(const float & _float, FILE * _pFile)
+{
+	if(NULL != _pFile)
+		WriteValue(_float, _pFile);
+}
+float ReadFloat(FILE * _pFile)
+{
+	return ReadValue<float>(_pFile);
+}
+void WriteInt(const int & _int, FILE * _pFile)
+{
+	WriteValue(_int, _pFile);
+}
+int ReadInt(FILE * _pFile)
+{
+	return ReadValue<int>(_pFile);
+}
+void WriteUINT(const UINT& _i, FILE* _pFile)
+{
+	WriteValue(_i, _pFile);
+}
+UINT ReadUINT(FILE * _pFile)
+{
+	return ReadValue<UINT>(_pFile);
+}
+void WriteVec3(const Vec3 & _vec, FILE * _pFile)
+{
+	WriteValue(_vec, _pFile);
+}
+Vec3 ReadVec3(FILE * _pFile)
+{
+	return ReadValue<Vec3>(_pFile);
+}
+void WriteVec2(const Vec2 & _vec, FILE * _pFile)
+{
+	WriteValue(_vec, _pFile);
+}
+Vec2 ReadVec2(FILE * _pFile)
+{
+	return ReadValue<Vec2>(_pFile);
+}
+void WriteWString(const wstring & _str, FILE * _pFile)
+{
+	BYTE len = _str.length();
+	fwrite(&len, sizeof(BYTE), 1, _pFile);
+	fwrite(_str.c_str(), sizeof(wchar_t), len, _pFile);
+}
+wchar_t szStr[255] = {};
+wchar_t* ReadWString(FILE * _pFile)
+{
+	BYTE len = 0;
+	fread(&len, sizeof(BYTE), 1, _pFile);
+	wmemset(szStr, 0, 255);			// ±ò²ûÇÏ°Ô ¹Ð¾î¹ö¸².
+	fread(&szStr, sizeof(wchar_t), len, _pFile);
+	return szStr;
+}
+
+wchar_t* ReadResourceKey(FILE * _pFile)
+{
+	wmemset(szStr, 0, 255);
+	BYTE bRes = 0;
+	fread(&bRes, sizeof(BYTE), 1, _pFile);
+	if (bRes)
+	{
+		ReadWString(_pFile);
+	}
+	return szStr;
+}

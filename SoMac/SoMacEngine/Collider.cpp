@@ -1,9 +1,11 @@
+
 #include "Collider.h"
 #include "Transform.h"
 #include "Device.h"
 #include "GameObject.h"
 #include "Script.h"
 UINT CCollider::g_iColID = 0;
+
 CCollider::CCollider()
 	: m_iColID(g_iColID++)
 	, m_pMesh(NULL)
@@ -102,3 +104,31 @@ void CCollider::ApplyData()
 	CONTEXT->VSSetConstantBuffers(pBuffer->iRegister, 1, &pBuffer->pBuffer);			// StartSlot(0) : Register ¹øÈ£.
 }
 
+
+
+void CCollider::Save(FILE * _pFile)
+{
+	WriteResourceKey(m_pMesh.GetTarget(), _pFile);
+	WriteResourceKey(m_pMaterial.GetTarget(), _pFile);
+	
+	WriteVec3(m_vObjPos, _pFile);
+	WriteVec3(m_vOffsetPos, _pFile);
+	WriteVec3(m_vOffsetScale, _pFile);
+	WriteBool(m_bApplyScale, _pFile);
+}
+void CCollider::Load(FILE * _pFile)
+{
+	wstring strKey;
+	strKey = ReadResourceKey(_pFile);
+	if (!strKey.empty())
+		m_pMesh = (CMesh*)CResMgr::GetInst()->Load<CMesh>(strKey);
+	
+	strKey = ReadResourceKey(_pFile);
+	if (!strKey.empty())
+		m_pMaterial = (CMaterial*)CResMgr::GetInst()->Load<CMaterial>(strKey);
+
+	m_vObjPos = ReadVec3(_pFile);
+	m_vOffsetPos = ReadVec3(_pFile);
+	m_vOffsetScale = ReadVec3(_pFile);
+	m_bApplyScale = ReadBool(_pFile);
+}

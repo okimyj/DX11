@@ -64,3 +64,47 @@ void Safe_Delete_Map_ResPtr(map<T1, T2> _map)
 		iter->second.Delete();
 	}
 }
+void WriteBool(const bool& _bool, FILE* _pFile);
+bool ReadBool(FILE* _pFile);
+void WriteByte(const BYTE& _byte, FILE* _pFile);
+BYTE ReadByte(FILE* _pFile);
+void WriteFloat(const float& _float, FILE* _pFile);
+float ReadFloat(FILE* _pFile);
+void WriteInt(const int& _int, FILE* _pFile);
+int ReadInt(FILE* _pFile);
+void WriteUINT(const UINT& _i, FILE* _pFile);
+UINT ReadUINT(FILE* _pFile);
+void WriteVec3(const Vec3& _vec, FILE* _pFile);
+Vec3 ReadVec3(FILE* _pFile);
+void WriteVec2(const Vec2& _vec, FILE* _pFile);
+Vec2 ReadVec2(FILE* _pFile);
+void WriteWString(const wstring& _str, FILE* _pFile);
+wchar_t* ReadWString(FILE* _pFile);
+template<typename T>
+void WriteValue(const T& _value, FILE* _pFile)
+{
+	fwrite(&_value, sizeof(T), 1, _pFile);
+}
+template<typename T>
+T ReadValue(FILE* _pFile)
+{
+	T value;
+	fread(&value, sizeof(T), 1, _pFile);
+	return value;
+}
+class CRes;
+template<typename T>
+void WriteResourceKey(T* _pRes, FILE* _pFile)
+{
+	BYTE bRes = 0;
+	if (NULL != _pRes)
+		bRes = 1;
+
+	WriteByte(bRes, _pFile);
+
+	if (bRes)
+	{
+		WriteWString(_pRes->GetKey(), _pFile);
+	}
+}
+wchar_t* ReadResourceKey(FILE* _pFile);

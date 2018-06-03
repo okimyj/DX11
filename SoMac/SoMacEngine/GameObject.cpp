@@ -229,7 +229,10 @@ void CGameObject::SetParent(CGameObject * _pParent, bool _bApplyLayer)
 			{
 				pCurLayer->RemoveGameObject(this);
 			}
-			CSceneMgr::GetInst()->GetCurSceneLayer(m_pParent->GetLayerName())->AddGameObject(this);
+			wstring strLayerName = m_pParent->GetLayerName();
+			if (L"" == strLayerName)
+				strLayerName = LAYER_DEFAULT;
+			CSceneMgr::GetInst()->GetCurSceneLayer(strLayerName)->AddGameObject(this);
 		}	
 	}
 

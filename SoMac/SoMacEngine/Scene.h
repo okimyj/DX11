@@ -23,11 +23,13 @@ public:
 	void Render();
 public :
 	int AddLayer(const wstring& _strLayerName, bool _bZOrder = false);
+	// load¿ë.
+	int AddLayer(CLayer* _pLayer);
 	CLayer* FindLayer(const wstring& _strLayerName);
 	CGameObject* FindObject(Vec2 _vWindowPos, Vec2 _vResolution, UINT _iMask=0);
 	Vec2 ScreenToWorldPosition(Vec2 _vWindowPos, Vec2 _vResolution);
 	CGameObject* GetMainCamera();
-private:
+	UINT GetLayerCount() { return m_mapLayer.size(); }
 private:
 	void GetAllParentObjects(list<CGameObject*>& _listOut);
 	UINT GetLayerIndex();
@@ -37,5 +39,6 @@ public:
 	virtual ~CScene();
 	friend class CCollisionMgr;
 	friend class CHierachyTreeDlg;
+	friend class CSaveLoadMgr;
 };
 

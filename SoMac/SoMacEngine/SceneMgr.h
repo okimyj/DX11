@@ -28,7 +28,7 @@ public:
 	void Render();
 	void AddGameObject(CGameObject* _pObj, const wstring& _strLayerName=L"");
 	void RemoveGameObject(CGameObject* _pObj, const wstring& _strLayerName = L"");
-//	void ChangeScene()
+	void ChangeScene(CScene* _pNextScene);
 
 public:
 	CScene* GetCurScene() { return m_pCurScene; }

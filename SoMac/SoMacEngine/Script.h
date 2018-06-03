@@ -13,7 +13,6 @@ class CScript :
 	public CComponent
 {
 public :
-	virtual CScript* Clone() = 0;
 	virtual void Awake() {};
 	virtual void Start() {};
 	virtual int Update() { return 0; }
@@ -24,6 +23,9 @@ public :
 	virtual void OnCollision(CCollider* _pOther) {};
 	virtual void OnCollisionExit(CCollider* _pOther) {};
 
+	virtual CScript* Clone() = 0;
+	virtual void Save(FILE* _pFile) {}
+	virtual void Load(FILE* _pFile) {}
 public:
 	CScript();
 	virtual ~CScript();

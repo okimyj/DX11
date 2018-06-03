@@ -9,7 +9,7 @@ private :
 
 public:
 	CGameObject* Instantiate();
-
+	CGameObject* gameObject() { return m_pObj; }
 public:
 	CPrefab(CGameObject* _pObj);
 	~CPrefab();

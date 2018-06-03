@@ -53,6 +53,8 @@ void CHierachyView::Dump(CDumpContext& dc) const
 // CHierachyView message handlers
 
 
+
+
 int CHierachyView::OnCreate(LPCREATESTRUCT lpCreateStruct)
 {
 	if (CFormView::OnCreate(lpCreateStruct) == -1)
@@ -84,4 +86,10 @@ void CHierachyView::OnSize(UINT nType, int cx, int cy)
 	iStartY += rt.bottom - rt.top;
 	m_pResourceTree->SetWindowPos(NULL, 0, iStartY, rt.right - rt.left, cy *0.4f, 0);
 	// TODO: Add your message handler code here
+}
+
+void CHierachyView::Init()
+{
+	m_pHierachyTree->Init();
+	m_pResourceTree->Init();
 }

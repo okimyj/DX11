@@ -10,7 +10,7 @@ protected:
 
 	UINT					m_iCurFrame;
 	float					m_fAccTime;
-
+	bool					m_b2DAnim;
 
 public:
 	void SetKey(const wstring& _strKey) { m_strKey = _strKey; }
@@ -24,8 +24,11 @@ public:
 	virtual int ApplyData()=0;
 	void SetEnable(bool _bEnable) { m_bEnable = _bEnable; }
 	bool IsEnable() { return m_bEnable; }
-	virtual CAnimation* Clone() = 0;
+	bool Is2DAnim() { return m_b2DAnim; }
 public:
+	void Save(FILE* _pFile);
+	void Load(FILE* _pFile);
+	virtual CAnimation* Clone() = 0;
 	CAnimation();
 	virtual ~CAnimation();
 };

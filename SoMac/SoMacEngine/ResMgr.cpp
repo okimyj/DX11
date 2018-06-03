@@ -169,4 +169,86 @@ CMaterial * CResMgr::FindMaterial(const wstring & _strKey)
 	return iter->second;
 }
 
+void CResMgr::SaveResource(FILE* _pFile)
+{
+	int iRefCount = 0;
+	//-- Mesh --//
+	UINT iCount = m_mapMesh.size();
+	WriteUINT(iCount, _pFile);
+	map<wstring, CResPtr<CMesh>>::iterator iter = m_mapMesh.begin();
+	for (; iter != m_mapMesh.end(); ++iter)
+	{
+		iRefCount = iter->second->GetRefCount();
+		WriteInt(iRefCount, _pFile);
+		if (1 < iRefCount)
+			iter->second.GetTarget()->Save(_pFile);
+	}
+	//-- Texture --//
+	iCount = m_mapTexture.size();
+	WriteUINT(iCount, _pFile);
+	map<wstring, CResPtr<CTexture>>::iterator texIter = m_mapTexture.begin();
+	for (; texIter != m_mapTexture.end(); ++texIter)
+	{
+		iRefCount = texIter->second->GetRefCount();
+		WriteInt(iRefCount, _pFile);
+		if (1 < iRefCount)
+			texIter->second.GetTarget()->Save(_pFile);
+	}
+	//-- Material --//
+	iCount = m_mapMaterial.size();
+	WriteUINT(iCount, _pFile);
+	map<wstring, CResPtr<CMaterial>>::iterator mtrlIter = m_mapMaterial.begin();
+	for (; mtrlIter != m_mapMaterial.end(); ++mtrlIter)
+	{
+		iRefCount = mtrlIter->second->GetRefCount();
+		WriteInt(iRefCount, _pFile);
+		if (1 < iRefCount)
+			mtrlIter->second.GetTarget()->Save(_pFile);
+	}
 
+	//-- Sound --//
+
+}
+void CResMgr::LoadResource(FILE* _pFile)
+{
+	int iRefCount = 0;
+	wstring strKey;
+	wstring strPath;
+	//-- Mesh --//
+	UINT iCount = ReadUINT(_pFile);
+	for (UINT i = 0; i < iCount; ++i)
+	{
+		iRefCount = ReadInt(_pFile);
+		if (1 < iRefCount)
+		{
+			strKey = ReadWString(_pFile);
+			strPath = ReadWString(_pFile);
+			Load<CMesh>(strKey, strPath);
+		}
+	}
+	//-- Texture --//
+	iCount = ReadUINT(_pFile);
+	for (UINT i = 0; i < iCount; ++i)
+	{
+		iRefCount = ReadInt(_pFile);
+		if (1 < iRefCount)
+		{
+			strKey = ReadWString(_pFile);
+			strPath = ReadWString(_pFile);
+			Load<CTexture>(strKey, strPath);
+		}
+	}
+	//-- Material --//
+	iCount = ReadUINT(_pFile);
+	for (UINT i = 0; i < iCount; ++i)
+	{
+		iRefCount = ReadInt(_pFile);
+		if (1 < iRefCount)
+		{
+			strKey = ReadWString(_pFile);
+			strPath = ReadWString(_pFile);
+			Load<CMaterial>(strKey, strPath);
+		}
+	}
+	//-- Sound --//
+}

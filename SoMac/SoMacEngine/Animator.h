@@ -27,6 +27,8 @@ public:
 private:
 	CAnimation* FindAnimation(const wstring& _strKey);
 public:
+	virtual void Save(FILE* _pFile);
+	virtual void Load(FILE* _pFile);
 	virtual CLONE(CAnimator);
 	CAnimator();
 	CAnimator(const CAnimator& _other);

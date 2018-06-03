@@ -5,6 +5,7 @@
 #include "Mesh.h"
 #include "Device.h"
 #include "Shader.h"
+
 CCollider2D::CCollider2D()
 {
 }
@@ -42,3 +43,15 @@ void CCollider2D::Render()
 	m_pMesh->Render();
 }
 
+
+
+void CCollider2D::Save(FILE * _pFile)
+{
+	UINT iType = (UINT)COMPONENT_TYPE::COLLIDER_2D;
+	WriteUINT(iType, _pFile);
+	CCollider::Save(_pFile);
+}
+void CCollider2D::Load(FILE * _pFile)
+{
+	CCollider::Load(_pFile);
+}

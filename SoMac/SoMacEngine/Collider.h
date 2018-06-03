@@ -44,6 +44,8 @@ public:
 	UINT GetColID() { return m_iColID; }
 	
 public:
+	virtual void Save(FILE* _pFile);
+	virtual void Load(FILE* _pFile);
 	CCollider();
 	CCollider(const CCollider& _pOther);
 	virtual ~CCollider();

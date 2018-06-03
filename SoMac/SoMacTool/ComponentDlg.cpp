@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "ComponentDlg.h"
 #include "MainFrm.h"
+
 CComponentDlg::CComponentDlg()
 	:m_pTargetObj(NULL)
 {

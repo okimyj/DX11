@@ -15,6 +15,9 @@ public:
 	
 public:
 	virtual CLONE(CCollider2D);
+	virtual void Save(FILE* _pFile);
+	virtual void Load(FILE* _pFile);
+
 	CCollider2D();
 	virtual ~CCollider2D();
 };

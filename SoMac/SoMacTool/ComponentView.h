@@ -38,6 +38,7 @@ private:
 	bool m_bACFocused;
 
 public:
+	void InitTarget();
 	void SetGameObject(CGameObject* _pObj, bool _bForce = false);
 	void UpdateComponents();
 	void Update();

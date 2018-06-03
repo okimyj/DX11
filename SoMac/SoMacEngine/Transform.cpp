@@ -5,6 +5,8 @@
 #include "Device.h"
 
 
+
+
 CTransform::CTransform()
 	: m_vPos(Vec3(0.f, 0.f, 1.f))
 	, m_vScale(Vec3(100.f, 100.f, 100.f))
@@ -84,4 +86,23 @@ Vec3 CTransform::GetWorldScale()
 	}
 
 	return vWorldScale;
+}
+
+
+
+void CTransform::Save(FILE * _pFile)
+{
+	UINT iType = (UINT)COMPONENT_TYPE::TRANSFORM;
+	fwrite(&iType, sizeof(UINT), 1, _pFile);
+	fwrite(&m_vPos, sizeof(Vec3), 1, _pFile);
+	fwrite(&m_vScale, sizeof(Vec3), 1, _pFile);
+	fwrite(&m_vRot, sizeof(Vec3), 1, _pFile);
+}
+
+void CTransform::Load(FILE * _pFile)
+{
+	// iType 은 어떤 component 인지 파싱 하면서 이미 읽음.
+	fread(&m_vPos, sizeof(Vec3), 1, _pFile);
+	fread(&m_vScale, sizeof(Vec3), 1, _pFile);
+	fread(&m_vRot, sizeof(Vec3), 1, _pFile);
 }

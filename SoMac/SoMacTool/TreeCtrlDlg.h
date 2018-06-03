@@ -19,6 +19,7 @@ protected:
 
 
 public:
+	void Init();
 	CTreeCtrlDlg();
 	CTreeCtrlDlg(UINT nIDTemplate, CWnd*pParent = NULL);
 	virtual ~CTreeCtrlDlg();

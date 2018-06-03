@@ -21,9 +21,11 @@ CScene::CScene()
 	m_vecLayer.resize(MAX_LAYER);
 
 	// 전체 씬 공통 Layer 생성.
+	/*
 	AddLayer(LAYER_DEFAULT, true);
 	AddLayer(LAYER_TRANSPARENT);
 	AddLayer(LAYER_CAMERA);
+	*/
 }
 
 
@@ -36,13 +38,8 @@ CScene::~CScene()
 
 void CScene::Awake()
 {
-	// -- Create Camera & Add to Camera Layer
-	CGameObject* pCamera = CGameObject::CreateCamera(L"MainCamera");
-	pCamera->GetCamera()->AddRenderTargetLayer(LAYER_DEFAULT);
-	pCamera->GetCamera()->AddRenderTargetLayer(LAYER_CAMERA);
-	FindLayer(LAYER_CAMERA)->AddGameObject(pCamera);
-	CGameObject* empty = CGameObject::CreateGameObject(L"Camera Child");
-	empty->SetParent(pCamera);
+	
+	
 
 
 	for (int i = 0; i < MAX_LAYER; ++i)
@@ -148,7 +145,21 @@ int CScene::AddLayer(const wstring & _strLayerName, bool _bZOrder)
 	m_vecLayer[iLayerIdx] = pLayer;
 	return RET_SUCCESS;
 }
+int CScene::AddLayer(CLayer* _pLayer)
+{
+	if (FindLayer(_pLayer->GetLayerName()))
+		assert(NULL);
+	UINT iLayerIndex = GetLayerIndex();
 
+	if (NULL != m_vecLayer[iLayerIndex])
+		assert(NULL);
+	set<UINT>::iterator iter = m_setLayerIdx.find(iLayerIndex);
+	if (m_setLayerIdx.end() != iter)
+		m_setLayerIdx.erase(iter);
+	m_mapLayer.insert(make_pair(_pLayer->GetLayerName(), _pLayer));
+	m_vecLayer[iLayerIndex] = _pLayer;
+	return RET_SUCCESS;
+}
 CLayer * CScene::FindLayer(const wstring & _strLayerName)
 {
 	map<wstring, CLayer*>::iterator iter = m_mapLayer.find(_strLayerName);

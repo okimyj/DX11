@@ -4,6 +4,8 @@
 #include "Transform.h"
 #include "Layer.h"
 
+
+
 CCamera::CCamera()
 	: m_bPerspective(false)
 	, m_fFOV(XM_PI / 4.f)
@@ -21,6 +23,11 @@ CCamera::~CCamera()
 {
 }
 
+
+
+void CCamera::UpdateInstancing()
+{
+}
 
 int CCamera::Update()
 {
@@ -95,3 +102,28 @@ bool CCamera::IsRenderTargetLayer(CLayer * _pLayer)
 	return (m_iRenderLayerFlag & (1 << iIdx));
 }
 
+void CCamera::Save(FILE * _pFile)
+{
+	UINT iType = (UINT)COMPONENT_TYPE::CAMERA;
+	WriteUINT(iType, _pFile);
+	WriteBool(m_bPerspective, _pFile);
+	WriteFloat(m_fFOV, _pFile);
+	WriteFloat(m_fWidth, _pFile);
+	WriteFloat(m_fHeight, _pFile);
+	WriteFloat(m_fScale, _pFile);
+	WriteFloat(m_fNear, _pFile);
+	WriteFloat(m_fFar, _pFile);
+	WriteUINT(m_iRenderLayerFlag, _pFile);
+}
+
+void CCamera::Load(FILE * _pFile)
+{
+	m_bPerspective = ReadBool(_pFile);
+	m_fFOV = ReadFloat(_pFile);
+	m_fWidth = ReadFloat(_pFile);
+	m_fHeight = ReadFloat(_pFile);
+	m_fScale = ReadFloat(_pFile);
+	m_fNear = ReadFloat(_pFile);
+	m_fFar = ReadFloat(_pFile);
+	m_iRenderLayerFlag = ReadUINT(_pFile);
+}

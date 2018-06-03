@@ -12,7 +12,7 @@ private:
 	CGameObject*	m_pObj;
 	
 public:
-	virtual CComponent* Clone() = 0;
+	
 	virtual void Awake() { isAwake = true; }
 	virtual void Start() {};
 	virtual int Update() = 0;
@@ -21,6 +21,7 @@ public:
 	virtual void Render() {};
 	bool enabled = true;
 	bool isAwake = false;
+
 private:
 	void SetGameObject(CGameObject* _pObj) { m_pObj = _pObj; }
 
@@ -32,6 +33,10 @@ protected:
 	CAnimator* Animator();
 	CCollider* Collider();
 	CCamera* Camera();
+public:
+	virtual void Save(FILE* _pFile) {};
+	virtual void Load(FILE* _pFile) {};
+	virtual CComponent* Clone() = 0;
 
 public:
 	CComponent();

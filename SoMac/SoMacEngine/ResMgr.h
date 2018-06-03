@@ -54,11 +54,15 @@ private:
 	map<wstring, CResPtr<CMaterial>>& GetMaterialMap() { return m_mapMaterial; }
 	vector<CResPtr<CRes>>& GetCloneVector() { return m_vecCloneRes; }
 public:
+	void SaveResource(FILE* _pFile);
+	void LoadResource(FILE* _pFile);
+
 	template <typename T>
 	CRes* Load(const wstring& _strKey, const wstring& _strFilePath=L"");	
 
 	friend class CListDlg;
 	friend class CResourceTreeDlg;
+	friend class CSaveLoadMgr;
 };
 
 template<typename T>

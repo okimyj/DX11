@@ -137,3 +137,48 @@ CAnimation * CAnimator::FindAnimation(const wstring & _strKey)
 
 	return iter->second;
 }
+
+void CAnimator::Save(FILE * _pFile)
+{
+	UINT iType = (UINT)COMPONENT_TYPE::ANIMATOR;
+	WriteUINT(iType, _pFile);
+
+	UINT iCount = m_mapAnim.size();
+	WriteUINT(iCount, _pFile);
+	map<wstring, CAnimation*>::iterator iter = m_mapAnim.begin();
+	for (; iter != m_mapAnim.end(); ++iter)
+	{
+		WriteBool(iter->second->Is2DAnim(), _pFile);
+		iter->second->Save(_pFile);
+	}
+	WriteBool(m_bRepeat, _pFile);
+	WriteResourceKey(m_pCurAnim, _pFile);
+}
+
+void CAnimator::Load(FILE * _pFile)
+{
+	UINT iCount = ReadUINT(_pFile);
+	CAnimation* pAnim = NULL;
+	for (UINT i = 0; i < iCount; ++i)
+	{
+		bool is2DAnim = ReadBool(_pFile);
+		if (is2DAnim)
+		{
+			pAnim = new CAnimation2D;
+		}
+		else
+		{
+			// TODO: CAnimation3D.
+		}
+		if (NULL != pAnim)
+		{
+			pAnim->Load(_pFile);
+			AddAnimation(pAnim);
+		}
+	}
+	m_bRepeat = ReadBool(_pFile);
+	wstring strKey = ReadResourceKey(_pFile);
+	
+	PlayAnimation(strKey, m_bRepeat);
+	
+}

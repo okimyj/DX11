@@ -15,6 +15,7 @@ protected:
 	void SetFocusGameView();
 
 public:
+	void InitTarget() { m_pTargetObj = NULL; }
 	CComponentDlg();
 	CComponentDlg(UINT nIDTemplate, CWnd* pParent = NULL);
 	virtual ~CComponentDlg();

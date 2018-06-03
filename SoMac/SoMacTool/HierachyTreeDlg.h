@@ -28,6 +28,7 @@ private:
 private:
 	void AddGameObject(CGameObject* _pObj, HTREEITEM _pParent);
 public:
+	
 	virtual BOOL OnInitDialog();
 	void UpdateTreeControl();
 	afx_msg void OnSelchangedTree(NMHDR *pNMHDR, LRESULT *pResult);

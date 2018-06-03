@@ -46,5 +46,6 @@ public:
 	friend class CScene;
 	friend class CTestScene;
 	friend class CCollisionMgr;
+	friend class CSaveLoadMgr;
 };
 

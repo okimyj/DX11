@@ -35,6 +35,7 @@ public:
 	CMySplitterWnd m_SubSplitter;
 public:
 	HWND GetGameViewHwnd() { return m_SubSplitter.GetPane(1, 0)->m_hWnd; }
+	CWnd* GetHierachyView() {return m_MainSplitter.GetPane(0, 1);}
 	CWnd* GetComponentView() { return m_MainSplitter.GetPane(0, 2); }      
 	void Update();
 // 생성된 메시지 맵 함수

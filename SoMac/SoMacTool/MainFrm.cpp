@@ -22,7 +22,7 @@
 #include "ResMgr.h"
 #include "MeshRenderer.h"
 #include "Animator.h"
-
+#include "../External/SaveLoadMgr.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -212,8 +212,8 @@ void CMainFrame::OnSceneSave()
 
 		if (0 == wcslen(pExt))
 			strPathName += L".scene";
-
-	//	CSaveLoadMgr::GetInst()->SaveScene(strPathName.GetBuffer());
+		
+		CSaveLoadMgr::GetInst()->SaveScene(strPathName.GetBuffer());
 	}
 
 }
@@ -221,5 +221,20 @@ void CMainFrame::OnSceneSave()
 
 void CMainFrame::OnSceneLoad()
 {
-	// TODO: Add your command handler code here
+	wchar_t szFilter[] = L"Scene (*.scene) | *.scene; |";
+	CFileDialog dlg(TRUE, NULL, NULL, OFN_OVERWRITEPROMPT, szFilter);
+	CString strInitPath = CPathMgr::GetResourcePath();
+	strInitPath += L"Scene";
+	dlg.m_ofn.lpstrInitialDir = strInitPath;
+
+	CString strPathName;
+	if (IDOK == dlg.DoModal())
+	{
+		// ComponentView ÃÊ±âÈ­
+		((CHierachyView*)GetHierachyView())->Init();
+		((CComponentView*)GetComponentView())->InitTarget();
+
+		strPathName = dlg.GetPathName();
+		CSaveLoadMgr::GetInst()->LoadScene(strPathName.GetBuffer());
+	}
 }

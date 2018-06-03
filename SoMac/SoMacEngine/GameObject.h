@@ -58,7 +58,7 @@ private:
 	CComponent* AddComponent(CComponent* _pComp, ID<CScript>);
 
 public:
-	CMeshRenderer* GetMeshRender() { return (CMeshRenderer*)m_arrComp[(UINT)COMPONENT_TYPE::MESHRENDER]; }
+	CMeshRenderer* GetMeshRender() { return (CMeshRenderer*)m_arrComp[(UINT)COMPONENT_TYPE::MESHRENDERER]; }
 	CTransform* GetTransform() { return (CTransform*)m_arrComp[(UINT)COMPONENT_TYPE::TRANSFORM]; }
 	CCamera* GetCamera() { return (CCamera*)m_arrComp[(UINT)COMPONENT_TYPE::CAMERA]; }
 	CCollider2D* GetCollider2D() { return (CCollider2D*)m_arrComp[(UINT)COMPONENT_TYPE::COLLIDER_2D]; }
@@ -109,7 +109,7 @@ CComponent* CGameObject::GetComponent()
 	}
 	else if (info.hash_code() == typeid(CMeshRenderer).hash_code())
 	{
-		return m_arrComp[(UINT)COMPONENT_TYPE::MESHRENDER];
+		return m_arrComp[(UINT)COMPONENT_TYPE::MESHRENDERER];
 	}
 	else if (info.hash_code() == typeid(CCamera).hash_code())
 	{
@@ -155,7 +155,7 @@ CComponent* CGameObject::AddComponent(CComponent* _pComp, ID<T>)
 	}
 	if (info.hash_code() == typeid(CMeshRenderer).hash_code())
 	{
-		m_arrComp[(UINT)COMPONENT_TYPE::MESHRENDER] = _pComp;
+		m_arrComp[(UINT)COMPONENT_TYPE::MESHRENDERER] = _pComp;
 	}
 	if (info.hash_code() == typeid(CCamera).hash_code())
 	{
